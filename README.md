@@ -28,4 +28,17 @@ The classpath can be edited through the following MATLAB command (need admin rig
 
 	>> edit classpath.txt
 
-# Create/add your own working directories in /SVM_MATLAB_Scripts/Scripts/SetEnvironment.m
+# Create/add your own working directories in /SVM_MATLAB_Scripts/Scripts/SetEnvironment.m. E.g.:
+
+	str_pathbase_radar_dhrubo_Ubuntu = '/home/royd/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
+	str_pathbase_data_dhrubo_Ubuntu = '/home/royd/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository';
+	str_pathbase_model_dhrubo_Ubuntu = '/home/royd/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/royd';
+	
+	%% assign path roots to global variables.
+	...
+	elseif strcmp(getenv('USER'),'royd'      )==1
+	    g_str_pathbase_radar = str_pathbase_radar_dhrubo_Ubuntu;
+	    g_str_pathbase_data  = str_pathbase_data_dhrubo_Ubuntu;
+	    g_str_pathbase_model = str_pathbase_model_dhrubo_Ubuntu;
+	...
+	
