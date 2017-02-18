@@ -18,17 +18,18 @@
 	/SVM_MATLAB_Scripts/Haar Features
 	/SVM_MATLAB_Scripts/eMote_scripts
 
-# Add the following directories to your MATLAB static Java classpath:
+# Add the following JAR files to your MATLAB static Java classpath:
 
-	/home/royd/weka-3-7-13/weka.jar
-	/home/royd/wekafiles/packages/LibSVM/LibSVM.jar
-	/home/royd/wekafiles/packages/LibSVM/lib/libsvm.jar
+	/SVM_MATLAB_Scripts/JAR files/weka.jar
+	/SVM_MATLAB_Scripts/JAR files/LibSVM.jar
+	/SVM_MATLAB_Scripts/JAR files/libsvm.jar
+	/SVM_MATLAB_Scripts/JAR files/InfoTheoreticRanking_1.7.jar
 
 The classpath can be edited through the following MATLAB command (need admin rights):
 
 	>> edit classpath.txt
 
-# Create/add your own working directories in /SVM_MATLAB_Scripts/Scripts/SetEnvironment.m. E.g.:
+# Create/add your own working directories in /SVM_MATLAB_Scripts/Scripts/SetEnvironment.m. e.g.:
 
 	str_pathbase_radar_dhrubo_Ubuntu = '/home/royd/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
 	str_pathbase_data_dhrubo_Ubuntu = '/home/royd/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository';
