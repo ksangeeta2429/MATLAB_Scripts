@@ -1,6 +1,4 @@
-# SVM_MATLAB_Scripts
-
-1. Add the following folders to your MATLAB path:
+# Add the following folders to your MATLAB path:
 
 	/SVM_MATLAB_Scripts/Features
 	/SVM_MATLAB_Scripts/Features/AcclnBased
@@ -20,11 +18,9 @@
 	/SVM_MATLAB_Scripts/Haar Features
 	/SVM_MATLAB_Scripts/eMote_scripts
 
-2. Add the following directories to your MATLAB static Java classpath:
+# Add the following directories to your MATLAB static Java classpath:
 
-	# Java classpath entry for weka.jar
 	/home/royd/weka-3-7-13/weka.jar
-	#Java classpath entry for weka Libsvm packages
 	/home/royd/wekafiles/packages/LibSVM/LibSVM.jar
 	/home/royd/wekafiles/packages/LibSVM/lib/libsvm.jar
 
@@ -32,4 +28,4 @@ The classpath can be edited through the following MATLAB command (need admin rig
 
 	>> edit classpath.txt
 
-3. Create/add your own working directories in /SVM_MATLAB_Scripts/Scripts/SetEnvironment.m
+# Create/add your own working directories in /SVM_MATLAB_Scripts/Scripts/SetEnvironment.m
