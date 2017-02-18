@@ -1,0 +1,80 @@
+% calculate some metrics for the above background region
+% AnomImage only tells us which regions are detecting
+% out2 is the percent area with hits 
+% out1 is the moment, i.e. hits weighted with their frequencies
+% based on TFAFS.docx
+
+function [Out1 Out2] = AboveBgndFft(compTarget, compNoise, Window, Overlap, Rate)
+
+%% Calculate Ffts for Noise Data
+if (length(compNoise) == 0)
+    N = length(compTarget);
+    comp = compTarget;
+else
+    comp = compNoise;
+    N = length(compNoise);
+end
+
+Freq = FftFreq(Window,double(Rate));
+
+numWindows = floor((N-Window)/Overlap);
+nEnergy = double(zeros(numWindows,Window));
+
+for j=1:numWindows
+    wStart = (j-1)*Overlap+1;
+    wEnd = (j-1)*Overlap + Window;
+    
+    nEnergy(j,:) = abs(fft(comp(wStart:wEnd)));
+end
+
+for j = 1:Window
+    meanE(j) = mean(nEnergy(:,j));
+    devE(j) = std(nEnergy(:,j));
+end
+
+%% Calculate Ffts for Target Data
+if (length(compNoise) == 0)
+    tEnergy = nEnergy;
+else
+    clear comp;
+    comp = compTarget;
+    N = length(compTarget);
+    numWindows = floor((N-Window)/Overlap);
+    tEnergy = double(zeros(numWindows,Window));
+    
+    for j=1:numWindows
+        wStart = (j-1)*Overlap+1;
+        wEnd = (j-1)*Overlap + Window;
+    
+        tEnergy(j,:) = abs(fft(comp(wStart:wEnd)));
+    end
+end
+
+hits = double(zeros(numWindows,Window));
+
+for j = 1:Window
+    hits(:,j) = tEnergy(:,j) > meanE(j) + 3*devE(j);
+end
+
+for j = 1:Window
+    numHitBins(j) = sum(hits(:,j)) > 0;
+end
+
+Freq = FftFreq(double(Window), double(Rate));
+
+Moment = double(zeros(numWindows,Window));
+for j = 1:numWindows
+    for k = 1:Window
+        Moment(j,k) = hits(j,k) * abs(Freq(k));
+    end
+end
+
+Out1 = double(sum(Moment(:))) / double(numWindows); % for Moment
+Out2 = double(sum(hits(:))) / double((numWindows * Window)); %for percent
+   
+
+
+    
+
+
+

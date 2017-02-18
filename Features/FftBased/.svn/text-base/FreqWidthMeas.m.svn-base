@@ -1,0 +1,36 @@
+% find the max continuous freq band that is excited
+% Intuition: humans have a smoother motion profile so they will have
+% longer continuuous bands 
+function Result = FreqWidthMeas(AnomImage, M, N)
+
+    for i = 1:size(AnomImage,1)
+        NumInWind = sum(AnomImage(i,1:N));
+        if (M <= NumInWind) 
+            RunLen = N;
+        else
+            RunLen = 0;
+        end
+        
+        MaxRunLen = RunLen;
+        for j = N+1:size(AnomImage,2)
+            NumInWind = NumInWind - AnomImage(i,j-N) + AnomImage(i,j);
+            if (M<=NumInWind)
+                if (RunLen == 0)
+                    RunLen = N;
+                else
+                    RunLen = RunLen + 1;
+                end
+            else
+                RunLen = 0;
+            end;
+            
+            if (MaxRunLen < RunLen)
+                MaxRunLen = RunLen;
+            end
+        end
+        
+        Out(i) = MaxRunLen;
+    end
+    
+    Result = max(Out);
+end

@@ -1,0 +1,7 @@
+function Out = SecondMomentMeas(AnomImage, FftFreq)
+    [m,n] = size(AnomImage);
+    f = abs(FftFreq');
+    Prod = AnomImage*f;
+    Out = std(Prod(:));
+end
+

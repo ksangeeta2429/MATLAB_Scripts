@@ -1,0 +1,30 @@
+% given a dataset, compare which regions in the spectrogram are more than
+% mult*StdDev apart from the mean for the no target case
+% MeanBack, DevBack are the median and Std Dev for the background noise
+% mult is how many std devs above/below median (typically 3 works best)
+% based on TFAFS.docx
+
+function Out = AnomImage(Data, FftSize, Overlap, Rate, MeanBack, DevBack,Mult)
+
+    [TimeFreq, Freq, Time] = spectrogram(Data, double(FftSize), double(FftSize - Overlap), double(FftSize), double(Rate));
+
+    N = length(Data);
+    [a,b] = size(TimeFreq);
+    
+    numWindows = b;
+    
+    Out = double(zeros(numWindows,FftSize));
+    
+    x = TimeFreq';
+    y = abs(x);
+    
+    for j = 1:FftSize
+        Out(:,j) = y(:,j) > MeanBack(j) + Mult*DevBack(j);
+    end
+end
+
+
+
+
+            
+        

@@ -1,0 +1,31 @@
+% compute mean, std dev and median of background spectral content for noise data
+% defined in TFAFS.docx
+
+function [BackStats] = ComputeBack(compNoise, Window, Overlap)
+
+    comp = compNoise;
+    N = length(compNoise);
+    numWindows = floor((N-Window)/Overlap);
+
+    nEnergy = double(zeros(numWindows,Window));
+
+    for j=1:numWindows
+        wStart = (j-1)*Overlap+1;
+        wEnd = (j-1)*Overlap + Window;
+    
+        nEnergy(j,:) = abs(fft(comp(wStart:wEnd)));
+    end
+
+    for j = 1:Window
+        meanBack(j) = mean(nEnergy(:,j));
+        stdBack(j) = std(nEnergy(:,j));
+        medBack(j) = median(nEnergy(:,j));
+    end
+    
+    BackStats = [meanBack,stdBack,medBack];
+end
+
+
+
+            
+        

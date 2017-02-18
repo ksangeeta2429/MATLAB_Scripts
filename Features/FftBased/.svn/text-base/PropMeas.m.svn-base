@@ -1,0 +1,13 @@
+% measure what fraction of the spectral region shows motion above
+% background
+function Out = PropMeas(AnomImage)
+    [m,n] = size(AnomImage);
+    Out = sum(AnomImage(:))/(m*n);
+end
+
+
+
+
+
+            
+        
