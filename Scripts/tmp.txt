@@ -1,0 +1,22 @@
+@relation target-classification
+
+@attribute class {human, car}
+@attribute oldVel1 numeric 
+@attribute oldVel2 numeric 
+@attribute oldVel3 numeric 
+@attribute newVel1 numeric 
+@attribute newVel2 numeric 
+@attribute newVel3 numeric 
+@attribute dist numeric 
+@attribute time numeric 
+@attribute distTimeProd numeric 
+@attribute distTimeRatio numeric 
+@attribute fftfreq numeric 
+@attribute fftmoment numeric 
+@attribute percentFreq numeric 
+@attribute secMoment numeric 
+@attribute maxFreq numeric 
+@attribute freqWidth numeric 
+@attribute accRange numeric 
+@attribute veloMinMax numeric 
+@data 
