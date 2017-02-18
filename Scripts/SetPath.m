@@ -4,9 +4,10 @@
 % Michael McGrath, 2015-10-16
 
 %% early return. comment out if something breaks.
-%if exist('g_path_is_set','var') == 1
+% if exist('g_path_is_set','var') == 1
 if exist('g_env_is_set','var') == 1
-    if g_path_is_set == true
+    % if g_path_is_set == true
+    if g_env_is_set == true
         return
     end
 end
