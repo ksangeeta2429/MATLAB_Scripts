@@ -69,21 +69,27 @@ The classpath can be edited through the following MATLAB command (need admin rig
  
 	sudo su 
 	diskutil list       (fdisk -l on Ubuntu, cat /proc/partitions on Cygwin) 
-	dd if=/dev/disk1 of=./Desktop/Great_Fish_Data_Collect/Nov_26_Lodge/radar_16.bbs bs=512 skip=1 count=1188
+	dd if=/dev/disk1 of=./Desktop/Great_Fish_Data_Collect/Nov_26_Lodge/March_4_noise.bbs bs=512 skip=1 count=1188
 
 2. Visualization on MATLAB
 
-	i)  Comp = ReadRadar('March_4_noise.bbs'); [preferred]
+	i)  Read generated .bbs file
 
-		or,
+		Comp = ReadRadar('March_4_noise.bbs'); [preferred]
 
-	    Comp = ReadRadarMedianTrack('March_4_noise.bbs',256,30);
+	or,
 
-	ii) BatchNoiseProd(Comp, 256, 'Dhrubo Test'); [preferred]
+		Comp = ReadRadarMedianTrack('March_4_noise.bbs',256,30);
+
+	ii) Visualize on MATLAB
+
+		BatchNoiseProd(Comp, 256, 'Dhrubo Test'); [preferred]
 		
-		or,
+	or,
 
-	    ParameterAnalysis(Comp,256,'test',7,45,2,3,1); [7, 45, 2, 3, 1 respectively stand for the threshold, IQ rejection, m, n, and window length]
+		ParameterAnalysis(Comp,256,'test',7,45,2,3,1);
+
+	 where 7, 45, 2, 3, 1 respectively stand for the threshold, IQ rejection, m, n, and window length.
 
 3. Zero-out SD card. CAREFUL!!! Writing zeros
 
