@@ -1,0 +1,64 @@
+%% Description:
+%This script analysis the clock drift based on the .
+%
+% Inp: --
+% The output is saved into the file specified by MemMapFilename
+%
+% Input:
+% MemMapFilename: The filename of the mmap file
+% chunkSize     : Number of lines to be read at a time
+% SamplePeriod  : The sample period for sampled read form the cvs file.
+%               Setting this equal to chunkSize reads all lines. Together with chunk size
+%               allows duty cyled, undersampled reading.
+%% Author: Bora Karaoglu
+%% Define Inputs
+%cur_directory = 'F:\Users\Bora\Samraksh\ClockSyncProject\Data\HSI_32Mhz_19BSamples\';
+cur_directory = 'F:\Users\Bora\Samraksh\ClockSyncProject\Data\HSI_32Mhz_19BSamples\';
+MemMapFilename = [cur_directory 'changes_64bit.bin'];
+
+%SamplePeriod = 1000;
+chunkSize = 10;
+freq_clock = (32*10^6); %Freq of the clok in Hz
+%% Initialization
+LAMemMap = MemoryMapLogicAnalyzerBinaryExportPerChange( MemMapFilename );
+%% Calculate Error Mean and Variance for various ChunkSizes
+chunkSizestobeTried = [100000 10000000 100000000];
+rlist = cell(1,numel(chunkSizestobeTried));
+for chunkSizeind = 1:numel(chunkSizestobeTried)
+    chunkSize =  chunkSizestobeTried(chunkSizeind);
+    %Save Statistics 1M at a time
+    disp(['chunkSize = ' num2str(chunkSize)]);
+    r = ChunkOperationOnMemoryMapData3(@findErrorVarLineFit_MM,LAMemMap, chunkSize );
+    rlist{1,chunkSizeind} = r;
+end
+%% Plot variance of error as a function of time
+fig_h = figure();
+axes_h = gca;
+xlabel('LA Time (s)');
+ylabel('Variance of absolute Error after linear fit (s^2)');
+hold on;
+color_m = hsv(numel(chunkSizestobeTried));
+for chunkSizeind = 1:numel(chunkSizestobeTried)
+    chunkSize =  chunkSizestobeTried(chunkSizeind);
+    m = cell2mat(rlist{1,chunkSizeind});
+    plot( (1:(numel(m)/2))*chunkSize/freq_clock ,m(2:2:end)/(freq_clock^2),'DisplayName', ['ChunkSize = ' num2str(chunkSize)], 'Color',color_m(chunkSizeind,:)  );
+    
+end
+legend(axes_h,'show');
+
+%% Plot variance of error as a function of time
+median_m = zeros(size(chunkSizestobeTried));
+for chunkSizeind = 1:numel(chunkSizestobeTried)
+    chunkSize =  chunkSizestobeTried(chunkSizeind);
+    m = cell2mat(rlist{1,chunkSizeind});
+    v = m(2:2:end-10);
+    median_m(chunkSizeind) = median(v);
+end
+fig_h = figure();
+axes_h = gca;
+plot(chunkSizestobeTried/freq_clock, median_m/(freq_clock^2));
+hold on;
+xlabel('Length of Window (s)');
+ylabel('Median Variance of Error (s^2)');
+color_m = hsv(numel(chunkSizestobeTried));
+
