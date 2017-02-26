@@ -1,35 +1,55 @@
 # Add the following folders to your MATLAB path:
 
-	/SVM_MATLAB_Scripts/Features
-	/SVM_MATLAB_Scripts/Features/AcclnBased
-	/SVM_MATLAB_Scripts/Features/FftBased
-	/SVM_MATLAB_Scripts/Features/PhaseBased
-	/SVM_MATLAB_Scripts/Features/VelocityBased
-	/SVM_MATLAB_Scripts/MatlabLibrary
-	/SVM_MATLAB_Scripts/Scripts
-	/SVM_MATLAB_Scripts/Scripts/OSC_PCT_Scripts
-	/SVM_MATLAB_Scripts/Scripts/Paper_plots
-	/SVM_MATLAB_Scripts/Scripts/Simple
-	/SVM_MATLAB_Scripts/Scripts/VisualizeInAfrica
-	/SVM_MATLAB_Scripts/Scripts/matlab2weka
-	/SVM_MATLAB_Scripts/Scripts/mi
-	/SVM_MATLAB_Scripts/Scripts/test
-	/SVM_MATLAB_Scripts/Scripts/yaonazoude
-	/SVM_MATLAB_Scripts/Haar Features
-	/SVM_MATLAB_Scripts/eMote_scripts
+	/MATLAB_Scripts/Features
+	/MATLAB_Scripts/Features/AcclnBased
+	/MATLAB_Scripts/Features/FftBased
+	/MATLAB_Scripts/Features/PhaseBased
+	/MATLAB_Scripts/Features/VelocityBased
+	/MATLAB_Scripts/MatlabLibrary
+	/MATLAB_Scripts/Scripts
+	/MATLAB_Scripts/Scripts/OSC_PCT_Scripts
+	/MATLAB_Scripts/Scripts/Paper_plots
+	/MATLAB_Scripts/Scripts/Simple
+	/MATLAB_Scripts/Scripts/VisualizeInAfrica
+	/MATLAB_Scripts/Scripts/matlab2weka
+	/MATLAB_Scripts/Scripts/mi
+	/MATLAB_Scripts/Scripts/test
+	/MATLAB_Scripts/Scripts/yaonazoude
+	/MATLAB_Scripts/Haar Features
+	/MATLAB_Scripts/eMote_scripts
+	/MATLAB_Scripts/Library/UserExtensions
+	/MATLAB_Scripts/Library/Products
+	/MATLAB_Scripts/Library/Products/BubleBee Design
+	/MATLAB_Scripts/Library/Products/BumbleBee Tests
+	/MATLAB_Scripts/Library/Products/BumbleBee Tests/Tests
+	/MATLAB_Scripts/Library/MatLab
+	/MATLAB_Scripts/Library/MatLab/NewFolder1
+	/MATLAB_Scripts/Library/MatLab/NewFolder2
+	/MATLAB_Scripts/Library/MatLab/NumAnal
+	/MATLAB_Scripts/Library/MatLab/SigPro
+	/MATLAB_Scripts/Library/MatLab/Tests
+	/MATLAB_Scripts/Library/MatLab/Visualization
+	/MATLAB_Scripts/Library/Data Collection/MatLab Scripts
+	/MATLAB_Scripts/Library/Data Collection/MatLab Scripts/ClockAnalyzer
+	/MATLAB_Scripts/Library/Data Collection/MatLab Scripts/LinkDetection
+	/MATLAB_Scripts/Library/Data Collection/MatLab Scripts/LinkDetection/WriteUp
+	/MATLAB_Scripts/Library/Data Collection/MatLab Scripts/Microphone
+	/MATLAB_Scripts/Library/Data Collection/MatLab Scripts/Radar
+	/MATLAB_Scripts/Library/Data Collection/MatLab Scripts/Radar/Jin
+	/MATLAB_Scripts/Library/Data Collection/MatLab Scripts/Radar/Nived
 
 # Add the following JAR files to your MATLAB static Java classpath:
 
-	/SVM_MATLAB_Scripts/JAR files/weka.jar
-	/SVM_MATLAB_Scripts/JAR files/LibSVM/LibSVM.jar
-	/SVM_MATLAB_Scripts/JAR files/libsvm.jar
-	/SVM_MATLAB_Scripts/JAR files/InfoTheoreticRanking_1.7.jar
+	/MATLAB_Scripts/JAR files/weka.jar
+	/MATLAB_Scripts/JAR files/LibSVM/LibSVM.jar
+	/MATLAB_Scripts/JAR files/libsvm.jar
+	/MATLAB_Scripts/JAR files/InfoTheoreticRanking_1.7.jar
 
 The classpath can be edited through the following MATLAB command (need admin rights):
 
 	>> edit classpath.txt
 
-# Create/add your own working directories in /SVM_MATLAB_Scripts/Scripts/SetEnvironment.m, e.g.:
+# Create/add your own working directories in /MATLAB_Scripts/Scripts/SetEnvironment.m, e.g.:
 
 	str_pathbase_radar_dhrubo_Ubuntu = '/home/royd/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
 	str_pathbase_data_dhrubo_Ubuntu = '/home/royd/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository';
