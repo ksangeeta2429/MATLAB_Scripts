@@ -62,4 +62,29 @@ The classpath can be edited through the following MATLAB command (need admin rig
 	    g_str_pathbase_data  = str_pathbase_data_dhrubo_Ubuntu;
 	    g_str_pathbase_model = str_pathbase_model_dhrubo_Ubuntu;
 	...
-	
+
+# Using dd and MATLAB to visualize raw radar data
+
+1. Exfiltration from SD card (88X LCD reading) 
+ 
+	sudo su 
+	diskutil list       (fdisk -l on Ubuntu, cat /proc/partitions on Cygwin) 
+	dd if=/dev/disk1 of=./Desktop/Great_Fish_Data_Collect/Nov_26_Lodge/radar_16.bbs bs=512 skip=1 count=1188
+
+2. Visualization on MATLAB
+
+	i)  Comp = ReadRadar('March_4_noise.bbs'); [preferred]
+
+		or,
+
+	    Comp = ReadRadarMedianTrack('March_4_noise.bbs',256,30);
+
+	ii) BatchNoiseProd(Comp, 256, 'Dhrubo Test'); [preferred]
+		
+		or,
+
+	    ParameterAnalysis(Comp,256,'test',7,45,2,3,1); [7, 45, 2, 3, 1 respectively stand for the threshold, IQ rejection, m, n, and window length]
+
+3. Zero-out SD card. CAREFUL!!! Writing zeros
+
+	dd if=/dev/zero of=/dev/disk1 bs=1M count=20
