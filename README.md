@@ -21,7 +21,7 @@
 # Add the following JAR files to your MATLAB static Java classpath:
 
 	/SVM_MATLAB_Scripts/JAR files/weka.jar
-	/SVM_MATLAB_Scripts/JAR files/LibSVM.jar
+	/SVM_MATLAB_Scripts/JAR files/LibSVM/LibSVM.jar
 	/SVM_MATLAB_Scripts/JAR files/libsvm.jar
 	/SVM_MATLAB_Scripts/JAR files/InfoTheoreticRanking_1.7.jar
 
