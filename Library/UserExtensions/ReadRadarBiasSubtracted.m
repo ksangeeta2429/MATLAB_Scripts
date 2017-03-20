@@ -1,6 +1,6 @@
 function Comp = ReadRadarBiasSubtracted(FileName_IQ, outputtype)
 
-  if nargin < 3
+  if nargin < 2
     outputtype = 'iplusq';
   end
 
