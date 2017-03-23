@@ -18,7 +18,7 @@
 %% list all path roots here.  they should mostly be the same.
 str_pathbase_radar_jin  = 'C:/Users/he/Documents/Dropbox/MyMatlabWork/radar';
 str_pathbase_radar_mike = 'C:/Users/researcher/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
-str_pathbase_radar_dhrubo = 'C:/Users/royd/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
+str_pathbase_radar_dhrubo = 'C:/Users/roy.174/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
 str_pathbase_radar_Roy = 'C:/Users/Roy/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
 str_pathbase_radar_Balderdash = '/Users/Balderdash/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
 str_pathbase_radar_OSC = '/nfs/16/osu8577/RobustEnv';
@@ -27,8 +27,8 @@ str_pathbase_radar_dhrubo_Ubuntu = '/home/roy.174/Box Sync/All_programs_data_IPS
 
 str_pathbase_data_jin = 'C:/Users/he/My Research/2015.1/test';
 str_pathbase_data_mike = 'C:/Users/researcher/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/data';
-%str_pathbase_data_dhrubo = 'C:/Users/royd/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/data';
-str_pathbase_data_dhrubo = 'C:/Users/royd/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository';
+%str_pathbase_data_dhrubo = 'C:/Users/roy.174/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/data';
+str_pathbase_data_dhrubo = 'C:/Users/roy.174/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository';
 str_pathbase_data_Roy = 'C:/Users/Roy/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/data';
 str_pathbase_data_Balderdash = '/Users/Balderdash/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/data';
 str_pathbase_data_OSC = '';
@@ -36,12 +36,12 @@ str_pathbase_data_Neel = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulat
 str_pathbase_data_dhrubo_Ubuntu = '/home/roy.174/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository';
 
 str_pathbase_model_mike = 'C:/Users/researcher/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/researcher';
-str_pathbase_model_dhrubo = 'C:/Users/royd/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/royd';
+str_pathbase_model_dhrubo = 'C:/Users/roy.174/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/roy.174';
 str_pathbase_model_Roy = 'C:/Users/Roy/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Roy';
 str_pathbase_model_Balderdash = '/Users/Balderdash/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Balderdash';
 str_pathbase_model_OSC = '/nfs/16/osu8577/RobustEnv/Models';
 str_pathbase_model_Neel = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Neel';
-str_pathbase_model_dhrubo_Ubuntu = '/home/roy.174/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/royd';
+str_pathbase_model_dhrubo_Ubuntu = '/home/roy.174/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/roy.174';
 
 %% assign path roots to global variables.
 
@@ -52,7 +52,7 @@ elseif strcmp(getenv('USERNAME'),'researcher')==1
     g_str_pathbase_radar = str_pathbase_radar_mike;
     g_str_pathbase_data  = str_pathbase_data_mike;
     g_str_pathbase_model = str_pathbase_model_mike;
-elseif strcmp(getenv('USERNAME'),'royd'      )==1
+elseif strcmp(getenv('USERNAME'),'roy.174'      )==1
     g_str_pathbase_radar = str_pathbase_radar_dhrubo;
     g_str_pathbase_data  = str_pathbase_data_dhrubo;
     g_str_pathbase_model = str_pathbase_model_dhrubo;
