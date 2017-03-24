@@ -32,7 +32,7 @@ SetPath
 
 % path_data_human = 'C:\Users\royd\Documents\WIP\Parking garage radial ortho (Sandeep)\radial';
 % path_data_human = 'C:\Users\royd\Documents\WIP\Darree_Fields';
-path_data_human = 'C:\Users\royd\Desktop\TestCut';
+path_data_human = 'C:\Users\roy.174\Documents\TestCut\3-2 30670 overnight cold';
 %% %%%%%%%%%%%%%%%%%%%%% human
 cd(path_data_human);
 

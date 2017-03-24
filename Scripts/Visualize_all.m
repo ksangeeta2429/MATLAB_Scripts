@@ -8,7 +8,7 @@ SetPath
 % path_data = strcat(g_str_pathbase_data,'training\ball - 408');
 % path_data = strrep('C:\Users\royd\Desktop\Temp\osu_farm_nearshed_may24_2016\cut','\','/');
 % path_data = 'C:\Users\royd\Documents\WIP\Darree_Fields\cut';
-path_data = 'C:\Users\royd\Desktop\TestCut\cut';
+path_data = 'C:\Users\roy.174\Documents\TestCut\3-2 30670 overnight cold\cut';
 
 cd(path_data);
 fileFullNames=dir;
