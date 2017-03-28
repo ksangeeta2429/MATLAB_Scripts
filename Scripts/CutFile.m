@@ -14,8 +14,8 @@ function [ nCuttedFiles, start, stop ] = CutFile(fileName)
 % cd(path_data);
 
 
-[I,Q,N]=Data2IQ(ReadBin([fileName,'.data']));
-%[I,Q,N]=Data2IQ(ReadBin([fileName,'.bbs']));
+%[I,Q,N]=Data2IQ(ReadBin([fileName,'.data']));
+[I,Q,N]=Data2IQ(ReadBin([fileName,'.bbs']));
 
 % test in the data, usually human walk will change 1e6 in 1 second (1m/s),
 % which means 2.5e5 in each step, so 12 step (3s) it should be 3e6

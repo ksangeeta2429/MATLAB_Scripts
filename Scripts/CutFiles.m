@@ -32,7 +32,7 @@ SetPath
 
 % path_data_human = 'C:\Users\royd\Documents\WIP\Parking garage radial ortho (Sandeep)\radial';
 % path_data_human = 'C:\Users\royd\Documents\WIP\Darree_Fields';
-path_data_human = 'C:\Users\roy.174\Documents\TestCut\3-2 30670 overnight cold';
+path_data_human = 'C:\Users\roy.174\Documents\HornNet Data (radar,network)\Darree_humans_and_groups_Oct_2016\Darree_Fields_grass_17_Oct_2016';
 %% %%%%%%%%%%%%%%%%%%%%% human
 cd(path_data_human);
 
@@ -48,8 +48,8 @@ i=1;
 for j=1:length(fileFullNames)
     s=fileFullNames(j).name;
     %% Also change line# 17-18 in CutFile.m
-    k=strfind(s,'.data'); % k=strfind(s,'.bbs');
-    if ~isempty(k) && k>=2 && k+4==length(s) % k+3==length(s)
+    k=strfind(s,'.bbs');
+    if ~isempty(k) && k>=2 && k+3==length(s)
         Files{i}=s(1:k-1);
         i=i+1;
     end

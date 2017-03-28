@@ -4,7 +4,7 @@
 % (https://dhruboroy29@bitbucket.org/dhruboroy29/wwf-baseline-classifier.git, commit# 899402cc6d61620a0cf3faa81a770d264107a0c9 [899402c])
 % For access to this repository, contact Dhrubojyoti Roy (royd@cse.osu.edu)
 
-function nCuttedFiles=CutFile_Manual_RadarAlgorithmGraph(fileName,walk_beg_file,walk_end_file,rate,min_length)
+function nCuttedFiles=CutFile_Manual_RadarAlgorithmGraph(fileName,walk_beg_file,walk_end_file,min_length_secs, cutoff_halfsecs)
 filePath_tmp = strrep(fileName,'\','/');
 pathIndex = strfind(filePath_tmp,'/');
 if isempty(pathIndex) % If unqualified filename
@@ -22,12 +22,12 @@ end
 [I,Q,N]=Data2IQ(ReadBin([fileName]));
 
 walk_begs = dlmread(walk_beg_file);
-walk_ends = dlmread(walk_end_file);
+walk_ends = dlmread(walk_end_file)';
 
 walk_lengths = (walk_ends - walk_begs)/2; % since unit is half-seconds
 
-start = walk_begs(walk_lengths > min_length)*rate;
-stop = walk_ends(walk_lengths > min_length)*rate;
+start = walk_begs(walk_lengths > min_length_secs & walk_begs < cutoff_halfsecs)*128;
+stop = walk_ends(walk_lengths > min_length_secs & walk_ends < cutoff_halfsecs)*128;
 
 for j=1:length(start)
     I_cut = I(start(j):stop(j));
