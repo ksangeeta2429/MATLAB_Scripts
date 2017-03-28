@@ -30,7 +30,7 @@
 %newer.
 str_bora_dll = 'F:\MF\MicroFrameworkPK_v4_3\Samraksh\APPS\DataCollectorHost\DataCollectorHost\bin\Debug\Microsoft.SPOT.Debugger.dll';
 str_mike_dll = 'C:\Users\researcher\Box Sync\All_programs_data_IPSN_2016\Simulation\toDhruboMichael\eMote_scripts\Microsoft.SPOT.Debugger.dll';
-str_dhrubo_dll = 'C:\Users\royd\Box Sync\All_programs_data_IPSN_2016\Simulation\toDhruboMichael\eMote_scripts\Microsoft.SPOT.Debugger.dll';
+str_dhrubo_dll = 'C:\Users\roy.174\Box Sync\All_programs_data_IPSN_2016\Simulation\toDhruboMichael\eMote_scripts\Microsoft.SPOT.Debugger.dll';
 str_Roy_dll = 'C:\Users\Roy\Box Sync\All_programs_data_IPSN_2016\Simulation\toDhruboMichael\eMote_scripts\Microsoft.SPOT.Debugger.dll';
 str_jin_dll = '';
 
@@ -47,7 +47,7 @@ if strcmp(getenv('USERNAME'),'he'            )==1
 elseif strcmp(getenv('USERNAME'),'researcher')==1
 	str_dll = str_mike_dll;
     portName = portNameMike;
-elseif strcmp(getenv('USERNAME'),'royd'      )==1
+elseif strcmp(getenv('USERNAME'),'roy.174'      )==1
 	str_dll = str_dhrubo_dll;
     portName = portNameDhrubo;
 elseif strcmp(getenv('USERNAME'),'Roy'      )==1
