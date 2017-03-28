@@ -54,5 +54,5 @@ end
 ifReg=0;
 instances=matlab2weka(instances.relationName(),featureNames,f_set_scaled,nColumn,ifReg);
 
-saveARFF(strcat('C:\Users\royd\Box Sync\All_programs_data_IPSN_2016\Simulation\toDhruboMichael\IIITDemo\Arff\GlobalTemp\radarALL_scaled',file_suffix), instances);
+saveARFF(strcat('C:\Users\roy.174\Box Sync\All_programs_data_IPSN_2016\Simulation\toDhruboMichael\IIITDemo\Arff\combined\radarALL_scaled',file_suffix), instances);
 
