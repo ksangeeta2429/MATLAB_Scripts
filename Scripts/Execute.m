@@ -66,15 +66,23 @@ SetPath
 %data_dog = {'NIL', 'NIL', 'NIL'};
 %data_human = {'/Darree_Fields/cut', '/Parking garage radial ortho (Sandeep)/radial/cut' , '/Parking garage radial ortho (Sandeep)/ortho/cut'};
 
+Index = [09102016];
+data_dog = {'NIL'};
+data_human = {'/Darree_Fields/cut'};
+
 %% 2014.08 Bike data
 % Index = [201408];
 % data_dog = {'/Bike data/cut'};
 % data_human = {'NIL'};
 
 %% Anomalous data
-Index = [03202017, 030230670]
-data_dog = {'/Anomalous_WLN/3-2 30670 overnight cold/cut', '/Anomalous_WLN/close zoom/cut'};
-data_human = {'NIL', 'NIL'};
+% Index = [03202017, 030230670]
+% data_dog = {'/Anomalous_WLN/3-2 30670 overnight cold/cut', '/Anomalous_WLN/close zoom/cut'};
+% data_human = {'NIL', 'NIL'};
+
+% Index=[03022018]
+% data_dog={'/Close zoom/Anomaly'};
+% data_human={'/Close zoom/Human'};
 %% Execute.m
 featureClass = 0;
 
