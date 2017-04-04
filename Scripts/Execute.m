@@ -66,9 +66,9 @@ SetPath
 %data_dog = {'NIL', 'NIL', 'NIL'};
 %data_human = {'/Darree_Fields/cut', '/Parking garage radial ortho (Sandeep)/radial/cut' , '/Parking garage radial ortho (Sandeep)/ortho/cut'};
 
-Index = [09102016];
-data_dog = {'NIL'};
-data_human = {'/Darree_Fields/cut'};
+% Index = [09102016];
+% data_dog = {'NIL'};
+% data_human = {'/Darree_Fields/cut'};
 
 %% 2014.08 Bike data
 % Index = [201408];
@@ -83,6 +83,11 @@ data_human = {'/Darree_Fields/cut'};
 % Index=[03022018]
 % data_dog={'/Close zoom/Anomaly'};
 % data_human={'/Close zoom/Human'};
+
+%% Any test data, such as a single walk cut
+Index = [12345];
+data_dog = {'/Test'};
+data_human = {'NIL'};
 %% Execute.m
 featureClass = 0;
 
