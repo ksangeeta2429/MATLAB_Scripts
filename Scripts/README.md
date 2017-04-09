@@ -11,7 +11,7 @@ Order of execution of MATLAB scripts on a Windows machine
 
 1b. Put the required .arff files (plain, scaled, scaled_nr, or scaled_r) in the folder IIITDemo\Arff\temp-all. Then run the script Combine_arff_doit.m. This combines the arff files and saves in the folder IIITDemo\Arff\combined.
 
-2. Run RunResultsScript_IoTDI.m. Prepare the input as required (lines 4-11). Specifically, put combined files if any, generated in step 2 in the required f1)olders. The script in turn calls:
+2. Run RunResultsScript_IoTDI.m. Prepare the input as required (lines 4-11). Specifically, put combined files if any, generated in step 2 in the required folders. The script in turn calls:
 
 (i) GenerateModels_IoTDI.m which performs grid search on the data (non-robust and robust) and generates the best models, saving them in the appropriate folder given by g_str_pathbase_model.
 
