@@ -1,11 +1,11 @@
-function MASS_2017(arff_folderlist, rnd)
+function MASS_2017_InfoGains_and_InfoGainMAD_Training(arff_folderlist, rnd)
 
 SetEnvironment
 SetPath
 
 %path_to_all_arffs =
 %strcat(g_str_pathbase_radar,'/IIITDemo/Arff/Datasets_ToSN'); % TODO: Uncomment this
-path_to_all_arffs = strcat(g_str_pathbase_radar,'/IIITDemo/Arff/Datasets_IPSN2017'); % TODO: Comment this
+path_to_all_arffs = strcat(g_str_pathbase_radar,'/IIITDemo/Arff/Datasets_MASS_2017'); % TODO: Comment this
 
 for fld=1:length(arff_folderlist)
     path_temp = strcat(g_str_pathbase_radar,'/IIITDemo/Arff/BigEnvs/Round',num2str(rnd),'/',char(arff_folderlist{fld}), '/single_envs');
@@ -91,44 +91,40 @@ for fld=1:length(arff_folderlist)
     movefile(strcat(g_str_pathbase_radar,'/IIITDemo/Arff/combined/*.arff'),path_to_combined_arffs);
 end
 
+% Write order of processing of environments
+writetable(cell2table(arff_folderlist'),strcat(g_str_pathbase_radar,'/IIITDemo/Arff/BigEnvs/Round',num2str(rnd),'/env_processing_order.csv'),'WriteVariableNames',0);
 
 for fld=1:length(arff_folderlist)
-    for cur_rnd={'10' '20' '30' '40'}
+    for cur_rnd={'10' '15' '20' '25' '30' '35' '40'}
     %for cur_rnd={'15'}
         fldr = char(arff_folderlist{fld});
-        evalstr=strcat('[crossval_',fldr,'_r1_top',char(cur_rnd),',','crossenv_',fldr,'_r1_top',char(cur_rnd),']=RunResultsScript_BigEnvs_ToSN(rnd,fldr,str2num(char(cur_rnd)));');
+        evalstr=strcat('[crossval_',fldr,'_r1_top',char(cur_rnd),']=RunTrainingScript_InfoGains_and_InfoGainMAD(rnd,fldr,str2num(char(cur_rnd)));');
         eval([evalstr]);
     end
 end
 
 
-for cur_rnd={'10' '20' '30' '40'}
+for cur_rnd={'10' '15' '20' '25' '30' '35' '40'}
 %for cur_rnd={'15'}
     fldr = char(arff_folderlist{1});
     evalstr = strcat('crossval_str_',char(cur_rnd),'=crossval_',fldr,'_r1_top',char(cur_rnd),';');
     eval([evalstr]);
-    evalstr2 = strcat('crossenv_str_',char(cur_rnd),'=crossenv_',fldr,'_r1_top',char(cur_rnd),';');
-    eval([evalstr2]);
 end
 
 
 for fld=2:length(arff_folderlist)
-    for cur_rnd={'10' '20' '30' '40'}
+    for cur_rnd={'10' '15' '20' '25' '30' '35' '40'}
     %for cur_rnd={'15'}
         fldr = char(arff_folderlist{fld});
         evalstr = strcat('crossval_str_',char(cur_rnd),'=[crossval_str_',char(cur_rnd),'; crossval_',fldr,'_r1_top',char(cur_rnd),'];');
         eval([evalstr]);
-        evalstr2 = strcat('crossenv_str_',char(cur_rnd),'=[crossenv_str_',char(cur_rnd),'; crossenv_',fldr,'_r1_top',char(cur_rnd),'];');
-        eval([evalstr2]);
     end
 end
 
 %dlmwrite(strcat(g_str_pathbase_radar,'/IIITDemo/Arff/BigEnvs/Round',num2str(rnd),'/crossenv_',list_features{f},'_humans.csv'),results_per_sheet);
 
-for cur_rnd={'10' '20' '30' '40'}
+for cur_rnd={'10' '15' '20' '25' '30' '35' '40'}
 %for cur_rnd={'15'}
     eval(['crossval=crossval_str_' char(cur_rnd)]);
-    eval(['crossenv=crossenv_str_' char(cur_rnd)]);
     eval(['dlmwrite(strcat(g_str_pathbase_radar,''/IIITDemo/Arff/BigEnvs/Round'',num2str(rnd),''/crossval_str_'',char(cur_rnd),''.csv''),crossval);']);
-    eval(['dlmwrite(strcat(g_str_pathbase_radar,''/IIITDemo/Arff/BigEnvs/Round'',num2str(rnd),''/crossenv_str_'',char(cur_rnd),''.csv''),crossenv);']);
 end
