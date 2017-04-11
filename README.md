@@ -38,16 +38,15 @@
 	/MATLAB_Scripts/Library/Data Collection/MatLab Scripts/Radar/Jin
 	/MATLAB_Scripts/Library/Data Collection/MatLab Scripts/Radar/Nived
 
-# Add the following JAR files to your MATLAB static Java classpath:
+# Add the following JAR_files to your MATLAB static Java classpath:
 
-	/MATLAB_Scripts/JAR files/weka.jar
-	/MATLAB_Scripts/JAR files/LibSVM/LibSVM.jar
-	/MATLAB_Scripts/JAR files/libsvm.jar
-	/MATLAB_Scripts/JAR files/InfoTheoreticRanking_1.7.jar
+	/MATLAB_Scripts/JAR_files/weka.jar
+	/MATLAB_Scripts/JAR_files/LibSVM/LibSVM.jar
+	/MATLAB_Scripts/JAR_files/libsvm.jar
+	/MATLAB_Scripts/JAR_files/InfoTheoreticRanking_1.7.jar
 
-The classpath can be edited through the following MATLAB command (need admin rights):
-
-	>> edit classpath.txt
+Follow these instructions for setting the static Java classpath: https://www.mathworks.com/help/matlab/matlab_external/static-path.html#bvjg_eg-3.
+DO NOT edit classpath.txt directly, as I encountered an issue with finding the appropriate packages on Ubuntu.
 
 # Create/add your own working directories in /MATLAB_Scripts/Scripts/SetEnvironment.m, e.g.:
 
