@@ -8,14 +8,7 @@ path_to_combined_arff_scaled = strcat(path_to_scaled_arffs,'/combined');
 path_to_out_mats = strcat(path_to_scaled_arffs,'/outmats');
 
 path_to_topk_arffs_scaled = strcat(path_to_scaled_arffs,strcat('/top',num2str(top_k))); % '\top20' or '\top10', depending on which top-k feature set you want
-path_to_InfoGain_arffs = strcat(path_to_topk_arffs_scaled,'/InfoGain_combined'); % combined file
 path_to_mRMR_D_arffs = strcat(path_to_topk_arffs_scaled,'/mRMR_D_combined'); % combined file
-
-%Create InfoGain features folder if it doesn't  exist
-if exist(path_to_InfoGain_arffs, 'dir') ~= 7
-    mkdir(path_to_InfoGain_arffs); % Includes path_to_topk_arffs_scaled
-    fprintf('INFO: created directory %s\n', path_to_InfoGain_arffs);
-end
 
 %Create mRMR_D features folder if they don't exist
 if exist(path_to_mRMR_D_arffs, 'dir') ~= 7
