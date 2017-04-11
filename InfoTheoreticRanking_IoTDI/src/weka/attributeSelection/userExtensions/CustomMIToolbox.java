@@ -317,9 +317,11 @@ public class CustomMIToolbox {
 					- alpha * featureMADs[(int) selectionMatrix[i][0]];
 		}
 
-		/*// The first feature is the one with the highest information gain
-		answerFeatures[0] = infoGainRanking[0];
-		unselectedFeatures[answerFeatures[0]] = false;*/
+		/*
+		 * // The first feature is the one with the highest information gain
+		 * answerFeatures[0] = infoGainRanking[0];
+		 * unselectedFeatures[answerFeatures[0]] = false;
+		 */
 
 		// Discretize input data before proceeding
 		Instances discrete_data;
@@ -350,7 +352,8 @@ public class CustomMIToolbox {
 					}
 					currentMIScore += featureMIMatrix[m][j];
 				}
-				double currentScore = infoGain_minus_MAD[j] - currentMIScore / numSelectedSoFar;
+				double currentScore = (numSelectedSoFar == 0) ? infoGain_minus_MAD[j]
+						: infoGain_minus_MAD[j] - currentMIScore / numSelectedSoFar;
 				if (currentScore > score) {
 					score = currentScore;
 					currentHighestFeature = j;
