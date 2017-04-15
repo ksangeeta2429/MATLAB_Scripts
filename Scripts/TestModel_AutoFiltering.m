@@ -10,11 +10,11 @@ type='functions.LibSVM';
 
 % Extract feature string from model name
 features_csv = strrep(full_path_model(strfind(full_path_model,'_f_')+3:strfind(full_path_model,'_p')-1),'_',',');
-
+full_path_filtered_test_set = strrep(full_path_testset,'.arff',[full_path_model(strfind(full_path_model,'_f_'):strfind(full_path_model,'_p')-1),'.arff']);
 % Filter test set
-filtered_test = AttributeSelectionManual_Instances(full_path_testset,features_csv);
+AttributeSelectionManual_Arff(full_path_testset,full_path_filtered_test_set,features_csv);
 
-options = sprintf('-l %s -T %s', full_path_model, full_path_testset);
+options = sprintf('-l %s -T %s', full_path_model, full_path_filtered_test_set);
 
 import weka.classifiers.Evaluation;
 import java.util.Random;
@@ -22,6 +22,6 @@ import weka.core.Utils.splitOptions;
 import weka.functions.supportVector.*;
 import weka.classifiers.functions.LibSVM; % need to add the path of the libsvm.jar to the class path, e.g. C:\Users\he\wekafiles\packages\LibSVM\libsvm.jar
 
-% classifier = javaObject(['weka.classifiers.',type]);
-classifier = weka.core.SerializationHelper.read(full_path_model);
-resultstr = Evaluation.evaluateModel(classifier,options);
+classifier = javaObject(['weka.classifiers.',type]);
+resultstr = Evaluation.evaluateModel(classifier,weka.core.Utils.splitOptions(options));
+delete(full_path_filtered_test_set);
