@@ -69,7 +69,7 @@ elseif strcmp(getenv('USER'),'Balderdash'      )==1
     g_str_pathbase_data  = str_pathbase_data_Balderdash;
     g_str_pathbase_model = str_pathbase_model_Balderdash;
 % elseif strcmp(getenv('PBS_O_LOGNAME'),'osu8577')==1
-elseif strcmp(getenv('LOGNAME'),'osu8577')==1 % Alternatively: elseif strcmp(getenv('PBS_O_LOGNAME'),'osu8577')==1
+elseif strcmp(getenv('PBS_O_LOGNAME'),'osu8577')==1 % Alternatively: elseif strcmp(getenv('PBS_O_LOGNAME'),'osu8577')==1
     g_str_pathbase_radar = str_pathbase_radar_OSC;
     g_str_pathbase_data  = str_pathbase_data_OSC;
     g_str_pathbase_model = str_pathbase_model_OSC;
