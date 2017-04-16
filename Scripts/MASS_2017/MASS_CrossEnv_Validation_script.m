@@ -28,7 +28,7 @@ for topk=topk_list
         for j=1:length(nameFilters)
             path_combined_env = strcat(path_to_arff_combos,'/',nameFilters{j});
             
-            if not(isempty(strfind(lower(nameFilters{1}),'info'))) % If this is an InfoGains_... filter
+            if not(isempty(strfind(lower(nameFilters{j}),'info'))) % If this is an InfoGains_... filter
                 path_models = strcat(g_str_pathbase_model,'/Crossenv_vals/InfoGains_and_MAD');
             else
                 path_models = strcat(g_str_pathbase_model,'/Crossenv_vals/mRMR_and_MAD');
@@ -40,10 +40,10 @@ for topk=topk_list
                 fprintf('INFO: created directory %s\n', path_models);
             end
             
-            Results = [Results; nameFilters{1}, GenerateModels_CrossEnv_MASS(path_models,path_single_envs, path_combined_env)];
+            Results = [Results; topk, nameFilters{j}, nameFolds{i}, GenerateModels_CrossEnv_MASS(path_models,path_single_envs, path_combined_env)];
         end
     end
 end
 
-cell2csv(strcat(path_to_round_folder,'/CrossEnvironment_validation_top',num2str(topk),'.csv'), Results);
+cell2csv(strcat(path_to_round_folder,'/CrossEnvironment_validation_all.csv'), Results);
 
