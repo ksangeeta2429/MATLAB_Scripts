@@ -34,6 +34,7 @@ if generate_model==1
     classifier.setOptions(weka.core.Utils.splitOptions(options));
     classifier.buildClassifier(instances);
     weka.core.SerializationHelper.write(model_outpath,classifier);
+    return
 end
 
 %classifier.setModelFile(sprintf('C:\\Users\\Roy\\human_dog_model%d.model',OutIndex));

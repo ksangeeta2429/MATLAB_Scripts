@@ -1,5 +1,5 @@
-%% MASS_Directory_Structure_2016.m
-function MASS_Directory_Structure_2016(arff_folderlist,rnd)
+%% MASS_Directory_Structure_2017.m
+function MASS_Directory_Structure_2017(arff_folderlist,rnd)
 % 
 % rnd = 2;
 % arff_folderlist=Generate_Similarity_Set_Combinations(rnd);

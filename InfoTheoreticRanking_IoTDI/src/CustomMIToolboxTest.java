@@ -6,9 +6,23 @@ public class CustomMIToolboxTest {
 
 	public static void main(String[] args) throws Exception {
 		/* WARNING: Do not discretize instances: will be handled in mRMR_D */
-		DataSource source = new DataSource(args[0]);
-		Instances data = source.getDataSet();
-
+		DataSource source = new DataSource("/home/roy.174/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Arff/BigEnvs/Round2/1_2/single_envs/radar1_scaled.arff");
+		Instances traindata = source.getDataSet();
+		
+		DataSource source2 = new DataSource("/home/roy.174/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Arff/BigEnvs/Round2/1_2/single_envs/radar2_scaled.arff");
+		Instances testdata = source.getDataSet();
+		
+		double c = 1000;
+		double gamma = 0.5;
+		
+		if (traindata.classIndex() == -1)
+			traindata.setClassIndex(traindata.numAttributes() - 1);
+		
+		if (testdata.classIndex() == -1)
+			testdata.setClassIndex(testdata.numAttributes() - 1);
+		
+		System.out.println("Accuracy="+CustomMIToolbox.evaluateSVM(traindata, traindata, c, gamma));
+		/*
 		if (data.classIndex() == -1)
 			data.setClassIndex(data.numAttributes() - 1);
 
@@ -25,6 +39,7 @@ public class CustomMIToolboxTest {
 		
 		for (int i = 0; i < rankedAttributes.length; i++)
 			System.out.println(rankedAttributes[i]);
+			*/
 	}
 
 }

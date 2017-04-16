@@ -19,7 +19,7 @@ arff_folderlist=Generate_Env_Combinations(numEnvs, rnd);
 %OSCMatlabPCT/PCTtestfiles/eigtest.m.
 %cd('~/Documents/MATLAB/OSCMatlabPCT/PCTtestfiles/Jobs');
 %Initialize cluster object using the appropriate profile for your situation
-intelCluster = parcluster('genericNonSharedOakleyIntel_R2015a');
+intelCluster = parcluster('genericNonSharedOakleyIntel_R2015b');
 
 %Submit the job. All file dependencies must be on the path or in your
 %current working directory. This job script is "eigtest"; it will run with 

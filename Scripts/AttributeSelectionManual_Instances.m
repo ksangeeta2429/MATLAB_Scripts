@@ -1,6 +1,11 @@
-function instances_filtered=AttributeSelectionManual_Instances(infile, features_csv)
+function instances_filtered=AttributeSelectionManual_Instances(inFileOrInstance, features_csv)
 %% SetEnvironment and SetPath must have been run first
-instances = loadARFF(infile);
+if not(isempty(strfind(inFileOrInstance,'.arff'))) %If input is a filename, load ARFF
+    instances = loadARFF(inFileOrInstance);
+else % Input is Instances
+    instances = inFileOrInstance;
+end
+
 eval(['temp = {' features_csv '};']);
 inputList = cell2mat(temp); %Adjusting for Java indices
 

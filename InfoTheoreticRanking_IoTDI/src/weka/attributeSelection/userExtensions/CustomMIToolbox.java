@@ -7,6 +7,8 @@ import weka.attributeSelection.ASSearch;
 import weka.attributeSelection.AttributeSelection;
 import weka.attributeSelection.InfoGainAttributeEval;
 import weka.attributeSelection.Ranker;
+import weka.classifiers.Evaluation;
+import weka.classifiers.functions.LibSVM;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Utils;
@@ -841,5 +843,18 @@ public class CustomMIToolbox {
 				}
 
 		return prob;
+	}
+	
+	public static double evaluateSVM(Instances train, Instances test, double c, double gamma) throws Exception{
+		
+		LibSVM classifier = new LibSVM();
+		String options = "-S 0 -K 2 -D 3 -G " + gamma + " -R 0.0 -N 0.5 -M 40.0 -C " + c + " -E 0.001 -P 0.1 -W \"1.0 1.0\" -seed 1";
+		classifier.setOptions(weka.core.Utils.splitOptions(options));
+		classifier.buildClassifier(train);
+		
+		Evaluation eval = new Evaluation(train);
+		eval.evaluateModel(classifier, test);
+		
+		return eval.pctCorrect();
 	}
 }
