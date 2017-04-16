@@ -40,10 +40,12 @@ for topk=topk_list
                 fprintf('INFO: created directory %s\n', path_models);
             end
             
-            Results = [Results; topk, nameFilters{j}, nameFolds{i}, GenerateModels_CrossEnv_MASS(path_models,path_single_envs, path_combined_env)];
+            % Results = [Results; topk, nameFilters{j}, nameFolds{i}, GenerateModels_CrossEnv_MASS(path_models,path_single_envs, path_combined_env)];
+            Results = [Results; topk, nameFolds{i}, nameFilters{j}];
         end
     end
 end
 
-cell2csv(strcat(path_to_round_folder,'/CrossEnvironment_validation_all.csv'), Results);
+%cell2csv(strcat(path_to_round_folder,'/CrossEnvironment_validation_all.csv'), Results);
+cell2csv(strcat(path_to_round_folder,'/CrossEnvironment_validation_orderonly.csv'), Results);
 
