@@ -3,7 +3,7 @@ function Results=MASS_TestEnvs_script(round,topk_list, training_type)
 SetEnvironment
 SetPath
 
-outFileName = strcat('CrossEnvironment_Evaluation_Round',round,'.csv');
+outFileName = strcat('CrossEnvironment_Evaluation_Round',num2str(round),'.csv');
 
 if lower(training_type) == 'crossval'
     path_models = g_str_pathbase_model;
