@@ -9,12 +9,12 @@ function [resultstr]=TestModel_AutoFiltering(full_path_model,full_path_testset)
 type='functions.LibSVM';
 
 % Extract feature string from model name
-features_csv = strrep(full_path_model(strfind(full_path_model,'_f_')+3:strfind(full_path_model,'_p')-1),'_',',');
-full_path_filtered_test_set = strrep(full_path_testset,'.arff',[full_path_model(strfind(full_path_model,'_f_'):strfind(full_path_model,'_p')-1),'.arff']);
+features_csv = strrep(full_path_model(strfind(full_path_model,'_f_')+3:strfind(full_path_model,'_p_')-1),'_',',');
+full_path_filtered_test_set = strrep(full_path_testset,'.arff',[full_path_model(strfind(full_path_model,'_f_'):strfind(full_path_model,'_p_')-1),'.arff']);
 % Filter test set
 AttributeSelectionManual_Arff(full_path_testset,full_path_filtered_test_set,features_csv);
 
-options = sprintf('-l %s -T %s', full_path_model, full_path_filtered_test_set);
+options = sprintf('-l "%s" -T "%s"', full_path_model, full_path_filtered_test_set);
 
 import weka.classifiers.Evaluation;
 import java.util.Random;
