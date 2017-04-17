@@ -16,3 +16,9 @@ MASS_2017_mRMR_and_mRMRMAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 4)
 MASS_CrossEnv_Validation_script(2,[10 15 20 25 30 35 40]);
 MASS_CrossEnv_Validation_script(3,[10 15 20 25 30 35 40]);
 MASS_CrossEnv_Validation_script(4,[10 15 20 25 30 35 40]);
+
+%% CrossEnvironment testing after above scripts are run
+
+MASS_TestEnvs_script(2,[10 15 20 25 30 35 40],'crossenv');
+MASS_TestEnvs_script(3,[10 15 20 25 30 35 40],'crossenv');
+MASS_TestEnvs_script(4,[10 15 20 25 30 35 40],'crossenv');
