@@ -3,6 +3,7 @@ function Results=MASS_CrossEnv_Validation_script(round,topk_list)
 SetEnvironment
 SetPath
 
+outFileName = strcat('CrossEnvironment_validation_Round',round,'.csv');
 path_to_round_folder = strcat(g_str_pathbase_radar,'/IIITDemo/Arff/BigEnvs/Round',num2str(round));
 
 cd(path_to_round_folder);
@@ -45,5 +46,5 @@ for topk=topk_list
     end
 end
 
-cell2csv(strcat(path_to_round_folder,'/CrossEnvironment_validation_all.csv'), Results);
+cell2csv(strcat(path_to_round_folder,'/',outFileName), Results);
 
