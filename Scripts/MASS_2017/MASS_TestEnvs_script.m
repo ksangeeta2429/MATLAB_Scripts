@@ -3,6 +3,8 @@ function Results=MASS_TestEnvs_script(round,topk_list, training_type)
 SetEnvironment
 SetPath
 
+outFileName = strcat('CrossEnvironment_Evaluation_Round',round,'.csv');
+
 if lower(training_type) == 'crossval'
     path_models = g_str_pathbase_model;
 else % Default: crossenvironment validation
@@ -46,4 +48,4 @@ for topk=topk_list
     end
 end
 
-cell2csv(strcat(path_to_round_folder,'/CrossEnvironment_Evaluation_all.csv'), Results);
+cell2csv(strcat(path_to_round_folder,'/',outFileName), Results);
