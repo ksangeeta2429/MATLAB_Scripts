@@ -1,4 +1,4 @@
-function Result=MASS_Optimize_MAD_Beta(round,training_type)
+function Result=MASS_Optimize_MAD_Beta(round,training_type,metric_type,prctile_param)
 
 SetEnvironment
 SetPath
@@ -20,7 +20,16 @@ for i=1:9:length(M)
     for j=i:i+7
         arr=[arr,M(j).Var7];
     end
-    metric = min(arr(arr>=max(arr)));
+    if strcmpi(metric_type,'max')==1
+        metric = min(arr(arr>=max(arr)));
+    elseif strcmpi(metric_type,'min')==1
+        metric = min(arr(arr>=min(arr)));
+    elseif strcmpi(metric_type,'median')==1
+        metric = min(arr(arr>=median(arr)));
+    elseif strcmpi(metric_type,'prctile')==1
+        metric = min(arr(arr>=prctile(arr,prctile_param)));
+    end
+    
     for j=i:i+7
         if M(j).Var7==metric
             Result=[Result;[{M(i).Var1},{M(i).Var2},{M(j).Var3}]];
@@ -28,4 +37,3 @@ for i=1:9:length(M)
         end
     end
 end
-    

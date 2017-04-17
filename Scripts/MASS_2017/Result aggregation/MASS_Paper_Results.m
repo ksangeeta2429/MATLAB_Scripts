@@ -1,4 +1,4 @@
-function [Median,IQR,OpPoint]=MASS_Paper_Results(round,topk_array,training_type)
+function [Median,IQR,OpPoint]=MASS_Paper_Results(round,topk_array,training_type,metric_type,prctile)
 
 SetEnvironment
 SetPath
@@ -12,7 +12,7 @@ else % Default: crossenv
     eval_csv = strcat('CrossEnvironment_Evaluation_Round',num2str(round),'.csv');
 end
 
-MAD_opt = MASS_Optimize_MAD_Beta(round,training_type);
+MAD_opt = MASS_Optimize_MAD_Beta(round,training_type,metric_type,prctile);
 
 M=table2struct(readtable(eval_csv,'Delimiter',',','ReadVariableNames',false));
 
