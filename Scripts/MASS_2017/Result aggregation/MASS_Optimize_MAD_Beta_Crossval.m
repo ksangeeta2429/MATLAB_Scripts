@@ -1,7 +1,7 @@
-function Result=Mass_Optimize_MAD_Beta_Crossval(round,training_type,metric_type,prctile_param)
-cd(strcat('/home/roy.174/Dropbox/TransferPCtoMac/Round',num2str(round)));
+function Result=MASS_Optimize_MAD_Beta_Crossval(round,training_type,metric_type,prctile_param)
+cd(strcat('/Users/Balderdash/Dropbox/TransferPCtoMac/Round',num2str(round)));
 filters={'mRMR_D_combined', 'mRMRMAD_D_0_25s', 'mRMRMAD_D_0_5s', 'mRMRMAD_D_0_75s', 'mRMRMAD_D_1s', 'mRMRMAD_D_5s', 'mRMRMAD_D_10s', 'mRMRMAD_D_20s', 'mRMRMAD_D_50s'};
-envs=table2struct(readtable('env_processing_order.csv','ReadVariableNames',false));
+envs=table2struct(readtable('env_processing_order.csv','Delimiter',',','ReadVariableNames',false));
 
 M={};
 for topk=10:5:40
