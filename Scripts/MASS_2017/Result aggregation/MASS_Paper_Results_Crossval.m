@@ -1,18 +1,19 @@
-function [Median,IQR,OpPoint,HighOpPoint]=MASS_Paper_Results_Crossval(round,topk_array,training_type,metric_type,prctile)
+function [Median,IQR,OpPoint,HighOpPoint]=MASS_Paper_Results_Crossval(round,topk_array,filter_type,metric_type,prctile)
 
 SetEnvironment
 SetPath
 
-path_to_round_folder = strcat('/Users/Balderdash/Dropbox/TransferPCtoMac/Round',num2str(round));
+if not(isempty(strfind(lower(filter_type),'mrmr')))
+    path_to_round_folder = strcat('~/Dropbox/TransferPCtoMac/mRMR_and_MAD/Round',num2str(round));
+else
+    path_to_round_folder = strcat('~/Dropbox/TransferPCtoMac/InfoGain_and_MAD/Round',num2str(round));
+end
 cd(path_to_round_folder);
 
-if lower(training_type)=='crossval'
-    eval_csv = ''; % TODO: Fix this later
-else % Default: crossenv
-    eval_csv = strcat('CrossEnvironment_Evaluation_Round',num2str(round),'.csv');
-end
 
-MAD_opt = MASS_Optimize_MAD_Beta_Crossval(round,training_type,metric_type,prctile);
+eval_csv = strcat('CrossEnvironment_Evaluation_Round',num2str(round),'.csv');
+
+MAD_opt = MASS_Optimize_MAD_Beta_Crossval(round,filter_type,metric_type,prctile);
 
 M=table2struct(readtable(eval_csv,'Delimiter',',','ReadVariableNames',false));
 
