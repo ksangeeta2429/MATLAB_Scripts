@@ -1,4 +1,4 @@
-function [Median,IQR,OpPoint,HighOpPoint]=MASS_Paper_Results_Crossval(round,topk_array,filter_type,metric_type,prctile)
+function [Median,IQR,OpPoint,HighOpPoint]=MASS_Paper_Results_Crossval(round,topk_array,filter_type,metric_type,prctile,testenvs)
 
 SetEnvironment
 SetPath
@@ -30,7 +30,8 @@ for topk=topk_array
         if M(i).Var1 ~= topk
             sentinel = i;
             break;
-        elseif (not(isempty(strfind(M(i).Var2,'10'))) || not(isempty(strfind(M(i).Var2,'2')))|| not(isempty(strfind(M(i).Var2,'1'))))....
+        elseif strcmpi(testenvs,'all')==0....
+                &&(not(isempty(strfind(M(i).Var2,'10'))) || not(isempty(strfind(M(i).Var2,'2')))|| not(isempty(strfind(M(i).Var2,'1'))))....
                 && (strcmp(M(i).Var5(strfind(M(i).Var5,'radar')+5:strfind(M(i).Var5,'_')-1),'10')==1 || ....
                 strcmp(M(i).Var5(strfind(M(i).Var5,'radar')+5:strfind(M(i).Var5,'_')-1),'2')==1 ||....
                 strcmp(M(i).Var5(strfind(M(i).Var5,'radar')+5:strfind(M(i).Var5,'_')-1),'1')==1)% 1,2,3 can't be in train/test
@@ -46,12 +47,80 @@ for topk=topk_array
             end
         end
     end
-    plot_orig(:,k) = orig_array;
-    plot_mad(:,k) = mad_array;
+%     plot_orig(:,k) = orig_array;
+%     plot_mad(:,k) = mad_array;
+%     k=k+1;
+%     oppoints_orig(topk)=median(orig_array)-iqr(orig_array)/2;
+%     oppoints_mad(topk)=median(mad_array)-iqr(mad_array)/2;
+    
+    medians_topk(1,k)=median(orig_array);
+    medians_topk(2,k)=median(mad_array);
+    
+    errors_topk(1,k)=iqr(orig_array)/2;
+    errors_topk(2,k)=iqr(mad_array)/2;
+    
+    Labels{k}=num2str(topk);
     k=k+1;
-    %boxplot([orig_array',mad_array'],'Labels',{'mu = 5','mu = 6'});
+    
     Median=[Median;[{topk},{median(orig_array)}, {median(mad_array)}]];
     IQR=[IQR;[{topk},{iqr(orig_array)}, {iqr(mad_array)}]];
     OpPoint=[OpPoint;[{topk},{median(orig_array)-iqr(orig_array)/2}, {median(mad_array)-iqr(mad_array)/2}]];
     HighOpPoint=[HighOpPoint;[{topk},{median(orig_array)+iqr(orig_array)/2}, {median(mad_array)+iqr(mad_array)/2}]];
 end
+distinguishable_colors(3);
+barweb(medians_topk,errors_topk);
+
+g = bar(medians_topk, 'grouped');
+grid on
+hold on
+errorbar(medians_topk, errors_topk,'bx');
+l=cell(1,2);
+% l{1}='InfoGain'; l{2}='mRMR'; l{3}='minEnvs'; l{4}='MAD';
+l{1}=filter_type; l{2}=strcat('MAD');
+legend(g,l,'Location','NorthWest','interpreter','latex');
+
+h=gca;
+h.TickLabelInterpreter='latex';
+%h.FontName = 'CMU Serif';`
+%h.Interpreter='latex';
+h.FontWeight = 'bold';
+h.FontSize = 20;
+h.XTickLabel=Labels;
+h.XLabel.String = 'Top k Features';
+h.XLabel.Interpreter='latex';
+h.XLabel.FontSize = 30;
+%h.XLabel.FontName = 'CMU Serif';
+h.XLabel.FontWeight = 'bold';
+
+h.YLabel.String = 'Median Precision';
+h.YLabel.Interpreter='latex';
+h.YLabel.FontSize = 30;
+%h.YLabel.FontName = 'CMU Serif';
+h.YLabel.FontWeight = 'bold';
+
+% [~,ncols] = size(plot_orig);
+% b=1;
+% t=1;
+% for c=1:ncols
+%     boxplotmatrix(:,b)=plot_orig(:,c);
+%     boxplotmatrix(:,b+1)=plot_mad(:,c);
+%     colorarray(b)='r';
+%     colorarray(b+1)='b';
+%     labelarray{b}=strcat(filter_type,', Top ',num2str(topk_array(t)));
+%     labelarray{b+1}=strcat('MAD, ',' Top ',num2str(topk_array(t)));
+%     oppointarray(b)=oppoints_orig(t);
+%     oppointarray(b+1)=oppoints_mad(t);
+%     t=t+1;
+%     b=b+2;
+% end
+% 
+% bh=boxplot(boxplotmatrix,'Colors',colorarray,'Labels',labelarray,);
+% hold on
+% hl = line('XData',1:length(oppointarray), ...
+%     'YData',oppointarray,...
+%     'LineStyle','none', ...
+%     'Marker','d');
+% set(gca,'FontSize',10,'XTickLabelRotation',45,'TickLabelInterpreter','latex');
+% ylim([10 100]);
+% ylabel('Precision (\%)', 'Interpreter', 'latex');
+% set(bh,'linewidth',1.0);
