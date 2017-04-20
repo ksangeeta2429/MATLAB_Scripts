@@ -1,5 +1,5 @@
 function [Median,IQR,OpPoint,HighOpPoint]=MASS_Paper_Results_Crossval(round,topk_array,filter_type,metric_type,prctile,testenvs)
-
+set(0,'DefaultFigureVisible','off');
 SetEnvironment
 SetPath
 
@@ -67,25 +67,28 @@ for topk=topk_array
     OpPoint=[OpPoint;[{topk},{median(orig_array)-iqr(orig_array)/2}, {median(mad_array)-iqr(mad_array)/2}]];
     HighOpPoint=[HighOpPoint;[{topk},{median(orig_array)+iqr(orig_array)/2}, {median(mad_array)+iqr(mad_array)/2}]];
 end
-distinguishable_colors(3);
-barweb(medians_topk,errors_topk);
 
-g = bar(medians_topk, 'grouped');
+%g = bar(medians_topk(1,:),'FaceColor',[0 .5 .5],'EdgeColor','black');
+g=errorbar(topk_array, medians_topk(1,:), errors_topk(1,:),'-s','MarkerSize',10,...
+    'MarkerEdgeColor','red','MarkerFaceColor','red');
+g.Color = 'black';
 grid on
 hold on
-errorbar(medians_topk, errors_topk,'bx');
+p=errorbar(topk_array, medians_topk(2,:), errors_topk(2,:),'-s','MarkerSize',10,...
+    'MarkerEdgeColor','blue','MarkerFaceColor','blue');
+p.Color = 'red';
+hold off
 l=cell(1,2);
 % l{1}='InfoGain'; l{2}='mRMR'; l{3}='minEnvs'; l{4}='MAD';
-l{1}=filter_type; l{2}=strcat('MAD');
-legend(g,l,'Location','NorthWest','interpreter','latex');
+l{1}=filter_type; l{2}=strcat(filter_type,'\_MAD');
 
 h=gca;
+legend(h,l,'Location','northwest','interpreter','latex');
 h.TickLabelInterpreter='latex';
 %h.FontName = 'CMU Serif';`
 %h.Interpreter='latex';
 h.FontWeight = 'bold';
 h.FontSize = 20;
-h.XTickLabel=Labels;
 h.XLabel.String = 'Top k Features';
 h.XLabel.Interpreter='latex';
 h.XLabel.FontSize = 30;
@@ -97,30 +100,37 @@ h.YLabel.Interpreter='latex';
 h.YLabel.FontSize = 30;
 %h.YLabel.FontName = 'CMU Serif';
 h.YLabel.FontWeight = 'bold';
-
-% [~,ncols] = size(plot_orig);
-% b=1;
-% t=1;
-% for c=1:ncols
-%     boxplotmatrix(:,b)=plot_orig(:,c);
-%     boxplotmatrix(:,b+1)=plot_mad(:,c);
-%     colorarray(b)='r';
-%     colorarray(b+1)='b';
-%     labelarray{b}=strcat(filter_type,', Top ',num2str(topk_array(t)));
-%     labelarray{b+1}=strcat('MAD, ',' Top ',num2str(topk_array(t)));
-%     oppointarray(b)=oppoints_orig(t);
-%     oppointarray(b+1)=oppoints_mad(t);
-%     t=t+1;
-%     b=b+2;
-% end
+ylim([-inf 100]);
+xlim([0 50]);
+saveas(h, strcat('~/Dropbox/TransferPCtoMac/',filter_type,'_and_MAD/',testenvs,'test_',filter_type,'_and_MAD_Envs_',num2str(round),'.fig'));
+saveas(h, strcat('~/Dropbox/TransferPCtoMac/',filter_type,'_and_MAD/',testenvs,'test_',filter_type,'_and_MAD_Envs_',num2str(round),'.eps'), 'eps2c');
 % 
-% bh=boxplot(boxplotmatrix,'Colors',colorarray,'Labels',labelarray,);
+% figure
+% g = bar(medians_topk(2,:),'FaceColor','yellow','EdgeColor','black');
+% grid on
 % hold on
-% hl = line('XData',1:length(oppointarray), ...
-%     'YData',oppointarray,...
-%     'LineStyle','none', ...
-%     'Marker','d');
-% set(gca,'FontSize',10,'XTickLabelRotation',45,'TickLabelInterpreter','latex');
-% ylim([10 100]);
-% ylabel('Precision (\%)', 'Interpreter', 'latex');
-% set(bh,'linewidth',1.0);
+% errorbar(medians_topk(2,:), errors_topk(1,:));
+% hold off
+% l=cell(1,1);
+% % l{1}='InfoGain'; l{2}='mRMR'; l{3}='minEnvs'; l{4}='MAD';
+% l{1}=strcat(filter_type,'\_MAD');
+% legend(g,l,'Location','NorthWest','interpreter','latex');
+% 
+% h=gca;
+% h.TickLabelInterpreter='latex';
+% %h.FontName = 'CMU Serif';`
+% %h.Interpreter='latex';
+% h.FontWeight = 'bold';
+% h.FontSize = 20;
+% h.XTickLabel=Labels;
+% h.XLabel.String = 'Top k Features';
+% h.XLabel.Interpreter='latex';
+% h.XLabel.FontSize = 30;
+% %h.XLabel.FontName = 'CMU Serif';
+% h.XLabel.FontWeight = 'bold';
+% 
+% h.YLabel.String = 'Median Precision';
+% h.YLabel.Interpreter='latex';
+% h.YLabel.FontSize = 30;
+% %h.YLabel.FontName = 'CMU Serif';
+% h.YLabel.FontWeight = 'bold';

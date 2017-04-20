@@ -8,7 +8,7 @@ outFileName = strcat('CrossEnvironment_Evaluation_Round',num2str(round),'.csv');
 if lower(training_type) == 'crossval'
     path_models = g_str_pathbase_model;
 else % Default: crossenvironment validation
-    path_models = strcat(g_str_pathbase_model,'/Crossenv_vals');
+    %path_models = strcat(g_str_pathbase_model,'/Crossenv_vals');
 end
 
 path_to_round_folder = strcat(g_str_pathbase_radar,'/IIITDemo/Arff/BigEnvs/Round',num2str(round));

@@ -5,6 +5,7 @@ MASS_2017_InfoGains_and_InfoGainMAD_Training(Generate_Env_Combinations([1 2 3 4 
 MASS_2017_InfoGains_and_InfoGainMAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 3),03); % Datasets 3-combo environments
 MASS_2017_InfoGains_and_InfoGainMAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 4),04); % Datasets 4-combo environments
 MASS_2017_InfoGains_and_InfoGainMAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 5),05); % Datasets 5-combo environments
+MASS_2017_InfoGains_and_InfoGainMAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 6),06); % Datasets 6-combo environments
 
 %% mRMR_D and mRMR_MAD_D training
 
@@ -22,8 +23,30 @@ MASS_CrossEnv_Validation_script(4,[10 15 20 25 30 35 40]);
 
 %% CrossEnvironment testing after above scripts are run
 
-MASS_TestEnvs_script(2,[10 15 20 25 30 35 40],'crossenv');
-MASS_TestEnvs_script(3,[10 15 20 25 30 35 40],'crossenv');
-MASS_TestEnvs_script(4,[10 15 20 25 30 35 40],'crossenv');
+MASS_TestEnvs_script(2,[10 15 20 25 30 35 40],'crossval');
+MASS_TestEnvs_script(3,[10 15 20 25 30 35 40],'crossval');
+MASS_TestEnvs_script(4,[10 15 20 25 30 35 40],'crossval');
+MASS_TestEnvs_script(5,[10 15 20 25 30 35 40],'crossval');
 
-%% Aggregate results
+%% Aggregate results - open world
+MASS_Paper_Results_Crossval(2,[10 15 20 25 30 35 40],'mRMR','prctile',10,'diff');
+MASS_Paper_Results_Crossval(3,[10 15 20 25 30 35 40],'mRMR','prctile',10,'diff');
+MASS_Paper_Results_Crossval(4,[10 15 20 25 30 35 40],'mRMR','prctile',10,'diff');
+MASS_Paper_Results_Crossval(5,[10 15 20 25 30 35 40],'mRMR','prctile',10,'diff');
+
+MASS_Paper_Results_Crossval(2,[10 15 20 25 30 35 40],'mRMR','prctile',10,'all');
+MASS_Paper_Results_Crossval(3,[10 15 20 25 30 35 40],'mRMR','prctile',10,'all');
+MASS_Paper_Results_Crossval(4,[10 15 20 25 30 35 40],'mRMR','prctile',10,'all');
+MASS_Paper_Results_Crossval(5,[10 15 20 25 30 35 40],'mRMR','prctile',10,'all');
+
+MASS_Paper_Results_Crossval(2,[10 15 20 25 30 35 40],'InfoGain','prctile',10,'diff');
+MASS_Paper_Results_Crossval(3,[10 15 20 25 30 35 40],'InfoGain','prctile',10,'diff');
+MASS_Paper_Results_Crossval(4,[10 15 20 25 30 35 40],'InfoGain','prctile',10,'diff');
+MASS_Paper_Results_Crossval(5,[10 15 20 25 30 35 40],'InfoGain','prctile',10,'diff');
+
+MASS_Paper_Results_Crossval(2,[10 15 20 25 30 35 40],'InfoGain','prctile',10,'all');
+MASS_Paper_Results_Crossval(3,[10 15 20 25 30 35 40],'InfoGain','prctile',10,'all');
+MASS_Paper_Results_Crossval(4,[10 15 20 25 30 35 40],'InfoGain','prctile',10,'all');
+MASS_Paper_Results_Crossval(5,[10 15 20 25 30 35 40],'InfoGain','prctile',10,'all');
+
+%% Aggregate results - complete world
