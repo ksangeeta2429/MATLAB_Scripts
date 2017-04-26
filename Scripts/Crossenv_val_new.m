@@ -37,6 +37,7 @@ if generate_model==1
     classifier.setOptions(weka.core.Utils.splitOptions(options));
     classifier.buildClassifier(instances);
     weka.core.SerializationHelper.write(model_outpath,classifier);
+    avg_accuracy=[];
     return
 end
 
