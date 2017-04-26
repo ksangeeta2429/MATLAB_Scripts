@@ -1,5 +1,5 @@
 function [Median,IQR,OpPoint,HighOpPoint]=MASS_Paper_Results_Crossval(round,topk_array,filter_type,metric_type,prctile,testenvs)
-set(0,'DefaultFigureVisible','off');
+%set(0,'DefaultFigureVisible','off');
 SetEnvironment
 SetPath
 
