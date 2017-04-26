@@ -1,3 +1,5 @@
+import java.util.Random;
+
 import weka.attributeSelection.userExtensions.CustomMIToolbox;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
@@ -5,8 +7,19 @@ import weka.core.converters.ConverterUtils.DataSource;
 public class CustomMIToolboxTest {
 
 	public static void main(String[] args) throws Exception {
-		/* WARNING: Do not discretize instances: will be handled in mRMR_D */
-		DataSource source = new DataSource("/home/roy.174/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Arff/BigEnvs/Round2/1_2/single_envs/radar1_scaled.arff");
+		/*10 folds enumeration test*/
+		DataSource src = new DataSource(args[0]);
+		Instances data = src.getDataSet();
+		
+		if (data.classIndex() == -1)
+			data.setClassIndex(data.numAttributes() - 1);
+		
+		String options = "-S 0 -K 2 -D 3 -G 0.5 -R 0.0 -N 0.5 -M 40.0 -C 10 -E 0.001 -P 0.1 -W \"1.0 1.0\" -seed 1";
+		
+		double[] accFolds = CustomMIToolbox.crossValidateFoldStats("weka.classifiers.functions.LibSVM", data, 10, weka.core.Utils.splitOptions(options), new Random(1));
+		System.out.println("Accuracies="+java.util.Arrays.toString(accFolds));
+		/*CrossEnv Validation Test*/
+		/*DataSource source = new DataSource("/home/roy.174/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Arff/BigEnvs/Round2/1_2/single_envs/radar1_scaled.arff");
 		Instances traindata = source.getDataSet();
 		
 		DataSource source2 = new DataSource("/home/roy.174/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Arff/BigEnvs/Round2/1_2/single_envs/radar2_scaled.arff");
@@ -21,7 +34,9 @@ public class CustomMIToolboxTest {
 		if (testdata.classIndex() == -1)
 			testdata.setClassIndex(testdata.numAttributes() - 1);
 		
-		System.out.println("Accuracy="+CustomMIToolbox.evaluateSVM(traindata, traindata, c, gamma));
+		System.out.println("Accuracy="+CustomMIToolbox.evaluateSVM(traindata, traindata, c, gamma));*/
+		
+		/* mRMRMAD Test: WARNING: Do not discretize instances: will be handled in mRMR_D */
 		/*
 		if (data.classIndex() == -1)
 			data.setClassIndex(data.numAttributes() - 1);

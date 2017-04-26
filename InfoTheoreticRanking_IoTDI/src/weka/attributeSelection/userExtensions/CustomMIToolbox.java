@@ -1,12 +1,15 @@
 package weka.attributeSelection.userExtensions;
 
 import java.util.Arrays;
+import java.util.Random;
 
 import weka.attributeSelection.ASEvaluation;
 import weka.attributeSelection.ASSearch;
 import weka.attributeSelection.AttributeSelection;
 import weka.attributeSelection.InfoGainAttributeEval;
 import weka.attributeSelection.Ranker;
+import weka.classifiers.AbstractClassifier;
+import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.functions.LibSVM;
 import weka.core.Instance;
@@ -857,4 +860,40 @@ public class CustomMIToolbox {
 		
 		return eval.pctCorrect();
 	}
+	
+	public static double[] crossValidateFoldStats(String classname, Instances data, int folds, String[] options, Random rand) throws Exception
+	{
+		Instances randData = new Instances(data);
+		randData.randomize(rand);
+	    if (randData.classAttribute().isNominal())
+	      randData.stratify(folds);
+	    
+	    Classifier cls = (Classifier) Utils.forName(Classifier.class, classname, options);
+	    
+	    double[] accFolds = new double[folds];
+	    Evaluation evalAll = new Evaluation(randData);
+	    for (int n = 0; n < folds; n++) {
+	      Evaluation eval = new Evaluation(randData);
+	      Instances train = randData.trainCV(folds, n);
+	      Instances test = randData.testCV(folds, n);
+	      // the above code is used by the StratifiedRemoveFolds filter, the
+	      // code below by the Explorer/Experimenter:
+	      // Instances train = randData.trainCV(folds, n, rand);
+
+	      // build and evaluate classifier
+	      Classifier clsCopy = AbstractClassifier.makeCopy(cls);
+	      clsCopy.buildClassifier(train);
+	      eval.evaluateModel(clsCopy, test);
+	      evalAll.evaluateModel(clsCopy, test);
+	      accFolds[n] = eval.pctCorrect();
+	      // output evaluation
+	      //System.out.println();
+	      //System.out.println(eval.toMatrixString("=== Confusion matrix for fold " + (n+1) + "/" + folds + " ===\n"));
+	    }
+	    
+	    System.out.println("Overall result="+evalAll.pctCorrect());
+	    
+		return accFolds;
+	}
+	
 }
