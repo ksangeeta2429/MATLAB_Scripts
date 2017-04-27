@@ -3,7 +3,6 @@ function Results=MASS_CrossVal_10foldstats_parallel(round,topk_list)
 SetEnvironment
 SetPath
 
-outFileName = strcat('CrossVal_SaveAllModels_Round',num2str(round),'.csv');
 path_to_round_folder = strcat(g_str_pathbase_radar,'/IIITDemo/Arff/BigEnvs/Round',num2str(round));
 path_models = g_str_pathbase_model;
 
@@ -63,6 +62,6 @@ for topk=topk_list
             end
         end
     end
+    outFileName = strcat('CrossVal_SaveAllModels_Round',num2str(round),'_Top',topk,'.csv');
+    cell2csv(strcat(path_to_round_folder,'/',outFileName), Results);
 end
-
-cell2csv(strcat(path_to_round_folder,'/',outFileName), Results);
