@@ -21,7 +21,7 @@ str_pathbase_radar_mike = 'C:/Users/researcher/Box Sync/All_programs_data_IPSN_2
 str_pathbase_radar_dhrubo = 'C:/Users/roy.174/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
 str_pathbase_radar_Roy = 'C:/Users/Roy/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
 str_pathbase_radar_Balderdash = '/Users/Balderdash/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
-str_pathbase_radar_OSC = '~/RobustEnv';
+str_pathbase_radar_OSC = '/users/PAS1090/osu8577/RobustEnv';
 str_pathbase_radar_Neel = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
 str_pathbase_radar_dhrubo_Ubuntu = '/home/roy.174/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
 
@@ -39,7 +39,7 @@ str_pathbase_model_mike = 'C:/Users/researcher/Box Sync/All_programs_data_IPSN_2
 str_pathbase_model_dhrubo = 'C:/Users/roy.174/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/roy.174';
 str_pathbase_model_Roy = 'C:/Users/Roy/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Roy';
 str_pathbase_model_Balderdash = '/Users/Balderdash/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Balderdash';
-str_pathbase_model_OSC = '~/RobustEnv/Models';
+str_pathbase_model_OSC = '/users/PAS1090/osu8577/RobustEnv/Models/osu8577';
 str_pathbase_model_Neel = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Neel';
 str_pathbase_model_dhrubo_Ubuntu = '/home/roy.174/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/roy.174';
 
