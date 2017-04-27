@@ -40,9 +40,9 @@ for topk=topk_list
                 for gamma=[0.001 0.01 0.05 0.1 0.5 1 5 10] %[0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 0.09 0.1]
                     fprintf('\tAttempting with c=%d, gamma=%d\n', c, gamma);
                     accuracy_arr=CrossVal_10foldstats_new(path_models,path_combined_env,c, gamma, 1);
+                    Results = [Results; num2cell(topk), nameFolds{i}, nameFilters{j}, num2cell(c), num2cell(gamma), num2cell(accuracy_arr)];
                 end
             end
-            Results = [Results; num2cell(topk), nameFolds{i}, nameFilters{j}, num2cell(c), num2cell(gamma), num2cell(accuracy_arr)];
         end
     end
 end
