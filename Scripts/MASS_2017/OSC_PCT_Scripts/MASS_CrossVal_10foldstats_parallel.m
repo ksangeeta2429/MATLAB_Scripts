@@ -4,7 +4,12 @@ SetEnvironment
 SetPath
 
 path_to_round_folder = strcat(g_str_pathbase_radar,'/IIITDemo/Arff/BigEnvs/Round',num2str(round));
-path_models = g_str_pathbase_model;
+path_models = strcat(g_str_pathbase_model,'/Round',num2str(round));
+
+if exist(path_models, 'dir') ~= 7
+    mkdir(path_models);
+    fprintf('INFO: created directory %s\n', path_models);
+end
 
 cd(path_to_round_folder);
 
@@ -62,6 +67,6 @@ for topk=topk_list
             end
         end
     end
-    outFileName = strcat('CrossVal_SaveAllModels_Round',num2str(round),'_Top',topk,'.csv');
+    outFileName = strcat('CrossVal_SaveAllModels_Round',num2str(round),'_Top',num2str(topk),'.csv');
     cell2csv(strcat(path_to_round_folder,'/',outFileName), Results);
 end
