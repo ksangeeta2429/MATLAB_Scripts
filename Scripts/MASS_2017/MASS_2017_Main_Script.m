@@ -53,4 +53,13 @@ MASS_Paper_Results_Crossval(3,[10 15 20 25 30 35 40],'InfoGain','prctile',10,'al
 MASS_Paper_Results_Crossval(4,[10 15 20 25 30 35 40],'InfoGain','prctile',10,'all');
 MASS_Paper_Results_Crossval(5,[10 15 20 25 30 35 40],'InfoGain','prctile',10,'all');
 
-%% Aggregate results - complete world
+%% Aggregate results - 10foldstats
+MASS_Paper_Results_10foldstats(2,[10 15 20 25 30 35],'mRMR','all');
+MASS_Paper_Results_10foldstats(3,[10 15 20 25 30 35],'mRMR','all');
+MASS_Paper_Results_10foldstats(4,[10 15 20 25 30 35],'mRMR','all');
+MASS_Paper_Results_10foldstats(5,[10 15 20 25 30 35],'mRMR','all');
+
+MASS_Paper_Results_10foldstats(2,[10 15 20 25 30 35],'InfoGain','all');
+MASS_Paper_Results_10foldstats(3,[10 15 20 25 30 35],'InfoGain','all');
+MASS_Paper_Results_10foldstats(4,[10 15 20 25 30 35],'InfoGain','all');
+MASS_Paper_Results_10foldstats(5,[10 15 20 25 30 35],'InfoGain','all');
