@@ -50,55 +50,62 @@ for i=1:length(trainFiles) % take every file from the set 'Files'
         testFileEnv = str2num(testFileName(strfind(testFileName,'radar')+5:strfind(testFileName,'_scaled')-1));
         
         %% PLEASE REENABLE - Ignore test environment if same as train environment, or is a constituent of the (composite) train environment
-%         if strcmp(testFileName, fileName)>0 || not(isempty(find(fileEnvs==testFileEnv)))
-%             continue;
-%         end
-     %%   
+        %         if strcmp(testFileName, fileName)>0 || not(isempty(find(fileEnvs==testFileEnv)))
+        %             continue;
+        %         end
+        %%
         % Ensure that the non-target in test file is represented in the training set
-%         for nt=1:length(nontarget_set)
-%             if not(isempty(find(nontarget_set{nt}==testFileEnv)))
-%                 nttest = nt;
-%                 break;
-%             end
-%         end
-%         
-%         flag = 0;
-%         for env=1:length(fileEnvs)
-%             if(not(isempty(find(nontarget_set{nttest}==fileEnvs(env)))))
-%                 flag = 1;
-%                 break;
-%             end
-%         end
-%         
-%         if flag==0
-%             continue;
-%         end
+        %         for nt=1:length(nontarget_set)
+        %             if not(isempty(find(nontarget_set{nt}==testFileEnv)))
+        %                 nttest = nt;
+        %                 break;
+        %             end
+        %         end
+        %
+        %         flag = 0;
+        %         for env=1:length(fileEnvs)
+        %             if(not(isempty(find(nontarget_set{nttest}==fileEnvs(env)))))
+        %                 flag = 1;
+        %                 break;
+        %             end
+        %         end
+        %
+        %         if flag==0
+        %             continue;
+        %         end
         
         
         % modelFile = dir(strcat(path_models,'\',fileName,'*.model'));
-        modelFile = dir(strcat(path_models,'/',fileName,'_p_*.model'));
+        modelFiles = dir(strcat(path_models,'/',fileName,'_p_*.model'));
         % result = CrossEnvironmentTestFromModel_new(strrep(strcat('"',path_models,'\',modelFile.name,'"'),'\','\\'), strrep(strcat('"',path_train_envs,'\',testFileName,'.arff"'),'\','\\'));
-        result = TestModel_AutoFiltering(strcat(path_models,'/',modelFile.name), strcat(path_test_envs,'/',testFileName,'.arff'));
-        st = java.util.StringTokenizer(result);
-        while(st.hasMoreTokens())
-            %fprintf('%s\n',char(st.nextToken()));
-            str = char(st.nextToken());
-            if strcmp(str,'<--')==1
-                st.nextToken();
-                st.nextToken();
-                st.nextToken();
-                st.nextToken();
-                st.nextToken();
-                st.nextToken();
-                st.nextToken();
-                st.nextToken();
-                incorrect = str2num(char(st.nextToken()));
-                correct = str2num(char(st.nextToken()));
-                accuracy=correct/(incorrect+correct)*100;
-                break;
+        for m=1:length(modelFiles)
+            modelFile = modelFiles(m).name;
+            str_c_gamma = modelFile(strfind(modelFile,'_p_')+3:strfind(modelFile,'.model')-1);
+            c = str2double(str_c_gamma(1:strfind(str_c_gamma,'_')-1));
+            gamma=str2double(str_c_gamma(strfind(str_c_gamma,'_')+1:end));
+            
+            fprintf('Processing test file %s.arff with c=%d,gamma=%d...\n',testFileName,c,gamma);
+            result = TestModel_AutoFiltering(strcat(path_models,'/',modelFile), strcat(path_test_envs,'/',testFileName,'.arff'));
+            st = java.util.StringTokenizer(result);
+            while(st.hasMoreTokens())
+                %fprintf('%s\n',char(st.nextToken()));
+                str = char(st.nextToken());
+                if strcmp(str,'<--')==1
+                    st.nextToken();
+                    st.nextToken();
+                    st.nextToken();
+                    st.nextToken();
+                    st.nextToken();
+                    st.nextToken();
+                    st.nextToken();
+                    st.nextToken();
+                    incorrect = str2double(char(st.nextToken()));
+                    correct = str2double(char(st.nextToken()));
+                    accuracy=correct/(incorrect+correct)*100;
+                    break;
+                end
             end
+            Results = [Results; topk_cell, folder_cell, filter_cell, {fileName}, {testFileName}, accuracy, c, gamma];
         end
-        Results = [Results; topk_cell, folder_cell, filter_cell, {fileName}, {testFileName}, accuracy];
     end
 end
-
