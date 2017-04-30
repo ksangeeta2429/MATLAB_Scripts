@@ -1,4 +1,4 @@
-function Results=MASS_CrossVal_10foldstats_script(round,topk_list)
+function Results=MASS_CrossVal_10foldstats(round,topk_list)
 
 SetEnvironment
 SetPath
