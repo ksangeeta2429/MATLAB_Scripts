@@ -1,4 +1,4 @@
-function [Result_orig,Result_MAD]=MASS_Optimize_MAD_Beta_10foldstats(round,filter_type)
+function [Result_orig,Result_MAD]=MASS_Optimize_MAD_Beta_10foldstats(round,topk_array,filter_type)
 
 path_to_round_folder = strcat('~/Dropbox/TransferPCtoMac/Round',num2str(round));
 if not(isempty(strfind(lower(filter_type),'mrmr')))
@@ -12,12 +12,12 @@ cd(path_to_round_folder);
 Result_orig={};
 Result_MAD={};
 envs=table2struct(readtable('env_processing_order.csv','Delimiter',',','ReadVariableNames',false));
-for topk=10:5:35
+for topk=topk_array
     M=table2struct(readtable(strcat('CrossVal_SaveAllModels_Round',num2str(round),'_Top',num2str(topk),'.csv'),'Delimiter',',','ReadVariableNames',false));
     for i=1:length(envs)
         % Best params for MAD
         min_score = 999;
-        for j=1:length(filters)
+        for j=2:length(filters)
             for k=1:length(M)
                 if strcmp(M(k).Var2,envs(i).Var1)==1 && strcmp(M(k).Var3,filters{j})==1
                     arr=[M(k).Var6 M(k).Var7 M(k).Var8 M(k).Var9 M(k).Var10 M(k).Var11 M(k).Var12 M(k).Var13 M(k).Var14 M(k).Var15];

@@ -6,7 +6,7 @@ SetPath
 path_to_round_folder = strcat('~/Dropbox/TransferPCtoMac/Round',num2str(round));
 cd(path_to_round_folder);
 
-[Orig_opt,MAD_opt] = MASS_Optimize_MAD_Beta_10foldstats(round,filter_type);
+[Orig_opt,MAD_opt] = MASS_Optimize_MAD_Beta_10foldstats(round,topk_array,filter_type);
 
 Median={'','Original_filter','MAD_filter'};
 IQR={'','Original_filter','MAD_filter'};
@@ -58,6 +58,12 @@ for topk=topk_array
     errors_topk(1,k)=iqr(orig_array)/2;
     errors_topk(2,k)=iqr(mad_array)/2;
     
+    errors_neg_topk(1,k)=median(orig_array)-quantile(orig_array,0.25);
+    errors_neg_topk(2,k)=median(mad_array)-quantile(mad_array,0.25);
+    
+    errors_pos_topk(1,k)=quantile(orig_array,0.75)-median(orig_array);
+    errors_pos_topk(2,k)=quantile(mad_array,0.75)-median(mad_array);
+    
     Labels{k}=num2str(topk);
     k=k+1;
     
@@ -68,12 +74,12 @@ for topk=topk_array
 end
 
 %g = bar(medians_topk(1,:),'FaceColor',[0 .5 .5],'EdgeColor','black');
-g=errorbar(topk_array, medians_topk(1,:), errors_topk(1,:),'-s','MarkerSize',10,...
+g=errorbar(topk_array, medians_topk(1,:), errors_neg_topk(1,:),errors_pos_topk(1,:),'-s','MarkerSize',10,...
     'MarkerEdgeColor','red','MarkerFaceColor','red');
 g.Color = 'red';
 grid on
 hold on
-p=errorbar(topk_array+0.5, medians_topk(2,:), errors_topk(2,:),'-s','MarkerSize',10,...
+p=errorbar(topk_array+0.5, medians_topk(2,:), errors_neg_topk(2,:),errors_pos_topk(2,:),'-s','MarkerSize',10,...
     'MarkerEdgeColor','blue','MarkerFaceColor','blue');
 p.Color = 'blue';
 hold off
@@ -103,3 +109,4 @@ h.YLabel.FontWeight = 'bold';
 ylim([-inf 100]);
 xlim([5 40]);
 saveas(h, strcat('~/Dropbox/TransferPCtoMac/',testenvs,'test_',filter_type,'_and_MAD_Envs_',num2str(round),'.fig'));
+saveas(h, strcat('~/Dropbox/TransferPCtoMac/',testenvs,'test_',filter_type,'_and_MAD_Envs_',num2str(round),'.eps'), 'eps2c');
