@@ -24,7 +24,7 @@ for topk=topk_array
                     score=iqr(arr);
                     if score < min_score
                         min_score = score;
-                        ResultArr={M(k).Var1, M(k).Var2, M(k).Var3, num2str(M(k).Var4), num2str(M(k).Var5)};
+                        ResultArr={M(k).Var1, M(k).Var2, M(k).Var3, num2str(M(k).Var4), num2str(M(k).Var5), mean(arr)};
                     end
                 end
             end
@@ -38,7 +38,7 @@ for topk=topk_array
                 score=median(arr);
                 if score > max_score
                         max_score = score;
-                    ResultArr={M(k).Var1, M(k).Var2, M(k).Var3, num2str(M(k).Var4), num2str(M(k).Var5)};
+                    ResultArr={M(k).Var1, M(k).Var2, M(k).Var3, num2str(M(k).Var4), num2str(M(k).Var5), mean(arr)};
                 end
             end
         end

@@ -88,8 +88,8 @@ l=cell(1,2);
 l{1}=filter_type; l{2}=strcat(filter_type,'\_MAD');
 
 h=gca;
-legend(h,l,'Location','northwest','interpreter','latex');
-legend boxoff
+legend(h,l,'Location','southeast','interpreter','latex');
+%legend boxoff
 h.TickLabelInterpreter='latex';
 %h.FontName = 'CMU Serif';`
 %h.Interpreter='latex';

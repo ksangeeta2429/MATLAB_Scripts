@@ -54,12 +54,12 @@ MASS_Paper_Results_Crossval(4,[10 15 20 25 30 35 40],'InfoGain','prctile',10,'al
 MASS_Paper_Results_Crossval(5,[10 15 20 25 30 35 40],'InfoGain','prctile',10,'all');
 
 %% Aggregate results - 10foldstats
-%MASS_Paper_Results_10foldstats(2,[10 15 20 25 30 35],'mRMR','all');
-MASS_Paper_Results_10foldstats(3,[10 15 20 25 30 35],'mRMR','all');
-MASS_Paper_Results_10foldstats(4,[10 15 20 25 30 35],'mRMR','all');
-MASS_Paper_Results_10foldstats(5,[10 15 20 25 30 35],'mRMR','all');
+[med_mRMR_2, iqr_mRMR_2, ~, ~]=MASS_Paper_Results_10foldstats(2,[10 15 20 25 30 35],'mRMR','all');
+[med_mRMR_3, iqr_mRMR_3, ~, ~]=MASS_Paper_Results_10foldstats(3,[10 15 20 25 30 35],'mRMR','all');
+[med_mRMR_4, iqr_mRMR_4, ~, ~]=MASS_Paper_Results_10foldstats(4,[10 15 20 25 30 35],'mRMR','all');
+[med_mRMR_5, iqr_mRMR_5, ~, ~]=MASS_Paper_Results_10foldstats(5,[10 15 20 25 30 35],'mRMR','all');
 
-%MASS_Paper_Results_10foldstats(2,[10 15 20 25 30 35],'InfoGain','all');
-MASS_Paper_Results_10foldstats(3,[10 15 20 25 30 35],'InfoGain','all');
-MASS_Paper_Results_10foldstats(4,[10 15 20 25 30 35],'InfoGain','all');
-MASS_Paper_Results_10foldstats(5,[10 15 20 25 30 35],'InfoGain','all');
+[med_ig_2, iqr_ig_2, ~, ~]=MASS_Paper_Results_10foldstats(2,[10 15 20 25 30 35],'InfoGain','all');
+[med_ig_3, iqr_ig_3, ~, ~]=MASS_Paper_Results_10foldstats(3,[10 15 20 25 30 35],'InfoGain','all');
+[med_ig_4, iqr_ig_4, ~, ~]=MASS_Paper_Results_10foldstats(4,[10 15 20 25 30 35],'InfoGain','all');
+[med_ig_5, iqr_ig_5, ~, ~]=MASS_Paper_Results_10foldstats(5,[10 15 20 25 30 35],'InfoGain','all');
