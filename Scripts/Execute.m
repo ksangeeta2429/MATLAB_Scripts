@@ -71,9 +71,9 @@ SetPath
 % data_human = {'/Darree_Fields/cut'};
 
 %% 2014.08 Bike data
-% Index = [201408];
-% data_dog = {'/Bike data/cut'};
-% data_human = {'NIL'};
+ Index = [201408];
+ data_dog = {'/Bike data/cut'};
+ data_human = {'NIL'};
 
 %% Anomalous data
 % Index = [03202017, 030230670]
@@ -85,9 +85,9 @@ SetPath
 % data_human={'/Close zoom/Human'};
 
 %% Any test data, such as a single walk cut
-Index = [12345];
-data_dog = {'/Test'};
-data_human = {'NIL'};
+%Index = [12345];
+%data_dog = {'/Test'};
+%data_human = {'NIL'};
 %% Execute.m
 featureClass = 0;
 

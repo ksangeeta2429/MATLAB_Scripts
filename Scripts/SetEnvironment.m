@@ -73,7 +73,7 @@ elseif strcmp(getenv('PBS_O_LOGNAME'),'osu8577')==1 % Alternatively: elseif strc
     g_str_pathbase_radar = str_pathbase_radar_OSC;
     g_str_pathbase_data  = str_pathbase_data_OSC;
     g_str_pathbase_model = str_pathbase_model_OSC;
-elseif strcmp(getenv('USER'),'root')==1
+elseif strcmp(getenv('USER'),'neel')==1
     g_str_pathbase_radar = str_pathbase_radar_Neel;
     g_str_pathbase_data  = str_pathbase_data_Neel;
     g_str_pathbase_model = str_pathbase_model_Neel;
