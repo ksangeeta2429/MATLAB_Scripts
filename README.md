@@ -35,8 +35,6 @@
 	/MATLAB_Scripts/Library/Data Collection/MatLab Scripts/LinkDetection/WriteUp
 	/MATLAB_Scripts/Library/Data Collection/MatLab Scripts/Microphone
 	/MATLAB_Scripts/Library/Data Collection/MatLab Scripts/Radar
-	/MATLAB_Scripts/Library/Data Collection/MatLab Scripts/Radar/Jin
-	/MATLAB_Scripts/Library/Data Collection/MatLab Scripts/Radar/Nived
 
 # Add the following JAR_files to your MATLAB static Java classpath:
 
