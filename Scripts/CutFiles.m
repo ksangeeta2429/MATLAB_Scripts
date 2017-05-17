@@ -32,7 +32,8 @@ SetPath
 
 % path_data_human = 'C:\Users\royd\Documents\WIP\Parking garage radial ortho (Sandeep)\radial';
 % path_data_human = 'C:\Users\royd\Documents\WIP\Darree_Fields';
-path_data_human = 'C:\Users\roy.174\Documents\HornNet Data (radar,network)\Darree_humans_and_groups_Oct_2016\Darree_Fields_grass_17_Oct_2016';
+%path_data_human = 'C:\Users\roy.174\Documents\HornNet Data (radar,network)\Darree_humans_and_groups_Oct_2016\Darree_Fields_grass_17_Oct_2016';
+path_data_human = strcat(g_str_pathbase_data,'/Bike data/March 25 2017');
 %% %%%%%%%%%%%%%%%%%%%%% human
 cd(path_data_human);
 
@@ -63,8 +64,11 @@ for i=1:length(Files) % take every file from the set 'Files'
     [ncut, start, stop] = CutFile(fileName);
     allstarts=[allstarts;start'/256];
     allstops=[allstops;stop'/256];
+    disp(allstarts);
+    disp(allstops);
 %     pause;
 end
+
 
 
 % path_data=[path_data_human,'\cut'];
