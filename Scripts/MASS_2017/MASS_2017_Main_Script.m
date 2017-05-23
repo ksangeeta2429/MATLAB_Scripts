@@ -20,17 +20,20 @@ MASS_2017_mRMR_and_mRMRMAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 6)
 % MASS_CrossEnv_Validation_script(2,[10 15 20 25 30 35 40]);
 % MASS_CrossEnv_Validation_script(3,[10 15 20 25 30 35 40]);
 % MASS_CrossEnv_Validation_script(4,[10 15 20 25 30 35 40]);
-MASS_CrossVal_10foldstats_script(2,[10 15 20 25 30 35 40]);
-MASS_CrossVal_10foldstats_script(3,[10 15 20 25 30 35 40]);
-MASS_CrossVal_10foldstats_script(5,[10 15 20 25 30 35 40]);
-MASS_CrossVal_10foldstats_script(4,[10 15 20 25 30 35 40]);
+
+%% Generating models 10fold stats
+
+MASS_CrossVal_10foldstats(2,[10 15 20 25 30 35 40]);
+MASS_CrossVal_10foldstats(3,[10 15 20 25 30 35 40]);
+MASS_CrossVal_10foldstats(5,[10 15 20 25 30 35 40]);
+MASS_CrossVal_10foldstats(4,[10 15 20 25 30 35 40]);
 
 %% CrossEnvironment testing after above scripts are run
 
-MASS_TestEnvs_script(2,[10 15 20 25 30 35 40],'crossval');
-MASS_TestEnvs_script(3,[10 15 20 25 30 35 40],'crossval');
-MASS_TestEnvs_script(4,[10 15 20 25 30 35 40],'crossval');
-MASS_TestEnvs_script(5,[10 15 20 25 30 35 40],'crossval');
+MASS_TestEnvs_script(2,[10 15 20 25 30 35 40]);
+MASS_TestEnvs_script(3,[10 15 20 25 30 35 40]);
+MASS_TestEnvs_script(4,[10 15 20 25 30 35 40]);
+MASS_TestEnvs_script(5,[10 15 20 25 30 35 40]);
 
 %% Aggregate results - open world
 MASS_Paper_Results_Crossval(2,[10 15 20 25 30 35 40],'mRMR','prctile',10,'diff');
