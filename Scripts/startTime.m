@@ -7,6 +7,9 @@
     absolute time. Ex: 38.36 represents 38 minutes and 36 seconds
     Final result i.e start_time : Ex: 12.44 - 12 hrs and 44 minutes on
     clock is the start time
+
+    Ex: If the end time is 1:22 PM or AM and duration is 38:36 call the function as :
+        startTime(1.22, 38.36)
 %}
 
 function startTime(end_time, duration)
