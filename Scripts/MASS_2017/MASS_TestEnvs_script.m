@@ -1,15 +1,10 @@
-function Results=MASS_TestEnvs_script(round,topk_list, training_type)
+function Results=MASS_TestEnvs_script(round,topk_list)
 
 SetEnvironment
 SetPath
 
 outFileName = strcat('CrossEnvironment_Evaluation_Round',num2str(round),'.csv');
-
-if lower(training_type) == 'crossval'
-    path_models = g_str_pathbase_model;
-else % Default: crossenvironment validation
-    %path_models = strcat(g_str_pathbase_model,'/Crossenv_vals');
-end
+path_models = g_str_pathbase_model;
 
 path_to_round_folder = strcat(g_str_pathbase_radar,'/IIITDemo/Arff/BigEnvs/Round',num2str(round));
 
