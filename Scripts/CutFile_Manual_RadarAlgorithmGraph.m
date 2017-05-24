@@ -22,7 +22,7 @@ end
 [I,Q,N]=Data2IQ(ReadBin([fileName]));
 
 walk_begs = dlmread(walk_beg_file);
-walk_ends = dlmread(walk_end_file)';
+walk_ends = dlmread(walk_end_file);
 
 walk_lengths = (walk_ends - walk_begs)/2; % since unit is half-seconds
 
