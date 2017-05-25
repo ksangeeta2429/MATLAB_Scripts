@@ -72,7 +72,7 @@ SetPath
 
 %% 2014.08 Bike data
  Index = [201408];
- data_dog = {'/Bike data/cut'};
+ data_dog = {'/Bike data/March 25 2017/cut'};
  data_human = {'NIL'};
 
 %% Anomalous data
