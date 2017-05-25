@@ -24,6 +24,7 @@ OverlapSamples = VelOverlap*WindowSamples;
 N = length(Range);
 
 k = 1;
+phaseDiff = [];
 % find max-min over each window
 for j = 1:(WindowSamples-OverlapSamples):(N + 1 - WindowSamples)
     %phaseDiff(k) = max(Range(j:j+WindowSamples-1)) - min(Range(j:j+WindowSamples-1));
@@ -32,11 +33,11 @@ for j = 1:(WindowSamples-OverlapSamples):(N + 1 - WindowSamples)
     else
         phaseDiff(k) = abs(Range(j+WindowSamples-1) - Range(j-1));
     end
-    
 %         currphase = Range(startIndex:startIndex+63)
 %         maxPhaseInStep = max(Range(startIndex:startIndex+63))
     k = k + 1;
 end
 
-phaseDiff = sort(phaseDiff);      
+phaseDiff = sort(phaseDiff);   
+%disp(phaseDiff);
 Out = phaseDiff(ceil(quantile*length(phaseDiff)));
