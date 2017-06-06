@@ -1,3 +1,19 @@
+# Required  MATLAB Java version
+
+The custom JAR file /MATLAB_Scripts/JAR_files/InfoTheoreticRanking_1.7.jar requires Java 1.7. Therefore, MATLAB should use the right JVM for accessing these classes. The MATLAB Java version can be different from the default system Java version. Based on your OS type, refer to the appropriate link for changing your MATLAB JVM:
+
+http://www.mathworks.com/matlabcentral/answers/130359-how-do-i-change-the-java-virtual-machine-jvm-that-matlab-is-using-for-windows-os
+https://www.mathworks.com/matlabcentral/answers/130360-how-do-i-change-the-java-virtual-machine-jvm-that-matlab-is-using-for-linux
+https://www.mathworks.com/matlabcentral/answers/103056-how-do-i-change-the-java-virtual-machine-jvm-that-matlab-is-using-for-mac-os
+
+Check your current MATLAB Java version through the following command:
+
+    >> version -java
+
+    ans =
+
+    Java 1.7.0_75-b13 with Oracle Corporation Java HotSpot(TM) 64-Bit Server VM mixed mode
+
 # Add the following folders to your MATLAB path:
 
 	/MATLAB_Scripts/Features
