@@ -27,6 +27,7 @@ Check your current MATLAB Java version through the following command:
 	/MATLAB_Scripts/Scripts/Paper_plots
 	/MATLAB_Scripts/Scripts/Simple
 	/MATLAB_Scripts/Scripts/VisualizeInAfrica
+	/MATLAB_Scripts/Scripts/cell2csv
 	/MATLAB_Scripts/Scripts/matlab2weka
 	/MATLAB_Scripts/Scripts/mi
 	/MATLAB_Scripts/Scripts/test
