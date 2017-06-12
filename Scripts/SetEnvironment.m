@@ -56,7 +56,7 @@ elseif strcmp(getenv('USERNAME'),'roy.174'      )==1
     g_str_pathbase_radar = str_pathbase_radar_dhrubo;
     g_str_pathbase_data  = str_pathbase_data_dhrubo;
     g_str_pathbase_model = str_pathbase_model_dhrubo;
-elseif strcmp(getenv('USER'),'root'      )==1
+elseif strcmp(getenv('USER'),'roy174'      )==1
     g_str_pathbase_radar = str_pathbase_radar_dhrubo_Ubuntu;
     g_str_pathbase_data  = str_pathbase_data_dhrubo_Ubuntu;
     g_str_pathbase_model = str_pathbase_model_dhrubo_Ubuntu;
