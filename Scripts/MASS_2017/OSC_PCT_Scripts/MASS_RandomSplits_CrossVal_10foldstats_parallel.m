@@ -27,8 +27,8 @@ for c=[0.001 0.01 0.1 1 10 100 1000 100000 1000000]
     end
 end
 
-Results={};
 for topk=topk_list
+    Results={};
     for i=1:length(nameFolds)
         path_to_arff_combos = strcat(path_to_round_folder,'/',char(nameFolds{i}),'/top',num2str(topk));
         fold_name=nameFolds{i};
