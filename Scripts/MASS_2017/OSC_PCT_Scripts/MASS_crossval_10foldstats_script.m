@@ -1,4 +1,4 @@
-function MASS_CrossVal_10foldstats_script(round, topk_list)
+function MASS_crossVal_10foldstats_script(round, topk_list)
 
 %THIS EXAMPLE IS FOR SUBMITTING A SCRIPT FROM A REMOTE CLIENT SESSION TO
 %RUN ON THE OSC OAKLEY CLUSTER.  THE SCRIPT MAY CONTAIN PARFOR LOOPS.
