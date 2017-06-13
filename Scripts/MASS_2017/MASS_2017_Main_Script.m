@@ -1,5 +1,4 @@
 %% InfoGains and InfoGainMAD training
-
 MASS_2017_InfoGains_and_InfoGainMAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 1),01); % Datasets single environments
 MASS_2017_InfoGains_and_InfoGainMAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 2),02); % Datasets 2-combo environments
 MASS_2017_InfoGains_and_InfoGainMAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 3),03); % Datasets 3-combo environments
@@ -8,7 +7,6 @@ MASS_2017_InfoGains_and_InfoGainMAD_Training(Generate_Env_Combinations([1 2 3 4 
 MASS_2017_InfoGains_and_InfoGainMAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 6),06); % Datasets 6-combo environments
 
 %% mRMR_D and mRMR_MAD_D training
-
 MASS_2017_mRMR_and_mRMRMAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 1),01); % Datasets single environments
 MASS_2017_mRMR_and_mRMRMAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 2),02); % Datasets 2-combo environments
 MASS_2017_mRMR_and_mRMRMAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 3),03); % Datasets 3-combo environments
@@ -21,22 +19,26 @@ MASS_2017_mRMR_and_mRMRMAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 6)
 % MASS_CrossEnv_Validation_script(3,[10 15 20 25 30 35 40]);
 % MASS_CrossEnv_Validation_script(4,[10 15 20 25 30 35 40]);
 
-%% Generating models 10fold stats
-
+%% Generating models 10fold stats for above
 MASS_CrossVal_10foldstats(2,[10 15 20 25 30 35 40]);
 MASS_CrossVal_10foldstats(3,[10 15 20 25 30 35 40]);
-MASS_CrossVal_10foldstats(5,[10 15 20 25 30 35 40]);
 MASS_CrossVal_10foldstats(4,[10 15 20 25 30 35 40]);
+MASS_CrossVal_10foldstats(5,[10 15 20 25 30 35 40]);
 
-%% Training MAD with random splits - second argumment * 10 represents the round, last argument is the pseudorandom seed
+%% MAD feature selection with random environment splits - second argumment * 10 represents the round, last argument is the pseudorandom seed
 MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 2),2,10); % Round 20
 MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 3),3,10); % Round 30
 MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 4),4,10); % Round 40
 MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 5),5,10); % Round 50
 MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 6),6,10); % Round 60
 
-%% CrossEnvironment testing after above scripts are run
+%% Generating models 10fold stats for above
+MASS_RandomSplits_CrossVal_10foldstats(20,10,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_CrossVal_10foldstats(30,10,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_CrossVal_10foldstats(40,10,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_CrossVal_10foldstats(50,10,[10 15 20 25 30 35 40]);
 
+%% CrossEnvironment testing after above scripts are run
 MASS_TestEnvs_script(2,[10 15 20 25 30 35 40]);
 MASS_TestEnvs_script(3,[10 15 20 25 30 35 40]);
 MASS_TestEnvs_script(4,[10 15 20 25 30 35 40]);
