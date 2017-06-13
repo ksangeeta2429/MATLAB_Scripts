@@ -28,6 +28,13 @@ MASS_CrossVal_10foldstats(3,[10 15 20 25 30 35 40]);
 MASS_CrossVal_10foldstats(5,[10 15 20 25 30 35 40]);
 MASS_CrossVal_10foldstats(4,[10 15 20 25 30 35 40]);
 
+%% Training MAD with random splits - second argumment * 10 represents the round, last argument is the pseudorandom seed
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 2),2,10); % Round 20
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 3),3,10); % Round 30
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 4),4,10); % Round 40
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 5),5,10); % Round 50
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 6),6,10); % Round 60
+
 %% CrossEnvironment testing after above scripts are run
 
 MASS_TestEnvs_script(2,[10 15 20 25 30 35 40]);
