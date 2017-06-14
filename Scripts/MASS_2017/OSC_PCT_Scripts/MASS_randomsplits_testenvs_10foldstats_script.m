@@ -30,7 +30,7 @@ intelCluster = parcluster('genericNonSharedOakleyIntel_R2015b');
 %NOTE: In the following command, fill in the last value with the path to your home directory.
 %You can find this path by typing "pwd" once you login the OSC system(Oakley, Ruby and Glenn)
 %A sample is like: /nfs/00/username
-jobObject=batch(intelCluster,'MASS_RandomSplits_TestEnvs_10foldstats_parallel',1,{round,seed,topk_list},'Pool',31,'CurrentFolder', '~/MATLABdir');
+jobObject=batch(intelCluster,'MASS_RandomSplits_TestEnvs_10foldstats_parallel',0,{round,seed,topk_list},'Pool',31,'CurrentFolder', '~/MATLABdir');
 
 %At this point you will be prompted for your OSC user name and password.
 %Answer "no" to the key file question.
