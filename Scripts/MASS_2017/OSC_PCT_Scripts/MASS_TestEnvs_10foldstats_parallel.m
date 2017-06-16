@@ -14,7 +14,8 @@ isub = [d(:).isdir]; %# returns logical vector
 nameFolds = {d(isub).name}';
 nameFolds(ismember(nameFolds,{'.','..'})) = [];
 
-parfor topk=topk_list
+parfor k=1:length(topk_list)
+    topk=topk_list(k);
     Results = {};
     for i=1:length(nameFolds)
         path_to_arff_combos = strcat(path_to_round_folder,'/',char(nameFolds{i}),'/top',num2str(topk));
