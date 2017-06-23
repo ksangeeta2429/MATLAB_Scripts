@@ -16,7 +16,7 @@ function MASS_randomsplits_crossval_10foldstats_script(round,seed,topk_list)
 
 %This example runs the script "eigtest" on the cluster. It is located in
 %OSCMatlabPCT/PCTtestfiles/eigtest.m.
-%cd('~/Documents/MATLAB/OSCMatlabPCT/PCTtestfiles/Jobs');
+cd('~/OSCMatlabPCT/launch');
 %Initialize cluster object using the appropriate profile for your situation
 intelCluster = parcluster('genericNonSharedOakleyIntel_R2015b');
 

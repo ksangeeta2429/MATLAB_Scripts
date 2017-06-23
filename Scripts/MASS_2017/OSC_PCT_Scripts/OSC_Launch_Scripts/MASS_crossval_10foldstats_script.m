@@ -1,4 +1,4 @@
-function MASS_crossVal_10foldstats_script(round, topk_list)
+function MASS_crossval_10foldstats_script(round, topk_list)
 
 %THIS EXAMPLE IS FOR SUBMITTING A SCRIPT FROM A REMOTE CLIENT SESSION TO
 %RUN ON THE OSC OAKLEY CLUSTER.  THE SCRIPT MAY CONTAIN PARFOR LOOPS.
@@ -16,7 +16,7 @@ function MASS_crossVal_10foldstats_script(round, topk_list)
 
 %This example runs the script "eigtest" on the cluster. It is located in
 %OSCMatlabPCT/PCTtestfiles/eigtest.m.
-%cd('~/Documents/MATLAB/OSCMatlabPCT/PCTtestfiles/Jobs');
+cd('~/OSCMatlabPCT/launch');
 %Initialize cluster object using the appropriate profile for your situation
 intelCluster = parcluster('genericNonSharedOakleyIntel_R2015b');
 
