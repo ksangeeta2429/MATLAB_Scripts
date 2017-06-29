@@ -1,10 +1,10 @@
 function Result=MASS_Optimize_MAD_Beta_Crossval(round,filter_type,metric_type,prctile_param)
 
 if not(isempty(strfind(lower(filter_type),'mrmr')))
-    path_to_round_folder = strcat('~/Dropbox/TransferPCtoMac/mRMR_and_MAD/Round',num2str(round));
+    path_to_round_folder = strcat('~/Research/Robust_Learning_Radar/Results/CrossValidation_Regular/mRMR_and_MAD/Round',num2str(round));
     filters={'mRMR_D_combined', 'mRMRMAD_D_0_25s', 'mRMRMAD_D_0_5s', 'mRMRMAD_D_0_75s', 'mRMRMAD_D_1s', 'mRMRMAD_D_5s', 'mRMRMAD_D_10s', 'mRMRMAD_D_20s', 'mRMRMAD_D_50s'};
 else
-    path_to_round_folder = strcat('~/Dropbox/TransferPCtoMac/InfoGain_and_MAD/Round',num2str(round));
+    path_to_round_folder = strcat('~/Research/Robust_Learning_Radar/Results/CrossValidation_Regular/InfoGain_and_MAD/Round',num2str(round));
     filters={'InfoGain_combined', 'InfoGainMAD_0_25s', 'InfoGainMAD_0_5s', 'InfoGainMAD_0_75s', 'InfoGainMAD_1s', 'InfoGainMAD_5s', 'InfoGainMAD_10s', 'InfoGainMAD_20s', 'InfoGainMAD_50s'};
 end
 

@@ -3,7 +3,7 @@ function [Median,IQR,OpPoint,HighOpPoint]=MASS_Paper_Results_10foldstats(round,t
 SetEnvironment
 SetPath
 
-path_to_round_folder = strcat('~/Dropbox/TransferPCtoMac/Round',num2str(round));
+path_to_round_folder = strcat('~/Research/Robust_Learning_Radar/Results/CrossValidation_10foldstats/Environment_Splits/Round',num2str(round));
 cd(path_to_round_folder);
 
 [Orig_opt,MAD_opt] = MASS_Optimize_MAD_Beta_10foldstats(round,topk_array,filter_type);

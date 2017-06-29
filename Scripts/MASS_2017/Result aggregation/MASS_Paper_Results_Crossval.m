@@ -4,9 +4,9 @@ SetEnvironment
 SetPath
 
 if not(isempty(strfind(lower(filter_type),'mrmr')))
-    path_to_round_folder = strcat('~/Dropbox/TransferPCtoMac/mRMR_and_MAD/Round',num2str(round));
+    path_to_round_folder = strcat('~/Research/Robust_Learning_Radar/Results/CrossValidation_Regular/mRMR_and_MAD/Round',num2str(round));
 else
-    path_to_round_folder = strcat('~/Dropbox/TransferPCtoMac/InfoGain_and_MAD/Round',num2str(round));
+    path_to_round_folder = strcat('~/Research/Robust_Learning_Radar/Results/CrossValidation_Regular/InfoGain_and_MAD/Round',num2str(round));
 end
 cd(path_to_round_folder);
 
@@ -102,8 +102,8 @@ h.YLabel.FontSize = 30;
 h.YLabel.FontWeight = 'bold';
 ylim([-inf 100]);
 xlim([0 50]);
-saveas(h, strcat('~/Dropbox/TransferPCtoMac/',filter_type,'_and_MAD/',testenvs,'test_',filter_type,'_and_MAD_Envs_',num2str(round),'.fig'));
-saveas(h, strcat('~/Dropbox/TransferPCtoMac/',filter_type,'_and_MAD/',testenvs,'test_',filter_type,'_and_MAD_Envs_',num2str(round),'.eps'), 'eps2c');
+saveas(h, strcat('~/Research/Robust_Learning_Radar/Results/CrossValidation_Regular/',filter_type,'_and_MAD/',testenvs,'test_',filter_type,'_and_MAD_Envs_',num2str(round),'.fig'));
+saveas(h, strcat('~/Research/Robust_Learning_Radar/Results/CrossValidation_Regular/',filter_type,'_and_MAD/',testenvs,'test_',filter_type,'_and_MAD_Envs_',num2str(round),'.eps'), 'eps2c');
 % 
 % figure
 % g = bar(medians_topk(2,:),'FaceColor','yellow','EdgeColor','black');
