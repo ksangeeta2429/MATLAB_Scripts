@@ -23,8 +23,12 @@ Check your current MATLAB Java version through the following command:
 	/MATLAB_Scripts/Features/VelocityBased
 	/MATLAB_Scripts/MatlabLibrary
 	/MATLAB_Scripts/Scripts
-	/MATLAB_Scripts/Scripts/OSC_PCT_Scripts
-	/MATLAB_Scripts/Scripts/Paper_plots
+	/MATLAB_Scripts/Scripts/OSC_PCT_Scripts (optional)
+	/MATLAB_Scripts/Scripts/MASS_2017 (optional)
+	/MATLAB_Scripts/Scripts/MASS_2017/OSC_PCT_Scripts (optional)
+	/MATLAB_Scripts/Scripts/MASS_2017/OSC_PCT_Scripts/OSC_Launch_Scripts (optional)
+	/MATLAB_Scripts/Scripts/MASS_2017/Result aggregation (optional)
+	/MATLAB_Scripts/Scripts/Paper_plots (optional)
 	/MATLAB_Scripts/Scripts/Simple
 	/MATLAB_Scripts/Scripts/VisualizeInAfrica
 	/MATLAB_Scripts/Scripts/cell2csv
@@ -40,8 +44,8 @@ Check your current MATLAB Java version through the following command:
 	/MATLAB_Scripts/Library/Products/BumbleBee Tests
 	/MATLAB_Scripts/Library/Products/BumbleBee Tests/Tests
 	/MATLAB_Scripts/Library/MatLab
-	/MATLAB_Scripts/Library/MatLab/NewFolder1
-	/MATLAB_Scripts/Library/MatLab/NewFolder2
+	/MATLAB_Scripts/Library/MatLab/NewFolder1 (optional)
+	/MATLAB_Scripts/Library/MatLab/NewFolder2 (optional)
 	/MATLAB_Scripts/Library/MatLab/NumAnal
 	/MATLAB_Scripts/Library/MatLab/SigPro
 	/MATLAB_Scripts/Library/MatLab/Tests
