@@ -14,8 +14,8 @@ start_time = datetime(cur_year, cur_month, cur_day, hrs, minute, second);
 disp(start_time);
 
 %path to the files containing start and end times from the cuts
-file_path_beginnings = strcat(g_str_pathbase_data,'/Bike data/March 25 2017/Detect_begs_and_ends/detect_beginnings__North2');
-file_path_ends = strcat(g_str_pathbase_data,'/Bike data/March 25 2017/Detect_begs_and_ends/detect_ends__North2');
+file_path_beginnings = strcat(g_str_pathbase_data,'/Bike data/March 25 2017/Detect_begs_and_ends/param0.9_newcode/detect_beginnings__North1');
+file_path_ends = strcat(g_str_pathbase_data,'/Bike data/March 25 2017/Detect_begs_and_ends/param0.9_newcode/detect_ends__North1');
 %disp(file_path);
 %disp(length(files));
 %walk through all the files
@@ -61,7 +61,7 @@ for i = 2:length(start)
     stop_arr = [stop_arr temp1];
 end
 
-output_file_path = strcat(g_str_pathbase_data,'/Bike data/March 25 2017/Detect_begs_and_ends/times_North2');
+output_file_path = strcat(g_str_pathbase_data,'/Bike data/March 25 2017/Detect_begs_and_ends/param0.9_newcode/times_North1');
 fd = fopen(output_file_path,'w');
 for i = 1:length(start_arr)
     [h,m,s] = hms(start_arr(i));
