@@ -3,7 +3,6 @@ function Results=MASS_RandomSplits_CrossVal_10foldstats(round,seed,topk_list)
 SetEnvironment
 SetPath
 
-outFileName = strcat('CrossVal_SaveAllModels_Round',num2str(round),'.csv');
 path_to_round_folder = strcat(g_str_pathbase_radar,'/IIITDemo/Arff/Randseed',num2str(seed),'/Round',num2str(round));
 path_models = g_str_pathbase_model;
 
@@ -14,8 +13,8 @@ isub = [d(:).isdir]; %# returns logical vector
 nameFolds = {d(isub).name}';
 nameFolds(ismember(nameFolds,{'.','..'})) = [];
 
-Results={};
 for topk=topk_list
+    Results={};
     for i=1:length(nameFolds)
         path_to_arff_combos = strcat(path_to_round_folder,'/',char(nameFolds{i}),'/top',num2str(topk));
         cd(path_to_arff_combos);
@@ -43,6 +42,6 @@ for topk=topk_list
             end
         end
     end
+    outFileName = strcat('CrossVal_SaveAllModels_Randseed',num2str(seed),'_Round_',num2str(round),'_Top',num2str(topk),'.csv');
+    cell2csv(strcat(path_to_round_folder,'/',outFileName), Results);
 end
-
-cell2csv(strcat(path_to_round_folder,'/',outFileName), Results);
