@@ -13,8 +13,8 @@ else
     filePath = filePath_tmp(1:pathIndex(end));
 end
 
-cut_folder = [filePath,'/cut'];
-%cut_folder = [filePath,'cut']; %disp(cut_folder);
+%cut_folder = [filePath,'/cut'];
+cut_folder = [filePath,'cut']; %disp(cut_folder);
 if exist(cut_folder, 'dir') ~= 7
     mkdir(cut_folder);
     fprintf('INFO: created directory %s\n', cut_folder);
@@ -26,10 +26,10 @@ walk_begs = dlmread(walk_beg_file); %disp(walk_begs);
 walk_ends = dlmread(walk_end_file); %disp(walk_ends);
 
 walk_lengths = (walk_ends - walk_begs)/2; % since unit is half-seconds
-
+disp(walk_lengths);
 start = walk_begs(walk_lengths > min_length_secs & walk_begs < cutoff_halfsecs)*128;
 stop = walk_ends(walk_lengths > min_length_secs & walk_ends < cutoff_halfsecs)*128;
-%fileName = 'South2';
+fileName = 'August_9_bikes_humans_radar_z';
 for j=1:length(start)
     I_cut = I(start(j):stop(j));
     Q_cut = Q(start(j):stop(j));
@@ -37,8 +37,8 @@ for j=1:length(start)
     Data_cut = zeros(1,2*(stop(j)-start(j)+1));
     Data_cut(1:2:length(Data_cut)-1) = I_cut;
     Data_cut(2:2:length(Data_cut)) = Q_cut;
-    WriteBin(['./cut/',fileName,'_cut',num2str(j),'.data'],Data_cut);
-    %WriteBin(['/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository/Bike data/March 25 2017/cut/',fileName,'_cut',num2str(j),'.data'],Data_cut);
+    %WriteBin(['./cut/',fileName,'_cut',num2str(j),'.data'],Data_cut);
+    WriteBin(['/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository/Bike data/Aug 9 2017/Detect_begs_and_ends/param0.9/cut/bikes humans radar z/',fileName,'_cut',num2str(j),'.data'],Data_cut);
 
 end
 

@@ -1,9 +1,11 @@
 function CompTrim = TestNoise(Comp, Rate)
-close all
 
 N = length(Comp);
+
 [Time,Unit] = PickTimeScale(N,Rate);
+
 plot(Time,abs(Comp));
+hold on
 
 xlabel(sprintf('Time in %s', Unit));
 ylabel('Amp (ADC Units)')
@@ -17,6 +19,7 @@ Temp = Comp(Index);
 CompTrim = Temp - MedComp(Temp);
 
 MarkRange(Range)
+hold off
 
 Axis = axis;
 

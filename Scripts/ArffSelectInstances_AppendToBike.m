@@ -6,14 +6,14 @@
     are required to be appended to another file.
 %}
 
-function ArffSelectInstances_AppendToBike(input_file, output_file)
+function ArffSelectInstances_AppendToBike(input_file, output_file,n
+)
 import weka.core.Instance;
 
 SetEnvironment
 SetPath
 
 % n is the size of the subset of instances that you desire to extract
-n = 10;
 % searchclass is the desired class labels of instances that you want to
 % extract
 searchclass = 'Human';

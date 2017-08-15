@@ -219,12 +219,12 @@ if featureClass == 0
     f=[f,timeDomainFeatures(Data)]; %8
     
     %         for quantile = [1 0.7 0.5]%0.05:0.05:0.95    %0.9
-    for quantile = [0.9 0.7 0.5]                   %3
+    for quantile = [0.9 0.7 0.5 0.3 0.8]                   %3
         %f = [f,SlidingPercentileVelocity(Data,0.25,0,Rate,quantile)];
         f = [f,SlidingPercentileVelocity(Data,1,0.75,Rate,quantile)];
     end
     
-    for quantile = [0.9 0.7 0.5]%0.05:0.05:0.95   %19   %3
+    for quantile = [0.9 0.7 0.5 0.3 0.8]%0.05:0.05:0.95   %19   %3
         %f = [f, ApproxMax(Data,0.25,0,Rate,quantile)];
         f = [f, ApproxMax(Data,0.5,0.5,Rate,quantile)];
     end
