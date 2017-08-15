@@ -32,11 +32,55 @@ MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 4)
 MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 5),5,10); % Round 50
 MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 6),6,10); % Round 60
 
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 2),2,50); % Round 20
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 3),3,50); % Round 30
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 4),4,50); % Round 40
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 5),5,50); % Round 50
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 6),6,50); % Round 60
+
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 2),2,100); % Round 20
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 3),3,100); % Round 30
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 4),4,100); % Round 40
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 5),5,100); % Round 50
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 6),6,100); % Round 60
+
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 2),2,150); % Round 20
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 3),3,150); % Round 30
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 4),4,150); % Round 40
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 5),5,150); % Round 50
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 6),6,150); % Round 60
+
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 2),2,200); % Round 20
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 3),3,200); % Round 30
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 4),4,200); % Round 40
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 5),5,200); % Round 50
+MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 6),6,200); % Round 60
+
 %% Generating models 10fold stats for above
 MASS_RandomSplits_CrossVal_10foldstats(20,10,[10 15 20 25 30 35 40]);
 MASS_RandomSplits_CrossVal_10foldstats(30,10,[10 15 20 25 30 35 40]);
 MASS_RandomSplits_CrossVal_10foldstats(40,10,[10 15 20 25 30 35 40]);
 MASS_RandomSplits_CrossVal_10foldstats(50,10,[10 15 20 25 30 35 40]);
+
+MASS_RandomSplits_CrossVal_10foldstats(20,50,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_CrossVal_10foldstats(30,50,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_CrossVal_10foldstats(40,50,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_CrossVal_10foldstats(50,50,[10 15 20 25 30 35 40]);
+
+MASS_RandomSplits_CrossVal_10foldstats(20,100,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_CrossVal_10foldstats(30,100,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_CrossVal_10foldstats(40,100,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_CrossVal_10foldstats(50,100,[10 15 20 25 30 35 40]);
+
+MASS_RandomSplits_CrossVal_10foldstats(20,150,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_CrossVal_10foldstats(30,150,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_CrossVal_10foldstats(40,150,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_CrossVal_10foldstats(50,150,[10 15 20 25 30 35 40]);
+
+MASS_RandomSplits_CrossVal_10foldstats(20,200,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_CrossVal_10foldstats(30,200,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_CrossVal_10foldstats(40,200,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_CrossVal_10foldstats(50,200,[10 15 20 25 30 35 40]);
 
 %% CrossEnvironment testing after above scripts are run
 MASS_TestEnvs_script(2,[10 15 20 25 30 35 40]);
