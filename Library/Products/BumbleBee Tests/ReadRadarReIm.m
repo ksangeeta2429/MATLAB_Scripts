@@ -7,6 +7,8 @@ Data = ReadRaw(FileName);
 switch Ext
   case 'bbs'
     [R,I] = SimulToReIm(Data);
+  case 'data'
+    [R,I] = SimulToReIm(Data);
   case 'bbi'
     [R,I] = InterToReIm(Data);
   case 'bbsu'
