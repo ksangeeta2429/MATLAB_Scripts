@@ -1,4 +1,4 @@
-function p=PlotCdfs_MASS(file,style)
+function handle=PlotCdfs_MASS(file,style)
 fid = fopen(file,'r');
 Data = fread(fid,inf,'float');
 %Data = Data * 5.1 / ( 400*pi);
@@ -13,11 +13,11 @@ I(N) = (N-1)/N;
 %figure;
 
 Data = sort(Data);
-q=plot(Data,log(1-I),style, 'LineWidth',1);
-col = get(q, 'Color');
+handle=plot(Data,log(1-I),style, 'LineWidth',1);
+col = get(handle, 'Color');
 %axis([0 3 -30 0]);
 %axis([0 1.8 -20 0]);
-axis([0 0.5 -15 0]);
+axis([0 0.5 -20 0]);
 %ylim([-30 0]);
 hold on;
 
