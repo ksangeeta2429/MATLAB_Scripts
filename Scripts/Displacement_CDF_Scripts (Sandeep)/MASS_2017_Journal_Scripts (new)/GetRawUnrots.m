@@ -1,7 +1,7 @@
-function UnRots=GetRawUnrots(Comp,SampRate, IQRejectionParam)
+function UnRots=GetRawUnrots(CompTrim,SampRate, IQRejectionParam)
 
-%% Subtract DC bias
-CompTrim = Comp - MedComp(Comp);
+%% Subtract DC bias -- Already done in Comp(ReadRadar)
+%CompTrim = Comp - MedComp(Comp);
 
 %% Compute noise median
 Median = median(abs(CompTrim));
