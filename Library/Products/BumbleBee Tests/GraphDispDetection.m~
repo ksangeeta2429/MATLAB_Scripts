@@ -90,7 +90,7 @@ for(i = 1:length(stop_times))
 end
 fclose(fd1);
 
-%save the length of the events to a file with name following format : detect_lengths__date_relevantname.
+%save the length of the events to a file with name following format : detect_lengths__date_relevantname
 lengths_path = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository/Bike data/Aug 9 2017/Detect_begs_and_ends/param0.9/param_Analysis/detect_lengths__August_9_bikes_humans_radar_z';
 fd1 = fopen(lengths_path,'w');
 for(i = 1:length(lengths))
