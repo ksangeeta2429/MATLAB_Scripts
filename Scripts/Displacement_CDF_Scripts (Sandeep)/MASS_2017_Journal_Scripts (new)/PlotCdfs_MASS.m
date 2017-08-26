@@ -17,8 +17,8 @@ handle=plot(Data,log(1-I),style, 'LineWidth',1);
 col = get(handle, 'Color');
 %axis([0 3 -30 0]);
 %axis([0 1.8 -20 0]);
-axis([0 0.5 -20 0]);
-%ylim([-30 0]);
+%axis([0 0.5 -20 0]);
+ylim([-20 0]);
 hold on;
 
 [x(1),y(1),but] = ginput(1);
@@ -37,7 +37,7 @@ startIndex = find(Data > x(1), 1, 'first');
 stopIndex = find(Data < x(2), 1, 'last');
 
 p = polyfit(Data(startIndex:stopIndex),log(1-I(startIndex:stopIndex))',1);
-a = [0:0.05:0.5];
+a = [0:0.05:1.0];
 v = polyval(p,a);
 plot(a,v,'-.','Color',col,'LineWidth',1);
 

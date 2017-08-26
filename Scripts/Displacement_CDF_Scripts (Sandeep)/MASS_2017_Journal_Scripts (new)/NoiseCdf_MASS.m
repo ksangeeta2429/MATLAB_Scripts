@@ -1,4 +1,4 @@
-function [cumData,OutDataFile]=NoiseCdf_MASS(Data, outPath, outName, SampRate, deltaT, IQRejectionParam)
+function [cumData,OutDataFile]=NoiseCdf_MASS(Data, outPath, outName, SampRate, deltaT, IQRejectionParam,N)
 
 %Fid = fopen(strcat(File,'.data'), 'r');
 if outPath(end) == '/'
@@ -8,16 +8,16 @@ else
 end
 
 fout = fopen(OutDataFile,'w');
-N = length(Data);
+NumSamples = length(Data);
 
-sampWindow = round(deltaT*SampRate);
+sampWindow = round(deltaT*SampRate*N);
 l = 1;
 
-cumData = zeros(1,N-deltaT*SampRate+1);
+%cumData = zeros(1,NumSamples-sampWindow+1);
 
 
 
-while (l < N-sampWindow)
+while (l < NumSamples-sampWindow)
   buffer = Data(l:l+sampWindow-1);
   diff = max(buffer) - min(buffer);
   cumData(l) = diff;      

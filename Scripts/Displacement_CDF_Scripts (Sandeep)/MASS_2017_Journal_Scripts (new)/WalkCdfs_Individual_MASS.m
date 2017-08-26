@@ -1,12 +1,9 @@
-function WalkCdfs_Individual_MASS(inDir,outPath,outName,SampRate,IQRejectionParam)
+function handle=WalkCdfs_Individual_MASS(inDir,outPath,outName,SampRate,IQRejectionParam,N)
 cd(inDir);
 fileFullNames=dir('*.data');
 UnRots=[];
 for j=1:length(fileFullNames)
-    Comp=ReadRadar(fileFullNames(j).name);
-    
-    % Subtract DC bias
-    CompTrim = Comp - MedComp(Comp);
+    CompTrim=ReadRadar(fileFullNames(j).name);
     
     % Do Drift
     NTrim = length(CompTrim);
@@ -23,7 +20,7 @@ for j=1:length(fileFullNames)
     UnRots = [UnRots, (UnWrap(angle(CompReSamp)/2/pi, -0.5, 0.5))'];
 end
 
-[cumData,~]=NoiseCdf_MASS(UnRots,outPath,outName,250,0.5,IQRejectionParam);
+[cumData,~]=NoiseCdf_MASS(UnRots,outPath,outName,250,0.5,IQRejectionParam,N);
 
 Data=cumData;
 BumbleBee;
@@ -35,9 +32,5 @@ I = [1:N] / N;
 I(N) = (N-1)/N;
 
 Data = sort(Data);
-plot(Data,(1-I));
-
-h = gca;
-h.XLabel.String = 'Distance (meters)';
-h.YLabel.String = 'CDF';
+handle=plot(Data,(1-I));
 hold on
