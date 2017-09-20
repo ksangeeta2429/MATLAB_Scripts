@@ -1,4 +1,8 @@
-function sanityCheck(hrs, minute, second)
+%{ 
+    sanityCheck converts the start and stop times in seconds/half seconds to timestamps starting from hrs:minute:second
+    If start and stop times are equal then that times are discarded
+ %}
+function sanityCheck(hrs, minute, second, beg_file,end_file,output_file)
 SetEnvironment;
 SetPath;
 
@@ -14,8 +18,8 @@ start_time = datetime(cur_year, cur_month, cur_day, hrs, minute, second);
 disp(start_time);
 
 %path to the files containing start and end times from the cuts
-file_path_beginnings = strcat(g_str_pathbase_data,'/Bike data/Aug 9 2017/Detect_begs_and_ends/param0.9/param_Analysis/detect_beginnings__August_9_bikes_humans_radar_z');
-file_path_ends = strcat(g_str_pathbase_data,'/Bike data/Aug 9 2017/Detect_begs_and_ends/param0.9/param_Analysis/detect_ends__August_9_bikes_humans_radar_z');
+file_path_beginnings = strcat(g_str_pathbase_data,beg_file);
+file_path_ends = strcat(g_str_pathbase_data,end_file);
 %disp(file_path);
 %disp(length(files));
 %walk through all the files
@@ -43,8 +47,8 @@ stop = [];
 %disp(start);
 %disp(stop);
 
-%start = start/2;
-%stop = stop/2;
+start = start/2;
+stop = stop/2;
 
 %disp(start);
 %disp(stop);
@@ -64,16 +68,31 @@ for i = 2:length(start)
     stop_arr = [stop_arr temp1];
 end
 
-output_file_path = strcat(g_str_pathbase_data,'/Bike data/Aug 9 2017/Detect_begs_and_ends/param0.9/param_Analysis/times_bikes_humans_radar_z');
+[start_arr,stop_arr] = remove_zero_length(start_arr,stop_arr);
+%disp(start_arr)
+output_file_path = strcat(g_str_pathbase_data,strcat(output_file,'.csv'));
 fd = fopen(output_file_path,'w');
+fprintf(fd,'Start Time,End Time\n');
 for i = 1:length(start_arr)
     [h,m,s] = hms(start_arr(i));
     [h1,m1,s1] = hms(stop_arr(i));    
-    fprintf(fd,'%d:%d:%d - %d:%d:%d\n',round(h),m,s,h1,m1,s1);
+    fprintf(fd,'%d:%d:%f,%d:%d:%f\n',round(h),m,s,h1,m1,s1);
 end
 
 fclose(fd);
 %disp(start_arr);
 %disp(stop_arr);
 
+end
+
+function [start,stop] = remove_zero_length(start_arr,stop_arr)
+    indices = []
+    for i = 1:length(start_arr)
+        if(start_arr(i) == stop_arr(i))
+            indices = [indices i];
+        end
+    end
+    start_arr(indices) = []
+    stop_arr(indices) = []
+    start = start_arr; stop = stop_arr;    
 end
