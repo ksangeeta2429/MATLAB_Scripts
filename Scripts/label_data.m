@@ -5,6 +5,9 @@
     (new line). Every line should have a label.
     The labels at the end of each line in arff file will be replaced using
     the labels from the input file.
+    Note : While listing the labels do not list Dog at the end. Ex:
+    {Human,Bike,Dog}. this will not work. There should be no comma before
+    dog.
 %}
 
 
