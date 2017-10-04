@@ -1,7 +1,7 @@
 % plot data, spectrogram, histogram, features
 % display the data I Q in C# format
 
-function Visualize(fileName, path_data)
+function Visualize(fileName)
 
 close all;
 % figure;
@@ -15,21 +15,21 @@ SetPath
 % fileName='1';%
 
 
-cd(path_data);
+%cd(path_data);
 
-path_amp = strcat(path_data,'/amplitude/');
+path_amp = 'amplitude/';
 if exist(path_amp, 'dir') ~= 7
     mkdir(path_amp);
     fprintf('INFO: created directory %s\n', path_amp);
 end
 
-path_phase = strcat(path_data,'/phase/');
+path_phase = 'phase/';
 if exist(path_phase, 'dir') ~= 7
     mkdir(path_phase);
     fprintf('INFO: created directory %s\n', path_phase);
 end
 
-path_spec = strcat(path_data,'/spectrogram/');
+path_spec = 'spectrogram/';
 if exist(path_spec, 'dir') ~= 7
     mkdir(path_spec);
     fprintf('INFO: created directory %s\n', path_spec);
