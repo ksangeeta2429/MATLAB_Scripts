@@ -82,11 +82,37 @@ MASS_RandomSplits_CrossVal_10foldstats(30,200,[10 15 20 25 30 35 40]);
 MASS_RandomSplits_CrossVal_10foldstats(40,200,[10 15 20 25 30 35 40]);
 MASS_RandomSplits_CrossVal_10foldstats(50,200,[10 15 20 25 30 35 40]);
 
-%% CrossEnvironment testing after above scripts are run
+%% CrossEnvironment testing after above scripts are run - real environments
 MASS_TestEnvs_script(2,[10 15 20 25 30 35 40]);
 MASS_TestEnvs_script(3,[10 15 20 25 30 35 40]);
 MASS_TestEnvs_script(4,[10 15 20 25 30 35 40]);
 MASS_TestEnvs_script(5,[10 15 20 25 30 35 40]);
+
+%% CrossEnvironment testing after above scripts are run - random split environments
+MASS_RandomSplits_TestEnvs_script(20,10,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(30,10,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(40,10,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(50,10,[10 15 20 25 30 35 40]);
+
+MASS_RandomSplits_TestEnvs_script(20,50,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(30,50,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(40,50,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(50,50,[10 15 20 25 30 35 40]);
+
+MASS_RandomSplits_TestEnvs_script(20,100,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(30,100,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(40,100,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(50,100,[10 15 20 25 30 35 40]);
+
+MASS_RandomSplits_TestEnvs_script(20,150,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(30,150,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(40,150,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(50,150,[10 15 20 25 30 35 40]);
+
+MASS_RandomSplits_TestEnvs_script(20,200,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(30,200,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(40,200,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(50,200,[10 15 20 25 30 35 40]);
 
 %% Aggregate results - open world
 MASS_Paper_Results_Crossval(2,[10 15 20 25 30 35 40],'mRMR','prctile',10,'diff');
