@@ -72,8 +72,23 @@ end
 lengths = stop_times - start_times;
 %disp(lengths);
 
+
+%delete start and stop times of 0 length
+zero_lengths = lengths == 0;
+temp_start = []; temp_stop = []; temp_length = [];
+for(i = 1:length(zero_lengths))
+	if(zero_lengths(i) == 0)
+		temp_start = [temp_start start_times(i)];
+		temp_stop = [temp_stop stop_times(i)];
+		temp_length = [temp_length lengths(i)]
+	end
+end
+
+start_times = [];	stop_times = []; lengths = [];
+start_times = temp_start;	stop_times = temp_stop;		lengths = temp_length;
+
 %save the start times of the events to a file with name following format : detect_beginnings__date_relevantname
-beginnings = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository/Bike data/Aug 9 2017/Detect_begs_and_ends/param0.9/param_Analysis/detect_beginnings__August_9_bikes_humans_radar_z';
+beginnings = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository/Bike data/Oct 21 2017/Detect_begs_and_ends/c1/detect_beginnings__r1_x';
 fd = fopen(beginnings,'w');
 for(i = 1:length(start_times))
 	temp = start_times(i);
@@ -82,7 +97,7 @@ end
 fclose(fd);
 
 %save the stop times of the events to a file with name following format : detect_ends__date_relevantname
-ends = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository/Bike data/Aug 9 2017/Detect_begs_and_ends/param0.9/param_Analysis/detect_ends__August_9_bikes_humans_radar_z';
+ends = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository/Bike data/Oct 21 2017/Detect_begs_and_ends/c1/detect_ends__r1_x';
 fd1 = fopen(ends,'w');
 for(i = 1:length(stop_times))
 	temp = stop_times(i);
@@ -91,7 +106,7 @@ end
 fclose(fd1);
 
 %save the length of the events to a file with name following format : detect_lengths__date_relevantname.
-lengths_path = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository/Bike data/Aug 9 2017/Detect_begs_and_ends/param0.9/param_Analysis/detect_lengths__August_9_bikes_humans_radar_z';
+lengths_path = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository/Bike data/Oct 21 2017/Detect_begs_and_ends/c1/detect_lengths__r1_x';
 fd1 = fopen(lengths_path,'w');
 for(i = 1:length(lengths))
 	temp = lengths(i);
