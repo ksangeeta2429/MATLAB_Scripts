@@ -14,7 +14,7 @@ endSecond = 208;
 cd(path_data);
 rate = 256;
 
-[I,Q,N]=Data2IQ(ReadBin([fileName,'.data'])); 
+[I,Q,N]=Data2IQ(ReadBin([fileName,'.data']));
 startIndex = round(startSecond*rate);
 endIndex = round(endSecond*rate);
 if startIndex<=0 startIndex = 1; end

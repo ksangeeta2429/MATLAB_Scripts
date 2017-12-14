@@ -6,7 +6,7 @@
 % Optional arguments: min_length_secs: (minimum allowed walk length, in seconds
 %                     cutoff_halfsecs: Cutoff time instant (in half seconds) beyond which walks should no longer be considered
 
-function nCuttedFiles=CutFile_Manual_RadarAlgorithmGraph(fileName,walk_beg_file,walk_end_file,min_length_secs, cutoff_halfsecs)
+function nCuttedFiles=CutFile_Manual_RadarAlgorithmGraph(fileName, walk_beg_file, walk_end_file, min_length_secs, cutoff_halfsecs)
 
 % Defaults
 if nargin == 3
