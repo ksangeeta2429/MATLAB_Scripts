@@ -1,6 +1,6 @@
 close all
 
-IQRejectionParam = 0.9;
+IQRejectionParam = 0.0;
 N = 1;
 
 out_cornfield = ComputeNoiseCDFs_MASS('/media/mydrive/Robust_Learning/Data_Repository/Parking garage radial ortho (Sandeep)/SenSys10_data_scripts/data/1-CornField-Snow/snow-no-targets.data', ...
@@ -16,12 +16,12 @@ out_grass = ComputeNoiseCDFs_MASS('/media/mydrive/Robust_Learning/Data_Repositor
 out_indoors = ComputeNoiseCDFs_MASS('/media/mydrive/Robust_Learning/Data_Repository/wln data/30670 indoor 2.bbs', ...
     '/media/mydrive/Robust_Learning/Results/Displacement_Graphs/Noise_CDFs/', 'Chris-indoors-WLN', 250, 0.5, IQRejectionParam,N);
 
-%h1=PlotCdfs_MASS(out_cornfield,'-');
-%h2=PlotCdfs_MASS(out_garage,'-');
-%h3=PlotCdfs_MASS(out_trees,'-');
-%h4=PlotCdfs_MASS(out_bushes,'-');
+h1=PlotCdfs_MASS(out_cornfield,'-');
+h2=PlotCdfs_MASS(out_garage,'-');
+h3=PlotCdfs_MASS(out_trees,'-');
+h4=PlotCdfs_MASS(out_bushes,'-');
 h5=PlotCdfs_MASS(out_grass,'-');
-h6=PlotCdfs_MASS(out_indoors,'-');
+%h6=PlotCdfs_MASS(out_indoors,'-');
 
 %% 3-second window thresholds
 % fplot(@(x) -12.25,[0 0.5],'-k') % 1 false alarm per week
@@ -31,42 +31,42 @@ h6=PlotCdfs_MASS(out_indoors,'-');
 %% 3 1/2-second window thresholds
 fplot(@(x) -12.9,[0 1],'-k'); % 1 false alarm per week
 fplot(@(x) -14.37,[0 1],'--k'); % 1 false alarm per month
-fplot(@(x) -16.86,[0 1],':k'); % 1 false alarm per year
+% fplot(@(x) -16.86,[0 1],':k'); % 1 false alarm per year
 
 annotation('textbox',...
     [0.753571428571429 0.339523808711155 0.162500002904046 0.0642857150983691],...
     'String','1 FA/week',...
-    'LineStyle','none');
+    'LineStyle','none','Interpreter','latex','FontSize', 20);
 annotation('textbox',...
     [0.751785714285714 0.235238094425441 0.17678571747658 0.0642857150983691],...
     'String','1 FA/month',...
-    'LineStyle','none');
-annotation('textbox',...
-    [0.753571428571429 0.133333332520679 0.153571431296212 0.0642857150983691],...
-    'String','1 FA/year',...
-    'LineStyle','none');
+    'LineStyle','none','Interpreter','latex','FontSize', 20);
+%annotation('textbox',...
+%    [0.753571428571429 0.133333332520679 0.153571431296212 0.0642857150983691],...
+%    'String','1 FA/year',...
+%    'LineStyle','none','Interpreter','latex');
 
 h = gca;
 %l=cell(1,8);
 %l{1}='Empty Mowed Field'; l{2}='Parking Garage'; l{3}='Trees (High Wind)'; l{4}='Bushes (light Wind)';
 %legend(l,'interpreter','latex','Location','NorthEast');
-legend([h1 h2 h3 h4 h5 h6],{'Empty Mowed Field','Parking Garage','Trees (High Wind)','Bushes (light Wind)', 'Grass outside Samraksh (WLN)', 'Indoors'});
+legend([h1 h2 h3 h4 h5],{'Empty Mowed Field','Parking Garage','Trees (High Wind)','Bushes (light Wind)', 'Grass'},'interpreter','latex');
 %legend([h1 h2 h3 h4],{'Empty Mowed Field','Parking Garage','Trees (High Wind)','Bushes (light Wind)'});
 xlim([0 1]);
 
-%h.TickLabelInterpreter='latex';
-%h.FontWeight = 'bold';
-%h.FontSize = 20;
+h.TickLabelInterpreter='latex';
+h.FontWeight = 'bold';
+h.FontSize = 20;
 h.XLabel.String = 'Distance (meters)';
-%h.XLabel.Interpreter='latex';
-%h.XLabel.FontSize = 20;
-%h.XLabel.FontWeight = 'bold';
+h.XLabel.Interpreter='latex';
+h.XLabel.FontSize = 30;
+h.XLabel.FontWeight = 'bold';
 
 h.YLabel.String = 'log(False Alarm Probability)';
-%h.YLabel.Interpreter='latex';
-%h.YLabel.FontSize = 20;
-%h.YLabel.FontWeight = 'bold';
-title(sprintf('Noise CDFs and Thresholds for\n%d 1/2-second Windows(IQR Parameter=%0.2f)',N,IQRejectionParam),'FontWeight','normal');
+h.YLabel.Interpreter='latex';
+h.YLabel.FontSize = 30;
+h.YLabel.FontWeight = 'bold';
+%title(sprintf('Noise CDFs and Thresholds for\n%d 1/2-second Windows(IQR Parameter=%0.2f)',N,IQRejectionParam),'FontWeight','normal');
 
 saveas(h,strcat('/media/mydrive/Robust_Learning/Results/Displacement_Graphs/Graphs/NoiseCDFs_N=',num2str(N),'_IQR=',num2str(IQRejectionParam),'.fig'));
 saveas(h,strcat('/media/mydrive/Robust_Learning/Results/Displacement_Graphs/Graphs/NoiseCDFs_N=',num2str(N),'_IQR=',num2str(IQRejectionParam),'.eps'),'eps2c');
