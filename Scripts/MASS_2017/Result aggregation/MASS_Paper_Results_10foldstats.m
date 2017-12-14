@@ -3,7 +3,7 @@ function [Median,IQR,OpPoint,HighOpPoint]=MASS_Paper_Results_10foldstats(round,t
 SetEnvironment
 SetPath
 
-path_to_round_folder = strcat(str_pathbase_radar_dhrubo,'/Results/CrossValidation_10foldstats/Environment_Splits/Round',num2str(round));
+path_to_round_folder = strcat(g_str_pathbase_radar,'/Results/CrossValidation_10foldstats/Environment_Splits/Round',num2str(round));
 cd(path_to_round_folder);
 
 [Orig_opt,MAD_opt] = MASS_Optimize_MAD_Beta_10foldstats(round,topk_array,filter_type);
@@ -108,4 +108,4 @@ h.YLabel.FontSize = 30;
 h.YLabel.FontWeight = 'bold';
 ylim([20 100]);
 xlim([5 40]);
-saveas(h, strcat(str_pathbase_radar_dhrubo,'/Results/CrossValidation_10foldstats/Environment_Splits/',testenvs,'test_',filter_type,'_and_MAD_Envs_',num2str(round),'.fig'));
+saveas(h, strcat(g_str_pathbase_radar,'/Results/CrossValidation_10foldstats/Environment_Splits/',testenvs,'test_',filter_type,'_and_MAD_Envs_',num2str(round),'.fig'));
