@@ -157,3 +157,14 @@ MASS_Paper_Results_Crossval(5,[10 15 20 25 30 35 40],'InfoGain','prctile',10,'al
 [med_ig_diff_3, iqr_ig_diff_3, ~, ~]=MASS_Paper_Results_10foldstats(3,[10 15 20 25 30 35],'InfoGain','diff');
 [med_ig_diff_4, iqr_ig_diff_4, ~, ~]=MASS_Paper_Results_10foldstats(4,[10 15 20 25 30 35],'InfoGain','diff');
 [med_ig_diff_5, iqr_ig_diff_5, ~, ~]=MASS_Paper_Results_10foldstats(5,[10 15 20 25 30 35],'InfoGain','diff');
+
+% "Similar" environments - 1, 2, 3, and 10 must be in the train-test
+[med_mRMR_sim_2, iqr_mRMR_sim_2, ~, ~]=MASS_Paper_Results_10foldstats(2,[10 15 20 25 30 35],'mRMR','sim');
+[med_mRMR_sim_3, iqr_mRMR_sim_3, ~, ~]=MASS_Paper_Results_10foldstats(3,[10 15 20 25 30 35],'mRMR','sim');
+[med_mRMR_sim_4, iqr_mRMR_sim_4, ~, ~]=MASS_Paper_Results_10foldstats(4,[10 15 20 25 30 35],'mRMR','sim');
+[med_mRMR_sim_5, iqr_mRMR_sim_5, ~, ~]=MASS_Paper_Results_10foldstats(5,[10 15 20 25 30 35],'mRMR','sim');
+
+[med_ig_sim_2, iqr_ig_sim_2, ~, ~]=MASS_Paper_Results_10foldstats(2,[10 15 20 25 30 35],'InfoGain','sim');
+[med_ig_sim_3, iqr_ig_sim_3, ~, ~]=MASS_Paper_Results_10foldstats(3,[10 15 20 25 30 35],'InfoGain','sim');
+[med_ig_sim_4, iqr_ig_sim_4, ~, ~]=MASS_Paper_Results_10foldstats(4,[10 15 20 25 30 35],'InfoGain','sim');
+[med_ig_sim_5, iqr_ig_sim_5, ~, ~]=MASS_Paper_Results_10foldstats(5,[10 15 20 25 30 35],'InfoGain','sim');
