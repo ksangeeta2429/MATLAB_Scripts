@@ -1,6 +1,6 @@
 function [Result_orig,Result_MAD]=MASS_Optimize_MAD_Beta_10foldstats(round,topk_array,filter_type)
 
-path_to_round_folder = strcat('~/Research/Robust_Learning_Radar/Results/CrossValidation_10foldstats/Environment_Splits/Round',num2str(round));
+path_to_round_folder = strcat('/media/mydrive/Robust_Learning/Results/CrossValidation_10foldstats/Environment_Splits/Round',num2str(round));
 if not(isempty(strfind(lower(filter_type),'mrmr')))
     filters={'mRMR_D_combined','mRMRMAD_D_0_25s', 'mRMRMAD_D_0_5s', 'mRMRMAD_D_0_75s', 'mRMRMAD_D_1s', 'mRMRMAD_D_5s', 'mRMRMAD_D_10s', 'mRMRMAD_D_20s', 'mRMRMAD_D_50s'};
 else
