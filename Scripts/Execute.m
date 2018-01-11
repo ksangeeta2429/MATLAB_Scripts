@@ -72,9 +72,12 @@ SetPath
 
 %% 2014.08 Bike data
  Index = [201408];
- data_dog = {'/Bike data/Aug 9 2017/Detect_begs_and_ends/param0.9/cut/humans only radar y'};
+ data_dog = {'/Bike data/Oct 21 2017/all_bikes'};
+ %data_dog = {'NIL'}
  %data_dog = {'/IPSNdata/5-15-2011/Human'};
- data_human = {'NIL'};
+ data_human = {'NIL'}
+ %data_human = {'/Debug/Human_100'};
+ %data_human = {'/Bike data/Aug 9 2017/135_human'};
 
 %% Anomalous data
 % Index = [03202017, 030230670]

@@ -258,7 +258,8 @@ if featureClass == 0
         widthLengthRatio1 = numHitBins_max/(time-8);
         %widthLengthRatio2 = numHitBins_median/(time/64-4);
         widthLengthRatio2 = numHitBins_median/(time-4);
-        f = [f,numHitBins_sum,numHitBins_max,numHitBins_median,numHitBins_var,moment_sum,maxFreq,freqWidth,freqHeight,widthLengthRatio1,widthLengthRatio2, totalPowerAboveThr]; % 10
+        %f = [f,numHitBins_sum,numHitBins_max,numHitBins_median,numHitBins_var,moment_sum,maxFreq,freqWidth,freqHeight,widthLengthRatio1,widthLengthRatio2, totalPowerAboveThr]; % 10
+        f = [f,numHitBins_sum,numHitBins_max,numHitBins_median,numHitBins_var,moment_sum,maxFreq,freqWidth,widthLengthRatio1,widthLengthRatio2, totalPowerAboveThr]; % 10
     end
     
     
