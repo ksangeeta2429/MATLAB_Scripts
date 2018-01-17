@@ -103,7 +103,7 @@ Data = (I-dcI) + 1i*(Q-dcQ);
 
 
 
-Rate=256;
+Rate=250;
 FftWindow = Rate;
 FftStep = round(1/4*FftWindow);
 
@@ -193,10 +193,12 @@ end
 
 %
 if featureClass == 0
-    %         nFeature = 18;
-    FftWindow = Rate;
-    FftStep = round(1/4*FftWindow);  % 1/8
     
+    %         nFeature = 18;
+    FftWindow = Rate; %commented by neel
+    FftStep = round(1/4*FftWindow);  % 1/8
+    %FftWindow = round(Rate/2); %added by neel
+    %FftStep = round(1/2*FftWindow);
     % Calculate velocity based features
     
     %         oldVel1 = SlidingPercentileVelocity(Data,1,0.75,Rate, 0.9);
@@ -221,7 +223,8 @@ if featureClass == 0
     %         for quantile = [1 0.7 0.5]%0.05:0.05:0.95    %0.9
     for quantile = [0.9 0.7 0.5 0.3 0.8]                   %3
         %f = [f,SlidingPercentileVelocity(Data,0.25,0,Rate,quantile)];
-        f = [f,SlidingPercentileVelocity(Data,1,0.75,Rate,quantile)];
+        f = [f,SlidingPercentileVelocity(Data,0.5,0.5,Rate,quantile)];
+        %f = [f,SlidingPercentileVelocity(Data,1,0.75,Rate,quantile)];
     end
     
     for quantile = [0.9 0.7 0.5 0.3 0.8]%0.05:0.05:0.95   %19   %3
@@ -230,7 +233,7 @@ if featureClass == 0
     end
     
     f=[f,dist,time,distTimeProd,distTimeRatio];    % 4
-    
+    disp(fileName);
     for thr_sqr_matlab_log = [14.144,17,18.915,20,24.144,25] % Dhrubo added 18.915 and 24.144 corresponding to thr_sqr_Csharp=30 and 100 respectively
      % for thr_sqr_matlab_log = 25 % 18.9154624932669 % TEST ONLY. TODO: Delete line
         thr_sqr_matlab = 10^(thr_sqr_matlab_log/10)*25238;
