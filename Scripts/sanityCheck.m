@@ -47,8 +47,8 @@ stop = [];
 %disp(start);
 %disp(stop);
 
-start = start/2;
-stop = stop/2;
+start = start;
+stop = stop;
 
 %disp(start);
 %disp(stop);

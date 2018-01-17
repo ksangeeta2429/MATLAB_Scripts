@@ -3,7 +3,7 @@ function [Median,IQR,OpPoint,HighOpPoint]=MASS_Paper_Results_10foldstats(round,t
 SetEnvironment
 SetPath
 
-path_to_round_folder = strcat('~/Research/Robust_Learning_Radar/Results/CrossValidation_10foldstats/Environment_Splits/Round',num2str(round));
+path_to_round_folder = strcat(g_str_pathbase_radar,'/Results/CrossValidation_10foldstats/Environment_Splits/Round',num2str(round));
 cd(path_to_round_folder);
 
 [Orig_opt,MAD_opt] = MASS_Optimize_MAD_Beta_10foldstats(round,topk_array,filter_type);
@@ -20,13 +20,20 @@ for topk=topk_array
     orig_array = [];
     mad_array = [];
     for i=1:length(M)
-        if strcmpi(testenvs,'all')==0....
+        if strcmpi(testenvs,'diff')==1....
                 &&(not(isempty(strfind(M(i).Var2,'10'))) || not(isempty(strfind(M(i).Var2,'2')))|| not(isempty(strfind(M(i).Var2,'1'))))....
                 && (strcmp(M(i).Var5(strfind(M(i).Var5,'radar')+5:strfind(M(i).Var5,'_')-1),'10')==1 || ....
                 strcmp(M(i).Var5(strfind(M(i).Var5,'radar')+5:strfind(M(i).Var5,'_')-1),'2')==1 ||....
-                strcmp(M(i).Var5(strfind(M(i).Var5,'radar')+5:strfind(M(i).Var5,'_')-1),'1')==1)% 1,2,10 can't be in train/test
+                strcmp(M(i).Var5(strfind(M(i).Var5,'radar')+5:strfind(M(i).Var5,'_')-1),'1')==1) % 1,2,10 can't be in train/test
+            continue
+        elseif strcmpi(testenvs,'sim')==1....
+                &&not((not(isempty(strfind(M(i).Var2,'10'))) || not(isempty(strfind(M(i).Var2,'2')))|| not(isempty(strfind(M(i).Var2,'1'))))....
+                && (strcmp(M(i).Var5(strfind(M(i).Var5,'radar')+5:strfind(M(i).Var5,'_')-1),'10')==1 || ....
+                strcmp(M(i).Var5(strfind(M(i).Var5,'radar')+5:strfind(M(i).Var5,'_')-1),'2')==1 ||....
+                strcmp(M(i).Var5(strfind(M(i).Var5,'radar')+5:strfind(M(i).Var5,'_')-1),'1')==1)) % 1,2,10 must be in train/test
             continue
         end
+        
         if not(isempty(strfind(M(i).Var3,'combined')))
             for j=1:length(Orig_opt)
                 if Orig_opt{j,1}==M(i).Var1 && strcmp(Orig_opt{j,2},M(i).Var2)==1 && strcmp(Orig_opt{j,3},M(i).Var3)==1 && strcmp(Orig_opt{j,4},num2str(M(i).Var7))==1 && strcmp(Orig_opt{j,5},num2str(M(i).Var8))==1
@@ -108,5 +115,5 @@ h.YLabel.FontSize = 30;
 h.YLabel.FontWeight = 'bold';
 ylim([20 100]);
 xlim([5 40]);
-saveas(h, strcat('~/Dropbox/TransferPCtoMac/',testenvs,'test_',filter_type,'_and_MAD_Envs_',num2str(round),'.fig'));
-%saveas(h, strcat('~/Dropbox/Dhrubo_Jin_Anish_Michael/MASS 2017/Images/matlab/precision/open_world/',filter_type,'_and_MAD/',testenvs,'test_',filter_type,'_and_MAD_Envs_',num2str(round),'.eps'), 'eps2c');
+saveas(h, strcat(g_str_pathbase_radar,'/Results/CrossValidation_10foldstats/Environment_Splits/',testenvs,'test_',filter_type,'_and_MAD_Envs_',num2str(round),'.fig'));
+saveas(h, strcat(g_str_pathbase_radar,'/Results/CrossValidation_10foldstats/Environment_Splits/',testenvs,'test_',filter_type,'_and_MAD_Envs_',num2str(round),'.eps'), 'epsc');

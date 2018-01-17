@@ -221,19 +221,24 @@ if featureClass == 0
     f=[f,timeDomainFeatures(Data)]; %8
     
     %         for quantile = [1 0.7 0.5]%0.05:0.05:0.95    %0.9
-    for quantile = [0.9 0.7 0.5 0.3 0.8]                   %3
+    for quantile = [0.9 0.7 0.5]                   %3
         %f = [f,SlidingPercentileVelocity(Data,0.25,0,Rate,quantile)];
         f = [f,SlidingPercentileVelocity(Data,0.5,0.5,Rate,quantile)];
         %f = [f,SlidingPercentileVelocity(Data,1,0.75,Rate,quantile)];
     end
     
-    for quantile = [0.9 0.7 0.5 0.3 0.8]%0.05:0.05:0.95   %19   %3
+    for quantile = [0.9 0.7 0.5]%0.05:0.05:0.95   %19   %3
         %f = [f, ApproxMax(Data,0.25,0,Rate,quantile)];
         f = [f, ApproxMax(Data,0.5,0.5,Rate,quantile)];
     end
     
     f=[f,dist,time,distTimeProd,distTimeRatio];    % 4
+<<<<<<< HEAD
     disp(fileName);
+=======
+    
+    freq_height = [];
+>>>>>>> b075e561e2b9013674a1972a4daa2f6e142fc380
     for thr_sqr_matlab_log = [14.144,17,18.915,20,24.144,25] % Dhrubo added 18.915 and 24.144 corresponding to thr_sqr_Csharp=30 and 100 respectively
      % for thr_sqr_matlab_log = 25 % 18.9154624932669 % TEST ONLY. TODO: Delete line
         thr_sqr_matlab = 10^(thr_sqr_matlab_log/10)*25238;
@@ -254,25 +259,32 @@ if featureClass == 0
         %           [numHitBins_sum, numHitBins_max, moment_sum,numHitBins_median] = SpectStat(Img_adaptive, Freq);
         maxFreq = MaxFreqMeas(Img, Freq, 0.9,5);
         freqWidth = FreqWidthMeas(Img,4,7);
+        freqHeight = FreqHeightMeas(Img,1,1); % added by neel
+        freq_height = [freq_height,freqHeight];
         %widthLengthRatio1 = numHitBins_max/(time/64-8);
         widthLengthRatio1 = numHitBins_max/(time-8);
         %widthLengthRatio2 = numHitBins_median/(time/64-4);
         widthLengthRatio2 = numHitBins_median/(time-4);
+        %f = [f,numHitBins_sum,numHitBins_max,numHitBins_median,numHitBins_var,moment_sum,maxFreq,freqWidth,freqHeight,widthLengthRatio1,widthLengthRatio2, totalPowerAboveThr]; % 10
         f = [f,numHitBins_sum,numHitBins_max,numHitBins_median,numHitBins_var,moment_sum,maxFreq,freqWidth,widthLengthRatio1,widthLengthRatio2, totalPowerAboveThr]; % 10
     end
     
+    
+    %plot(freq_height);
     
     nSteps = size(Img,1);
     
     
     accRange = AccRange(Data,0.5,0.5,Rate,0.9);  % 0.5,0.8
-    veloVar = VeloVarMinMax(Data,1,0.75, Rate, 0.1,0.9);   %0.5, 0.8
-    
+    %veloVar = VeloVarMinMax(Data,1,0.75, Rate, 0.1,0.9);   %0.5, 0.8
+    veloVar = VeloVarMinMax(Data,12,4,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
+     
     f=[f,accRange];
     f=[f,veloVar];
     %addpath('C:\Users\he\My Research\2014.10\Haar Features');
     f = [f, haar_feature(Data,5)];
     %         f = [f, haar_feature(Data,5)-haar_feature(BkData,levels)];
+    
 end
 
 

@@ -82,11 +82,37 @@ MASS_RandomSplits_CrossVal_10foldstats(30,200,[10 15 20 25 30 35 40]);
 MASS_RandomSplits_CrossVal_10foldstats(40,200,[10 15 20 25 30 35 40]);
 MASS_RandomSplits_CrossVal_10foldstats(50,200,[10 15 20 25 30 35 40]);
 
-%% CrossEnvironment testing after above scripts are run
+%% CrossEnvironment testing after above scripts are run - real environments
 MASS_TestEnvs_script(2,[10 15 20 25 30 35 40]);
 MASS_TestEnvs_script(3,[10 15 20 25 30 35 40]);
 MASS_TestEnvs_script(4,[10 15 20 25 30 35 40]);
 MASS_TestEnvs_script(5,[10 15 20 25 30 35 40]);
+
+%% CrossEnvironment testing after above scripts are run - random split environments
+MASS_RandomSplits_TestEnvs_script(20,10,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(30,10,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(40,10,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(50,10,[10 15 20 25 30 35 40]);
+
+MASS_RandomSplits_TestEnvs_script(20,50,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(30,50,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(40,50,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(50,50,[10 15 20 25 30 35 40]);
+
+MASS_RandomSplits_TestEnvs_script(20,100,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(30,100,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(40,100,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(50,100,[10 15 20 25 30 35 40]);
+
+MASS_RandomSplits_TestEnvs_script(20,150,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(30,150,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(40,150,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(50,150,[10 15 20 25 30 35 40]);
+
+MASS_RandomSplits_TestEnvs_script(20,200,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(30,200,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(40,200,[10 15 20 25 30 35 40]);
+MASS_RandomSplits_TestEnvs_script(50,200,[10 15 20 25 30 35 40]);
 
 %% Aggregate results - open world
 MASS_Paper_Results_Crossval(2,[10 15 20 25 30 35 40],'mRMR','prctile',10,'diff');
@@ -110,6 +136,7 @@ MASS_Paper_Results_Crossval(4,[10 15 20 25 30 35 40],'InfoGain','prctile',10,'al
 MASS_Paper_Results_Crossval(5,[10 15 20 25 30 35 40],'InfoGain','prctile',10,'all');
 
 %% Aggregate results - 10foldstats
+% All environments
 [med_mRMR_2, iqr_mRMR_2, ~, ~]=MASS_Paper_Results_10foldstats(2,[10 15 20 25 30 35],'mRMR','all');
 [med_mRMR_3, iqr_mRMR_3, ~, ~]=MASS_Paper_Results_10foldstats(3,[10 15 20 25 30 35],'mRMR','all');
 [med_mRMR_4, iqr_mRMR_4, ~, ~]=MASS_Paper_Results_10foldstats(4,[10 15 20 25 30 35],'mRMR','all');
@@ -119,3 +146,25 @@ MASS_Paper_Results_Crossval(5,[10 15 20 25 30 35 40],'InfoGain','prctile',10,'al
 [med_ig_3, iqr_ig_3, ~, ~]=MASS_Paper_Results_10foldstats(3,[10 15 20 25 30 35],'InfoGain','all');
 [med_ig_4, iqr_ig_4, ~, ~]=MASS_Paper_Results_10foldstats(4,[10 15 20 25 30 35],'InfoGain','all');
 [med_ig_5, iqr_ig_5, ~, ~]=MASS_Paper_Results_10foldstats(5,[10 15 20 25 30 35],'InfoGain','all');
+
+% "Different" environments - 1, 2, 3, and 10 can't be in the train-test
+[med_mRMR_diff_2, iqr_mRMR_diff_2, ~, ~]=MASS_Paper_Results_10foldstats(2,[10 15 20 25 30 35],'mRMR','diff');
+[med_mRMR_diff_3, iqr_mRMR_diff_3, ~, ~]=MASS_Paper_Results_10foldstats(3,[10 15 20 25 30 35],'mRMR','diff');
+[med_mRMR_diff_4, iqr_mRMR_diff_4, ~, ~]=MASS_Paper_Results_10foldstats(4,[10 15 20 25 30 35],'mRMR','diff');
+[med_mRMR_diff_5, iqr_mRMR_diff_5, ~, ~]=MASS_Paper_Results_10foldstats(5,[10 15 20 25 30 35],'mRMR','diff');
+
+[med_ig_diff_2, iqr_ig_diff_2, ~, ~]=MASS_Paper_Results_10foldstats(2,[10 15 20 25 30 35],'InfoGain','diff');
+[med_ig_diff_3, iqr_ig_diff_3, ~, ~]=MASS_Paper_Results_10foldstats(3,[10 15 20 25 30 35],'InfoGain','diff');
+[med_ig_diff_4, iqr_ig_diff_4, ~, ~]=MASS_Paper_Results_10foldstats(4,[10 15 20 25 30 35],'InfoGain','diff');
+[med_ig_diff_5, iqr_ig_diff_5, ~, ~]=MASS_Paper_Results_10foldstats(5,[10 15 20 25 30 35],'InfoGain','diff');
+
+% "Similar" environments - 1, 2, 3, and 10 must be in the train-test
+[med_mRMR_sim_2, iqr_mRMR_sim_2, ~, ~]=MASS_Paper_Results_10foldstats(2,[10 15 20 25 30 35],'mRMR','sim');
+[med_mRMR_sim_3, iqr_mRMR_sim_3, ~, ~]=MASS_Paper_Results_10foldstats(3,[10 15 20 25 30 35],'mRMR','sim');
+[med_mRMR_sim_4, iqr_mRMR_sim_4, ~, ~]=MASS_Paper_Results_10foldstats(4,[10 15 20 25 30 35],'mRMR','sim');
+[med_mRMR_sim_5, iqr_mRMR_sim_5, ~, ~]=MASS_Paper_Results_10foldstats(5,[10 15 20 25 30 35],'mRMR','sim');
+
+[med_ig_sim_2, iqr_ig_sim_2, ~, ~]=MASS_Paper_Results_10foldstats(2,[10 15 20 25 30 35],'InfoGain','sim');
+[med_ig_sim_3, iqr_ig_sim_3, ~, ~]=MASS_Paper_Results_10foldstats(3,[10 15 20 25 30 35],'InfoGain','sim');
+[med_ig_sim_4, iqr_ig_sim_4, ~, ~]=MASS_Paper_Results_10foldstats(4,[10 15 20 25 30 35],'InfoGain','sim');
+[med_ig_sim_5, iqr_ig_sim_5, ~, ~]=MASS_Paper_Results_10foldstats(5,[10 15 20 25 30 35],'InfoGain','sim');

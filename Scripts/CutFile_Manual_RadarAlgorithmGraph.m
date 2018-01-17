@@ -6,7 +6,7 @@
 % Optional arguments: min_length_secs: (minimum allowed walk length, in seconds
 %                     cutoff_halfsecs: Cutoff time instant (in half seconds) beyond which walks should no longer be considered
 
-function nCuttedFiles=CutFile_Manual_RadarAlgorithmGraph(fileName,walk_beg_file,walk_end_file,min_length_secs, cutoff_halfsecs)
+function nCuttedFiles=CutFile_Manual_RadarAlgorithmGraph(fileName, walk_beg_file, walk_end_file, min_length_secs, cutoff_halfsecs)
 
 % Defaults
 if nargin == 3
@@ -39,7 +39,7 @@ fileNameOnly = filePath_tmp(pathIndex(end)+1:fileExtIndex-1);
 
 %Create cut folder if it doesn't exist already
 %cut_folder = [filePath,'/cut'];
-cut_folder = [filePath,'cut/']; %disp(cut_folder);
+cut_folder = [filePath,'cut/c2/r3/']; %disp(cut_folder);
 if exist(cut_folder, 'dir') ~= 7
     mkdir(cut_folder);
     fprintf('INFO: created directory %s\n', cut_folder);
@@ -47,19 +47,28 @@ end
 
 [I,Q,N]=Data2IQ(ReadBin([fileName]));
 
-walk_begs = dlmread(walk_beg_file); %disp(walk_begs);
-walk_ends = dlmread(walk_end_file); %disp(walk_ends);
+walk_begs = dlmread(walk_beg_file);
+walk_ends = dlmread(walk_end_file);
 
-walk_lengths = (walk_ends - walk_begs)/2; % since unit is half-seconds
-disp(walk_lengths);
-start = walk_begs(walk_lengths > min_length_secs & walk_begs < cutoff_halfsecs)*128;
-stop = walk_ends(walk_lengths > min_length_secs & walk_ends < cutoff_halfsecs)*128;
+walk_begs = round(walk_begs,1);
+walk_ends = round(walk_ends,1);
+%walk_begs = uint64(walk_begs);
+%walk_ends = uint64(walk_ends);
 
+%disp(walk_begs(3)); disp(walk_ends(3));
+
+%walk_lengths = (walk_ends - walk_begs)/2; % since unit is half-seconds
+walk_lengths = (walk_ends - walk_begs); % if unit is in seconds
+%disp(walk_lengths);
+start = walk_begs(walk_lengths > min_length_secs & walk_begs < cutoff_halfsecs)*250; %use 125 if unit is half sec
+stop = walk_ends(walk_lengths > min_length_secs & walk_ends < cutoff_halfsecs)*250;
+
+k=0;
 for j=1:length(start)
+    k=k+1;
     I_cut = I(start(j):stop(j));
     Q_cut = Q(start(j):stop(j));
-    
-    Data_cut = zeros(1,2*(stop(j)-start(j)+1));
+    Data_cut = zeros(1,2*(floor(stop(j)-start(j))+1));
     Data_cut(1:2:length(Data_cut)-1) = I_cut;
     Data_cut(2:2:length(Data_cut)) = Q_cut;
     WriteBin([cut_folder,fileNameOnly,'_cut',num2str(j),'.data'],Data_cut);
