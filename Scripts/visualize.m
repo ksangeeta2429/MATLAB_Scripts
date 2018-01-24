@@ -1,7 +1,7 @@
 % plot data, spectrogram, histogram, features
 % display the data I Q in C# format
 
-function visualize(fileName, path_data)
+function Visualize(fileName, path_data)
 
 close all;
 % figure;
