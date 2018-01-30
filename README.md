@@ -29,7 +29,7 @@ Check your current MATLAB Java version through the following command:
 	/MATLAB_Scripts/Scripts/MASS_2017/OSC_PCT_Scripts/OSC_Launch_Scripts (optional)
 	/MATLAB_Scripts/Scripts/MASS_2017/Result aggregation (optional)
 	/MATLAB_Scripts/Scripts/Paper_plots (optional)
-	/MATLAB_Scripts/Scripts/Simple
+	/MATLAB_Scripts/Scripts/WWF_Related
 	/MATLAB_Scripts/Scripts/VisualizeInAfrica
 	/MATLAB_Scripts/Scripts/cell2csv
 	/MATLAB_Scripts/Scripts/matlab2weka
