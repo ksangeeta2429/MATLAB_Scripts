@@ -18,7 +18,7 @@
 %% list all path roots here.  they should mostly be the same.
 str_pathbase_radar_jin  = 'C:/Users/he/Documents/Dropbox/MyMatlabWork/radar';
 str_pathbase_radar_mike = 'C:/Users/researcher/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
-str_pathbase_radar_dhrubo = '/media/mydrive/Robust_Learning';
+str_pathbase_radar_dhrubo = '/media/Roy.174/6b93b438-a3d4-40d2-9f3d-d8cdbb850183/Research/Robust_Learning';
 str_pathbase_radar_Roy = 'C:/Users/Roy/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
 str_pathbase_radar_Balderdash = '/Users/Balderdash/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
 str_pathbase_radar_OSC = '/users/PAS1090/osu8577/RobustEnv';
@@ -28,7 +28,7 @@ str_pathbase_radar_dhrubo_Ubuntu = '/home/roy174/Robust_Learning';
 str_pathbase_data_jin = 'C:/Users/he/My Research/2015.1/test';
 str_pathbase_data_mike = 'C:/Users/researcher/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/data';
 %str_pathbase_data_dhrubo = 'C:/Users/roy.174/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/data';
-str_pathbase_data_dhrubo = '/media/mydrive/Robust_Learning/Data_Repository';
+str_pathbase_data_dhrubo = '/media/Roy.174/6b93b438-a3d4-40d2-9f3d-d8cdbb850183/Research/Robust_Learning/Data_Repository';
 str_pathbase_data_Roy = 'C:/Users/Roy/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/data';
 str_pathbase_data_Balderdash = '/Users/Balderdash/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/data';
 str_pathbase_data_OSC = '';
@@ -36,7 +36,7 @@ str_pathbase_data_Neel = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulat
 str_pathbase_data_dhrubo_Ubuntu = '/home/roy174/Robust_Learning/Data';
 
 str_pathbase_model_mike = 'C:/Users/researcher/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/researcher';
-str_pathbase_model_dhrubo = '/media/mydrive/Robust_Learning/Models';
+str_pathbase_model_dhrubo = '/media/Roy.174/6b93b438-a3d4-40d2-9f3d-d8cdbb850183/Research/Robust_Learning/Models';
 str_pathbase_model_Roy = 'C:/Users/Roy/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Roy';
 str_pathbase_model_Balderdash = '/Users/Balderdash/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Balderdash';
 str_pathbase_model_OSC = '/users/PAS1090/osu8577/RobustEnv/Models/osu8577';
@@ -52,7 +52,7 @@ elseif strcmp(getenv('USERNAME'),'researcher')==1
     g_str_pathbase_radar = str_pathbase_radar_mike;
     g_str_pathbase_data  = str_pathbase_data_mike;
     g_str_pathbase_model = str_pathbase_model_mike;
-elseif strcmp(getenv('USER'),'roy.174'      )==1
+elseif strcmpi(getenv('USER'),'roy.174'      )==1
     g_str_pathbase_radar = str_pathbase_radar_dhrubo;
     g_str_pathbase_data  = str_pathbase_data_dhrubo;
     g_str_pathbase_model = str_pathbase_model_dhrubo;
