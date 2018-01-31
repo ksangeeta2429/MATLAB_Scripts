@@ -5,7 +5,7 @@ SetPath
 
 %path_to_all_arffs =
 %strcat(g_str_pathbase_radar,'/IIITDemo/Arff/Datasets_ToSN'); % TODO: Uncomment this
-path_to_all_arffs = strcat(g_str_pathbase_radar,'/IIITDemo/Arff/Datasets_MASS_2017'); % TODO: Comment this
+path_to_all_arffs = strcat(g_str_pathbase_radar,'/Datasets_MASS_2017'); % TODO: Comment this
 
 for fld=1:length(arff_folderlist)
     path_temp = strcat(g_str_pathbase_radar,'/IIITDemo/Arff/BigEnvs/Round',num2str(rnd),'/',char(arff_folderlist{fld}), '/single_envs');
@@ -70,17 +70,26 @@ for fld=1:length(arff_folderlist)
     end
     
     path_to_combined_arffs = strcat(g_str_pathbase_radar,'/IIITDemo/Arff/BigEnvs/Round',num2str(rnd),'/',char(arff_folderlist{fld}), '/combined');
-    
     if exist(path_to_combined_arffs, 'dir') ~= 7
         mkdir(path_to_combined_arffs); % Includes path_to_topk_arffs_scaled
         fprintf('INFO: created directory %s\n', path_to_combined_arffs);
     end
     
     path_to_temp_all=(strcat(g_str_pathbase_radar,'/IIITDemo/Arff/temp-all'));
+    if exist(path_to_temp_all, 'dir') ~= 7
+        mkdir(path_to_temp_all); % Includes path_to_topk_arffs_scaled
+        fprintf('INFO: created directory %s\n', path_to_temp_all);
+    end
+    
+    path_to_comb_all=strcat(g_str_pathbase_radar,'/IIITDemo/Arff/combined');
+    if exist(path_to_comb_all, 'dir') ~= 7
+        mkdir(path_to_comb_all); % Includes path_to_topk_arffs_scaled
+        fprintf('INFO: created directory %s\n', path_to_comb_all);
+    end
+    
     cd(path_to_temp_all);
     delete('*.arff');
-    
-    cd(strcat(g_str_pathbase_radar,'/IIITDemo/Arff/combined'));
+    cd(path_to_comb_all);
     delete('*.arff');
     
     for f=1:length(trainFiles)
@@ -88,7 +97,7 @@ for fld=1:length(arff_folderlist)
     end
     
     Combine_arff_doit_v2;
-    movefile(strcat(g_str_pathbase_radar,'/IIITDemo/Arff/combined/*.arff'),path_to_combined_arffs);
+    movefile(strcat(path_to_comb_all,'/*.arff'),path_to_combined_arffs);
 end
 
 % Write order of processing of environments
