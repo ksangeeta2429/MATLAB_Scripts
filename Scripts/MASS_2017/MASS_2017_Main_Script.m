@@ -25,6 +25,12 @@ MASS_CrossVal_10foldstats(3,[10 15 20 25 30 35 40]);
 MASS_CrossVal_10foldstats(4,[10 15 20 25 30 35 40]);
 MASS_CrossVal_10foldstats(5,[10 15 20 25 30 35 40]);
 
+%% CrossEnvironment testing after above scripts are run - real environments
+MASS_TestEnvs_script(2,[10 15 20 25 30 35 40]);
+MASS_TestEnvs_script(3,[10 15 20 25 30 35 40]);
+MASS_TestEnvs_script(4,[10 15 20 25 30 35 40]);
+MASS_TestEnvs_script(5,[10 15 20 25 30 35 40]);
+
 %% MAD feature selection with random environment splits - second argumment * 10 represents the round, last argument is the pseudorandom seed
 MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 2),2,10); % Round 20
 MASS_2017_RandomSplits_MAD_Training(Generate_Env_Combinations([1 2 3 4 5 10], 3),3,10); % Round 30
@@ -81,12 +87,6 @@ MASS_RandomSplits_CrossVal_10foldstats(20,200,[10 15 20 25 30 35 40]);
 MASS_RandomSplits_CrossVal_10foldstats(30,200,[10 15 20 25 30 35 40]);
 MASS_RandomSplits_CrossVal_10foldstats(40,200,[10 15 20 25 30 35 40]);
 MASS_RandomSplits_CrossVal_10foldstats(50,200,[10 15 20 25 30 35 40]);
-
-%% CrossEnvironment testing after above scripts are run - real environments
-MASS_TestEnvs_script(2,[10 15 20 25 30 35 40]);
-MASS_TestEnvs_script(3,[10 15 20 25 30 35 40]);
-MASS_TestEnvs_script(4,[10 15 20 25 30 35 40]);
-MASS_TestEnvs_script(5,[10 15 20 25 30 35 40]);
 
 %% CrossEnvironment testing after above scripts are run - random split environments
 MASS_RandomSplits_TestEnvs_script(20,10,[10 15 20 25 30 35 40]);
