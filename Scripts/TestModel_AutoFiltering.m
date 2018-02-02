@@ -1,4 +1,4 @@
-function [resultstr]=TestModel_AutoFiltering(full_path_model,full_path_testset)
+function [resultstr]=TestModel_AutoFiltering(full_path_model,full_path_testset,filteredout_save_folder)
 % Dummy values - to be commented post testing
 % SetEnvironment
 % SetPath
@@ -10,7 +10,15 @@ type='functions.LibSVM';
 
 % Extract feature string from model name
 features_csv = strrep(full_path_model(strfind(full_path_model,'_f_')+3:strfind(full_path_model,'_p_')-1),'_',',');
-full_path_filtered_test_set = strrep(full_path_testset,'.arff',[full_path_model(strfind(full_path_model,'_f_'):strfind(full_path_model,'_p_')-1),'.arff']);
+[filepath,name,ext] = fileparts(full_path_testset);
+filename=strcat(name,ext);
+
+if exist(filteredout_save_folder, 'dir') ~= 7
+    mkdir(filteredout_save_folder);
+    fprintf('INFO: created directory %s\n', filteredout_save_folder);
+end
+
+full_path_filtered_test_set = fullfile(filteredout_save_folder,strrep(filename,'.arff',[full_path_model(strfind(full_path_model,'_f_'):strfind(full_path_model,'_p_')-1),'.arff']));
 % Filter test set
 AttributeSelectionManual_Arff(full_path_testset,full_path_filtered_test_set,features_csv);
 
@@ -24,4 +32,4 @@ import weka.classifiers.functions.LibSVM; % need to add the path of the libsvm.j
 
 classifier = javaObject(['weka.classifiers.',type]);
 resultstr = Evaluation.evaluateModel(classifier,weka.core.Utils.splitOptions(options));
-delete(full_path_filtered_test_set);
+%delete(full_path_filtered_test_set);

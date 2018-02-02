@@ -28,6 +28,8 @@ for j=1:length(fileFullNames)
     end
 end
 
+testfolder_filtered=fullfile(path_train_envs,'test');
+    
 for i=1:length(trainFiles) % take every file from the set 'Files'
     fileName=trainFiles{i};
     fprintf('Processing file %s.arff...\n',fileName);
@@ -85,7 +87,7 @@ for i=1:length(trainFiles) % take every file from the set 'Files'
             gamma=str2double(str_c_gamma(strfind(str_c_gamma,'_')+1:end));
             
             fprintf('Processing test file %s.arff with c=%d,gamma=%d...\n',testFileName,c,gamma);
-            result = TestModel_AutoFiltering(strcat(path_models,'/',modelFile), strcat(path_test_envs,'/',testFileName,'.arff'));
+            result = TestModel_AutoFiltering(strcat(path_models,'/',modelFile), strcat(path_test_envs,'/',testFileName,'.arff'),testfolder_filtered);
             st = java.util.StringTokenizer(result);
             while(st.hasMoreTokens())
                 %fprintf('%s\n',char(st.nextToken()));
