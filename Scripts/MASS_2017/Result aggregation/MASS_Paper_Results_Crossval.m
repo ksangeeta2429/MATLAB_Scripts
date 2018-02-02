@@ -3,7 +3,7 @@ function [Median,IQR,OpPoint,HighOpPoint]=MASS_Paper_Results_Crossval(round,topk
 SetEnvironment
 SetPath
 
-if not(isempty(strfind(lower(filter_type),'mrmr')))
+if not(~contains(lower(filter_type),'mrmr'))
     path_to_round_folder = strcat('~/Research/Robust_Learning_Radar/Results/CrossValidation_Regular/mRMR_and_MAD/Round',num2str(round));
 else
     path_to_round_folder = strcat('~/Research/Robust_Learning_Radar/Results/CrossValidation_Regular/InfoGain_and_MAD/Round',num2str(round));
