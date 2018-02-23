@@ -233,12 +233,9 @@ if featureClass == 0
     end
     
     f=[f,dist,time,distTimeProd,distTimeRatio];    % 4
-<<<<<<< HEAD
     disp(fileName);
-=======
     
     freq_height = [];
->>>>>>> b075e561e2b9013674a1972a4daa2f6e142fc380
     for thr_sqr_matlab_log = [14.144,17,18.915,20,24.144,25] % Dhrubo added 18.915 and 24.144 corresponding to thr_sqr_Csharp=30 and 100 respectively
      % for thr_sqr_matlab_log = 25 % 18.9154624932669 % TEST ONLY. TODO: Delete line
         thr_sqr_matlab = 10^(thr_sqr_matlab_log/10)*25238;
