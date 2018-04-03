@@ -1,0 +1,31 @@
+function f=FeatureClass9_3(I,Q)
+
+Comp=(I-median(I))+i*(Q-median(Q));
+h = spectrum.welch;    % Create a Welch spectral estimator. 
+Hpsd = psd(h,Comp,'Fs',300);                % Calculate the PSD 
+P=Hpsd.Data;
+freq=Hpsd.Frequencies;
+P=[P(129:256);P(1:128)];
+P_dbm=10*log10(abs(P));
+freq=[freq(129:256)-300;freq(1:128)];
+
+f(1)=sum(P_dbm(128-4:128))/sum(P_dbm);
+f(2)=sum(P_dbm(128-8:128))/sum(P_dbm);
+f(3)=sum(P_dbm(128-12:128))/sum(P_dbm);
+f(4)=sum(P_dbm(128-16:128))/sum(P_dbm);
+f(5)=sum(P_dbm(128-20:128))/sum(P_dbm);
+f(6)=sum(P_dbm(128-24:128))/sum(P_dbm);
+f(7)=sum(P_dbm(128-28:128))/sum(P_dbm);
+f(8)=sum(P_dbm(128-32:128))/sum(P_dbm);
+f(9)=sum(P_dbm(128-48:128))/sum(P_dbm);
+f(10)=sum(P_dbm(128-64:128))/sum(P_dbm);
+f(11)=sum(P_dbm(129:129+4))/sum(P_dbm);
+f(12)=sum(P_dbm(129:129+8))/sum(P_dbm);
+f(13)=sum(P_dbm(129:129+12))/sum(P_dbm);
+f(14)=sum(P_dbm(129:129+16))/sum(P_dbm);
+f(15)=sum(P_dbm(129:129+20))/sum(P_dbm);
+f(16)=sum(P_dbm(129:129+24))/sum(P_dbm);
+f(17)=sum(P_dbm(129:129+28))/sum(P_dbm);
+f(18)=sum(P_dbm(129:129+32))/sum(P_dbm);
+f(19)=sum(P_dbm(129:129+48))/sum(P_dbm);
+f(20)=sum(P_dbm(129:129+64))/sum(P_dbm);

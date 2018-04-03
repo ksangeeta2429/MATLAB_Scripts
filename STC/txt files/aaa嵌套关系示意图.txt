@@ -1,0 +1,7 @@
+嵌套关系示意图：
+
+                （STCParse）-->(plotSpect)-->(ProcessingSpect)<---
+                                                                 |
+                                                                 |
+                                                                 |
+(Build_arff)-->(Feature2arff)-->(FeatureExtract)-->(ParFeature)---

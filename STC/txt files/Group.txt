@@ -1,0 +1,127 @@
+% 1 1prun
+% 2 1prun_hengxiang
+% 3 1pwalk
+% 4 1pstill
+% 5 0p
+% 6 3pwalk286fast
+% 7 264_1p_still
+% 8 264_4p_sit
+% 9 264_10p_betweenclass
+@RELATION radar1
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% 1 testbed_1p_walk
+% 2 testbed_2p_walk
+% 3 testbed_3p_walk
+% 4 testbed_4p_walk
+% 5 testbed_2p_still
+@RELATION radar2 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% 1 264_1p_still
+% 2 264_4p_sit
+% 3 264_10+p_betweenclass
+% 4 264_16+p_betweenclass
+% 5 264_16p_betweenclass
+% 6 264_19p_class
+% 7 264_21p_class
+% 8 264_21p_class1
+@RELATION radar 3
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% 1 264_18p_class_l
+% 2 264_18p_class_l1
+% 3 264_18p_class_l2
+% 4 264_18p_class_l3
+@RELATION radar5 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% frame length:  10s 
+% Data Sets:
+% 1 264_1p_still
+% 2 264_11p_beforeclass_l
+% 3 264_19p_class1
+% 4 264_26p_class
+@RELATION radar6
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% frame length:  10s 
+% Data Sets:
+% 1 264_31p_class_r
+% 2 264_31p_class_r1
+% 3 264_31p_class_r2
+% 4 264_31p_class_r3
+@RELATION radar7
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% frame length:  5s 
+% Data Sets:
+% 1 264_1p_still
+% 2 264_11p_beforeclass_l
+% 3 264_19p_class_r1
+% 4 264_26p_class_r
+@RELATION radar10 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% frame length:  10s 
+% Data Sets:
+% 4 264_27p_class_r1
+@RELATION radar11 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% frame length:  1s 
+% Data Sets:
+% 1 264_1p_still
+% 2 264_11p_beforeclass_l
+% 3 264_19p_class1
+% 4 264_26p_class
+@RELATION radar12 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% frame length:  1.000000e-001s 
+% Data Sets:
+% 1 264_1p_still
+% 2 264_11p_beforeclass_l
+% 3 264_19p_class1
+% 4 264_26p_class
+@RELATION radar13 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% frame length:  5s 
+% Data Sets:
+% 1 264_19p_class_r1
+% 2 264_19p_class_r2
+% 3 264_18p_class_l3
+@RELATION radar14 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% frame length:  10s 
+% Data Sets:
+% 1 264_18p_class_l1
+% 1 264_18p_class_l2
+% 1 264_18p_class_l3
+% 1 264_18p_class_l
+% 2 264_26p_class_r
+% 2 264_26p_class_r1
+% 2 264_27p_class_r
+% 3 264_31p_class_r
+% 3 264_29p_class_r
+% 3 264_29p_class_r1
+% 3 264_29p_class_r3
+@RELATION radar15 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% frame length:  10s 
+% Data Sets:
+% 1 264_18p_class_l1
+% 1 264_18p_class_l2
+% 1 264_18p_class_l3
+% 1 264_18p_class_l
+% 2 264_26p_class_r
+% 2 264_26p_class_r1
+% 2 264_27p_class_r
+% 3 264_29p_class_r
+% 3 264_29p_class_r1
+% 3 264_29p_class_r3
+@RELATION radar16 
+
+

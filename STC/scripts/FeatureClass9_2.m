@@ -1,0 +1,31 @@
+function f=FeatureClass9_2(I,Q)
+
+Comp=(I-median(I))+i*(Q-median(Q));
+h = spectrum.welch;    % Create a Welch spectral estimator. 
+Hpsd = psd(h,Comp,'Fs',300);                % Calculate the PSD 
+P=Hpsd.Data;
+freq=Hpsd.Frequencies;
+P=[P(129:256);P(1:128)];
+P_dbm=10*log10(abs(P));
+freq=[freq(129:256)-300;freq(1:128)];
+
+f(1)=P_dbm(128-4)/max(P_dbm);
+f(2)=P_dbm(128-8)/max(P_dbm);
+f(3)=P_dbm(128-12)/max(P_dbm);
+f(4)=P_dbm(128-16)/max(P_dbm);
+f(5)=P_dbm(128-20)/max(P_dbm);
+f(6)=P_dbm(128-24)/max(P_dbm);
+f(7)=P_dbm(128-28)/max(P_dbm);
+f(8)=P_dbm(128-32)/max(P_dbm);
+f(9)=P_dbm(128-48)/max(P_dbm);
+f(10)=P_dbm(128-64)/max(P_dbm);
+f(11)=P_dbm(129+4)/max(P_dbm);
+f(12)=P_dbm(129+8)/max(P_dbm);
+f(13)=P_dbm(129+12)/max(P_dbm);
+f(14)=P_dbm(129+16)/max(P_dbm);
+f(15)=P_dbm(129+20)/max(P_dbm);
+f(16)=P_dbm(129+24)/max(P_dbm);
+f(17)=P_dbm(129+28)/max(P_dbm);
+f(18)=P_dbm(129+32)/max(P_dbm);
+f(19)=P_dbm(129+48)/max(P_dbm);
+f(20)=P_dbm(129+64)/max(P_dbm);
