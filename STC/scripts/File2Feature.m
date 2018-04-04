@@ -6,8 +6,11 @@ function f_file=File2Feature(fileName, secondsPerFrame,fClass,ifReg,ifTrimsample
 %ifTrimsample=1; % cut every file by only leave first 5(?) samples or the full file if not enough for 5
 %ifReg=0;
 
-sampRate=300;
-
+sampRate=250;
+WINDOW = sampRate;
+%NFFT = nextpow2(sampRate);
+NFFT = sampRate;
+fileName;
 %roomInFilename=ExtractRoomFromFileName(fileName);
 nPeople=ExtractNumFromFileName(fileName);
 if ifReg==0
@@ -18,7 +21,8 @@ end
 
 data = ReadBin(fileName);
 [I,Q,N]=Data2IQ(data);
-[m,s]=LocalNoise(fileName,256,256*(1-1/16),10);  % get noise level
+%[m,s]=LocalNoise(fileName,256,256*(1-1/16),10,NFFT,sampRate);  % get noise level
+[m,s]=LocalNoise(fileName,WINDOW,WINDOW*(1-1/16),1,NFFT,sampRate);
 %%%%%%% framing the data %%%%%%%%%%%%%
 pointsPerFrame=sampRate*secondsPerFrame;
 nFrames=2*floor(N/pointsPerFrame)-1;
@@ -38,7 +42,7 @@ if nFrames>0       % at least 1 frame, not too short
 %         Iframe=I(1+(k-1)*pointsPerFrame:k*pointsPerFrame);        
 %         Qframe=Q(1+(k-1)*pointsPerFrame:k*pointsPerFrame);
 
-        f_frame=IQ2Feature(Iframe, Qframe, sampRate, m, s,fClass); % features
+        f_frame=IQ2Feature(Iframe, Qframe, sampRate, m, s,fClass,WINDOW,NFFT,sampRate); % features
         if ifReg==0 %Classification
             f_frame=num2cell(f_frame);
         end

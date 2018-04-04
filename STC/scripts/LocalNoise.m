@@ -2,16 +2,16 @@
 % input: a file
 % output: mean and std (column vector - on different frequency) of noise in this file
 
-function [m,s]=LocalNoise(fileName,WINDOW,NOVERLAP,secondsPerFrame)
-NFFT=256;
-sampRate=300;
+function [m,s]=LocalNoise(fileName,WINDOW,NOVERLAP,secondsPerFrame,NFFT,rate)
+%NFFT=256;
+sampRate=rate;
 
 
 data = ReadBin(fileName);
 [I,Q,N]=Data2IQ(data);
 
 %   secondsPerFrame=5;
-sampRate=300;
+%sampRate=300;
 pointsPerFrame=sampRate*secondsPerFrame;
 nFrames=floor(N/pointsPerFrame);
 overlap=0.5;
@@ -35,7 +35,7 @@ acI = Iframe - mean(Iframe);
 acQ = Qframe - mean(Qframe);
 Comp = acI + i*acQ;
 [S,F,T,P]=spectrogram(Comp,WINDOW,NOVERLAP,NFFT,sampRate,'yaxis');
-Fs=300;                       
+Fs=rate;                       
 F=F-Fs/2;                       
 P=[P(NFFT/2+1:NFFT,:);     
    P(1:NFFT/2,:)]; 

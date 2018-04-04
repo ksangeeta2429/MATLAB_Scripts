@@ -1,10 +1,10 @@
 % create lots of features only differ on the parameter setting
 % input: all
 % output:f (feature vector)
-function f=parameterized_features(I, Q, fClass)
+function f=parameterized_features(I, Q, fClass,WINDOW,NFFT,rate)
 
-sampRate=300;
-NFFT=256;
+sampRate=rate;
+%NFFT=nextpow2(rate);
 f=[];
 
 % Class 1

@@ -1,6 +1,6 @@
 function f=FeatureClass3_7(P_dbm,sigma,thr)     % Gradient features
 root='C:/Documents and Settings/he/My Documents/Dropbox/MyMatlabWork/';
-addpath([root,'radar/STC/scripts/gaussgradient']);
+%addpath([root,'radar/STC/scripts/gaussgradient']);
 
 f=zeros(1,1);
 

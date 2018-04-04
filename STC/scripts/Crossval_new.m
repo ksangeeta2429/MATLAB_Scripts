@@ -1,9 +1,9 @@
 % input: index of data set
 % do: cross validation
 
-function [result confusionmatrix]=Crossval_new(root, OutIndex,ifReg,c,omega,sigma)       % used when trim data is used. Crossval is used when all the data is used(do not let frames in the same file showing in both training and testing set)
-addpath([root,'radar/STC/scripts/matlab2weka']);
-addpath([root,'radar/STC/scripts']);
+function [result confusionmatrix]=Crossval_new(root, OutIndex,ifReg,c,omega,sigma,path_arff)       % used when trim data is used. Crossval is used when all the data is used(do not let frames in the same file showing in both training and testing set)
+%addpath([root,'radar/STC/scripts/matlab2weka']);
+%addpath([root,'radar/STC/scripts']);
 
 
 %OutIndex=11;
@@ -24,7 +24,7 @@ import java.util.Random;
 import weka.core.Utils.splitOptions;
 import weka.functions.supportVector.*;
 
-path_arff=[root,'radar/STC/arff files'];
+%path_arff=[root,'radar/STC/arff files'];
 cd(path_arff);
 instances = loadARFF(sprintf('radar%d.arff',OutIndex));
 

@@ -1,7 +1,7 @@
 % input: I Q
 % output: a vector - features
 
-function f=IQ2Feature(I, Q, sampRate,m,s,fClass)          % given I and Q, produce feature vector f (N*1)
+function f=IQ2Feature(I, Q, sampRate,m,s,fClass,WINDOW,NFFT,rate)          % given I and Q, produce feature vector f (N*1)
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%% chosen features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if length(fClass)==1
@@ -101,17 +101,17 @@ if length(fClass)==1
     %     
     %     %f()=ParamIndex2Feature(featureIndex, class,I,Q);
 
-        f1=parameterized_features(I,Q,8.2);
-        f2=parameterized_features(I,Q,3.2);
+        f1=parameterized_features(I,Q,8.2,WINDOW,NFFT,rate);
+        f2=parameterized_features(I,Q,3.2,WINDOW,NFFT,rate);
         f=[f1,f2];
     else       % if fClass~=0   means chosing parameters
         %%%%%%%%%%%%%%%%%%%%% parameterized features %%%%%%%%%%%%%%%%%%%%%%%%%%                   
-        f=parameterized_features(I,Q,fClass); 
+        f=parameterized_features(I,Q,fClass,WINDOW,NFFT,rate); 
     end
 else % length(fClass)>1 multiple feature classes
     f=[];
     for i=1:length(fClass)
-        tmp=parameterized_features(I,Q,fClass(i));
+        tmp=parameterized_features(I,Q,fClass(i),WINDOW,NFFT,rate);
         f=[f,tmp];
     end
 end

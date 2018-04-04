@@ -13,6 +13,7 @@ for t=2:length(Q)-1
 end
 
 Comp = (I-median(I)) + i*(Q-median(Q));
+Comp = padSignalWithZeros(Comp,WINDOW,NOVERLAP,NFFT,sampRate);
 [S,F,T,P]=spectrogram(Comp,WINDOW,NOVERLAP,NFFT,sampRate); 
 % S = spectrogram_nohamming(Comp,WINDOW,NOVERLAP,NFFT,sampRate);%change to nohamming in 10/24/2014      
                      

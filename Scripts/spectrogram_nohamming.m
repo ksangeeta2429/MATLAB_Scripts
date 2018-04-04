@@ -1,11 +1,19 @@
 function s = spectrogram_nohamming(X,WINDOW,NOVERLAP,NFFT,Fs)
+ %length of cut in number of samples
+size(X);
+X = padSignalWithZeros(X,WINDOW,NOVERLAP,NFFT,Fs);
+size(X);
 nx = length(X);
 ncol = fix((nx-NOVERLAP)/(WINDOW-NOVERLAP));
+ncol;
+NOVERLAP;
+WINDOW;
 colindex = 1 + (0:(ncol-1))*(WINDOW-NOVERLAP);
 rowindex = (1:WINDOW)';
 xin = zeros(WINDOW,ncol);
 xin(:) = X(rowindex(:,ones(1,ncol))+colindex(ones(WINDOW,1),:)-1);
-
+%rowindex(:,ones(1,ncol))+colindex(ones(WINDOW,1),:)-1
+%size(xin)
 %% no hamming !!
 % win=hamming(nwind);
 % win(:,ones(1,ncol));
@@ -18,6 +26,8 @@ xin(:) = X(rowindex(:,ones(1,ncol))+colindex(ones(WINDOW,1),:)-1);
 % a=xin(:,1)
 
 se = fft(xin,NFFT);
+
+size(se);
 % se = fftemote(xin,NFFT); % need to connect eMote with TinyCLR that has DynamicTestRunner, change COM port number in DynamicTestRunner_ConnectEmote.m, add DynamicTestRunner folder to MATLAB path. - Mike, 2015-09-29
 
 s = se;
@@ -40,4 +50,3 @@ s = se;
 
 % tmp2 =s(:,1);
 % GenerateArrInCsharp(tmp2,'fftonput')
-

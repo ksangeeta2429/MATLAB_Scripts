@@ -108,7 +108,9 @@ SetPath
 %data_dog = {'/Test'};
 %data_human = {'NIL'};
 %% Execute.m
-featureClass = 0;
+%featureClass = 0; % use class 0 for classification features, also include
+%counting features.
+featureClass = 10; % use class 10 for only counting features.
 
 %
 % these two lines put here because when the below two lines are commented

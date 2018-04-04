@@ -363,7 +363,52 @@ if featureClass == 0
     
 end
 
-
+if featureClass == 10   %only counting features -> added by neel
+    f=[];
+        
+        %gradient features -> added by Neel
+        
+        %TimeFreq = spectrogram_nohamming(Data, FftWindow, FftWindow - FftStep, FftWindow, Rate);
+        %power = abs(TimeFreq(:)).^2;
+        %[hog_features,visual] = HOG(power);
+        %plot(visual);
+        %f = [f,hog_features];
+    Img = AnomImage(Data, FftWindow, FftStep, Rate, NFFT, thr_sqr_matlab,medianBack,stdBack);
+    thr = [0.1,0.3,0.5,0.7]; % for gradient feature
+    if(Rate < 500)
+        window = [32,64,128,256];
+    elseif(Rate >= 500 && Rate <= 500)
+        window = [32,64,128,256,512];
+    end
+    
+    sigma = [0.1,0.2,0.5,1,2,5,10];
+    overlap = [15/16,7/8,3/4];
+    gradient_data = IQSmoothing(I,Q);
+    gradient_f = highGradientDiffParameters(gradient_data,window,overlap,sigma,Rate,NFFT,thr); %336 features
+    size(gradient_f);
+    f = [f gradient_f]; 
+    %336
+    %Activity region
+    region_f = activityRegionDiffParameters(Data,window,overlap,Rate,NFFT,thr); %48
+    size(region_f);
+    f = [f region_f];
+    %384
+    %Time domain based event features
+    thr = [50 100 200 400 600 800 1000];
+    for t = thr
+        event_f = eventFeatures(I,Q,t);%6 %42
+        f = [f event_f];
+    end
+    %426
+    
+      
+    %PSD
+    psd = PSDDiffParameters(Data,window,overlap,Rate,NFFT);
+    size(psd);
+    f = [f psd]; %300
+    %726
+    
+end
 
 
 

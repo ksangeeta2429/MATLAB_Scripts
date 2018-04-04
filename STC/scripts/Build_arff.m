@@ -4,10 +4,10 @@
 % then there are errors happening at the validation stage, but the arff file is still successfully built, that is enough)
 
 
-function [result confusionmatrix]=Build_arff(root, OutIndex, fClass, ClassDef, ifReg, path_data,secondsPerFrame,ifTrimsample)
+function [result confusionmatrix]=Build_arff(root, OutIndex, fClass, ClassDef, ifReg, path_data,secondsPerFrame,ifTrimsample,path_arff)
 root='C:/Documents and Settings/he/My Documents/Dropbox/MyMatlabWork/';
-addpath([root,'radar/STC/scripts/matlab2weka']);
-addpath([root,'radar/STC/scripts']);
+%addpath([root,'radar/STC/scripts/matlab2weka']);
+%addpath([root,'radar/STC/scripts']);
 
 % OutIndex=21;
 % fClass=[5.2 3.2 8.2];%[3.2 8.2]
@@ -42,6 +42,7 @@ sprintf('the total num of files is: %d',length(Files))
     % display total num of files
     
 for i=1:length(Files) % take every file from the set 'Files'
+    %Files{i}
     %if mod(i,10)==0 
         sprintf('%dth file is processing\n',i) % the i-th file is processing
     %end
@@ -72,7 +73,7 @@ end
 
 instances=matlab2weka(sprintf('radar%d',OutIndex),featureNames,f_set,nColumn,ifReg);
 %% save the wekaOBJ to arff file
-path_arff=[root,'radar/STC/arff files'];
+%path_arff=[root,'radar/STC/arff files'];
 cd(path_arff);
 saveARFF(sprintf('radar%d.arff',OutIndex),instances);
 
@@ -81,5 +82,5 @@ saveARFF(sprintf('radar%d.arff',OutIndex),instances);
 c=20;
 omega=0.1;
 sigma=200;
-[result confusionmatrix]=Crossval_new(root, OutIndex,ifReg,c,omega,sigma)
+[result confusionmatrix]=Crossval_new(root, OutIndex,ifReg,c,omega,sigma,path_arff)
 
