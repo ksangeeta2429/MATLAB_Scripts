@@ -4,7 +4,7 @@
 % Rate - sampling rate
 % Implemented as per VV.docx
 
-function Out = VeloVarMinMax(Data, Window, Overlap, Rate, LowQuant, HighQuant)
+function [Out,velo_var] = VeloVarMinMax(Data, Window, Overlap, Rate, LowQuant, HighQuant)
 
 %WindowSamples = round(Window*Rate);
 %OverlapSamples = round(WindowSamples*Overlap);
@@ -12,10 +12,11 @@ function Out = VeloVarMinMax(Data, Window, Overlap, Rate, LowQuant, HighQuant)
 WindowSamples = Window;
 OverlapSamples = Overlap;
 
+%calculate range in meters
+%lambda = 3e8/5.8e9;
+%Range = UnWrap(angle(Data)/2/pi, -0.5, 0.5)* lambda/2;
 
-lambda = 3e8/5.8e9;
-Range = UnWrap(angle(Data)/2/pi, -0.5, 0.5)* lambda/2;
-%Range = UnWrap(angle(Data)/2/pi, -0.5, 0.5)* 2*pi*4096;
+Range = UnWrap(angle(Data)/2/pi, -0.5, 0.5)* 2*pi*4096;
 %Range = Range * 2.584;
 %Range = abs(diff(Range));
 %disp(Range(length(Range))-Range(1));
@@ -32,7 +33,7 @@ if (N<WindowSamples)
 else
     k = 1;
     for j = 1:(WindowSamples-OverlapSamples):(N + 1 - WindowSamples)
-        startIndex = j; 
+        startIndex = j;
         stopIndex = j+WindowSamples-1;
         Feat(k) = max(Range(startIndex:stopIndex)) - min(Range(startIndex:stopIndex));
         k = k + 1;
@@ -43,12 +44,14 @@ else
     %scatter(x,Feat);
     numFeat = length(Feat);
     Feat = sort(Feat);
-    plot(Feat);
-    xlabel('Sliding windows');
-    ylabel('Max - Min of relative distance for each window');
+    %plot(Feat);
+    %xlabel('Sliding windows');
+    %ylabel('Max - Min of relative distance for each window');
     % get the difference between the high and low percentiles
     High = round(HighQuant*numFeat);
     Low = max(round(LowQuant*numFeat),1);
     Out = Feat(High) - Feat(Low);
-    disp(Out);
+    velo_var = var(Feat(Low:High));
+    %fprintf('%f ',Out);
+    %fprintf('%f ',max(Range)-min(Range));
 end

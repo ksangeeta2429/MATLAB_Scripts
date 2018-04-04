@@ -1,0 +1,12 @@
+@relation test_predicted
+
+@attribute f1 numeric
+@attribute f2 numeric
+@attribute f3 numeric
+@attribute predictedf4 numeric
+@attribute f4 numeric
+
+@data
+1,2,3,4,4
+2,3,4,3.323958,2
+3,2,1,5.272834,6

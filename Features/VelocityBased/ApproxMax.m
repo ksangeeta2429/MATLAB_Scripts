@@ -7,8 +7,11 @@
 
 function Out = ApproxMax(Data, VelWindow, VelOverlap, Rate, quantile)
 
-WindowSamples = round(VelWindow*Rate);
-OverlapSamples = round(VelOverlap*WindowSamples);
+%WindowSamples = round(VelWindow*Rate);
+%OverlapSamples = round(VelOverlap*WindowSamples);
+
+WindowSamples = VelWindow;
+OverlapSamples = VelOverlap;
 
 % convert data into range (in meters)
 % lambda = 3e8/5.8e9;

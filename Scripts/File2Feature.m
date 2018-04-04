@@ -249,20 +249,14 @@ if featureClass == 0
     end
     %20
     f=[f,dist,time,distTimeProd,distTimeRatio];    % 4
-<<<<<<< HEAD
     %disp(fileName);
     length(Data);
     %24
-    freq_height = [];
     %for thr_sqr_matlab_log = [14.144,17,18.915,20,24.144,25] % Dhrubo added 18.915 and 24.144 corresponding to thr_sqr_Csharp=30 and 100 respectively
     for thr_sqr_csharp = [5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,110,120,130,140,150,160,170,180,190,200]
         thr_sqr_matlab = thr_sqr_csharp * FftWindow^2;
-=======
-    disp(fileName);
     
     freq_height = [];
-    for thr_sqr_matlab_log = [14.144,17,18.915,20,24.144,25] % Dhrubo added 18.915 and 24.144 corresponding to thr_sqr_Csharp=30 and 100 respectively
->>>>>>> cc5ddb230b551a1efe85a016f130d31cc2fc03e3
      % for thr_sqr_matlab_log = 25 % 18.9154624932669 % TEST ONLY. TODO: Delete line
         %thr_sqr_matlab = 10^(thr_sqr_matlab_log/10)*25238;
         %         for thr_sqr_Csharp =[30 100];%[9.9994,19.301,38.51,121.78]

@@ -72,7 +72,6 @@ SetPath
 
 %% 2014.08 Bike data
  Index = [201408];
-<<<<<<< HEAD
  %data_dog = {'/Bike data/Oct 21 2017/cut/c1/r1/bikes_after_manual_checking'};
  data_dog = {'/Bike data/Oct 21 2017/bikes_first_window_start/'};
  %data_dog = {'NIL'};
@@ -88,24 +87,12 @@ SetPath
  data_human = {'/Bike data/Oct 21 2017/humans_first_window_start/'};
  %data_human = {'/raw/NearForest/combined/'};
  %data_human = {'/Bike data/Oct 21 2017/cut_manual/all_humans/test2/'};
-=======
  %data_dog = {'/Bike data/Aug 9 2017/Detect_begs_and_ends/param0.9/cut/humans only radar y'};
  data_dog = {'/Bike data/Oct 21 2017/bikes_no_0.5/'};
  %data_dog = {'NIL'};
  %data_dog = {'/IPSNdata/5-15-2011/Human'};
  %data_human = {'NIL'};
  data_human = {'/Bike data/Oct 21 2017/humans_no_0.5/'};
-
-%% Conflicted code hunk
- % =======
- % data_dog = {'/Bike data/Oct 21 2017/all_bikes'};
- %data_dog = {'NIL'}
- %data_dog = {'/IPSNdata/5-15-2011/Human'};
- % data_human = {'NIL'}
- %data_human = {'/Debug/Human_100'};
- %data_human = {'/Bike data/Aug 9 2017/135_human'};
- % >>>>>>> b075e561e2b9013674a1972a4daa2f6e142fc380
->>>>>>> cc5ddb230b551a1efe85a016f130d31cc2fc03e3
 
 %% Anomalous data
 % Index = [03202017, 030230670]
