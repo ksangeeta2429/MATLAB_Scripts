@@ -8,8 +8,8 @@ function f_file=File2Feature(fileName, secondsPerFrame,fClass,ifReg,ifTrimsample
 
 sampRate=250;
 WINDOW = sampRate;
-%NFFT = nextpow2(sampRate);
-NFFT = sampRate;
+NFFT = nextpow2(sampRate);
+%NFFT = sampRate;
 fileName;
 %roomInFilename=ExtractRoomFromFileName(fileName);
 nPeople=ExtractNumFromFileName(fileName);
@@ -21,6 +21,19 @@ end
 
 data = ReadBin(fileName);
 [I,Q,N]=Data2IQ(data);
+
+%added by neel. Old human data is sampled at rate 256 and new data at 250
+%use secondsPerFrame same as length of the cuts since the cuts for new data are much smaller 
+N;
+if(rem(N,256) == 0)
+    sampRate = 256;
+    secondsPerFrame = N/sampRate;
+elseif(rem(N-1,125) == 0)
+    sampRate = 250;
+    secondsPerFrame = (N-1)/sampRate; %for some reason there is one extra sample
+end
+
+
 %[m,s]=LocalNoise(fileName,256,256*(1-1/16),10,NFFT,sampRate);  % get noise level
 [m,s]=LocalNoise(fileName,WINDOW,WINDOW*(1-1/16),1,NFFT,sampRate);
 %%%%%%% framing the data %%%%%%%%%%%%%

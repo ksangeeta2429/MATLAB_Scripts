@@ -82,5 +82,53 @@ saveARFF(sprintf('radar%d.arff',OutIndex),instances);
 c=20;
 omega=0.1;
 sigma=200;
-[result confusionmatrix]=Crossval_new(root, OutIndex,ifReg,c,omega,sigma,path_arff)
+cost = [0.001,0.01,0.1,1,10,100,1000,10000,100000];
+o = [0.1,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10,100,200];
+s = [0.1,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10,100,200];
+
+%only for testing purpose
+%cost = [10,100,1000];
+%o = [0.1,1.5,4,10,100];
+%s = [0.1,4,10,200];
+
+cd(path_arff);
+fd = fopen('results.txt','a');
+
+%{
+min_meanAbsError = 1;
+best_omega = 0;
+best_sigma = 0;
+best_cost = 0;
+error = [];
+best_result = '';
+for c = cost
+    for omega = o
+        for sigma = s
+            [meanAbsError result confusionmatrix]=Crossval_new(root, OutIndex,ifReg,c,omega,sigma,path_arff);
+            meanAbsError;
+            error = [error meanAbsError];
+            if(min_meanAbsError > meanAbsError)
+                min_meanAbsError = meanAbsError;
+                best_cost = c; best_sigma = sigma; best_omega = omega;
+                best_result = result;
+            end
+        end
+    end
+end
+%}
+
+fprintf(fd,'--------------------------------\n');
+fprintf(fd,datestr(datetime));
+fprintf(fd,'\n\nBest result : \n');
+fprintf(fd,'%s',best_result);
+fprintf(fd,'\nBest omega : %f\n',best_omega);
+fprintf(fd,'Best sigma : %f\n',best_sigma);
+fprintf(fd,'Best C : %f\n',best_cost);
+fprintf(fd,'--------------------------------\n');
+
+plot(error);
+ylabel('Mean Absolute Error For differnt parameter settings');
+xlabel('Number of combinations of parameters');
+
+%[result confusionmatrix]=Crossval_new(root, OutIndex,ifReg,c,omega,sigma,path_arff)
 

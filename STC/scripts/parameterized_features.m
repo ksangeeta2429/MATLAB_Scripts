@@ -448,8 +448,8 @@ end
 
 
 if fClass==3.7
-%     parameterSetting={[32 64 128 256],[1/16 1/8 1/4],[0.1 0.2 0.5 1 2 5 10],[0.1 0.3 0.5 0.7 0.9]};
-    parameterSetting={[256],[1/4],[1],[0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95]};
+    parameterSetting={[32 64 128 256],[1/16 1/8 1/4],[0.1 0.2 0.5 1 2 5 10],[0.1 0.3 0.5 0.7 0.9]};
+    %parameterSetting={[256],[1/4],[1],[0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95]};
     
     nParam=length(parameterSetting);
     for i0=1:nParam
@@ -658,8 +658,8 @@ if fClass==5.22
 end
     
 if fClass==5.23
-%     parameterSetting={[32 64 128 256],[1/16 1/8 1/4],[5 10 15 20 25 30 35 40 45 50 55 60]};
-    parameterSetting={[256],[1/4],[10 15 20 25 30 35 40 45]};
+    parameterSetting={[32 64 128 256],[1/16 1/8 1/4],[5 10 15 20 25 30 35 40 45 50 55 60]};
+    %parameterSetting={[256],[1/4],[10 15 20 25 30 35 40 45]};
     nParam=length(parameterSetting);
     for i0=1:nParam
         nValue(i0)=length(parameterSetting{i0}); 
