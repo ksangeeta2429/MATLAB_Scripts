@@ -1,17 +1,47 @@
 % Input: file name
 % Do: draw spectrogram
 
-function plotspect(fileName,WINDOW,NOVERLAP,NFFT,sampRate,frameSeconds,plotOffset,PLOTFRAMES)
+% Input: file name
+% Do: draw spectrogram
+
+function plotspect(fileName,WINDOW,NOVERLAP,NFFT,sampRate,frameSeconds,plotOffset,PLOTFRAMES,bandwidth)
 
 % OutFile = strcat(fileName,'.spect.emf');
 data = ReadBin([fileName,'.data']);
-
-
-
+size(data);
+%padding zeros, added by neel
+X = data;
+nx = length(X); %length of cut in number of samples 
+number = (nx-NOVERLAP)/(WINDOW-NOVERLAP);
+integ = floor(number);
+fract = number-integ;
+if(nx < WINDOW)
+    %Pad the end of X with WINDOW - nx zero's
+    X = [X;zeros(WINDOW-nx,1)];
+elseif(fract ~= 0)
+    temp = nx/(WINDOW-NOVERLAP);
+    integer = floor(temp);
+    fract = temp - integer;
+    del = round((WINDOW-NOVERLAP)*fract);
+    if(del < (floor((WINDOW-NOVERLAP) / 2)))
+        %delete del number of samples at the end of the cut
+        cut_size = length(X);
+        X = X(1:cut_size-del);
+    else
+        %pad the end of X with n_pad_zeros zero's
+        temp = floor((nx-NOVERLAP)/(WINDOW-NOVERLAP)) + 1;
+        n_pad_zeros = (temp * (WINDOW-NOVERLAP)) - (nx-NOVERLAP);
+        X = [X; zeros(n_pad_zeros,1)];
+    end
+end
+nx = length(X);
+%end of padding zeros
+data = X;
+size(data);
 if PLOTFRAMES==1
     data=data(1+plotOffset:(2*sampRate*frameSeconds)+plotOffset); 
 end
-
+size(data);
 [I,Q,N]=Data2IQ(data);
 
 % index=[318*256:327*256]; %51-56
@@ -56,9 +86,9 @@ grid off;
 
 
 % cut the high freq of the spectrogram
-bandwidth= 128;
-P_dbm=P_dbm(NFFT/2-bandwidth+1:NFFT/2+bandwidth,:);
-F=F(NFFT/2-bandwidth+1:NFFT/2+bandwidth);
+%bandwidth= 125;
+%P_dbm=P_dbm(NFFT/2-bandwidth+1:NFFT/2+bandwidth,:);
+%F=F(NFFT/2-bandwidth+1:NFFT/2+bandwidth);
 
 
 % x = (-127:128)';
@@ -163,6 +193,10 @@ ylabel('Frequency (Hz)','FontSize', 20);
 %
 % print ('-dmeta', OutFile);
 fclose('all');
+
+
+
+
 
 
 

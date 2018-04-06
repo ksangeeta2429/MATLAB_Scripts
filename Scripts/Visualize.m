@@ -1,7 +1,7 @@
 % plot data, spectrogram, histogram, features
 % display the data I Q in C# format
 
-function Visualize(fileName)
+function Visualize(fileName,FftWindow)
 
 close all;
 % figure;
@@ -36,9 +36,20 @@ if exist(path_spec, 'dir') ~= 7
 end
 
 %% COMPUTE:
-sampRate = 256;
-step=64;
+%sampRate = 256;
+sampRate = 250; %for new data -> Neel
+%step=64;
 frameSeconds=60;
+
+%added by neel
+bandwidth = round(sampRate/2)
+%FftWindow = 2^nextpow2(round(sampRate/4)) %take as argument to Visualize
+%function
+NFFT = 2^nextpow2(FftWindow)
+%NFFT = 500;
+FftStep = round(1/8*FftWindow)
+step = FftStep;
+
 ifBackground=1;  % 1 to save background hist,0 not
 PLOTFRAMES=0; % 1 if display frames, 0 if display the whole file 
 DISPALL=0; % 1 if diplay all the frames, 0 if display a single frame
@@ -83,7 +94,9 @@ print('-dbitmap', [path_phase,fileName,'.phase.emf']);
 
 
 if PLOTFRAMES==0
-    plotSpect(fileName, sampRate,sampRate-step,sampRate,sampRate,frameSeconds,0,0);
+    %plotSpect(fileName, sampRate,sampRate-step,sampRate,sampRate,frameSeconds,0,0);
+    plotSpect(fileName, FftWindow,FftWindow-FftStep,NFFT,sampRate,frameSeconds,0,0,bandwidth); %added by neel
+
 %     figure;imagesc(T,F,bw1);colormap(gray);axis xy;
 
 else % PLOTFRAMES=1
@@ -92,10 +105,12 @@ else % PLOTFRAMES=1
         for i=1:nFigure
              m=ceil(nFigure^0.5);
              subplot(m,m,i);
-             plotSpect(fileName, sampRate,sampRate-step,sampRate,sampRate,frameSeconds,(2*sampRate*frameSeconds)*(i-1),1); 
+             %plotSpect(fileName, sampRate,sampRate-step,sampRate,sampRate,frameSeconds,(2*sampRate*frameSeconds)*(i-1),1); 
+             plotSpect(fileName, FftWindow,FftWindow-FftStep,NFFT,sampRate,frameSeconds,(2*sampRate*frameSeconds)*(i-1),1,bandwidth);
         end
     else
-        plotSpect(fileName, sampRate,sampRate-step,sampRate,sampRate,frameSeconds,(2*sampRate*frameSeconds)*(frameIndex-1),1);
+        %plotSpect(fileName, sampRate,sampRate-step,sampRate,sampRate,frameSeconds,(2*sampRate*frameSeconds)*(frameIndex-1),1);
+        plotSpect(fileName, FftWindow,FftWindow-FftStep,NFFT,sampRate,frameSeconds,(2*sampRate*frameSeconds)*(frameIndex-1),1,bandwidth);
     end
 end
 print('-dbitmap', [path_spec,fileName,'.spect.emf']);

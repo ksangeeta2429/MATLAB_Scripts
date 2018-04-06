@@ -34,6 +34,7 @@ dcQ = median(Q);
 
 Comp= (I-dcI) + 1j*(Q-dcQ);
 
+Comp = padSignalWithZeros(Comp,WINDOW,NOVERLAP,NFFT,sampRate); % added by neel
 
 % by testing, I know that P is in fact abs(S).^2/25238
 % except the top and bottom frequency: these two, the factor becomes 50476
@@ -49,6 +50,7 @@ F=F-sampRate/2;
 % F=zeros(1,WINDOW)
 % T=zeros(1,fix((length(I)-NOVERLAP)/(WINDOW-NOVERLAP)));
 
+NFFT
 
 P=[P(NFFT/2+1:NFFT,:);     
    P(1:NFFT/2,:)];                                                      
