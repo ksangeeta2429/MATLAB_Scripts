@@ -23,11 +23,13 @@ import weka.classifiers.Evaluation;
 import java.util.Random;
 import weka.core.Utils.splitOptions;
 import weka.functions.supportVector.*;
+import weka.attributeSelection.AttributeSelection;
+import weka.attributeSelection.PrincipalComponents;
 
 %path_arff=[root,'radar/STC/arff files'];
 cd(path_arff);
 %instances = loadARFF(sprintf('radar%d.arff',OutIndex));
-instances = loadARFF(sprintf('586_bikes_700+humans_counting.arff'));
+instances = loadARFF(sprintf('586_humans_700+humans_counting_frame_length_is_cut_length_20_features_CorrelationAttEval.arff'));
 disp('Instances loaded from arff file');
 classifier = javaObject(['weka.classifiers.',type]);
 classifier.setOptions(weka.core.Utils.splitOptions(options));

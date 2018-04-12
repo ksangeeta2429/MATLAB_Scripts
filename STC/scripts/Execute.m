@@ -21,10 +21,11 @@ SetPath
 data_bike = '/Bike data/Oct 21 2017/bikes_first_window_start/';
 data_human = '/Bike data/Oct 21 2017/humans_first_window_start/';
 
-data_all = '/data_with_count/';
+data_all = '/data_with_count/old_humans/';
 %data_all = '/Bike data/Oct 21 2017/all_first_window_start/';
 %data_all = '/home/neel/STC/STC/data files/new_radar_dataset/full';
 output_arff = strcat(g_str_pathbase_data,data_all,'counting');
+%output_arff = strcat(g_str_pathbase_data,'/data_with_count/','counting');
 %output_arff = data_all;
 root='C:/Documents and Settings/he/My Documents/Dropbox/MyMatlabWork/';
 %addpath([root,'radar/STC/scripts/matlab2weka']);

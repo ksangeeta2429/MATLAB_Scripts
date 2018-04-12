@@ -105,8 +105,8 @@ Data = (I-dcI) + 1i*(Q-dcQ);
 Rate = 250;
 %FftWindow = Rate;
 %FftStep = round(1/4*FftWindow);
-FftWindow = Rate; %added by neel
-FftStep = round(1/4*FftWindow);
+FftWindow = 2^nextpow2(Rate/8); %added by neel
+FftStep = round(1/8*FftWindow);
 %NFFT = FftWindow;
 NFFT = 2^nextpow2(FftWindow); %added by neel
 %Freq = FftFreq(FftWindow, Rate);
@@ -195,6 +195,7 @@ end
 %
 if featureClass == 0
     
+    %disp('Computing Features');
     %         nFeature = 18;
     %FftWindow = Rate; %commented by neel
     %FftStep = round(1/4*FftWindow);  % 1/8
@@ -223,12 +224,12 @@ if featureClass == 0
     
     
     %         for quantile = [1 0.7 0.5]%0.05:0.05:0.95    %0.9
-    for quantile = [0.98 0.96 0.9 0.7 0.5] 
+    for quantile = [0.98 0.96 0.95 0.9 0.7 0.5] 
     %for quantile = [0.99 0.98 0.97 0.96 0.95 0.9 0.8 0.7 0.6 0.5]                   %3
         %f = [f,SlidingPercentileVelocity(Data,0.25,0,Rate,quantile)];
         %f = [f,SlidingPercentileVelocity(Data,0.5,0.5,Rate,quantile)];
          %f = [f,SlidingPercentileVelocity(Data,10,7,Rate,quantile)]; %using number of samples instead of window length for finer level velocities - > neel
-         %f = [f,SlidingPercentileVelocity(Data,30,20,Rate,quantile)];
+         f = [f,SlidingPercentileVelocity(Data,30,20,Rate,quantile)];
          f = [f,SlidingPercentileVelocity(Data,50,40,Rate,quantile)];
          %f = [f,SlidingPercentileVelocity(Data,80,60,Rate,quantile)];
          f = [f,SlidingPercentileVelocity(Data,125,90,Rate,quantile)];
@@ -236,14 +237,14 @@ if featureClass == 0
         %f = [f,SlidingPercentileVelocity(Data,1,0.75,Rate,quantile)];
     end
     
-    for quantile = [0.98 0.96 0.9 0.7 0.5]
+    for quantile = [0.98 0.96 0.95 0.9 0.7 0.5]
     %for quantile = [0.99 0.98 0.97 0.96 0.95 0.9 0.8 0.7 0.6 0.5]%0.05:0.05:0.95   %19   %3
         %f = [f, ApproxMax(Data,0.25,0,Rate,quantile)];
         %f = [f, ApproxMax(Data,0.5,0.5,Rate,quantile)];
        % f = [f, ApproxMax(Data,0.5,0.5,Rate,quantile)];
        f = [f, ApproxMax(Data,125,90,Rate,quantile)];
        f = [f, ApproxMax(Data,50,40,Rate,quantile)];
-       %f = [f, ApproxMax(Data,30,20,Rate,quantile)];
+       f = [f, ApproxMax(Data,30,20,Rate,quantile)];
        %f = [f, ApproxMax(Data,80,60,Rate,quantile)];
        %f = [f, ApproxMax(Data,250,190,Rate,quantile)];
     end
@@ -251,8 +252,10 @@ if featureClass == 0
     f=[f,dist,time,distTimeProd,distTimeRatio];    % 4
     %disp(fileName);
     length(Data);
+    %disp('FFT features...');
     %24
     %for thr_sqr_matlab_log = [14.144,17,18.915,20,24.144,25] % Dhrubo added 18.915 and 24.144 corresponding to thr_sqr_Csharp=30 and 100 respectively
+    %for thr_sqr_csharp = [5,10,15,20,30,40,60,80,90,100,120,140,150,160,180,200]
     for thr_sqr_csharp = [5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,110,120,130,140,150,160,170,180,190,200]
         thr_sqr_matlab = thr_sqr_csharp * FftWindow^2;
     
@@ -290,6 +293,7 @@ if featureClass == 0
         %           [numHitBins_sum, numHitBins_max, moment_sum,numHitBins_median] = SpectStat(Img_adaptive, Freq);
         maxFreq = MaxFreqMeas(Img, Freq, 0.9,5);
         freqWidth = FreqWidthMeas(Img,4,7);
+        %{
         [freq_width_mean, freq_width_meadian,freq_width_var] = FreqWidthMeanAndMedian(Img,4,7);
         [p1,p2] = NumberofExcitedBinsOnOneSide(Img);
         num_exc_bins_diff = abs(p1-p2);
@@ -298,13 +302,15 @@ if featureClass == 0
         %freq_range = FreqRange(Img,4,7);
         %freqHeight = FreqHeightMeas(Img,1,1); % added by neel
         %freq_height = [freq_height,freqHeight];
+        %}
         %widthLengthRatio1 = numHitBins_max/(time/64-8);
         widthLengthRatio1 = numHitBins_max/(time-8);
         %widthLengthRatio2 = numHitBins_median/(time/64-4);
         widthLengthRatio2 = numHitBins_median/(time-4);
-        %f = [f,numHitBins_sum,numHitBins_max,moment_sum,numHitBins_median,numHitBins_var,maxFreq,freqWidth,widthLengthRatio1,widthLengthRatio2, totalPowerAboveThr]; % 10
-        f = [f,numHitBins_sum,numHitBins_max,numHitBins_median,numHitBins_var,moment_sum,maxFreq,freq_width_mean,freq_width_meadian,freq_width_var,freqWidth,widthLengthRatio1,widthLengthRatio2, totalPowerAboveThr,p1,p2,num_exc_bins_diff,num_exc_bins_ratio,num_exc_bins_ratio1]; % 18
+        f = [f,numHitBins_sum,numHitBins_max,moment_sum,numHitBins_median,numHitBins_var,maxFreq,freqWidth,widthLengthRatio1,widthLengthRatio2, totalPowerAboveThr]; % 10
+        %f = [f,numHitBins_sum,numHitBins_max,numHitBins_median,numHitBins_var,moment_sum,maxFreq,freq_width_mean,freq_width_meadian,freq_width_var,freqWidth,widthLengthRatio1,widthLengthRatio2, totalPowerAboveThr,p1,p2,num_exc_bins_diff,num_exc_bins_ratio,num_exc_bins_ratio1]; % 18
     end
+    %{
     %564
     thr = [0.1,0.3,0.5,0.7]; % for gradient feature
     if(Rate < 500)
@@ -339,22 +345,27 @@ if featureClass == 0
     size(psd);
     f = [f psd]; %300
     %1290
+    %}
     accRange = AccRange(Data,0.5,0.5,Rate,0.9);  % 0.5,0.8
     %veloVar = VeloVarMinMax(Data,1,0.75, Rate, 0.1,0.9);   %0.5, 0.8
     %figure(); hold on
     %[veloVar,veloVar2] = VeloVarMinMax(Data,10,7,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
     %f = [f,veloVar,veloVar2];
-    %[veloVar,veloVar2] = VeloVarMinMax(Data,30,20,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
+    [veloVar,veloVar2] = VeloVarMinMax(Data,30,20,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
     %f = [f,veloVar,veloVar2];
+    f = [f,veloVar];
     [veloVar,veloVar2] = VeloVarMinMax(Data,50,40,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
-    f = [f,veloVar,veloVar2];
-    [veloVar,veloVar2] = VeloVarMinMax(Data,80,60,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
-    f = [f,veloVar,veloVar2];
-    [veloVar,veloVar2] = VeloVarMinMax(Data,125,90,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
-    f = [f,veloVar,veloVar2];
-    [veloVar,veloVar2] = VeloVarMinMax(Data,250,190,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
-    f = [f,veloVar,veloVar2];
+    %f = [f,veloVar,veloVar2];
+    f = [f,veloVar];
+    [veloVar,veloVar2] = VeloVarMinMax(Data,125,90,Rate,0.1,0.9);
+    f = [f,veloVar]; 
+    %[veloVar,veloVar2] = VeloVarMinMax(Data,80,60,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
+    %f = [f,veloVar];
+    
+    %[veloVar,veloVar2] = VeloVarMinMax(Data,250,190,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
+    %f = [f,veloVar,veloVar2];
     %hold off
+    
     f=[f,accRange];
     %f=[f,veloVar];
     %addpath('C:\Users\he\My Research\2014.10\Haar Features');
@@ -362,6 +373,8 @@ if featureClass == 0
     %         f = [f, haar_feature(Data,5)-haar_feature(BkData,levels)];
     
 end
+
+%fprintf('Size of feature vector : %d\n',length(f));
 
 if featureClass == 10   %only counting features -> added by neel
     f=[];

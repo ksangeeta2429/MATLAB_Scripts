@@ -88,11 +88,11 @@ SetPath
  %data_human = {'/raw/NearForest/combined/'};
  %data_human = {'/Bike data/Oct 21 2017/cut_manual/all_humans/test2/'};
  %data_dog = {'/Bike data/Aug 9 2017/Detect_begs_and_ends/param0.9/cut/humans only radar y'};
- data_dog = {'/Bike data/Oct 21 2017/bikes_no_0.5/'};
+ %data_dog = {'/Bike data/Oct 21 2017/bikes_no_0.5/'};
  %data_dog = {'NIL'};
  %data_dog = {'/IPSNdata/5-15-2011/Human'};
  %data_human = {'NIL'};
- data_human = {'/Bike data/Oct 21 2017/humans_no_0.5/'};
+ %data_human = {'/Bike data/Oct 21 2017/humans_no_0.5/'};
 
 %% Anomalous data
 % Index = [03202017, 030230670]
@@ -108,9 +108,7 @@ SetPath
 %data_dog = {'/Test'};
 %data_human = {'NIL'};
 %% Execute.m
-%featureClass = 0; % use class 0 for classification features, also include
-%counting features.
-featureClass = 10; % use class 10 for only counting features.
+featureClass = 0 % use class 0 for classification features, also include
 
 %
 % these two lines put here because when the below two lines are commented

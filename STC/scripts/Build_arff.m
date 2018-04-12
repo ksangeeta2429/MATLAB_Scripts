@@ -94,7 +94,7 @@ s = [0.1,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10,100,200];
 cd(path_arff);
 fd = fopen('results.txt','a');
 
-%{
+
 min_meanAbsError = 1;
 best_omega = 0;
 best_sigma = 0;
@@ -105,7 +105,7 @@ for c = cost
     for omega = o
         for sigma = s
             [meanAbsError result confusionmatrix]=Crossval_new(root, OutIndex,ifReg,c,omega,sigma,path_arff);
-            meanAbsError;
+            meanAbsError
             error = [error meanAbsError];
             if(min_meanAbsError > meanAbsError)
                 min_meanAbsError = meanAbsError;
@@ -115,7 +115,7 @@ for c = cost
         end
     end
 end
-%}
+
 
 fprintf(fd,'--------------------------------\n');
 fprintf(fd,datestr(datetime));
