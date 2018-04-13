@@ -2,7 +2,7 @@
 % output: feature matrix, each row is a frame
 
 
-function f_file=File2Feature(fileName, secondsPerFrame,fClass,ifReg,ifTrimsample,ClassDef, indexFile)
+function f_file=File2Feature(fileName, secondsPerFrame,ifScaled,fClass, feature_min,scalingFactors,ifReg,ifTrimsample,ClassDef, indexFile)
 %ifTrimsample=1; % cut every file by only leave first 5(?) samples or the full file if not enough for 5
 %ifReg=0;
 
@@ -19,7 +19,7 @@ else
     classIndex=classMapping(nPeople,ClassDef);
 end
 
-% this is only for a particular format of fileName
+% Extract class label, this is only for a particular format of fileName. See the function definition
 %target_label = ExtractClassLabelFromFileName(fileName);
 %if(strcmp(target_label,'bike'))
 %    class_label = 1;
@@ -81,8 +81,17 @@ if nFrames>0       % at least 1 frame, not too short
         if ifReg==0 %Classification
             f_frame=num2cell(f_frame);
         end
-        %f_frame1 = [f_frame class_label]; 
+        %%%%%%%%%%% scaling
+        if ifScaled==1
+            % load('..\tmp','feature_min','feature_max')
+            f_frame = (f_frame-feature_min).*scalingFactors;
+        end
+        f_frame=num2cell(f_frame);
+        %%%%%%%%%%% include class label as a feature
+        %f_frame = [f_frame class_label];
+
         f_frame1=[f_frame classIndex]; %  [f_frame indexFile classIndex];  add indexFile and classIndex at the last
         f_file=[f_file;f_frame1];
     end
 end
+

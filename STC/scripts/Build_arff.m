@@ -4,7 +4,7 @@
 % then there are errors happening at the validation stage, but the arff file is still successfully built, that is enough)
 
 
-function [result confusionmatrix]=Build_arff(root, OutIndex, fClass, ClassDef, ifReg, path_data,secondsPerFrame,ifTrimsample,path_arff)
+function [feature_min scalingFactors]=Build_arff(root, OutIndex, ifScaled, fClass, feature_min, scalingFactors, ClassDef, ifReg, path_data,secondsPerFrame,ifTrimsample,path_arff,ifTrain)
 root='C:/Documents and Settings/he/My Documents/Dropbox/MyMatlabWork/';
 %addpath([root,'radar/STC/scripts/matlab2weka']);
 %addpath([root,'radar/STC/scripts']);
@@ -32,8 +32,8 @@ for j=1:length(fileFullNames)
     end
 end
 %% display useful info
-OutIndex
-fClass
+OutIndex;
+fClass;
 
 %saveBackground();
 %% build arff file for the data set 
@@ -47,8 +47,24 @@ for i=1:length(Files) % take every file from the set 'Files'
         sprintf('%dth file is processing\n',i) % the i-th file is processing
     %end
     fileName=Files{i}; 
-    f_file=File2Feature(fileName, secondsPerFrame, fClass,ifReg,ifTrimsample,ClassDef,i);
+    f_file=File2Feature(fileName, secondsPerFrame,ifScaled,fClass,feature_min,scalingFactors,ifReg,ifTrimsample,ClassDef,i);
     f_set=[f_set;f_file];     
+end
+
+if (ifScaled == 0)
+    format shortg
+    feature_max = max(cell2mat(f_set(:,1:size(f_set,2)-1)));
+    feature_min = min(cell2mat(f_set(:,1:size(f_set,2)-1)));
+    
+    scalingFactors = zeros(1,length(feature_max));
+    for j=1:length(feature_max)
+        if feature_max(j)~=feature_min(j)
+            scalingFactors(j) = 1/(feature_max(j)-feature_min(j));
+        else
+            scalingFactors(j) = 0;
+        end
+    end
+    %save('..\tmp');
 end
 sprintf('the total num of features is: %d',size(f_set,2)-1)
 
@@ -75,8 +91,14 @@ instances=matlab2weka(sprintf('radar%d',OutIndex),featureNames,f_set,nColumn,ifR
 %% save the wekaOBJ to arff file
 %path_arff=[root,'radar/STC/arff files'];
 cd(path_arff);
-saveARFF(sprintf('radar%d.arff',OutIndex),instances);
+if ifScaled == 0
+    saveARFF(sprintf('radar%d.arff',OutIndex),instances);
+else
+    saveARFF(sprintf('radar%d_scaled.arff',OutIndex),instances);
+end
+%saveARFF(sprintf('radar%d.arff',OutIndex),instances);
 
+if(ifTrain == 1)
 %% Cross Validation
 
 c=20;
@@ -131,4 +153,4 @@ ylabel('Mean Absolute Error For differnt parameter settings');
 xlabel('Number of combinations of parameters');
 
 %[result confusionmatrix]=Crossval_new(root, OutIndex,ifReg,c,omega,sigma,path_arff)
-
+end

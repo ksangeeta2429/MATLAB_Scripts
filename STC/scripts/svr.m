@@ -2,7 +2,7 @@
 % written by neel
 %do not forget to select small number of attributes to begin with
 
-function [] = svr(arff_file,result_file,n_fold,heldout,percent)
+function [] = svr(arff_file,result_file,n_fold,ifScaling,heldout,percent)
 
 import weka.classifiers.Evaluation;
 import java.util.Random;
