@@ -8,7 +8,6 @@ function [train,test] = holdOut(instances,percent)
 	import weka.core.Instances;
 	import java.util.Random;
 
-	instances.randomize(javaObject('java.util.Random'));
     trainSize = round(instances.numInstances() * percent/ 100);
     testSize = instances.numInstances() - trainSize;
     train = javaObject('weka.core.Instances',instances,0,trainSize);

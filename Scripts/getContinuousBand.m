@@ -24,6 +24,7 @@ function [start,stop] = getContinuousBand(Img_column,M,N)
 				else
 					%previous band was not continuous, found a new band.
 					num_bands = num_bands + 1;
+					%fprintf('Found new band...%d %d\n',i,j)
 					start(num_bands) = i;
 					stop(num_bands) = j;
 					flag = 1;
@@ -39,6 +40,6 @@ function [start,stop] = getContinuousBand(Img_column,M,N)
 				start(i) = stop(i-1) + 1;
 			end
 		end
-	start
-	stop	
+	start;
+	stop;
 end
