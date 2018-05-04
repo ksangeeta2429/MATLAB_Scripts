@@ -4,14 +4,14 @@
 % mult is how many std devs above/below median (typically 3 works best)
 % based on TFAFS.docx
 
-function Out = AnomImage(Data, FftWindow, FftStep, Rate, NFFT, thr_sqr_matlab,medianBack,stdBack)
+function Out = AnomImage_shift(Data, FftWindow, FftStep, Rate, NFFT, thr_sqr_matlab,medianBack,stdBack)
 %     [TimeFreq, ~, ~] = spectrogram(Data, FftWindow, FftWindow - FftStep, FftWindow, Rate);
     [TimeFreq,TimeFreq_shift] = spectrogram_nohamming(Data, FftWindow, FftWindow - FftStep, NFFT, Rate);
     numWindows = size(TimeFreq,2);
     
     Out = zeros(numWindows,FftWindow);
     
-    x = TimeFreq';
+    x = TimeFreq_shift';
 
 %     y = abs(x).^2;   %changed to square in 2/19/15
     
