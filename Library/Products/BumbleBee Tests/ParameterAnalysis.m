@@ -1,4 +1,4 @@
-function CompTrim = ParameterAnalysis(Comp,Rate, Title, Threshold, IQRejection, matches, windowCnt, windowSize)
+function CompTrim = ParameterAnalysis(Comp,Rate, Title, Threshold, IQRejection, matches, windowCnt, windowSize, save_times_to_file)
 
 %% Constants
 lambda = 299792458/5.8e9;
@@ -45,4 +45,4 @@ title(['Displacement with IQ filtering of: ', num2str(IQRejection)])
 
 subplot(4,2, [7,8])
 
-GraphDispDetection(TimeReSamp, CompFiltered, Threshold, IQRejection, matches, windowCnt, windowSize);
+GraphDispDetection(TimeReSamp, CompFiltered, Threshold, IQRejection, matches, windowCnt, windowSize,save_times_to_file);

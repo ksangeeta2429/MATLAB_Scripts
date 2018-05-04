@@ -1,4 +1,4 @@
-function GraphDispDetection(Time, Comp, Threshold, IQRejection, matches, window, windowSize)
+function GraphDispDetection(Time, Comp, Threshold, IQRejection, matches, window, windowSize,save_times_to_file)
 
 if any(size(Time) ~= size(Comp))
   if length(Time) == length(Comp)
@@ -87,6 +87,9 @@ end
 start_times = [];	stop_times = []; lengths = [];
 start_times = temp_start;	stop_times = temp_stop;		lengths = temp_length;
 
+
+if(save_times_to_file == 1)
+
 %save the start times of the events to a file with name following format : detect_beginnings__date_relevantname
 beginnings = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository/Bike data/Oct 21 2017/Detect_begs_and_ends/c1/detect_beginnings__r1_x';
 fd = fopen(beginnings,'w');
@@ -113,6 +116,8 @@ for(i = 1:length(lengths))
 	fprintf(fd1,'%d\n',temp);
 end
 fclose(fd1);
+end
+
 
 plot(timePlot,displacementDetection);
 xlim([Time(1) Time(N)])
