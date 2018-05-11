@@ -103,6 +103,12 @@ SetPath
 % data_dog={'/Close zoom/Anomaly'};
 % data_human={'/Close zoom/Human'};
 
+%% Simulation - Human
+Index = 20180505;
+data_dog = {'NIL'};
+data_human = {'/Simulation/20180505/walking/data/'};
+
+
 %% Any test data, such as a single walk cut
 %Index = [12345];
 %data_dog = {'/Test'};
