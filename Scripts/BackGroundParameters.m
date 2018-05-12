@@ -25,7 +25,9 @@ for i=1:length(Files) % take every file from the set 'Files'
     sprintf('%dth file is processing\n',i) % the i-th file is processing
     fileName=Files{i}; 
     [I,Q,N]=Data2IQ(ReadBin([fileName,'.data']));
-    BkData = (I-mean(I)) + i*(Q-mean(Q));
+    dcBiasI = median(I);
+    dcBiasQ = median(Q);
+    BkData = (I-dcBiasI) + i*(Q-dcBiasQ);
     [medianBack,stdBack] = ComputeBack(BkData, 256, 64);
 %     thr(i,:) = medianBack+mul*stdBack;
     thr(i) = medianBack+mul*stdBack;

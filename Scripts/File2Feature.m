@@ -90,9 +90,11 @@ thr_sqr_Csharp = thr_sqr_matlab/(256^2);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Data = (I-mean(I)) + 1i*(Q-mean(Q));
+% warning( 'Using mean for DC bias instead of median.');
 
 %dcI = 2044;   % enable when do test on dummy data
 %dcQ = 2048;
+% warning( 'Using static DC Bias' );
 
 dcI = median(I);
 dcQ = median(Q);

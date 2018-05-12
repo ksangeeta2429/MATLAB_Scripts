@@ -12,7 +12,7 @@
     
 %     bkfFleName = 'C:\Users\he\Documents\Dropbox\MyMatlabWork\radar\IIITDemo\Data\Noise\noise2.data';
 %     [I,Q,~] = Data2IQ(ReadBin(bkfFleName));
-%     BkData = (I-mean(I)) + i*(Q-mean(Q)); 
+%     BkData = (I-median(I)) + i*(Q-median(Q));
     
     
     Rate=256;
