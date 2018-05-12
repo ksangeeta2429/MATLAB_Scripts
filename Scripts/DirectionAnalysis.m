@@ -33,7 +33,9 @@ for j=1:length(Files) % take every file from the set 'Files'
     sprintf('%dth file is processing\n',j) % the i-th file is processing
     fileName=Files{j}; 
     [I,Q,N]=Data2IQ(ReadBin([fileName,'.data']));
-    data = (I-mean(I))+1j*(Q-mean(Q));
+    dcBiasI = median(I);
+    dcBiasQ = median(Q);
+    data = (I-dcBiasI)+1j*(Q-dcBiasQ);
     powerMax(j) = max(abs(data).^2);
     amplitudeMax(j) = max(abs(data));
     powerMean(j) = mean(abs(data).^2);
