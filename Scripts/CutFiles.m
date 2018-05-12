@@ -56,14 +56,16 @@ for j=1:length(fileFullNames)
     end
 end
 
+sampleRate = 256;
+
 allstarts = [];
 allstops=[];
 for i=1:length(Files) % take every file from the set 'Files'
     sprintf('%dth file is processing\n',i) % the i-th file is processing
     fileName=Files{i} 
     [ncut, start, stop] = CutFile(fileName);
-    allstarts=[allstarts;start'/256];
-    allstops=[allstops;stop'/256];
+    allstarts=[allstarts;start'/sampleRate];
+    allstops=[allstops;stop'/sampleRate];
     disp(allstarts);
     disp(allstops);
 %     pause;

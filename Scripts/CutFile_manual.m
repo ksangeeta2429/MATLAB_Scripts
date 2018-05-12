@@ -12,11 +12,11 @@ endSecond = 208;
 
 
 cd(path_data);
-rate = 256;
+sampleRate = 256;
 
 [I,Q,N]=Data2IQ(ReadBin([fileName,'.data']));
-startIndex = round(startSecond*rate);
-endIndex = round(endSecond*rate);
+startIndex = round(startSecond*sampleRate);
+endIndex = round(endSecond*sampleRate);
 if startIndex<=0 startIndex = 1; end
 if endIndex>length(I) endIndex = length(I); end
 I = I(startIndex : endIndex);
