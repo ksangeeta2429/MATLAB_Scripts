@@ -103,10 +103,10 @@ Data = (I-dcI) + 1i*(Q-dcQ);
 
 %disp(fileName);
 Rate = 256;
-if(rem(length(Data),256) == 0 | rem(length(Data),128) == 0 | rem(length(Data),64) == 0 | rem(length(Data)-2,256) == 0 | rem(length(Data)-2,128) == 0 | rem(length(Data)-2,64) == 0)
+if(rem(length(Data),256) == 0 || rem(length(Data),128) == 0 || rem(length(Data),64) == 0 || rem(length(Data)-2,256) == 0 || rem(length(Data)-2,128) == 0 || rem(length(Data)-2,64) == 0)
 	%fprintf('Rate is 256 : %d\n',length(Data));
 	Rate = 256;
-elseif(rem(length(Data),250) == 0 | rem(length(Data),125) == 0 | rem(length(Data)-1,250) == 0 | rem(length(Data)-1,125) == 0)
+elseif(rem(length(Data),250) == 0 || rem(length(Data),125) == 0 || rem(length(Data)-1,250) == 0 || rem(length(Data)-1,125) == 0)
 	%fprintf('\nRate is 250 : %d\n\n',length(Data));
 	Rate = 250;
 else
