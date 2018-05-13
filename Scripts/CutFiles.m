@@ -1,6 +1,7 @@
 % CutFile.m will cut one file to n files, using displacement detection algorithm,
 % call CutFile on all the files in the given folder,put the generated files in the subfolder .\cut\
-
+%
+% See Also: CutFile, CutFilesInFolder
 
 
 SetEnvironment
