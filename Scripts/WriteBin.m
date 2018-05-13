@@ -1,10 +1,17 @@
-function WriteBin(File,Data)
+function [] = WriteBin( File, Data )
+%WriteBin -- writes data to file (int16's).
+%
+% Input:
+% File - name of file to write.
+% Data - variable to write to file.
+%
+% Output:
 
-% ReadBin -- Reads raw data from a data sample file (int16's).
+%TODO: verify data will fit Int16.
 
 Fid = fopen(File, 'w+');
 if (Fid < 0)
-  'Could not open file'
+	error( 'Could not open file' );
 end
 
 fwrite(Fid, Data, 'int16');
