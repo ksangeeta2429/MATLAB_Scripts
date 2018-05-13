@@ -4,11 +4,11 @@
 % Michael McGrath, 2015-10-16
 
 %% early return. comment out if something breaks.
-% if exist('g_path_is_set','var') == 1
 if exist('g_env_is_set','var') == 1
-    % if g_path_is_set == true
-    if g_env_is_set == true
-        return
+    if exist('g_path_is_set','var') == 1
+        if g_path_is_set == true
+            return
+        end
     end
 end
 
@@ -23,17 +23,12 @@ if strcmp(getenv('PBS_O_LOGNAME'),'osu8577')==1
     % javaaddpath('/nfs/16/osu8577/libsvm.jar','-end');
     % javaaddpath('/nfs/16/osu8577/LibSVM.jar','-end');
     % javaaddpath('/nfs/16/osu8577/InfoTheoreticRanking_1.7.jar','-end');
-else
-    addpath(strcat(g_str_pathbase_radar,'/IIITDemo/Scripts'));
-    addpath(strcat(g_str_pathbase_radar,'/IIITDemo/Scripts/matlab2weka'));
-    addpath(strcat(g_str_pathbase_radar,'/IIITDemo/Features'));
-    addpath(strcat(g_str_pathbase_radar,'/IIITDemo/Features/VelocityBased'));
-    addpath(strcat(g_str_pathbase_radar,'/IIITDemo/Features/PhaseBased'));
-    addpath(strcat(g_str_pathbase_radar,'/IIITDemo/Features/FftBased'));
-    addpath(strcat(g_str_pathbase_radar,'/IIITDemo/Features/AcclnBased'));
-    addpath(strcat(g_str_pathbase_radar,'/IIITDemo/MatlabLibrary'));
-    addpath(strcat(g_str_pathbase_radar,'/eMote_scripts'));
-    addpath(strcat(g_str_pathbase_radar,'/Haar Features'));
+elseif strcmp(getenv('USER'),'mcgrathm') == 1
+        git_path = '/Users/mcgrathm/SDK/dhruboroy29';
+        addpath(genpath([ git_path '/MATLAB_Scripts/' ]));
+        rmpath(genpath([ git_path '/MATLAB_Scripts/Library/Data Collection/MatLab Scripts/Radar/Jin' ]));
+        rmpath(genpath([ git_path '/MATLAB_Scripts/STC/' ]));
+        rmpath(genpath([ git_path '/MATLAB_Scripts/Deconv-Matlab/' ]));
 end
 
 g_path_is_set = 1;
