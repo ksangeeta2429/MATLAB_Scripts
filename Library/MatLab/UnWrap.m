@@ -13,3 +13,9 @@ elseif (size(WrapPhase,2) == 1) %% Column vector
 else
   ERROR('UnWrap works on one vector at a time.')
 end
+
+% problem: unwrapped phase should start at zero.  adding Start phase will
+% cause displacement to be off by (Start phase * wavelength), or whatever
+% is used in lieu of wavelength for numerical stability. So for
+% displacement detector, high starting phase could give advantage to some
+% files. - MAM 2018-05-12.
