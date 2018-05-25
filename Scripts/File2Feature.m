@@ -91,11 +91,11 @@ thr_sqr_Csharp = thr_sqr_matlab/(256^2);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Data = (I-mean(I)) + 1i*(Q-mean(Q));
 
-%dcI = 2044;   % enable when do test on dummy data
-%dcQ = 2048;
+dcI = 2044;   % enable when do test on dummy data
+dcQ = 2048;
 
-dcI = median(I);
-dcQ = median(Q);
+%dcI = median(I);
+%dcQ = median(Q);
 
 Data = (I-dcI) + 1i*(Q-dcQ);
 
