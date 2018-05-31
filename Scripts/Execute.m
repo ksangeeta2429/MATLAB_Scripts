@@ -85,9 +85,9 @@ SetPath
 % data_human={'/Close zoom/Human'};
 
 %% Any test data, such as a single walk cut
-Index = [12345];
-data_dog = {'/FeatureTest/Human'};
-data_human = {'/FeatureTest/Cow'};
+Index = [2468];
+data_dog = {'NIL'};
+data_human = {'/FeatureTest/Human'};
 %% Execute.m
 featureClass = 0;
 
