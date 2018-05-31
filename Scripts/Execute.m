@@ -86,8 +86,8 @@ SetPath
 
 %% Any test data, such as a single walk cut
 Index = [12345];
-data_dog = {'/Test'};
-data_human = {'NIL'};
+data_dog = {'/FeatureTest/Human'};
+data_human = {'/FeatureTest/Cow'};
 %% Execute.m
 featureClass = 0;
 
