@@ -2,7 +2,7 @@
     sanityCheck converts the start and stop times in seconds/half seconds to timestamps starting from hrs:minute:second
     If start and stop times are equal then that times are discarded
  %}
-function sanityCheck(hrs, minute, second, beg_file,end_file,output_file)
+function sanityCheck(hrs, minute, second, beg_file,end_file,output_file,window)
 SetEnvironment;
 SetPath;
 
@@ -30,20 +30,42 @@ stop = [];
    fd = fopen(file_path_beginnings,'r');
    while(~feof(fd))
        line = fgets(fd);
-       line = str2num(line);
-       %disp(line);
+       %disp(string(line));
+       if line == -1
+        break;
+       else
+        line = str2num(line);
+        %disp(line);
        start = [start line];
+       end
    end
    fclose(fd);
    fd = fopen(file_path_ends,'r');
    while(~feof(fd))
        line = fgets(fd);
+       if line == -1
+        break;
+       else
        line = str2num(line);
        %disp(line);
        stop = [stop line];
+       end
    end
    fclose(fd);
-   
+  
+if(length(start) > 0 || length(stop) > 0)
+    
+    
+   if(window == 0.5)
+    start = start/2;
+    stop = stop/2;
+   elseif(window == 1.5)
+    start = start*3/(2);
+    stop = stop*3/(2);
+   elseif(window == 2)
+    start = start*2;
+    stop = stop*2;
+   end
 %disp(start);
 %disp(stop);
 
@@ -69,6 +91,9 @@ for i = 2:length(start)
 end
 
 [start_arr,stop_arr] = remove_zero_length(start_arr,stop_arr);
+
+
+
 %disp(start_arr)
 output_file_path = strcat(g_str_pathbase_data,strcat(output_file,'.csv'));
 fd = fopen(output_file_path,'w');
@@ -83,16 +108,23 @@ fclose(fd);
 %disp(start_arr);
 %disp(stop_arr);
 
+else
+    %no start and stop times found, output empty file and exit
+    output_file_path = strcat(g_str_pathbase_data,strcat(output_file,'.csv'));
+    fd = fopen(output_file_path,'w');
+    fprintf(fd,'Start Time,End Time\n');
+    fclose(fd);
+end %end of outer if block
 end
 
 function [start,stop] = remove_zero_length(start_arr,stop_arr)
-    indices = []
+    indices = [];
     for i = 1:length(start_arr)
         if(start_arr(i) == stop_arr(i))
             indices = [indices i];
         end
     end
-    start_arr(indices) = []
-    stop_arr(indices) = []
+    start_arr(indices) = [];
+    stop_arr(indices) = [];
     start = start_arr; stop = stop_arr;    
 end
