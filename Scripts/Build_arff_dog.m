@@ -54,13 +54,13 @@ f_set=[]; % f_set will eventually contain the complete list of feature vectors f
 %     end
 %     %sprintf('Human - %dth file is processing\n',i)
 %     fileName=Files{i};
-%     [~, f_file] = File2Feature(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,[]);
+%     [~, f_file, str_featnames] = File2Feature(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,[]);
 %     %     if ifScaled==0
-%     %         [imghuman, f_file] = File2Feature(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,[]);
+%     %         [imghuman, f_file, str_featnames] = File2Feature(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,[]);
 %     %         dlmwrite(strcat(path_images_human,'\',fileName,'.fft'),imghuman);
 %     %     else
 %     %         imghuman_path = strcat(path_images_human,'\',fileName,'.fft');
-%     %         [~, f_file] = File2Feature(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,imghuman_path);
+%     %         [~, f_file, str_featnames] = File2Feature(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,imghuman_path);
 %     %     end
 %     %     if length(f_file)==60
 %     f_set=[f_set;f_file];
@@ -87,13 +87,13 @@ for i=1:length(Files) % take every file from the set 'Files'
     end
     %sprintf('Dog - %dth file is processing\n',i)
     fileName=Files{i};
-    [~, f_file] = File2Feature(fileName, 'Dog', ifScaled, featureClass, feature_min, scalingFactors,[]);
+    [~, f_file, str_featnames] = File2Feature(fileName, 'Dog', ifScaled, featureClass, feature_min, scalingFactors,[]);
     %     if ifScaled==0
-    %         [imgdog, f_file] = File2Feature(fileName, 'Dog', ifScaled, featureClass, feature_min, scalingFactors,[]);
+    %         [imgdog, f_file, str_featnames] = File2Feature(fileName, 'Dog', ifScaled, featureClass, feature_min, scalingFactors,[]);
     %         dlmwrite(strcat(path_images_dog,'\',fileName,'.fft'),imgdog);
     %     else
     %         imgdog_path = strcat(path_images_dog,'\',fileName,'.fft');
-    %         [~, f_file] = File2Feature(fileName, 'Dog', ifScaled, featureClass, feature_min, scalingFactors,imgdog_path);
+    %         [~, f_file, str_featnames] = File2Feature(fileName, 'Dog', ifScaled, featureClass, feature_min, scalingFactors,imgdog_path);
     %     end
     %     if length(f_file)==60
     f_set=[f_set;f_file];
@@ -118,7 +118,7 @@ end
 % for i=1:length(Files) % take every file from the set 'Files'
 %     sprintf('%dth file is processing\n',i) % the i-th file is processing
 %     fileName=Files{i};
-%     f_file=File2Feature(fileName, 'Noise', ifScaled);
+%     [~, f_file, str_featnames] = File2Feature(fileName, 'Noise', ifScaled);
 %     f_set=[f_set;f_file];
 % end
 

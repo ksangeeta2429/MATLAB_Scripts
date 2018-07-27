@@ -2,7 +2,10 @@
 % output: feature matrix, each row is a frame
 
 
-function [Img, f_file] = File2Feature(fileName, classLabel, ifScaled, featureClass, feature_min, scalingFactors, fftimage)
+function [Img, f_file, str_featnames] = File2Feature(fileName, classLabel, ifScaled, featureClass, feature_min, scalingFactors, fftimage)
+
+str_featnames = {};
+c_comma = 'c';
 
 thr_sqr_matlab_log = 17;%14.14 17 %25->122, 30->385, 20->38.5(39), 14.14->10, 15->12, 10->3.85(4), 17->19.3 18->24.3 19->30.6 16->15.3
 %14.14->10, 14.14 is chosen in matlab, 10 in c#
@@ -152,6 +155,7 @@ if featureClass==1
             
             for quantile = [0.9 0.7 0.5 0.1]
                 f = [f SlidingPercentileVelocity(Data,VelWindow,VelOverlap,Rate, quantile)];
+                str_featnames{end+1} = [ 'SlidingPercentileVelocity_' num2str(VelWindow) c_comma num2str(VelOverlap) c_comma num2str(Rate) c_comma num2str(quantile) ];
             end
         end
     end
@@ -163,6 +167,7 @@ if featureClass==2
             VelOverlap = 1- step/VelWindow;
             for quantile = [0.9 0.7 0.5 0.1]
                 f = [f ApproxMax(Data,VelWindow,VelOverlap,Rate, quantile)];
+                str_featnames{end+1} = [ 'ApproxMax_' 'VelWindow' num2str(VelWindow) 'VelOverlap' num2str(VelOverlap) 'Rate' num2str(Rate) 'quantile' num2str(quantile) ];
             end
         end
     end
@@ -233,8 +238,9 @@ if featureClass == 0
     
     %         f = zeros(1,nFeature);
     f=[];
-    
-    f=[f,timeDomainFeatures(Data)]; %8
+    [ f_tdf, str_feat_tdf ] = timeDomainFeatures(Data);
+    f=[f, f_tdf]; %8
+    str_featnames = [ str_featnames str_feat_tdf ];
     
     %87 features - 8
 
@@ -250,6 +256,7 @@ if featureClass == 0
          %f = [f,SlidingPercentileVelocity(Data,50,40,Rate,quantile)];
          %f = [f,SlidingPercentileVelocity(Data,80,60,Rate,quantile)];
          f = [f,SlidingPercentileVelocity(Data,125,90,Rate,quantile)];
+         str_featnames = [ str_featnames [ 'SlidingPercentileVelocity(Data_VelWindow125_VelOverlap90_Rate' num2str(Rate) '_quantile' num2str(quantile) ')' ] ];
          %f = [f,SlidingPercentileVelocity(Data,250,190,Rate,quantile)];
         %f = [f,SlidingPercentileVelocity(Data,1,0.75,Rate,quantile)];
     end
@@ -263,6 +270,7 @@ if featureClass == 0
         %f = [f, ApproxMax(Data,0.5,0.5,Rate,quantile)];
        % f = [f, ApproxMax(Data,0.5,0.5,Rate,quantile)];
        f = [f, ApproxMax(Data,125,90,Rate,quantile)];
+       str_featnames = [ str_featnames ['ApproxMax(Data_VelWindow125_VelOverlap90_Rate' num2str(Rate) '_quantile' num2str(quantile) ')' ] ];
        %f = [f, ApproxMax(Data,50,40,Rate,quantile)];
        %f = [f, ApproxMax(Data,30,20,Rate,quantile)];
        %f = [f, ApproxMax(Data,80,60,Rate,quantile)];
@@ -273,6 +281,7 @@ if featureClass == 0
 
     %20
     f=[f,dist,time,distTimeProd,distTimeRatio];    % 4
+    str_featnames = [ str_featnames [ 'dist_' num2str(dist) ] [ 'time_' num2str(time) ] [ 'distTimeProd_' num2str(distTimeProd) ] [ 'distTimeRatio_' num2str(distTimeRatio) ] ];
     %disp(fileName);
     length(Data);
     %disp('FFT features...');
@@ -365,6 +374,17 @@ if featureClass == 0
         %widthLengthRatio2 = numHitBins_median/(time/64-4);
         widthLengthRatio2 = numHitBins_median/(time-4);
         f = [f,numHitBins_sum,numHitBins_max,moment_sum,numHitBins_median,numHitBins_var,maxFreq,freqWidth,widthLengthRatio1,widthLengthRatio2, totalPowerAboveThr]; % 10
+        str_featnames = [ str_featnames ...
+            [ 'thr_sqr_matlab_log' '_' num2str(thr_sqr_matlab_log) '__' 'numHitBins_sum' ] ...
+            [ 'thr_sqr_matlab_log' '_' num2str(thr_sqr_matlab_log) '__' 'numHitBins_max' ] ...
+            [ 'thr_sqr_matlab_log' '_' num2str(thr_sqr_matlab_log) '__' 'moment_sum' ] ...
+            [ 'thr_sqr_matlab_log' '_' num2str(thr_sqr_matlab_log) '__' 'numHitBins_median' ] ...
+            [ 'thr_sqr_matlab_log' '_' num2str(thr_sqr_matlab_log) '__' 'numHitBins_var' ] ...
+            [ 'thr_sqr_matlab_log' '_' num2str(thr_sqr_matlab_log) '__' 'maxFreq' ] ...
+            [ 'thr_sqr_matlab_log' '_' num2str(thr_sqr_matlab_log) '__' 'freqWidth' ] ...
+            [ 'thr_sqr_matlab_log' '_' num2str(thr_sqr_matlab_log) '__' 'widthLengthRatio1' ] ...
+            [ 'thr_sqr_matlab_log' '_' num2str(thr_sqr_matlab_log) '__' 'widthLengthRatio2' ] ...
+            [ 'thr_sqr_matlab_log' '_' num2str(thr_sqr_matlab_log) '__' 'totalPowerAboveThr' ] ];
         %f = [f,numHitBins_sum,numHitBins_max,numHitBins_median,numHitBins_var,moment_sum,maxFreq,freq_width_mean,freq_width_meadian,freq_width_var,freqWidth,widthLengthRatio1,widthLengthRatio2, totalPowerAboveThr,p1,p2,num_exc_bins_diff,num_exc_bins_ratio,num_exc_bins_ratio1]; % 18
     end
 
@@ -409,6 +429,7 @@ if featureClass == 0
 
     accRange = AccRange(Data,0.5,0.5,Rate,0.9);  % 0.5,0.8
     f=[f,accRange];
+    str_featnames = [ str_featnames 'accRange' ];
     %veloVar = VeloVarMinMax(Data,1,0.75, Rate, 0.1,0.9);   %0.5, 0.8
     %figure(); hold on
     %[veloVar,veloVar2] = VeloVarMinMax(Data,10,7,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
@@ -420,7 +441,8 @@ if featureClass == 0
     %f = [f,veloVar,veloVar2];
     %f = [f,veloVar];
     [veloVar,veloVar2] = VeloVarMinMax(Data,125,90,Rate,0.1,0.9);
-    f = [f,veloVar]; 
+    f = [f,veloVar];
+    str_featnames = [ str_featnames 'veloVar' ];
     %[veloVar,veloVar2] = VeloVarMinMax(Data,80,60,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
     %f = [f,veloVar];
     
@@ -435,6 +457,7 @@ if featureClass == 0
 
     %addpath('C:\Users\he\My Research\2014.10\Haar Features');
     f = [f, haar_feature(Data,5)];
+    str_featnames = [ str_featnames 'haar_l1' 'haar_l2' 'haar_l3' 'haar_l4' 'haar_l5' 'haar_a' ];
     %         f = [f, haar_feature(Data,5)-haar_feature(BkData,levels)];
 
     %87 features - 86
@@ -505,6 +528,7 @@ if ifScaled==1
 end
 
 f_file=[num2cell(f),classLabel]; %Return the list of features for that file and the classlabel (Human/Dog/Ball etc.) as the last feature.
+str_featnames = [ str_featnames 'classLabel' ];
 
 %     nStep = N/64
 %

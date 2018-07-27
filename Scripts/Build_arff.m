@@ -56,13 +56,13 @@ for i=1:length(Files) % take every file from the set 'Files'
     end
     %sprintf('Human - %dth file is processing\n',i)
     fileName=Files{i};
-    [~, f_file] = File2Feature(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,[]);
+    [~, f_file, str_featnames] = File2Feature(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,[]);
     %     if ifScaled==0
-    %         [imghuman, f_file] = File2Feature(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,[]);
+    %         [imghuman, f_file, str_featnames] = File2Feature(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,[]);
     %         dlmwrite(strcat(path_images_human,'\',fileName,'.fft'),imghuman);
     %     else
     %         imghuman_path = strcat(path_images_human,'\',fileName,'.fft');
-    %         [~, f_file] = File2Feature(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,imghuman_path);
+    %         [~, f_file, str_featnames] = File2Feature(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,imghuman_path);
     %     end
     %     if length(f_file)==60
     f_set=[f_set;f_file];
@@ -91,13 +91,13 @@ for i=1:length(Files) % take every file from the set 'Files'
     end
     %sprintf('Dog - %dth file is processing\n',i)
     fileName=Files{i};
-    [~, f_file] = File2Feature(fileName, 'Dog', ifScaled, featureClass, feature_min, scalingFactors,[]);
+    [~, f_file, str_featnames] = File2Feature(fileName, 'Dog', ifScaled, featureClass, feature_min, scalingFactors,[]);
     %     if ifScaled==0
-    %         [imgdog, f_file] = File2Feature(fileName, 'Dog', ifScaled, featureClass, feature_min, scalingFactors,[]);
+    %         [imgdog, f_file, str_featnames] = File2Feature(fileName, 'Dog', ifScaled, featureClass, feature_min, scalingFactors,[]);
     %         dlmwrite(strcat(path_images_dog,'\',fileName,'.fft'),imgdog);
     %     else
     %         imgdog_path = strcat(path_images_dog,'\',fileName,'.fft');
-    %         [~, f_file] = File2Feature(fileName, 'Dog', ifScaled, featureClass, feature_min, scalingFactors,imgdog_path);
+    %         [~, f_file, str_featnames] = File2Feature(fileName, 'Dog', ifScaled, featureClass, feature_min, scalingFactors,imgdog_path);
     %     end
     %     if length(f_file)==60
     f_set=[f_set;f_file];
@@ -122,7 +122,7 @@ end
 % for i=1:length(Files) % take every file from the set 'Files'
 %     sprintf('%dth file is processing\n',i) % the i-th file is processing
 %     fileName=Files{i};
-%     f_file=File2Feature(fileName, 'Noise', ifScaled);
+%     [~, f_file, str_featnames] = File2Feature(fileName, 'Noise', ifScaled);
 %     f_set=[f_set;f_file];
 % end
 
@@ -157,7 +157,7 @@ for i=1:nColumn
 end
 
 ifReg=0;
-instances=matlab2weka(sprintf('radar%d',OutIndex),featureNames,f_set,nColumn,ifReg);
+instances=matlab2weka(sprintf('radar%d',OutIndex),str_featnames,f_set,nColumn,ifReg);
 
 %% Commented by Dhrubo - f_set_nr and f_set_r not needed
 % nColumn=size(f_set_nr,2);
