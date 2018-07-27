@@ -19,6 +19,7 @@
 str_pathbase_radar_jin  = 'C:/Users/he/Documents/Dropbox/MyMatlabWork/radar';
 str_pathbase_radar_mike = 'C:/Users/researcher/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
 str_pathbase_radar_mcgrathm_mac = '/Users/mcgrathm/SDK/classifier/toDhruboMichael';
+str_pathbase_radar_mcgrathm_z = '/media/mcgrathm/userdata/simdata';
 str_pathbase_radar_dhrubo = '/media/Roy.174/6b93b438-a3d4-40d2-9f3d-d8cdbb850183/Research/Robust_Learning';
 str_pathbase_radar_Roy = 'C:/Users/Roy/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
 str_pathbase_radar_Balderdash = '/Users/Balderdash/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
@@ -29,6 +30,7 @@ str_pathbase_radar_dhrubo_Ubuntu = '/home/roy174/Robust_Learning';
 str_pathbase_data_jin = 'C:/Users/he/My Research/2015.1/test';
 str_pathbase_data_mike = 'C:/Users/researcher/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/data';
 str_pathbase_data_mcgrathm_mac = '/Users/mcgrathm/SDK/classifier/toDhruboMichael/data';
+str_pathbase_data_mcgrathm_z = '/media/mcgrathm/userdata/simdata/data';
 %str_pathbase_data_dhrubo = 'C:/Users/roy.174/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/data';
 str_pathbase_data_dhrubo = '/media/Roy.174/6b93b438-a3d4-40d2-9f3d-d8cdbb850183/Research/Robust_Learning/Data_Repository';
 str_pathbase_data_Roy = 'C:/Users/Roy/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/data';
@@ -39,6 +41,7 @@ str_pathbase_data_dhrubo_Ubuntu = '/home/roy174/Robust_Learning/Data';
 
 str_pathbase_model_mike = 'C:/Users/researcher/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/researcher';
 str_pathbase_model_mcgrathm_mac = '/Users/mcgrathm/SDK/classifier/toDhruboMichael/model';
+str_pathbase_model_mcgrathm_z = '/media/mcgrathm/userdata/simdata/models';
 str_pathbase_model_dhrubo = '/media/Roy.174/6b93b438-a3d4-40d2-9f3d-d8cdbb850183/Research/Robust_Learning/Models';
 str_pathbase_model_Roy = 'C:/Users/Roy/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Roy';
 str_pathbase_model_Balderdash = '/Users/Balderdash/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Balderdash';
@@ -59,6 +62,10 @@ elseif strcmp(getenv('USER'),'mcgrathm')==1 && ismac() == 1
     g_str_pathbase_radar = str_pathbase_radar_mcgrathm_mac;
     g_str_pathbase_data  = str_pathbase_data_mcgrathm_mac;
     g_str_pathbase_model = str_pathbase_model_mcgrathm_mac;
+elseif strcmpi(getenv('USER'),'mcgrathm') == 1 && isunix() == 1
+    g_str_pathbase_radar = str_pathbase_radar_mcgrathm_z;
+    g_str_pathbase_data  = str_pathbase_data_mcgrathm_z;
+    g_str_pathbase_model = str_pathbase_model_mcgrathm_z;
 elseif strcmpi(getenv('USER'),'roy.174'      )==1
     g_str_pathbase_radar = str_pathbase_radar_dhrubo;
     g_str_pathbase_data  = str_pathbase_data_dhrubo;
@@ -93,6 +100,6 @@ end
 g_env_is_set = true;
 
 % cleanup
-clear str_pathbase_radar_jin str_pathbase_radar_mike str_pathbase_radar_mcgrathm_mac str_pathbase_radar_dhrubo str_pathbase_radar_Roy str_pathbase_radar_Balderdash str_pathbase_radar_OSC str_pathbase_radar_Neel str_pathbase_radar_dhrubo_Ubuntu
-clear str_pathbase_data_jin str_pathbase_data_mike str_pathbase_data_mcgrathm_mac str_pathbase_data_dhrubo str_pathbase_data_Roy str_pathbase_data_Balderdash str_pathbase_data_OSC str_pathbase_data_Neel str_pathbase_data_dhrubo_Ubuntu
-clear str_pathbase_model_mike str_pathbase_model_mcgrathm_mac str_pathbase_model_dhrubo str_pathbase_model_Roy str_pathbase_model_Balderdash str_pathbase_model_OSC str_pathbase_model_Neel str_pathbase_model_dhrubo_Ubuntu
+clear str_pathbase_radar_jin str_pathbase_radar_mike str_pathbase_radar_mcgrathm_mac str_pathbase_radar_mcgrathm_z str_pathbase_radar_dhrubo str_pathbase_radar_Roy str_pathbase_radar_Balderdash str_pathbase_radar_OSC str_pathbase_radar_Neel str_pathbase_radar_dhrubo_Ubuntu
+clear str_pathbase_data_jin str_pathbase_data_mike str_pathbase_data_mcgrathm_mac str_pathbase_data_mcgrathm_z str_pathbase_data_dhrubo str_pathbase_data_Roy str_pathbase_data_Balderdash str_pathbase_data_OSC str_pathbase_data_Neel str_pathbase_data_dhrubo_Ubuntu
+clear str_pathbase_model_mike str_pathbase_model_mcgrathm_mac str_pathbase_model_mcgrathm_z str_pathbase_model_dhrubo str_pathbase_model_Roy str_pathbase_model_Balderdash str_pathbase_model_OSC str_pathbase_model_Neel str_pathbase_model_dhrubo_Ubuntu
