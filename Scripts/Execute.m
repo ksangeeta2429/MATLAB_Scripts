@@ -106,7 +106,7 @@ SetPath
 %% Simulation - Human
 Index = 20180505;
 data_dog = {'NIL'};
-data_human = {'/Simulation/20180505/walking/data/'};
+data_human = {'/Simulation/20180505/walking/cut/'};
 
 
 %% Any test data, such as a single walk cut
