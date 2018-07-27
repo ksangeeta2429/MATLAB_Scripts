@@ -33,7 +33,7 @@ if exist(dir_out,'dir') ~= 7
 end
 
 if nargin < 4 || exist('cutLength','var') ~= 1 || isempty(cutLength)
-    cutLength = 64;
+    cutLength = 250;
 end
 
 if nargin < 5 || exist('offset','var') ~= 1 || isempty(offset)
@@ -48,10 +48,10 @@ if length(I) < cutLength
     warning( [ 'Not enough samples in bbs file ' fname_bbs ] );
 end
 
-idx_offset = offset+1; % MATLAB indexing starts at 1
+idx_offset = 0 + offset; 
 
 idx_cutpoints = idx_offset:cutLength:length(I);
-start = idx_cutpoints(1:(end-1));
+start = idx_cutpoints(1:(end-1)) + 1; % MATLAB indexing starts at 1
 stop = idx_cutpoints(2:end);
 
 if (length(stop)==length(start)-1) 
