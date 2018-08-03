@@ -24,11 +24,23 @@ if strcmp(getenv('PBS_O_LOGNAME'),'osu8577')==1
     % javaaddpath('/nfs/16/osu8577/LibSVM.jar','-end');
     % javaaddpath('/nfs/16/osu8577/InfoTheoreticRanking_1.7.jar','-end');
 elseif strcmp(getenv('USER'),'mcgrathm') == 1
+    if ismac() == 1
         git_path = '/Users/mcgrathm/SDK/dhruboroy29';
         addpath(genpath([ git_path '/MATLAB_Scripts/' ]));
         rmpath(genpath([ git_path '/MATLAB_Scripts/Library/Data Collection/MatLab Scripts/Radar/Jin' ]));
         rmpath(genpath([ git_path '/MATLAB_Scripts/STC/' ]));
         rmpath(genpath([ git_path '/MATLAB_Scripts/Deconv-Matlab/' ]));
+    elseif isunix() == 1
+        git_path = '/home/mcgrathm/sdk/dhruboroy29';
+        addpath(genpath([ git_path '/MATLAB_Scripts/' ]));
+        rmpath(genpath([ git_path '/MATLAB_Scripts/Library/Data Collection/MatLab Scripts/Radar/Jin' ]));
+        rmpath(genpath([ git_path '/MATLAB_Scripts/STC/' ]));
+        rmpath(genpath([ git_path '/MATLAB_Scripts/Deconv-Matlab/' ]));
+    else
+        error('not sure about environment.');
+    end
+else
+    error('please add your environment info to the SetPath script');
 end
 
 g_path_is_set = 1;
