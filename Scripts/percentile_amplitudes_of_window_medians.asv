@@ -1,0 +1,10 @@
+function [percentile] = percentile_amplitudes_of_window_medians(fileName,sampRate,percentile,windowSize)
+data = ReadBin([fileName]);
+[I,Q,N]=Data2IQ(data);
+Comp = (I-median(I)) + 1i*(Q-median(Q));
+global_median = median(abs(Comp))
+window_medians = [];
+step = sampRate*windowSize;
+for i = 1:step:length(Comp)-step
+    
+end

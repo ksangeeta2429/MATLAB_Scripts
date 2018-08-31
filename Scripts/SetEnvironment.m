@@ -22,7 +22,12 @@ str_pathbase_radar_dhrubo = '/media/Roy.174/6b93b438-a3d4-40d2-9f3d-d8cdbb850183
 str_pathbase_radar_Roy = 'C:/Users/Roy/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
 str_pathbase_radar_Balderdash = '/Users/Balderdash/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
 str_pathbase_radar_OSC = '/users/PAS1090/osu8577/RobustEnv';
-str_pathbase_radar_Neel = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
+
+if(ispc == 1)
+    str_pathbase_radar_Neel = 'C:/Users/neel/Downloads/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
+else
+    str_pathbase_radar_Neel = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
+end
 str_pathbase_radar_dhrubo_Ubuntu = '/home/roy174/Robust_Learning';
 
 str_pathbase_data_jin = 'C:/Users/he/My Research/2015.1/test';
@@ -32,7 +37,11 @@ str_pathbase_data_dhrubo = '/media/Roy.174/6b93b438-a3d4-40d2-9f3d-d8cdbb850183/
 str_pathbase_data_Roy = 'C:/Users/Roy/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/data';
 str_pathbase_data_Balderdash = '/Users/Balderdash/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/data';
 str_pathbase_data_OSC = '';
-str_pathbase_data_Neel = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository';
+if(ispc == 1)
+    str_pathbase_data_Neel = 'C:/Users/neel/Downloads/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository';
+else
+    str_pathbase_data_Neel = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository';
+end
 str_pathbase_data_dhrubo_Ubuntu = '/home/roy174/Robust_Learning/Data';
 
 str_pathbase_model_mike = 'C:/Users/researcher/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/researcher';
@@ -40,7 +49,11 @@ str_pathbase_model_dhrubo = '/media/Roy.174/6b93b438-a3d4-40d2-9f3d-d8cdbb850183
 str_pathbase_model_Roy = 'C:/Users/Roy/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Roy';
 str_pathbase_model_Balderdash = '/Users/Balderdash/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Balderdash';
 str_pathbase_model_OSC = '/users/PAS1090/osu8577/RobustEnv/Models/osu8577';
-str_pathbase_model_Neel = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Neel';
+if(ispc == 1)
+    str_pathbase_model_Neel = 'C:/Users/neel/Downloads/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Neel';
+else
+    str_pathbase_model_Neel = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Neel';
+end
 str_pathbase_model_dhrubo_Ubuntu = '/home/roy174/Robust_Learning/Models';
 
 %% assign path roots to global variables.
@@ -73,7 +86,7 @@ elseif strcmp(getenv('PBS_O_LOGNAME'),'osu8577')==1 % Alternatively: elseif strc
     g_str_pathbase_radar = str_pathbase_radar_OSC;
     g_str_pathbase_data  = str_pathbase_data_OSC;
     g_str_pathbase_model = str_pathbase_model_OSC;
-elseif strcmp(getenv('USER'),'neel')==1
+elseif strcmp(getenv('USERNAME'),'neel')==1
     g_str_pathbase_radar = str_pathbase_radar_Neel;
     g_str_pathbase_data  = str_pathbase_data_Neel;
     g_str_pathbase_model = str_pathbase_model_Neel;

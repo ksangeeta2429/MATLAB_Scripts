@@ -1,7 +1,7 @@
 % plot data, spectrogram, histogram, features
 % display the data I Q in C# format
 
-function Visualize(fileName,FftWindow)
+function Visualize(fileName,sampRate,FftWindow)
 
 close all;
 % figure;
@@ -17,19 +17,23 @@ SetPath
 
 %cd(path_data);
 
-path_amp = 'amplitude/';
+fft_num = num2str(FftWindow);
+%path_amp = strcat(string(FftWindow),'_fft/amplitude/');
+path_amp = strcat(fft_num,'_fft/amplitude/');
 if exist(path_amp, 'dir') ~= 7
     mkdir(path_amp);
     fprintf('INFO: created directory %s\n', path_amp);
 end
 
-path_phase = 'phase/';
+%path_phase = strcat(string(FftWindow),'_fft/phase/');
+path_phase = strcat(fft_num,'_fft/phase/');
 if exist(path_phase, 'dir') ~= 7
     mkdir(path_phase);
     fprintf('INFO: created directory %s\n', path_phase);
 end
 
-path_spec = 'spectrogram/';
+%path_spec = strcat(string(FftWindow),'_fft/spectrogram/');
+path_spec = strcat(fft_num,'_fft/spectrogram/');
 if exist(path_spec, 'dir') ~= 7
     mkdir(path_spec);
     fprintf('INFO: created directory %s\n', path_spec);
@@ -37,17 +41,17 @@ end
 
 %% COMPUTE:
 %sampRate = 256;
-sampRate = 250; %for new data -> Neel
+%sampRate = 250; %for new data -> Neel
 %step=64;
 frameSeconds=60;
 
 %added by neel
-bandwidth = round(sampRate/2)
+bandwidth = round(sampRate/2);
 %FftWindow = 2^nextpow2(round(sampRate/4)) %take as argument to Visualize
 %function
-NFFT = 2^nextpow2(FftWindow)
+NFFT = 2^nextpow2(FftWindow);
 %NFFT = 500;
-FftStep = round(1/8*FftWindow)
+FftStep = round(1/8*FftWindow);
 step = FftStep;
 
 ifBackground=1;  % 1 to save background hist,0 not

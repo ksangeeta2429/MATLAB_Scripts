@@ -5,8 +5,9 @@
 % For access to this repository, contact Dhrubojyoti Roy (royd@cse.osu.edu)
 % Optional arguments: min_length_secs: (minimum allowed walk length, in seconds
 %                     cutoff_halfsecs: Cutoff time instant (in half seconds) beyond which walks should no longer be considered
-
-function nCuttedFiles=CutFile_Manual_RadarAlgorithmGraph(fileName, walk_beg_file, walk_end_file, min_length_secs, cutoff_halfsecs)
+% need to change parameter in line 63 and 64 if you are not using 250 Hz
+% sampling rate and if input is not in one second units->neel
+function nCuttedFiles=CutFile_Manual_RadarAlgorithmGraph(fileName, walk_beg_file, walk_end_file, min_length_secs, cutoff_halfsecs,date)
 
 % Defaults
 if nargin == 3
@@ -39,7 +40,7 @@ fileNameOnly = filePath_tmp(pathIndex(end)+1:fileExtIndex-1);
 
 %Create cut folder if it doesn't exist already
 %cut_folder = [filePath,'/cut'];
-cut_folder = [filePath,'cut/c2/r3/']; %disp(cut_folder);
+cut_folder = [filePath,'cut/']; %disp(cut_folder);
 if exist(cut_folder, 'dir') ~= 7
     mkdir(cut_folder);
     fprintf('INFO: created directory %s\n', cut_folder);
@@ -60,8 +61,8 @@ walk_ends = round(walk_ends,1);
 %walk_lengths = (walk_ends - walk_begs)/2; % since unit is half-seconds
 walk_lengths = (walk_ends - walk_begs); % if unit is in seconds
 %disp(walk_lengths);
-start = walk_begs(walk_lengths > min_length_secs & walk_begs < cutoff_halfsecs)*250; %use 125 if unit is half sec
-stop = walk_ends(walk_lengths > min_length_secs & walk_ends < cutoff_halfsecs)*250;
+start = walk_begs(walk_lengths > min_length_secs & walk_begs < cutoff_halfsecs)*256; %use 125 if unit is half sec
+stop = walk_ends(walk_lengths > min_length_secs & walk_ends < cutoff_halfsecs)*256;
 
 k=0;
 for j=1:length(start)
@@ -71,7 +72,7 @@ for j=1:length(start)
     Data_cut = zeros(1,2*(floor(stop(j)-start(j))+1));
     Data_cut(1:2:length(Data_cut)-1) = I_cut;
     Data_cut(2:2:length(Data_cut)) = Q_cut;
-    WriteBin([cut_folder,fileNameOnly,'_cut',num2str(j),'.data'],Data_cut);
+    WriteBin([cut_folder,fileNameOnly,'_',date,'_cut',num2str(j),'.data'],Data_cut);
     %WriteBin(['/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository/Bike data/Aug 9 2017/Detect_begs_and_ends/param0.9/cut/bikes humans radar z/',fileName,'_cut',num2str(j),'.data'],Data_cut);
 
 end

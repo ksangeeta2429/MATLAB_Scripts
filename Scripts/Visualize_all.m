@@ -1,5 +1,5 @@
 % clear all;
-function Visualize_all(path_data,FftWindow)
+function Visualize_all(path_data,sampRate,FftWindow)
 clc;close all
 
 SetEnvironment
@@ -29,6 +29,6 @@ for i=1:length(Files) % take every file from the set 'Files'
     sprintf('%dth file is processing: %s\n',i,char(Files{i})) % the i-th file is processing
     fileName=Files{i};
     
-    Visualize(fileName,FftWindow);
+    Visualize(fileName,sampRate,FftWindow);
 %     pause;
 end

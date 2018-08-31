@@ -73,7 +73,6 @@ thr_sqr_Csharp = thr_sqr_matlab/(256^2);
 %
 %%
 
-
 %%%%%%%%%%%%%%%%%%%%%%%% DC Tracking %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % nBuffer = floor(N/128);
 % nLeft = N-nBuffer*128;
@@ -91,26 +90,38 @@ thr_sqr_Csharp = thr_sqr_matlab/(256^2);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Data = (I-mean(I)) + 1i*(Q-mean(Q));
 
-%dcI = 2044;   % enable when do test on dummy data
-%dcQ = 2048;
+%dcI = 1960;%2044;   % enable when do test on dummy data
+%dcQ = 1960;%2048;
 
 dcI = median(I);
 dcQ = median(Q);
 
 Data = (I-dcI) + 1i*(Q-dcQ);
-
-
-
+Data(1:50);
+%disp(fileName);
+Rate = 256;
+if(rem(length(Data),256) == 0 | rem(length(Data),128) == 0 | rem(length(Data),64) == 0 | rem(length(Data)-2,256) == 0 | rem(length(Data)-2,128) == 0 | rem(length(Data)-2,64) == 0)
+	%fprintf('Rate is 256 : %d\n',length(Data));
+	Rate = 256;
+elseif(rem(length(Data),250) == 0 | rem(length(Data),125) == 0 | rem(length(Data)-1,250) == 0 | rem(length(Data)-1,125) == 0)
+	%fprintf('\nRate is 250 : %d\n\n',length(Data));
+	Rate = 250;
+else
+	fprintf('Rate is not 256 or 250: %d Terminating script\n',length(Data));
+	return;
+end
+Rate;
 %Rate = 256; % for old data
-Rate = 250;
+%Rate = 250;
 %FftWindow = Rate;
 %FftStep = round(1/4*FftWindow);
-FftWindow = 2^nextpow2(Rate/8); %added by neel
-FftStep = round(1/8*FftWindow);
+FftWindow = 2^nextpow2(Rate); %added by neel
+FftStep = round(1/4*FftWindow);
 %NFFT = FftWindow;
-NFFT = 2^nextpow2(FftWindow); %added by neel
-%Freq = FftFreq(FftWindow, Rate);
-Freq = FftFreq(NFFT, Rate);
+NFFT = FftWindow; %added by neel
+Freq = FftFreq(FftWindow, Rate);
+%Freq = FftFreq(NFFT, Rate);
+fshift = (-NFFT/2:NFFT/2-1)*Rate/NFFT;
 medianBack=[];
 stdBack=[];
 
@@ -222,55 +233,98 @@ if featureClass == 0
     
     f=[f,timeDomainFeatures(Data)]; %8
     
+    %87 features - 8
+
     
     %         for quantile = [1 0.7 0.5]%0.05:0.05:0.95    %0.9
-    for quantile = [0.98 0.96 0.95 0.9 0.7 0.5] 
+    for quantile = [0.9 0.7 0.5]
+    %for quantile = [0.98 0.96 0.95 0.9 0.7 0.5] 
     %for quantile = [0.99 0.98 0.97 0.96 0.95 0.9 0.8 0.7 0.6 0.5]                   %3
         %f = [f,SlidingPercentileVelocity(Data,0.25,0,Rate,quantile)];
         %f = [f,SlidingPercentileVelocity(Data,0.5,0.5,Rate,quantile)];
          %f = [f,SlidingPercentileVelocity(Data,10,7,Rate,quantile)]; %using number of samples instead of window length for finer level velocities - > neel
-         f = [f,SlidingPercentileVelocity(Data,30,20,Rate,quantile)];
-         f = [f,SlidingPercentileVelocity(Data,50,40,Rate,quantile)];
+         %f = [f,SlidingPercentileVelocity(Data,30,20,Rate,quantile)];
+         %f = [f,SlidingPercentileVelocity(Data,50,40,Rate,quantile)];
          %f = [f,SlidingPercentileVelocity(Data,80,60,Rate,quantile)];
          f = [f,SlidingPercentileVelocity(Data,125,90,Rate,quantile)];
          %f = [f,SlidingPercentileVelocity(Data,250,190,Rate,quantile)];
         %f = [f,SlidingPercentileVelocity(Data,1,0.75,Rate,quantile)];
     end
-    
-    for quantile = [0.98 0.96 0.95 0.9 0.7 0.5]
+
+    %87 features - 11
+
+    for quantile = [0.9 0.7 0.5]
+    %for quantile = [0.98 0.96 0.95 0.9 0.7 0.5]
     %for quantile = [0.99 0.98 0.97 0.96 0.95 0.9 0.8 0.7 0.6 0.5]%0.05:0.05:0.95   %19   %3
         %f = [f, ApproxMax(Data,0.25,0,Rate,quantile)];
         %f = [f, ApproxMax(Data,0.5,0.5,Rate,quantile)];
        % f = [f, ApproxMax(Data,0.5,0.5,Rate,quantile)];
        f = [f, ApproxMax(Data,125,90,Rate,quantile)];
-       f = [f, ApproxMax(Data,50,40,Rate,quantile)];
-       f = [f, ApproxMax(Data,30,20,Rate,quantile)];
+       %f = [f, ApproxMax(Data,50,40,Rate,quantile)];
+       %f = [f, ApproxMax(Data,30,20,Rate,quantile)];
        %f = [f, ApproxMax(Data,80,60,Rate,quantile)];
        %f = [f, ApproxMax(Data,250,190,Rate,quantile)];
     end
+
+    %87 features - 14
+
     %20
     f=[f,dist,time,distTimeProd,distTimeRatio];    % 4
     %disp(fileName);
     length(Data);
     %disp('FFT features...');
     %24
-    %for thr_sqr_matlab_log = [14.144,17,18.915,20,24.144,25] % Dhrubo added 18.915 and 24.144 corresponding to thr_sqr_Csharp=30 and 100 respectively
-    %for thr_sqr_csharp = [5,10,15,20,30,40,60,80,90,100,120,140,150,160,180,200]
-    for thr_sqr_csharp = [5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,110,120,130,140,150,160,170,180,190,200]
-        thr_sqr_matlab = thr_sqr_csharp * FftWindow^2;
+    %for thr_sqr_matlab_log = [5] 
+    for thr_sqr_matlab_log = [14.144,17,18.915,20,24.144,25] % Dhrubo added 18.915 and 24.144 corresponding to thr_sqr_Csharp=30 and 100 respectively
+    %for thr_sqr_csharp = [140]
+    %for thr_sqr_csharp = [5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,110,120,130,140,150,160,170,180,190,200]
+        %thr_sqr_matlab = thr_sqr_csharp * FftWindow^2;
+        %thr_sqr_matlab = 10*log10(thr_sqr_matlab);
     
     freq_height = [];
      % for thr_sqr_matlab_log = 25 % 18.9154624932669 % TEST ONLY. TODO: Delete line
-        %thr_sqr_matlab = 10^(thr_sqr_matlab_log/10)*25238;
+        thr_sqr_matlab = 10^(thr_sqr_matlab_log/10)*25238;
         %         for thr_sqr_Csharp =[30 100];%[9.9994,19.301,38.51,121.78]
         %             thr_sqr_matlab = thr_sqr_Csharp * 256^2;
         %         for thr_sqr_Csharp = [9.9994,19.301,38.51,121.78]
         %             thr_sqr_matlab = thr_sqr_Csharp * 256^2;
         
         totalPowerAboveThr = TotalPowerAboveThr(Data, FftWindow, FftStep, Rate, NFFT, thr_sqr_matlab,medianBack,stdBack);
-        Img = AnomImage(Data, FftWindow, FftStep, Rate, NFFT, thr_sqr_matlab,medianBack,stdBack);
-       
+        Img = AnomImage(Data, FftWindow, FftStep, Rate, NFFT, thr_sqr_matlab,medianBack,stdBack);    
+        Img_shift = AnomImage_shift(Data, FftWindow, FftStep, Rate, NFFT, thr_sqr_matlab,medianBack,stdBack);    
+
+        Img_t = Img_shift';
+        temp = zeros(size(Img_t,1),size(Img_t,2));
+        size(temp);
         
+        for i = 1:size(Img_t,2)
+            Index = find(Img_t(:,i));
+            for j = Index
+                temp(j,i) = fshift(j);
+            end
+        end
+        %temp = flip(temp);
+        %flip(temp(:,1:8));
+        Image = Img_t;
+        %Image(:,5:17)
+        %spy(sparse(temp));
+        %fshift = flip(fshift);
+        %{    
+        Img_t = Img';
+        f = '/home/neel/Img.txt';
+        fd = fopen(f,'a');
+        fprintf(fd,'\n\n');
+        for i = 1:size(Img_t,1)
+            for j = 1:size(Img_t,2)
+                fprintf(fd,'%d ',Img_t(i,j));
+            end
+            fprintf(fd,'\n');
+        end
+        %}
+        
+        %[time_per_half_cycle,height,rate] = oscillation_rate(Image,FftStep,Rate,fshift,4,7,1);
+        %disp(thr_sqr_csharp);
+        %f = [f,time_per_half_cycle,height,rate];
         %gradient features -> added by Neel
         
         %TimeFreq = spectrogram_nohamming(Data, FftWindow, FftWindow - FftStep, FftWindow, Rate);
@@ -304,12 +358,15 @@ if featureClass == 0
         %freq_height = [freq_height,freqHeight];
         %}
         %widthLengthRatio1 = numHitBins_max/(time/64-8);
-        widthLengthRatio1 = numHitBins_max/(time-8);
+        widthLengthRatio1 = numHitBins_max/(time-4);
         %widthLengthRatio2 = numHitBins_median/(time/64-4);
         widthLengthRatio2 = numHitBins_median/(time-4);
         f = [f,numHitBins_sum,numHitBins_max,moment_sum,numHitBins_median,numHitBins_var,maxFreq,freqWidth,widthLengthRatio1,widthLengthRatio2, totalPowerAboveThr]; % 10
         %f = [f,numHitBins_sum,numHitBins_max,numHitBins_median,numHitBins_var,moment_sum,maxFreq,freq_width_mean,freq_width_meadian,freq_width_var,freqWidth,widthLengthRatio1,widthLengthRatio2, totalPowerAboveThr,p1,p2,num_exc_bins_diff,num_exc_bins_ratio,num_exc_bins_ratio1]; % 18
     end
+
+    %87 features - 78
+
     %{
     %564
     thr = [0.1,0.3,0.5,0.7]; % for gradient feature
@@ -346,17 +403,19 @@ if featureClass == 0
     f = [f psd]; %300
     %1290
     %}
+
     accRange = AccRange(Data,0.5,0.5,Rate,0.9);  % 0.5,0.8
+    f=[f,accRange];
     %veloVar = VeloVarMinMax(Data,1,0.75, Rate, 0.1,0.9);   %0.5, 0.8
     %figure(); hold on
     %[veloVar,veloVar2] = VeloVarMinMax(Data,10,7,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
     %f = [f,veloVar,veloVar2];
-    [veloVar,veloVar2] = VeloVarMinMax(Data,30,20,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
+    %[veloVar,veloVar2] = VeloVarMinMax(Data,30,20,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
     %f = [f,veloVar,veloVar2];
-    f = [f,veloVar];
-    [veloVar,veloVar2] = VeloVarMinMax(Data,50,40,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
+    %f = [f,veloVar];
+    %[veloVar,veloVar2] = VeloVarMinMax(Data,50,40,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
     %f = [f,veloVar,veloVar2];
-    f = [f,veloVar];
+    %f = [f,veloVar];
     [veloVar,veloVar2] = VeloVarMinMax(Data,125,90,Rate,0.1,0.9);
     f = [f,veloVar]; 
     %[veloVar,veloVar2] = VeloVarMinMax(Data,80,60,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
@@ -366,12 +425,22 @@ if featureClass == 0
     %f = [f,veloVar,veloVar2];
     %hold off
     
-    f=[f,accRange];
+    
     %f=[f,veloVar];
+
+    %87 features - 80
+
     %addpath('C:\Users\he\My Research\2014.10\Haar Features');
     f = [f, haar_feature(Data,5)];
     %         f = [f, haar_feature(Data,5)-haar_feature(BkData,levels)];
-    
+
+    %87 features - 86
+
+
+    %let last feature be count label
+	%count_label = ExtractNumFromFileName(fileName);
+	%f = [f,count_label];
+	%f = [f,1];
 end
 
 %fprintf('Size of feature vector : %d\n',length(f));
@@ -447,8 +516,3 @@ f_file=[num2cell(f),classLabel]; %Return the list of features for that file and 
 %     GenerateArrInCsharp(I)
 %     pause;
 %     GenerateArrInCsharp(Q)
-
-
-
-
-

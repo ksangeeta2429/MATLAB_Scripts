@@ -79,6 +79,9 @@ temp = start_time + seconds(stop(1));
 stop_arr = [temp];
 for i = 2:length(start)
     t = start(i);
+    if(i > length(stop))
+        continue;
+    end
     t1 = stop(i);
     half = (t1 - t); %disp(half);
     temp = start_time + seconds(t);

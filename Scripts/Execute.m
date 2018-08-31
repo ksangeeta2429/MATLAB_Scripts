@@ -73,7 +73,7 @@ SetPath
 %% 2014.08 Bike data
  Index = [201408];
  %data_dog = {'/Bike data/Oct 21 2017/cut/c1/r1/bikes_after_manual_checking'};
- data_dog = {'/Bike data/Oct 21 2017/bikes_first_window_start/'};
+ data_dog = {'/Bike data/Least False Positives/Bikes/'};
  %data_dog = {'NIL'};
  %data_dog = {'/IPSNdata/5-15-2011/Human'};
  %data_human = {'NIL'};
@@ -84,7 +84,7 @@ SetPath
  %data_human = {'NIL'}
  %data_human = {'/Human_845/'};
  %data_human = {'/Bike data/Oct 21 2017/cut/c1/r3/humans_after_manual_checking'};
- data_human = {'/Bike data/Oct 21 2017/humans_first_window_start/'};
+ data_human = {'/Bike data/Least False Positives/Humans/'};
  %data_human = {'/raw/NearForest/combined/'};
  %data_human = {'/Bike data/Oct 21 2017/cut_manual/all_humans/test2/'};
  %data_dog = {'/Bike data/Aug 9 2017/Detect_begs_and_ends/param0.9/cut/humans only radar y'};
