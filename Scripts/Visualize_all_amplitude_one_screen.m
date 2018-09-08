@@ -26,7 +26,7 @@ end
 
 %calculate m and n for grid in figure
 p = ceil(power(length(Files),0.5));
-p = 8
+%p = 8
 n = p; m = p;
 x = 0:400:3000;
 figure('units','normalized','outerposition',[0 0 1 1])

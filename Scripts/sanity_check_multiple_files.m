@@ -16,8 +16,8 @@ w = [1]; %windows
 
 %start_hrs = 16; start_minutes = 51; start_seconds = 20; %start time of the radar for one particular raw file
 start_hrs = 0; start_minutes = 0; start_seconds = 0;
-date = 'July 18 2018';
-parent_path = strcat('/Bike data/',date,'/Detect_begs_and_ends/c1/'); %the prefix to this path is set using setEnvironment and setPath in sanityCheck.m
+date = 'Aug 31 2018';
+parent_path = strcat('/Bike data/',date,'/Detect_begs_and_ends/c2/'); %the prefix to this path is set using setEnvironment and setPath in sanityCheck.m
 
 radar = 'aus'; r = strcat(radar,'');
 

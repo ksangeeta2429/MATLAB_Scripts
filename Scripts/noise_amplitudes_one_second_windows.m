@@ -4,8 +4,9 @@ data = ReadBin([fileName]);
 Comp = (I-median(I)) + 1i*(Q-median(Q));
 global_median = median(abs(Comp))
 window_medians = [];
-for i = 1:sampRate:length(Comp)-sampRate
-    one_window_signal = Comp(i:i+sampRate-1);
+step = sampRate/2;
+for i = 1:step:length(Comp)-step
+    one_window_signal = Comp(i:i+step-1);
     window_medians = [window_medians median(abs(one_window_signal))];
 end
 result = prctile(window_medians,percentile)
