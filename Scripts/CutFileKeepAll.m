@@ -5,7 +5,7 @@ function [ nCuttedFiles, start, stop ] = CutFileKeepAll( fileName, filePath, dir
 % Input:
 % fileName - bbs file name
 % filePath - bbs file path
-% cutLength - length of cut. probably should be multiple of 64 (default).
+% cutLength - length of cut. probably should be multiple of 250 (default).
 % offset - offset in the file to start cutting
 %
 % Output:
