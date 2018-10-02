@@ -49,7 +49,7 @@ for j=1:length(fileFullNames)
 end
 for i=1:length(Files) % take every file from the set 'Files'
     if mod(i,10)==0
-        sprintf('Human - %dth file is processing\n',i) % Report every 10 files-the i-th file is processing
+        disp( [ 'Human - ' num2str(i,'%d') 'th file is processing' ] ); % Report every 10 files-the i-th file is processing
     end
     %sprintf('Human - %dth file is processing\n',i)
     fileName=Files{i};
