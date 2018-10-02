@@ -107,7 +107,9 @@ SetPath
 Index = 20180505;
 data_dog = {'NIL'};
 data_human = {'/Simulation/20180505/walking/cut/'};
-
+% Index = 20180730;
+% data_dog = {'NIL'};
+% data_human = {'/Simulation/20180730/walking_250hz/_rank248/cut/'};
 
 %% Any test data, such as a single walk cut
 %Index = [12345];
