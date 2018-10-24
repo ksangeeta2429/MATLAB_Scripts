@@ -57,7 +57,7 @@ for i=1:length(Files) % take every file from the set 'Files'
     end
     %sprintf('Human - %dth file is processing\n',i)
     fileName=Files{i};
-    [~, f_file] = File2Feature(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,[]);
+    [f_file] = File2Feature(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,[]);
     %     if ifScaled==0
     %         [imghuman, f_file] = File2Feature(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,[]);
     %         dlmwrite(strcat(path_images_human,'\',fileName,'.fft'),imghuman);
@@ -93,7 +93,7 @@ for i=1:length(Files) % take every file from the set 'Files'
     end
     %sprintf('Dog - %dth file is processing\n',i)
     fileName=Files{i};
-    [~, f_file] = File2Feature(fileName, 'Bike', ifScaled, featureClass, feature_min, scalingFactors,[]);
+    [f_file] = File2Feature(fileName, 'NonHuman', ifScaled, featureClass, feature_min, scalingFactors,[]);
     %     if ifScaled==0
     %         [imgdog, f_file] = File2Feature(fileName, 'Dog', ifScaled, featureClass, feature_min, scalingFactors,[]);
     %         dlmwrite(strcat(path_images_dog,'\',fileName,'.fft'),imgdog);

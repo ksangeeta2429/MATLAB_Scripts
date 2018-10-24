@@ -2,7 +2,7 @@
 % output: feature matrix, each row is a frame
 
 
-function [Img, f_file] = File2Feature(fileName, classLabel, ifScaled, featureClass, feature_min, scalingFactors, fftimage)
+function [f_file] = File2Feature(fileName, classLabel, ifScaled, featureClass, feature_min, scalingFactors, fftimage)
 
 thr_sqr_matlab_log = 17;%14.14 17 %25->122, 30->385, 20->38.5(39), 14.14->10, 15->12, 10->3.85(4), 17->19.3 18->24.3 19->30.6 16->15.3
 %14.14->10, 14.14 is chosen in matlab, 10 in c#
@@ -99,8 +99,9 @@ dcQ = median(Q);
 Data = (I-dcI) + 1i*(Q-dcQ);
 Data(1:50);
 disp(fileName);
-%Rate = 256;
 
+
+length(Data);
 
 if(rem(length(Data),256) == 0 | rem(length(Data),128) == 0 | rem(length(Data),64) == 0 | rem(length(Data)-1,256) == 0 | rem(length(Data)-1,128) == 0 | rem(length(Data)-1,64) == 0)
 	%fprintf('Rate is 256 : %d\n',length(Data));
@@ -109,11 +110,12 @@ elseif(rem(length(Data),250) == 0 | rem(length(Data),125) == 0 | rem(length(Data
 	%fprintf('\nRate is 250 : %d\n\n',length(Data));
 	Rate = 250;
 else
+    Rate = 256;
 	fprintf('Rate is not 256 or 250: %d Terminating script\n',length(Data));
-	return;
+	%return;
 end
 
-Rate
+fprintf('Length : %d Rate : %d\n',length(Data),Rate);
 %Rate = 256; % for old data
 %Rate = 250;
 %FftWindow = Rate;

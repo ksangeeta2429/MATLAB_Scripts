@@ -72,7 +72,7 @@ SetPath
 
 %% 2014.08 Bike data
  Index = [201408];
- data_dog = {'/Human_vs_non_human_training_new_detector/'};
+ data_dog = {'/Human_vs_non_human_training_new_detector/1238_non_human/'};
  %data_dog = {'/Humanvsbike/austere_bikes_cuts_9_0.5_and_WLN_bikes/'};
  %data_dog = {'NIL'};
  %data_dog = {'/IPSNdata/5-15-2011/Human'};
@@ -85,7 +85,7 @@ SetPath
  %data_human = {'/Human_845/'};
  %data_human = {'/Bike data/Oct 21 2017/cut/c1/r3/humans_after_manual_checking'};
  %data_human = {'/Humanvsbike/austere_125_humans_wln_125_humans/'};
- data_human = {'/Human_vs_non_human_training_new_detector/'};
+ data_human = {'/Human_vs_non_human_training_new_detector/1238_human/'};
  %data_human = {'/Bike data/Oct 21 2017/cut_manual/all_humans/test2/'};
  %data_dog = {'/Bike data/Aug 9 2017/Detect_begs_and_ends/param0.9/cut/humans only radar y'};
  %data_dog = {'/Bike data/Oct 21 2017/bikes_no_0.5/'};
