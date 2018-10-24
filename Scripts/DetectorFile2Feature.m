@@ -1,4 +1,4 @@
-function DetectorFile2Feature(cut_folders,class_labels,OutIndex)
+function DetectorFile2Feature(cut_folders,class_labels,OutIndex,window,stride)
 
 SetEnvironment
 SetPath
@@ -30,8 +30,8 @@ for y = 1:size(cut_folders,2)
     
     for i=1:length(Files) % take every file from the set 'Files'
         f = [];
-        if mod(i,10)==0
-            sprintf('%dth file is processing\n',i) % Report every 10 files-the i-th file is processing
+        if mod(i,40)==0
+            sprintf('%dth file is processing out of %d\n',i,length(Files)) % Report every 10 files-the i-th file is processing
         end
         %sprintf('Human - %dth file is processing\n',i)
         fileName=Files{i};
@@ -72,6 +72,30 @@ end
 
 f_set_scaled;
 
+
+
+
+%standardization
+f_set_scaled_temp = cell2mat(f_set_scaled(:,1:size(f_set_scaled,2)-1));
+f_set_scaled_std = zeros(size(f_set_scaled,1),size(f_set_scaled,2));
+feature_mean = mean(cell2mat(f_set_scaled(:,1:size(f_set_scaled,2)-1)));
+feature_std = std(cell2mat(f_set_scaled(:,1:size(f_set_scaled,2)-1)));
+%for each column
+for i = 1:size(f_set_scaled,2)-1
+    f_set_scaled_std(:,i) = (f_set_scaled_temp(:,i)-feature_mean(i))/feature_std(i);
+end
+f_set_scaled_std;
+f_set_scaled_std(f_set_scaled_std < 0.00001) = 1;
+
+f_set_scaled_std = num2cell(f_set_scaled_std);
+
+%add class label to scaled features
+for i = 1:size(f_set_scaled_std,1)
+    f_set_scaled_std(i,size(f_set_scaled_std,2)) = f_set_scaled(i,size(f_set_scaled,2));
+end
+
+f_set_scaled_std;
+
 % Weka Related
 % featureNames is f1 f2 f3 ...., give these name to the n columns of f_set
 nColumn=size(f_set,2);
@@ -87,6 +111,7 @@ ifReg=0;
 cur_datetime = string(datetime);
 instances = matlab2weka(sprintf('detector_%d_features_%d',OutIndex,nColumn-1),featureNames,f_set,nColumn,ifReg);
 instances_scaled = matlab2weka(sprintf('detector_%d_features_scaled_%d',OutIndex,nColumn-1),featureNames,f_set_scaled,nColumn,ifReg);
+instances_scaled_std = matlab2weka(sprintf('detector_%d_features_scaled_%d_std',OutIndex,nColumn-1),featureNames,f_set_scaled_std,nColumn,ifReg);
 
 %save features/instances to arff file
 cd(path_arff);
@@ -95,7 +120,8 @@ if exist(path_arff, 'dir') ~= 7
     fprintf('INFO: created directory %s\n', path_arff);
 end
 
-saveARFF(sprintf('detector_%d_features_%d.arff',OutIndex,nColumn-1),instances);
-saveARFF(sprintf('detector_%d_features_scaled_%d.arff',OutIndex,nColumn-1),instances_scaled);
+saveARFF(sprintf('detector_%d_%d_features_%d_instances_window_%d_stride_%d.arff',OutIndex,nColumn-1,size(f_set,1),window,stride),instances);
+saveARFF(sprintf('detector_%d_%d_features_%d_instances_window_%d_stride_%d_scaled.arff',OutIndex,nColumn-1,size(f_set,1),window,stride),instances_scaled);
+saveARFF(sprintf('detector_%d_%d_features_%d_instances_window_%d_stride_%d_scaled_std.arff',OutIndex,nColumn-1,size(f_set,1),window,stride),instances_scaled_std);
 
 end

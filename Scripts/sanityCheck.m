@@ -69,8 +69,8 @@ if(length(start) > 0 || length(stop) > 0)
 %disp(start);
 %disp(stop);
 
-start = start;
-stop = stop;
+start = int32(start);
+stop = int32(stop);
 
 %disp(start);
 %disp(stop);
@@ -103,8 +103,14 @@ fd = fopen(output_file_path,'w');
 fprintf(fd,'Start Time,End Time\n');
 for i = 1:length(start_arr)
     [h,m,s] = hms(start_arr(i));
-    [h1,m1,s1] = hms(stop_arr(i));    
-    fprintf(fd,'%d:%d:%f,%d:%d:%f\n',round(h),m,s,h1,m1,s1);
+    [h,m,s] = fixHMS(h,m,s);
+    [h1,m1,s1] = hms(stop_arr(i));
+    [h1,m1,s1] = fixHMS(h1,m1,s1);
+    if(i == 1388)
+        disp(s1);
+        fprintf('%d:%d:%d,%d:%d:%d\n',round(h),m,s,h1,m1,s1);
+    end
+    fprintf(fd,'%d:%d:%d,%d:%d:%d\n',round(h),m,s,h1,m1,s1);
 end
 
 fclose(fd);

@@ -20,3 +20,5 @@ if nargin < 2, Type = 'uint16'; else Type = TypeArg; end;
 Data = fwrite(Fid, Data, Type);
 
 fclose(Fid);
+
+end

@@ -10,8 +10,8 @@ SetPath
 %path_data_dog   = strcat(g_str_pathbase_data,'\training\test_dog_onedata'); %REPLACE: ball - 408
 
 
-path_data_human = strcat(g_str_pathbase_data,data_human);
-path_data_dog = strcat(g_str_pathbase_data,data_dog);
+path_data_human = strcat(g_str_pathbase_data,data_human)
+path_data_dog = strcat(g_str_pathbase_data,data_dog)
 
 %Initialize path to ARFF files
 path_arff=strcat(g_str_pathbase_radar,'/IIITDemo/Arff/',getenv('USERNAME'));
@@ -50,6 +50,7 @@ for j=1:length(fileFullNames)
         i=i+1;
     end
 end
+num_of_humans = num2str(length(Files));
 for i=1:length(Files) % take every file from the set 'Files'
     if mod(i,10)==0
         sprintf('Human - %dth file is processing\n',i) % Report every 10 files-the i-th file is processing
@@ -85,13 +86,14 @@ for j=1:length(fileFullNames)
         i=i+1;
     end
 end
+num_of_dogs = num2str(length(Files));
 for i=1:length(Files) % take every file from the set 'Files'
     if mod(i,10)==0
         sprintf('Dog - %dth file is processing\n',i) % Report every 10 files-the i-th file is processing
     end
     %sprintf('Dog - %dth file is processing\n',i)
     fileName=Files{i};
-    [~, f_file] = File2Feature(fileName, 'Dog', ifScaled, featureClass, feature_min, scalingFactors,[]);
+    [~, f_file] = File2Feature(fileName, 'Bike', ifScaled, featureClass, feature_min, scalingFactors,[]);
     %     if ifScaled==0
     %         [imgdog, f_file] = File2Feature(fileName, 'Dog', ifScaled, featureClass, feature_min, scalingFactors,[]);
     %         dlmwrite(strcat(path_images_dog,'\',fileName,'.fft'),imgdog);
@@ -135,6 +137,17 @@ if (ifScaled==0)
     format shortg
     feature_max = max(cell2mat(f_set(:,1:size(f_set,2)-1)));
     feature_min = min(cell2mat(f_set(:,1:size(f_set,2)-1)));
+    %save feature max and min vectors to a csv file. Use these to scale any
+    
+    %heldout instances for testing.
+    path_arff;
+    fd = fopen(strcat(path_arff,'/',num_of_humans,'_humans_',num_of_dogs,'_dogs_',string(size(f_set,2)),'_feature_max_min','.csv'),'w');
+    fprintf(fd,'Feature_max,Feature_min\n');
+    disp(length(feature_max));
+    for i = 1:length(feature_max)
+        fprintf(fd,'%f,%f\n',feature_max(i),feature_min(i));
+    end
+    fclose(fd);
     
     scalingFactors = zeros(1,length(feature_max));
     for j=1:length(feature_max)
@@ -179,11 +192,13 @@ instances=matlab2weka(sprintf('radar%d',OutIndex),featureNames,f_set,nColumn,ifR
 %% save the wekaOBJ to arff file
 cd(path_arff);
 if ifScaled == 0
-    saveARFF(sprintf('radar%d.arff',OutIndex),instances);
+    temp = strcat(num2str(nColumn),'_features_',num_of_humans,'_humans_',num_of_dogs,'_dogs','.arff')
+    saveARFF(temp,instances);
 %    saveARFF(sprintf('radar%d_nr.arff',OutIndex),instances_nr);
 %    saveARFF(sprintf('radar%d_r.arff',OutIndex),instances_r);
 else
-    saveARFF(sprintf('radar%d_scaled.arff',OutIndex),instances);
+    temp1 = strcat(num2str(nColumn),'_features_',num_of_humans,'_humans_',num_of_dogs,'_dogs','_scaled.arff')
+    saveARFF(temp1,instances);
 %    saveARFF(sprintf('radar%d_scaled_nr.arff',OutIndex),instances_nr);
 %    saveARFF(sprintf('radar%d_scaled_r.arff',OutIndex),instances_r);
 end

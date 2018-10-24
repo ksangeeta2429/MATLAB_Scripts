@@ -7,7 +7,7 @@
 %print - saves figure as png, but takes about 5 seconds to save after the figure is opened. Do not close the 
 %figure for 5 seconds atleast
 
-function Visualize_spectrogram_one_screen(path_data,Fftwindow,sampRate)
+function Visualize_spectrogram_one_screen(path_data,Fftwindow,sampRate,date,target)
 clc;close all
 
 WINDOW = 2^nextpow2(Fftwindow); 
@@ -39,9 +39,13 @@ end
 p = ceil(power(length(Files),0.5));
 %p = 5;
 n = p; m = p;
-
+if(length(Files) < 64)
+    num_files = length(Files);
+else
+    num_files = 64;
+end
 figure('units','normalized','outerposition',[0 0 1 1])
-for i = 1:64
+for i = 1:num_files
     fileName = Files{i};
     fprintf('%s    ',fileName)
     % OutFile = strcat(fileName,'.spect.emf');
@@ -68,8 +72,8 @@ for i = 1:64
 end
 
 set(gcf,'PaperPositionMode','auto')
-savefig(strcat(path_data,'a_some_spectrograms_',string(NFFT),'_fft'));
-print(strcat(path_data,'a_some_Spectrograms_png_',string(NFFT),'_fft'),'-dpng');
+%savefig(strcat(path_data,'a_some_spectrograms_',date,'_',target));
+print(strcat(path_data,'some_Spectrograms_',date,'_',target),'-dpng');
 end
 
 

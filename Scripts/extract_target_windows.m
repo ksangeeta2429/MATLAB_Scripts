@@ -3,10 +3,12 @@ clear all
 
 % Params (in #samples)
 sampRate = 256
-class_label = 'target'
-inputdir = 'C:/Users/neel/Downloads/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository/Bike data/Aug 19 2018/cut/';
-stride = round(sampRate*2/3)%1.5;
-winlen = sampRate*1%2.5;
+class_label = 'cow'
+inputdir = 'C:/Users/neel/Downloads/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository/Bike data/Sept 5 2018/cut_1_2.65/Cow/';
+
+winlen = round(sampRate*1)%2.5;
+%stride = round(winlen*2/3)%1.5;
+stride = 171
 minlength_secs = 1;
 
 cd(inputdir);
@@ -15,7 +17,7 @@ cd(inputdir);
 %     mkdir(valid_cuts_dir);
 % end
 
-outdir = [inputdir,'/winlen_',num2str(winlen/sampRate),'_stride_',num2str(stride)];
+outdir = [inputdir,'/winlen_',num2str(winlen),'_stride_',num2str(stride)];
 if exist(outdir, 'dir') ~= 7
     mkdir(outdir);
 end

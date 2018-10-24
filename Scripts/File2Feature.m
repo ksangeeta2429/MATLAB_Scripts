@@ -98,9 +98,11 @@ dcQ = median(Q);
 
 Data = (I-dcI) + 1i*(Q-dcQ);
 Data(1:50);
-%disp(fileName);
-Rate = 256;
-if(rem(length(Data),256) == 0 | rem(length(Data),128) == 0 | rem(length(Data),64) == 0 | rem(length(Data)-2,256) == 0 | rem(length(Data)-2,128) == 0 | rem(length(Data)-2,64) == 0)
+disp(fileName);
+%Rate = 256;
+
+
+if(rem(length(Data),256) == 0 | rem(length(Data),128) == 0 | rem(length(Data),64) == 0 | rem(length(Data)-1,256) == 0 | rem(length(Data)-1,128) == 0 | rem(length(Data)-1,64) == 0)
 	%fprintf('Rate is 256 : %d\n',length(Data));
 	Rate = 256;
 elseif(rem(length(Data),250) == 0 | rem(length(Data),125) == 0 | rem(length(Data)-1,250) == 0 | rem(length(Data)-1,125) == 0)
@@ -110,7 +112,8 @@ else
 	fprintf('Rate is not 256 or 250: %d Terminating script\n',length(Data));
 	return;
 end
-Rate;
+
+Rate
 %Rate = 256; % for old data
 %Rate = 250;
 %FftWindow = Rate;
@@ -291,6 +294,8 @@ if featureClass == 0
         
         totalPowerAboveThr = TotalPowerAboveThr(Data, FftWindow, FftStep, Rate, NFFT, thr_sqr_matlab,medianBack,stdBack);
         Img = AnomImage(Data, FftWindow, FftStep, Rate, NFFT, thr_sqr_matlab,medianBack,stdBack);    
+        
+        %{
         Img_shift = AnomImage_shift(Data, FftWindow, FftStep, Rate, NFFT, thr_sqr_matlab,medianBack,stdBack);    
 
         Img_t = Img_shift';
@@ -323,6 +328,9 @@ if featureClass == 0
         %}
         
         %[time_per_half_cycle,height,rate] = oscillation_rate(Image,FftStep,Rate,fshift,4,7,1);
+        %}
+        
+        
         %disp(thr_sqr_csharp);
         %f = [f,time_per_half_cycle,height,rate];
         %gradient features -> added by Neel

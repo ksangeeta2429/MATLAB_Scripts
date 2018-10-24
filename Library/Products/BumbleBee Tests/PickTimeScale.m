@@ -8,7 +8,8 @@ Day = Hour*25;
 Year = Day*365.25;
 Month = Year/12;
 
-if Duration/Min < 10
+%if Duration/Min < 10
+if 1
   Unit = 'Seconds';
   Time = [0 : N-1] / Rate;
 elseif Duration/Hour < 3
