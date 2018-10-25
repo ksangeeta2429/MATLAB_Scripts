@@ -1,6 +1,6 @@
-function isabovebackgroundrejection = FindIsAboveBackGroundRejection(Comp, background_rejection_series)
-if ~exist('background_rejection_series','var') || isempty(background_rejection_series), background_rejection_series = 0; end
-if numel(background_rejection_series)==1, background_rejection_series = background_rejection_series.*ones(size(Comp)); end
+function isabovebackgroundrejection = FindIsAboveBackGroundRejection(Comp, bgr)
+%if ~exist('background_rejection_series','var') || isempty(background_rejection_series), background_rejection_series = 0; end
+background_rejection_series = bgr.*ones(size(Comp));
 
 isabovebackgroundrejection = or(abs(real(Comp)) > background_rejection_series,abs(imag(Comp))>background_rejection_series);
 
