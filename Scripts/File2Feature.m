@@ -99,8 +99,15 @@ dcQ = median(Q);
 Data = (I-dcI) + 1i*(Q-dcQ);
 Data(1:50);
 disp(fileName);
-
-
+disp(fileName(1));
+%use background rejection for austere data.
+USEBGR = 0;
+if(fileName(1) == 'a')
+    USEBGR = 1;
+else
+    USEBGR = 0;
+end
+USEBGR
 length(Data);
 
 if(rem(length(Data),256) == 0 | rem(length(Data),128) == 0 | rem(length(Data),64) == 0 | rem(length(Data)-1,256) == 0 | rem(length(Data)-1,128) == 0 | rem(length(Data)-1,64) == 0)
@@ -111,7 +118,7 @@ elseif(rem(length(Data),250) == 0 | rem(length(Data),125) == 0 | rem(length(Data
 	Rate = 250;
 else
     Rate = 256;
-	fprintf('Rate is not 256 or 250: %d Terminating script\n',length(Data));
+	%fprintf('Rate is not 256 or 250: %d Terminating script\n',length(Data));
 	%return;
 end
 
@@ -228,7 +235,7 @@ if featureClass == 0
     %         newVel3 = ApproxMax(Data,0.5,0.5,Rate, 0.5);
     
     % Calculate phase based features
-    [dist, time, distTimeProd, distTimeRatio] = DistTime(Data); %NOTE by Dhrubo: The time is in units of step (1/4th s)
+    [dist, time, distTimeProd, distTimeRatio] = DistTime(Data,USEBGR); %NOTE by Dhrubo: The time is in units of step (1/4th s)
     
     
     
