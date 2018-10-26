@@ -23,12 +23,12 @@ Out2 = length(Range)/64;  % in terms of step (1/4 s)
 Out3 = Out1 * Out2;
 
 % not instantaneous speed but average speed
-if(USEBGR == 1)
-    Out4 = Out1/Out2;
+if(USEBGR == 0)
+    Out4 = Out1/Out2
 else
     bgr = 19; numQuads = 4;
     qd_Diff = qdDiffBoraNewDetector(Data,numQuads,bgr);
     Out1 = sum(qd_Diff)*lambda/8;
     Out3 = Out1 * Out2;
-    Out4 = Out1 / Out2;
+    Out4 = Out1 / Out2
 end

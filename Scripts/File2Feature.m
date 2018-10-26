@@ -102,11 +102,13 @@ disp(fileName);
 disp(fileName(1));
 %use background rejection for austere data.
 USEBGR = 0;
+%{
 if(fileName(1) == 'a')
     USEBGR = 1;
 else
     USEBGR = 0;
 end
+%}
 USEBGR
 length(Data);
 

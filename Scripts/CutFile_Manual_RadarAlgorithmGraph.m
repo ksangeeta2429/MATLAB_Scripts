@@ -44,6 +44,16 @@ cut_folder = [filePath,output_folder,'/']; %disp(cut_folder);
 if exist(cut_folder, 'dir') ~= 7
     mkdir(cut_folder);
     fprintf('INFO: created directory %s\n', cut_folder);
+else
+    [status, message, messageid] = rmdir(cut_folder,'s');
+    if status == 1
+        fprintf('Successfully deleted %s\n',cut_folder);
+        mkdir(cut_folder);
+        fprintf('INFO: created new directory %s\n', cut_folder);
+    else
+        disp(message);
+        return;
+    end
 end
 
 [I,Q,N]=Data2IQ(ReadBin([fileName]));
@@ -63,8 +73,8 @@ walk_lengths = (walk_ends - walk_begs); % if unit is in seconds
 %disp(walk_lengths);
 start = walk_begs(walk_lengths > min_length_secs & walk_begs < cutoff_halfsecs)*sampRate; %use 125 if unit is half sec
 stop = walk_ends(walk_lengths > min_length_secs & walk_ends < cutoff_halfsecs)*sampRate;
-start = fix(start)
-stop = ceil(stop)
+start = fix(start);
+stop = ceil(stop);
 k=0;
 for j=1:length(start)
     k=k+1;
