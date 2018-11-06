@@ -9,10 +9,12 @@ SetPath;
 
 %austere FPGA datasets
 dates = {'Aug 13 2018','20180815','20180814','Sept 26 2018','Aug 31 2018','Sept 4 2018','Sept 5 2018','Sept 12 2018','Aug 19 2018'};
-%dates = {'Aug 19 2018'};
-c = {'c1','c2'};
+dates = {'Aug 13 2018'};
+c = {'c1'};
 radars = {'aus','aus2','a16','a15','a17'};
-ifile_version = '_bora_new_detector';
+CUT_USING_SAMPLE_INDEXES = 1;
+ifile_version = '_bora_det_window_res';
+indexFile_version = '_bora_det_window_res_index';
 ths = [22];
 adjs = [19];
 sampRate = 256;
@@ -38,9 +40,15 @@ for date = dates
                     f = strcat(g_str_pathbase_data,'/Bike data/',date,'/',radar,'_',coll,'.bbs');
                     %wb = strcat('C:/Users/neel/Downloads/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository/Bike data/',date,'/Detect_begs_and_ends/',coll,'/w1/t',th,'/param',adj,'/',radar,'/detect_beginnings__',r,ifile_version);
                     %we = strcat('C:/Users/neel/Downloads/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository/Bike data/',date,'/Detect_begs_and_ends/',coll,'/w1/t',th,'/param',adj,'/',radar,'/detect_ends__',r,ifile_version);
-                    wb = strcat(g_str_pathbase_data,'/Bike data/',date,'/Detect_begs_and_ends/',coll,'/t',th,'/bgr',adj,'/',radar,'/detect_beginnings__',r,ifile_version);
-                    we = strcat(g_str_pathbase_data,'/Bike data/',date,'/Detect_begs_and_ends/',coll,'/t',th,'/bgr',adj,'/',radar,'/detect_ends__',r,ifile_version);
-                    CutFile_Manual_RadarAlgorithmGraph(f,wb,we,min_cut_length,cutoff_halfsecs,date,sampRate,output_folder)
+                    if(CUT_USING_SAMPLE_INDEXES == 0)
+                        wb = strcat(g_str_pathbase_data,'/Bike data/',date,'/Detect_begs_and_ends/',coll,'/t',th,'/bgr',adj,'/',radar,'/detect_beginnings__',r,ifile_version);
+                        we = strcat(g_str_pathbase_data,'/Bike data/',date,'/Detect_begs_and_ends/',coll,'/t',th,'/bgr',adj,'/',radar,'/detect_ends__',r,ifile_version);
+                        CutFile_Manual_RadarAlgorithmGraph(f,wb,we,min_cut_length,cutoff_halfsecs,date,sampRate,output_folder)
+                    else
+                        wb = strcat(g_str_pathbase_data,'/Bike data/',date,'/Detect_begs_and_ends/',coll,'/t',th,'/bgr',adj,'/',radar,'/detect_beginnings__',r,indexFile_version);
+                        we = strcat(g_str_pathbase_data,'/Bike data/',date,'/Detect_begs_and_ends/',coll,'/t',th,'/bgr',adj,'/',radar,'/detect_ends__',r,indexFile_version);
+                        CutFile_Manual_From_Sample_Index(f,wb,we,date,output_folder)
+                    end
                 end
             end
         end
