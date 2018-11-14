@@ -1,4 +1,4 @@
-function [ ncut_all, time_start_all, time_stop_all, Files ] = CutFilesInFolder( dir_bbs, dir_out, sampleRate, str_cuttingAlgorithm )
+function [ ncut_all, time_start_all, time_stop_all, Files ] = CutFilesInFolder( dir_bbs, dir_out, sampleRate, str_cuttingAlgorithm, cutLength, offset, pattern_fext )
 %CutFilesInFolder - cut all bbs files in a directory
 %
 % Input:
@@ -6,6 +6,9 @@ function [ ncut_all, time_start_all, time_stop_all, Files ] = CutFilesInFolder( 
 % dir_out - output directory to place 'cut' folder in. optional. default=pwd
 % sampleRate - sample rate of bbs files. optional. default=256;
 % str_cuttingAlgorithm - name of Cut* function to call. default='CutFile'
+% cutLength - desired length of cut samples. optional. default = empty. for CutFileKeepAll. 
+% offset - desired starting offset in the file. optional. default = empty. for CutFileKeepAll. 
+% pattern_fext - strfind pattern to search for. optional. default= '.bbs'
 %
 % Output:
 % Files - names of input files.
@@ -32,15 +35,26 @@ end
 if nargin < 4 || exist('str_cuttingAlgorithm','var') ~= 1 || isempty(str_cuttingAlgorithm)
     str_cuttingAlgorithm = 'CutFile';
 end
-
 fh_cuttingAlgorithm = str2func(str_cuttingAlgorithm);
 
+if nargin < 5 || exist('cutLength','var') ~= 1 || isempty(cutLength)
+    cutLength = [];
+end
+
+if nargin < 6 || exist('offset','var') ~= 1 || isempty(offset)
+    offset = [];
+end
+
+if nargin < 7 || exist('pattern_fext','var') ~= 1 || isempty(pattern_fext)
+    pattern_fext = '.bbs';
+end
+
 if exist(dir_bbs,'dir') ~= 7
-    error('input directory does not exist.');
+    error( [ 'input directory does not exist:' dir_bbs ] );
 end
 
 if exist(dir_out, 'dir') ~= 7
-    error('output directory does not exist.');
+    error( [ 'output directory does not exist: ' dir_out ] );
 end
 
 cut_folder = [ dir_out filesep 'cut' ];
@@ -64,7 +78,7 @@ for j=1:length(fileFullNames)
     s=fileFullNames(j).name;
     p = fileFullNames(j).folder;
     %% Also change line# 17-18 in CutFile.m
-    k=strfind(s,'.bbs');
+    k=strfind(s,pattern_fext);
     if ~isempty(k) && k>=2 && k+3==length(s)
         Files{i}=s(1:k-1);
         Paths{i} = p;
@@ -80,7 +94,7 @@ for i=1:length(Files) % take every file from the set 'Files'
     fileName=Files{i};
     filePath = Paths{i};
     disp( fileName );
-    [ncut, idx_start, idx_stop] = fh_cuttingAlgorithm(fileName, filePath, dir_out);
+    [ncut, idx_start, idx_stop] = fh_cuttingAlgorithm(fileName, filePath, dir_out, cutLength, offset);
     time_start = idx_start / sampleRate;
     time_stop  = idx_stop  / sampleRate;
     ncut_all{1,i} = ncut;
