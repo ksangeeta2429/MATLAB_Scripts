@@ -24,11 +24,15 @@ Out3 = Out1 * Out2;
 
 % not instantaneous speed but average speed
 if(USEBGR == 0)
-    Out4 = Out1/Out2
+    Out4 = Out1/Out2;
 else
-    bgr = 19; numQuads = 4;
-    qd_Diff = qdDiffBoraNewDetector(Data,numQuads,bgr);
-    Out1 = sum(qd_Diff)*lambda/8;
+    bgr = 19; numQuads = 4; short_term_buffer_length = 256;
+    %qd_Diff = qdDiffBoraNewDetector(Data,numQuads,bgr);
+    [qd_Diff,qd_unwrap] = findqd_diff_Bora(Data, 4, bgr );
+    qd_Diff;
+    %qd_Diff(isnan(qd_Diff))=0;
+    %Out1 = sum(abs(qd_Diff));
+    Out1 = abs(sum(qd_Diff));
     Out3 = Out1 * Out2;
-    Out4 = Out1 / Out2
+    Out4 = Out1 / Out2;
 end
