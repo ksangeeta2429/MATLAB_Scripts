@@ -11,8 +11,9 @@ function Out = AnomImage(Data, FftWindow, FftStep, Rate, NFFT, thr_sqr_matlab,me
     
     Out = zeros(numWindows,FftWindow);
     
+    size(TimeFreq);
     x = TimeFreq';
-
+    size(x);
 %     y = abs(x).^2;   %changed to square in 2/19/15
     
 %     plot(y(1,:));

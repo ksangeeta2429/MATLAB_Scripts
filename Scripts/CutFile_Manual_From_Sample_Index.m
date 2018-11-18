@@ -25,7 +25,7 @@ fileNameOnly = filePath_tmp(pathIndex(end)+1:fileExtIndex-1);
 
 %Create cut folder if it doesn't exist already
 %cut_folder = [filePath,'/cut'];
-cut_folder = [filePath,output_folder,'/']; %disp(cut_folder);
+cut_folder = [filePath,output_folder,'/'] %disp(cut_folder);
 if exist(cut_folder, 'dir') ~= 7
     mkdir(cut_folder);
     fprintf('INFO: created directory %s\n', cut_folder);

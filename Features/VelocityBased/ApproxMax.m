@@ -5,7 +5,7 @@
 % Rate - sampling rate
 % Implemented according to the writeup in MV.docx
 
-function Out = ApproxMax(Data, VelWindow, VelOverlap, Rate, quantile)
+function Out = ApproxMax(Data, VelWindow, VelOverlap, Rate, quantile,USEBGR,bgr,numQuads,short_term_buffer_length)
 
 %WindowSamples = round(VelWindow*Rate);
 %OverlapSamples = round(VelOverlap*WindowSamples);
@@ -16,8 +16,12 @@ OverlapSamples = VelOverlap;
 % convert data into range (in meters)
 % lambda = 3e8/5.8e9;
 % Range = UnWrap(angle(Data)/2/pi, -0.5, 0.5)* lambda/2;
-Range = UnWrap(angle(Data)/2/pi, -0.5, 0.5)* 2*pi*4096;
-
+if(USEBGR == 0)
+    Range = UnWrap(angle(Data)/2/pi, -0.5, 0.5)* 2*pi*4096;
+else
+    [qd_Diff,qd_unwrap] = findqd_diff_Bora(Data, numQuads, bgr );
+    Range = qd_unwrap;
+end
 
 N = length(Range);
 

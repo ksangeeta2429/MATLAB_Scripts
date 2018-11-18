@@ -4,7 +4,7 @@
 % Rate - sampling rate
 % Implemented as per VV.docx
 
-function [Out,velo_var] = VeloVarMinMax(Data, Window, Overlap, Rate, LowQuant, HighQuant)
+function [Out,velo_var] = VeloVarMinMax(Data, Window, Overlap, Rate, LowQuant, HighQuant,USEBGR,bgr,numQuads,short_term_buffer_length)
 
 %WindowSamples = round(Window*Rate);
 %OverlapSamples = round(WindowSamples*Overlap);
@@ -16,7 +16,12 @@ OverlapSamples = Overlap;
 %lambda = 3e8/5.8e9;
 %Range = UnWrap(angle(Data)/2/pi, -0.5, 0.5)* lambda/2;
 
-Range = UnWrap(angle(Data)/2/pi, -0.5, 0.5)* 2*pi*4096;
+if(USEBGR == 1)
+    [qd_Diff,qd_unwrap] = findqd_diff_Bora(Data, numQuads, bgr );
+    Range = qd_unwrap;
+else
+    Range = UnWrap(angle(Data)/2/pi, -0.5, 0.5)* 2*pi*4096;
+end
 %Range = Range * 2.584;
 %Range = abs(diff(Range));
 %disp(Range(length(Range))-Range(1));

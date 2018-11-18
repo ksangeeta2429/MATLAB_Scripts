@@ -72,9 +72,9 @@ SetPath
 
 %% 2014.08 Bike data
  Index = [201408];
- data_dog = {'/Human_vs_non_human_training_new_detector/austere_465_non_human/'};
- %data_dog = {'/Humanvsbike/austere_bikes_cuts_9_0.5_and_WLN_bikes/'};
- %data_dog = {'NIL'};
+ %data_dog = {'/Human_vs_non_human_training_new_detector/M_30_N_128_window_res/last_wind_padded_with_signal/austere_304_cow/cuts_intersec_with_old_det/'};
+ data_dog = {'/Human_vs_non_human_training_new_detector/M_30_N_96_window_res/test/'};
+ %data_dog = {'/Human_vs_non_human_training_new_detector/M_30_N_256_window_res/austere_282_cow/'};
  %data_dog = {'/IPSNdata/5-15-2011/Human'};
  %data_human = {'NIL'};
  %data_human = {'/Bike data/Oct 21 2017/humans_no_0.5/'};
@@ -83,9 +83,10 @@ SetPath
  %data_dog = {'/IPSNdata/5-15-2011/Human'};
  %data_human = {'NIL'}
  %data_human = {'/Human_845/'};
- %data_human = {'/Bike data/Oct 21 2017/cut/c1/r3/humans_after_manual_checking'};
- %data_human = {'/Humanvsbike/austere_125_humans_wln_125_humans/'};
- data_human = {'/Human_vs_non_human_training_new_detector/austere_608_human/'};
+ %data_human = {'/Synthetic/20180505/walking_250hz/rank5/cut/'};
+ %data_human = {'/Human_vs_non_human_training_new_detector/M_30_N_256_window_res/austere_364_human/'};
+ data_human = {'/Human_vs_non_human_training_new_detector/M_30_N_96_window_res/test/'};
+ %data_human = {'/Human_vs_non_human_training_new_detector/M_30_N_128_window_res/last_wind_padded_with_signal/austere_384_human/cuts_intersec_with_old_det/'};
  %data_human = {'/Bike data/Oct 21 2017/cut_manual/all_humans/test2/'};
  %data_dog = {'/Bike data/Aug 9 2017/Detect_begs_and_ends/param0.9/cut/humans only radar y'};
  %data_dog = {'/Bike data/Oct 21 2017/bikes_no_0.5/'};

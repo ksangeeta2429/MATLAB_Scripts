@@ -1,8 +1,10 @@
 function [s,s_shift] = spectrogram_nohamming(X,WINDOW,NOVERLAP,NFFT,Fs)
  %length of cut in number of samples
+%{
 size(X);
 X = padSignalWithZeros(X,WINDOW,NOVERLAP,NFFT,Fs);
 size(X);
+%}
 nx = length(X);
 ncol = fix((nx-NOVERLAP)/(WINDOW-NOVERLAP));
 ncol;
