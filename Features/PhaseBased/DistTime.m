@@ -33,7 +33,7 @@ else
     qd_unwrap;
     %qd_Diff(isnan(qd_Diff))=0;
     %Out1 = sum(abs(qd_Diff));
-    Out1 = abs(sum(qd_Diff));
+    Out1 = abs(sum(qd_Diff)); %gave slightly better performance
     Out3 = Out1 * Out2;
     Out4 = Out1 / Out2;
 end
