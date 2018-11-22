@@ -143,11 +143,16 @@ if (ifScaled==0)
     
     %heldout instances for testing.
     path_arff;
-    fd = fopen(strcat(path_arff,'/',num_of_humans,'_humans_',num_of_dogs,'_dogs_',string(size(f_set,2)),'_feature_max_min','.csv'),'w');
-    fprintf(fd,'Feature_max,Feature_min\n');
+    fd = fopen(strcat(path_arff,'/',num_of_humans,'_humans_',num_of_dogs,'_cows_',string(size(f_set,2)),'_feature_max_min_final','.csv'),'w');
+    fprintf(fd,'Feature_max,Feature_min,ScalingFactors\n');
     disp(length(feature_max));
     for i = 1:length(feature_max)
-        fprintf(fd,'%f,%f\n',feature_max(i),feature_min(i));
+        if feature_max(i)~=feature_min(i)
+            sF_i = 1/(feature_max(i)-feature_min(i));
+        else
+            sF_i = 0;
+        end
+        fprintf(fd,'%f,%f,%f\n',feature_max(i),feature_min(i),sF_i);
     end
     fclose(fd);
     
@@ -194,12 +199,12 @@ instances=matlab2weka(sprintf('radar%d',OutIndex),featureNames,f_set,nColumn,ifR
 %% save the wekaOBJ to arff file
 cd(path_arff);
 if ifScaled == 0
-    temp = strcat(num2str(nColumn),'_f_',num_of_humans,'_humans_',num_of_dogs,'_cows','.arff')
+    temp = strcat(num2str(nColumn),'_f_',num_of_humans,'_humans_',num_of_dogs,'_cows_final','.arff')
     saveARFF(temp,instances);
 %    saveARFF(sprintf('radar%d_nr.arff',OutIndex),instances_nr);
 %    saveARFF(sprintf('radar%d_r.arff',OutIndex),instances_r);
 else
-    temp1 = strcat(num2str(nColumn),'_f_',num_of_humans,'_humans_',num_of_dogs,'_cows','_scaled.arff')
+    temp1 = strcat(num2str(nColumn),'_f_',num_of_humans,'_humans_',num_of_dogs,'_cows_final','_scaled.arff')
     saveARFF(temp1,instances);
 %    saveARFF(sprintf('radar%d_scaled_nr.arff',OutIndex),instances_nr);
 %    saveARFF(sprintf('radar%d_scaled_r.arff',OutIndex),instances_r);
