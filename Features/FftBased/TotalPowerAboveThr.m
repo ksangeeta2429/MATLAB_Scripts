@@ -1,19 +1,14 @@
-function totalPowerAboveThr = TotalPowerAboveThr(Data, FftWindow, FftStep, Rate, NFFT, thr_sqr_matlab,medianBack,stdBack)
-%     [TimeFreq, ~, ~] = spectrogram(Data, FftWindow, FftWindow - FftStep, FftWindow, Rate);
-    TimeFreq = spectrogram_nohamming(Data, FftWindow, FftWindow - FftStep, NFFT, Rate);
+function totalPowerAboveThr = TotalPowerAboveThr(Data, FftWindow, FftStep, Rate, NFFT, thr_sqr_matlab,medianBack,stdBack,TimeFreq)
+    %[TimeFreq, ~, ~] = spectrogram(Data, FftWindow, FftWindow - FftStep, FftWindow, Rate);
+    
+    %compute spectrogram outside the for loop in File2Feature.m, so that it is
+    %computed only once
+    %TimeFreq = spectrogram_nohamming(Data, FftWindow, FftWindow - FftStep, NFFT, Rate);
     numWindows = size(TimeFreq,2);
     
     x = TimeFreq';
-   %{ 
-    power = [];
-    temp = TimeFreq(:,7);
-    fd = fopen('power','w');
-    for i = 1:length(temp)
-        power = [power abs(temp(i))^2]; 
-        fprintf(fd,'%f\n',abs(temp(i))^2);
-    end
-    %}
-%     y = abs(x).^2;   %changed to square in 2/19/15
+ 
+%    y = abs(x).^2;   %changed to square in 2/19/15
     
 %     plot(y(1,:));
     totalPowerAboveThr = 0;
@@ -33,10 +28,4 @@ function totalPowerAboveThr = TotalPowerAboveThr(Data, FftWindow, FftStep, Rate,
             end
         end
     end
-    %power;
-    %for i = 1:30
-     %   for j = 1:1
-      %     fprintf('%f ',abs(x(j,i)));
-       % end
-    %end
 end
