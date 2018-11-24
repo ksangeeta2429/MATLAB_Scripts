@@ -106,8 +106,8 @@ SetPath
 
 %% Any test data, such as a single walk cut
 %Index = [12345];
-%data_dog = {'/Test'};
-%data_human = {'NIL'};
+data_dog = {'/Test/cow'};
+data_human = {'/Test/human'};
 %% Execute.m
 featureClass = 0 % use class 0 for classification features, also include
 
@@ -128,13 +128,13 @@ for i=1:length(Index)
     fprintf('Processing OutIndex=%d...\n', OutIndex);
     if strcmp(data_human{i},'NIL')==1
         [feature_min, scalingFactors] = Build_arff_dog(OutIndex,0,featureClass, 0, 0, data_dog{i}); %Compute unscaled features
-        Build_arff_dog(OutIndex,1,featureClass, feature_min, scalingFactors, data_dog{i}); %Compute scaled features, cross-validate (suppressed, refer to RunResultScript_IoTDI.m)
+        %Build_arff_dog(OutIndex,1,featureClass, feature_min, scalingFactors, data_dog{i}); %Compute scaled features, cross-validate (suppressed, refer to RunResultScript_IoTDI.m)
     elseif strcmp(data_dog{i},'NIL')==1
         [feature_min, scalingFactors] = Build_arff_human(OutIndex,0,featureClass, 0, 0, data_human{i}); %Compute unscaled features (suppressed, refer to RunResultScript_IoTDI.m)
-        Build_arff_human(OutIndex,1,featureClass, feature_min, scalingFactors, data_human{i}); %Compute scaled features, cross-validate (suppressed, refer to RunResultScript_IoTDI.m)
+        %Build_arff_human(OutIndex,1,featureClass, feature_min, scalingFactors, data_human{i}); %Compute scaled features, cross-validate (suppressed, refer to RunResultScript_IoTDI.m)
     else
         [feature_min, scalingFactors] = Build_arff(OutIndex,0,featureClass, 0, 0, data_human{i}, data_dog{i}); %Compute unscaled features (suppressed, refer to RunResultScript_IoTDI.m)
-        Build_arff(OutIndex,1,featureClass, feature_min, scalingFactors, data_human{i}, data_dog{i}); %Compute scaled features, cross-validate (suppressed, refer to RunResultScript_IoTDI.m)
+        %Build_arff(OutIndex,1,featureClass, feature_min, scalingFactors, data_human{i}, data_dog{i}); %Compute scaled features, cross-validate (suppressed, refer to RunResultScript_IoTDI.m)
     end
     
     %% Uncomment this block to train a model
