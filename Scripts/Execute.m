@@ -106,6 +106,12 @@ SetPath
 % data_dog={'/Close zoom/Anomaly'};
 % data_human={'/Close zoom/Human'};
 
+%% Final Austere Dec demo dataset
+%% Any test data, such as a single walk cut
+Index = [112418];
+data_dog = {'/data/austere/final_304_cow'};
+data_human = {'/data/austere/final_384_human'};
+
 %% Any test data, such as a single walk cut
 %Index = [12345];
 %data_dog = {'/Test/cow'};
