@@ -326,7 +326,7 @@ if featureClass == 0
     
     temp = [];%to print set of features testing against C# equivalent features
     %m_s_19 = 0; m_s_30 = 0;  m_s_38 = 0; m_s_99 = 0; fre_w_9 = 0;
-    [TimeFreq,TimeFreq_shift] = spectrogram_nohamming(Data, FftWindow, FftWindow - FftStep, NFFT, Rate);
+    [TimeFreq,~] = spectrogram_nohamming(Data, FftWindow, FftWindow - FftStep, NFFT, Rate);
 
     %for thr_sqr_matlab_log = [14.144,17,18.915,20,24.144,25] % Dhrubo added 18.915 and 24.144 corresponding to thr_sqr_Csharp=30 and 100 respectively
     %for thr_sqr_csharp = [9,19,30,38,99,121]
