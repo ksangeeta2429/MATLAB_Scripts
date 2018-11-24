@@ -126,8 +126,7 @@ if (m_eng.ConnectionSource ~= Microsoft.SPOT.Debugger.ConnectionSource.TinyCLR)
     fprintf('       ... ensure the TinyCLR is built for DynamicTestRunner\n');
     fprintf('################################################################\n');
     % DynamicTestRunner_DisconnectEmote
-    m_eng.Stop();
-    m_eng.Dispose();
-    clear m_eng;
-    return;
+    %m_eng.Stop();
+    %m_eng.Dispose();
+    %clear m_eng;
 end
