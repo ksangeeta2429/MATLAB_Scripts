@@ -56,7 +56,7 @@ for i=1:length(Files) % take every file from the set 'Files'
         sprintf('Human - %dth file is processing\n',i) % Report every 10 files-the i-th file is processing
     end
     %sprintf('Human - %dth file is processing\n',i)
-    fileName=Files{i};
+    fileName=Files{i}
     [f_file] = File2Feature(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,[]);
     %[f_file] = File2Feature_minimal(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,[]);
     %     if ifScaled==0
