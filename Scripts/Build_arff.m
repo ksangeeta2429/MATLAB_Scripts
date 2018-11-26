@@ -29,7 +29,6 @@ end
 % if exist(path_images_dog, 'dir') ~= 7
 %     mkdir(path_images_dog);
 % end
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%% build f_sets %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 f_set=[]; % f_set will eventually contain the complete list of feature vectors for all target and non-target files (Human/Dog etc.)
 % f_set_nr=[]; % Extracting the non-robust subset of features: indices 1,5,9,12,21,22,24,25,32,54,61 from f_set
@@ -49,6 +48,7 @@ for j=1:length(fileFullNames)
     end
 end
 num_of_humans = num2str(length(Files));
+Files_all = Files;
 for i=1:length(Files) % take every file from the set 'Files'
     if mod(i,10)==0
         sprintf('Human - %dth file is processing\n',i) % Report every 10 files-the i-th file is processing
@@ -87,6 +87,7 @@ for j=1:length(fileFullNames)
     end
 end
 num_of_dogs = num2str(length(Files));
+Files_all=horzcat(Files_all,Files);
 for i=1:length(Files) % take every file from the set 'Files'
     if mod(i,10)==0
         sprintf('Bike - %dth file is processing\n',i) % Report every 10 files-the i-th file is processing
@@ -221,6 +222,10 @@ else
 %    saveARFF(sprintf('radar%d_scaled_nr.arff',OutIndex),instances_nr);
 %    saveARFF(sprintf('radar%d_scaled_r.arff',OutIndex),instances_r);
 end
+
+%% Save the order of files
+T = cell2table(Files_all','VariableNames',{'File_Order'});
+writetable(T,'files_order.dat');
 
 %c=100000;
 %gamma=0.1;
