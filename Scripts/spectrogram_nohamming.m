@@ -27,8 +27,13 @@ xin(:) = X(rowindex(:,ones(1,ncol))+colindex(ones(WINDOW,1),:)-1);
 %debug
 % a=xin(:,1)
 
-se = fft(xin,NFFT);
-s_shift = fftshift(se,1);
+%se = fft(xin,NFFT);
+%s_shift = fftshift(se,1);
+
+%use mote fft
+se = fftemote(xin,NFFT); % need to connect eMote with TinyCLR that has DynamicTestRunner, change COM port number in DynamicTestRunner_ConnectEmote.m, add DynamicTestRunner folder to MATLAB path. - Mike, 2015-09-29
+s_shift=NaN; % No need to shift; not using it
+
 
 size(se);
 % se = fftemote(xin,NFFT); % need to connect eMote with TinyCLR that has DynamicTestRunner, change COM port number in DynamicTestRunner_ConnectEmote.m, add DynamicTestRunner folder to MATLAB path. - Mike, 2015-09-29

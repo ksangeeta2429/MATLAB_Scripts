@@ -32,12 +32,14 @@ str_bora_dll = 'F:\MF\MicroFrameworkPK_v4_3\Samraksh\APPS\DataCollectorHost\Data
 str_mike_dll = 'C:\Users\researcher\Box Sync\All_programs_data_IPSN_2016\Simulation\toDhruboMichael\eMote_scripts\Microsoft.SPOT.Debugger.dll';
 str_dhrubo_dll = 'C:\Users\roy.174\Box Sync\All_programs_data_IPSN_2016\Simulation\toDhruboMichael\eMote_scripts\Microsoft.SPOT.Debugger.dll';
 str_Roy_dll = 'C:\Users\Roy\Box Sync\All_programs_data_IPSN_2016\Simulation\toDhruboMichael\eMote_scripts\Microsoft.SPOT.Debugger.dll';
-str_jin_dll = '';
+str_jihoon_dll = 'C:\Users\yun.131\Desktop\MATLAB_Scripts\eMote_scripts\Microsoft.SPOT.Debugger.dll';
+str_neel_dll = 'C:\Users\neel\Downloads\box.com\MATLAB_Scripts\eMote_scripts\Microsoft.SPOT.Debugger.dll';
 
 portNameMike = 'COM52';
 portNameDhrubo = 'COM32';
 portNameRoy = 'COM5';
-portNameJin = '';
+portNameJihoon = 'COM11';
+portNameNeel = 'COM6';
 
 str_dll = '';
 portName = '';
@@ -53,12 +55,18 @@ elseif strcmp(getenv('USERNAME'),'roy.174'      )==1
 elseif strcmp(getenv('USERNAME'),'Roy'      )==1
 	str_dll = str_Roy_dll;
     portName = portNameRoy;
+elseif strcmp(getenv('USERNAME'),'yun.131')==1
+    str_dll = str_jihoon_dll;
+    portName = portNameJihoon;
+elseif strcmp(getenv('USERNAME'),'neel')==1
+    str_dll = str_neel_dll;
+    portName = portNameNeel;
 else
 	fprintf('ERROR! no environment defined for user %s.  Please edit this file!\n',getenv('USERNAME'));
 end
 
-clear str_bora_dll str_mike_dll str_dhrubo_dll str_jin_dll str_Roy_dll;
-clear portNameMike portNameDhrubo portNameJin portNameRoy;
+clear str_bora_dll str_mike_dll str_dhrubo_dll str_jin_dll str_Roy_dll str_jihoon_dll;
+clear portNameMike portNameDhrubo portNameJin portNameRoy portNameJihoon;
 
 DBG = NET.addAssembly(str_dll);
 
@@ -123,8 +131,7 @@ if (m_eng.ConnectionSource ~= Microsoft.SPOT.Debugger.ConnectionSource.TinyCLR)
     fprintf('       ... ensure the TinyCLR is built for DynamicTestRunner\n');
     fprintf('################################################################\n');
     % DynamicTestRunner_DisconnectEmote
-    m_eng.Stop();
-    m_eng.Dispose();
-    clear m_eng;
-    return;
+    %m_eng.Stop();
+    %m_eng.Dispose();
+    %clear m_eng;
 end

@@ -2,6 +2,8 @@
 %spectrogram
 function data = padSignalWithZeros(X,WINDOW,NOVERLAP,NFFT,Fs)
 nx = length(X);
+WINDOW;
+NOVERLAP;
 number = (nx-NOVERLAP)/(WINDOW-NOVERLAP);
 integ = floor(number);
 fract = number-integ;

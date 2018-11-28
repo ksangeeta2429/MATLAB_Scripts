@@ -34,7 +34,12 @@ Qframe=Q(1+(k-1)/2*pointsPerFrame:(k+1)/2*pointsPerFrame);
 acI = Iframe - mean(Iframe);
 acQ = Qframe - mean(Qframe);
 Comp = acI + i*acQ;
+
+%Comp = padSignalWithZeros(Comp,WINDOW,NOVERLAP,NFFT,sampRate);
+
 [S,F,T,P]=spectrogram(Comp,WINDOW,NOVERLAP,NFFT,sampRate,'yaxis');
+N
+size(P)
 Fs=rate;                       
 F=F-Fs/2;                       
 P=[P(NFFT/2+1:NFFT,:);     

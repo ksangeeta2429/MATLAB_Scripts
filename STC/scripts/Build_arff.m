@@ -90,11 +90,22 @@ end
 instances=matlab2weka(sprintf('radar%d',OutIndex),featureNames,f_set,nColumn,ifReg);
 %% save the wekaOBJ to arff file
 %path_arff=[root,'radar/STC/arff files'];
+if(exist(path_arff,'dir') ~= 7)
+    mkdir(path_arff)
+    fprintf('INFO: created directory %s\n', path_arff);
+end
 cd(path_arff);
+ofile_ver = '_aus';
 if ifScaled == 0
-    saveARFF(sprintf('radar%d.arff',OutIndex),instances);
+    temp = strcat(num2str(size(f_set,2)-1),'_f',ofile_ver,'.arff');
+    saveARFF(temp,instances);
+    %saveARFF(sprintf('%d_f.arff',size(f_set,2)-1),instances);
+    fprintf('Arff saved as %s\n',temp);
 else
-    saveARFF(sprintf('radar%d_scaled.arff',OutIndex),instances);
+    temp = strcat(num2str(size(f_set,2)-1),'_f',ofile_ver,'_scaled.arff');
+    saveARFF(temp,instances);
+    fprintf('Arff saved as %s\n',temp);
+    %saveARFF(sprintf('%d_f_scaled.arff',size(f_set,2)-1),instances);
 end
 %saveARFF(sprintf('radar%d.arff',OutIndex),instances);
 
