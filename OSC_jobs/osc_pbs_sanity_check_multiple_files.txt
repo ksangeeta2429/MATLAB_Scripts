@@ -1,0 +1,9 @@
+#PBS -l walltime=0:30:00
+#PBS -l nodes=1:ppn=4
+#PBS -l mem=4000MB
+#PBS -j oe
+
+cd "/users/PAS1090/osu10640/box.com/MATLAB_Scripts/OSC_jobs/"
+
+module load matlab
+matlab -nodisplay -nodesktop < "sanity_check_multiple_files_osc.m"
