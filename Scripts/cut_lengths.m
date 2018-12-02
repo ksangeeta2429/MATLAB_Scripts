@@ -1,10 +1,12 @@
 SetEnvironment
 SetPath
 
-path = strcat(g_str_pathbase_data,'/Human_vs_non_human_training_new_detector/M_30_N_128_window_res/last_wind_padded_with_signal/austere_384_human/')
+%path = strcat(g_str_pathbase_data,'/Human_vs_non_human_training_new_detector/M_30_N_128_window_res/last_wind_padded_with_signal/austere_384_human/')
 %path = strcat(g_str_pathbase_data,'/Human_vs_non_human_training_new_detector/M_30_N_64_window_res/austere_311_cow/')
 %path = strcat(g_str_pathbase_data,'/Human_vs_non_human_training_new_detector/M_30_N_256_window_res/austere_364_human/')
 
+%bikes
+path = strcat(g_str_pathbase_data,'/Human_vs_bike_training_new_detector/M_30_N_128_window_res/last_wind_padded_with_signal/Bike/')
 %path = strcat(g_str_pathbase_data,'/Bike data/Aug 13 2018/Detect_begs_and_ends/c1/t22/bgr19/aus/cut/')
 oldFolder = cd(path);
 fileFullNames=dir;
@@ -31,7 +33,7 @@ for i=1:length(Files) % take every file from the set 'Files'
     
     
     Data = I + 1i * Q;
-    if(length(Data) < 256*5)
+    if(length(Data) < 256)
         move_to_f = strcat('less_than_',num2str(512/256));   
         if(exist(move_to_f,'dir') ~= 7)
             mkdir(move_to_f);

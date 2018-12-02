@@ -29,6 +29,7 @@ end
 
 
 % fid = fopen('C:\Users\he\Documents\Dropbox\MyMatlabWork\radar\IIITDemo\Records\tmp.txt','w');
-fid = fopen('C:\Users\royd\Documents\WIP\arraysC#.txt','a');
+%fid = fopen('C:\Users\royd\Documents\WIP\arraysC#.txt','a');
+fid = fopen('C:\Users\neel\Desktop\arraysC#.txt','a');
 fprintf(fid,res);
 fclose(fid);

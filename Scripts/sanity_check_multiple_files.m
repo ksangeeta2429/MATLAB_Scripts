@@ -23,11 +23,11 @@ w = [1]; %windows
 
 %start_hrs = 16; start_minutes = 51; start_seconds = 20; %start time of the radar for one particular raw file
 start_hrs = 0; start_minutes = 0; start_seconds = 0;
-dates = {'Aug 13 2018','20180815','20180814','Sept 26 2018','Aug 31 2018','Sept 4 2018','Sept 5 2018','Sept 12 2018','Aug 19 2018'}; 
-%dates = {'Aug 13 2018'};
-c = {'c1','c2'};
+%dates = {'Aug 13 2018','20180815','20180814','Sept 26 2018','Aug 31 2018','Sept 4 2018','Sept 5 2018','Sept 12 2018','Aug 19 2018'}; 
+dates = {'Aug 13 2018'};
+c = {'c3'};
 radars = {'aus','aus2','a16','a15','a17'};
-ofile_version = '_bora_det_win_N_256';
+ofile_version = '_bora_det_win_N_128';
 
 for date = dates
 date = char(date);

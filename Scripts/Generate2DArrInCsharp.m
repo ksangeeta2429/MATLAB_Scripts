@@ -8,7 +8,8 @@ function Generate2DArrInCsharp(OutIndex,SV_matlab,param,gamma,rho,feature_min,sc
 SetPath
 SetEnvironment
 
-fid = fopen([g_str_pathbase_radar,'/IIITDemo/Models/ModelParameters/ModelParameters_Csharp',num2str(OutIndex),'.txt'],'w');
+%fid = fopen([g_str_pathbase_radar,'/IIITDemo/Models/ModelParameters/ModelParameters_Csharp',num2str(OutIndex),'.txt'],'w');
+fid = fopen([g_str_pathbase_radar,'/IIITDemo/Models/SV/',num2str(OutIndex),'.txt'],'w');
 % fid = fopen(['C:\Users\he\Documents\Dropbox\MyMatlabWork\radar\IIITDemo\Models\ModelParameters\ModelParameters_Csharp',num2str(OutIndex),'.txt'],'w');
 
 %% write rho and gamma

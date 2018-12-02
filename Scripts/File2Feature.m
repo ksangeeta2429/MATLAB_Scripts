@@ -101,15 +101,25 @@ thr_sqr_Csharp = thr_sqr_matlab/(256^2);
 %dcI = 1960;%2044;   % enable when do test on dummy data
 %dcQ = 1960;%2048;
 
-dcI = 2025;
-dcQ = 2025;
+dcI = 0;
+dcQ = 0;
 
-%dcI = median(I);
-%dcQ = median(Q);
+if(fileName(1) == 'a')
+    dcI = 2025;
+    dcQ = 2025;
+else
+    dcI = median(I);
+    dcQ = median(Q);
+end
+
+disp(fileName);
+
+fprintf('dcI : %d dcQ : %d\n',dcI,dcQ);
+
 
 Data = (I-dcI) + 1i*(Q-dcQ);
 Data(1:50);
-%disp(fileName);
+
 %disp(fileName(1));
 %use background rejection for austere data.
 USEBGR = 1;
@@ -136,7 +146,7 @@ else
 	%return;
 end
 %disp(fileName);
-%disp(Rate);
+disp(Rate);
 %fprintf('Length : %d Rate : %d\n',length(Data),Rate);
 %Rate = 256; % for old data
 %Rate = 250;
@@ -256,11 +266,11 @@ if featureClass == 0
     
     
     %commented out to use only spectrogram based features
-    %f=[f,timeDomainFeatures(Data)]; %8
+    f=[f,timeDomainFeatures(Data)]; %8
 
 
     %commenting out to use only fft based features
-    %{
+    
     %         for quantile = [1 0.7 0.5]%0.05:0.05:0.95    %0.9
     for quantile = [0.9 0.7 0.5]
     %for quantile = [0.98 0.96 0.95 0.9 0.7 0.5] 
@@ -273,16 +283,16 @@ if featureClass == 0
          %f = [f,SlidingPercentileVelocity(Data,80,60,Rate,quantile)];
          
          %commenting out to use only fft based features
-         %f = [f,SlidingPercentileVelocity(Data,125,90,Rate,quantile,USEBGR,bgr,numQuads,short_term_buffer_length)];
+         f = [f,SlidingPercentileVelocity(Data,125,90,Rate,quantile,USEBGR,bgr,numQuads,short_term_buffer_length)];
          
          %f = [f,SlidingPercentileVelocity(Data,250,190,Rate,quantile)];
         %f = [f,SlidingPercentileVelocity(Data,1,0.75,Rate,quantile)];
     end
-    %}
+    
     
     
      %commenting out to use only fft based features
-    %{
+    
     for quantile = [0.9 0.7 0.5]
     %for quantile = [0.98 0.96 0.95 0.9 0.7 0.5]
     %for quantile = [0.99 0.98 0.97 0.96 0.95 0.9 0.8 0.7 0.6 0.5]%0.05:0.05:0.95   %19   %3
@@ -298,7 +308,7 @@ if featureClass == 0
        %f = [f, ApproxMax(Data,80,60,Rate,quantile)];
        %f = [f, ApproxMax(Data,250,190,Rate,quantile)];
     end
-    %}
+    
      
     %commented out to get only fft features
     f=[f,dist,time,distTimeProd,distTimeRatio];    % 4
@@ -495,8 +505,8 @@ if featureClass == 0
     %}
 
     %commenting out to use only fft based features
-    %accRange = AccRange(Data,0.5,0.5,Rate,0.9,USEBGR,bgr,numQuads,short_term_buffer_length);  % 0.5,0.8
-    %f=[f,accRange];
+    accRange = AccRange(Data,0.5,0.5,Rate,0.9,USEBGR,bgr,numQuads,short_term_buffer_length);  % 0.5,0.8
+    f=[f,accRange];
     
     %veloVar = VeloVarMinMax(Data,1,0.75, Rate, 0.1,0.9);   %0.5, 0.8
     %figure(); hold on
@@ -510,8 +520,8 @@ if featureClass == 0
     %f = [f,veloVar];
     
     %commenting out to use only fft based features
-    %[veloVar,veloVar2] = VeloVarMinMax(Data,125,90,Rate,0.1,0.9,USEBGR,bgr,numQuads,short_term_buffer_length);
-    %f = [f,veloVar]; 
+    [veloVar,veloVar2] = VeloVarMinMax(Data,125,90,Rate,0.1,0.9,USEBGR,bgr,numQuads,short_term_buffer_length);
+    f = [f,veloVar]; 
     
     %[veloVar,veloVar2] = VeloVarMinMax(Data,80,60,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
     %f = [f,veloVar];
@@ -528,7 +538,7 @@ if featureClass == 0
     %addpath('C:\Users\he\My Research\2014.10\Haar Features');
     
     %commenting out to use only fft based features
-    %f = [f, haar_feature(Data,5)];
+    f = [f, haar_feature(Data,5)];
     
     
     %         f = [f, haar_feature(Data,5)-haar_feature(BkData,levels)];

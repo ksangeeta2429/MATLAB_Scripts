@@ -39,7 +39,7 @@ portNameMike = 'COM52';
 portNameDhrubo = 'COM32';
 portNameRoy = 'COM5';
 portNameJihoon = 'COM11';
-portNameNeel = 'COM6';
+portNameNeel = 'COM8';
 
 str_dll = '';
 portName = '';

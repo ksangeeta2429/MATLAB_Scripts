@@ -72,21 +72,23 @@ SetPath
 
 %% 2014.08 Bike data
  Index = [201408];
- %data_dog = {'/Human_vs_non_human_training_new_detector/M_30_N_128_window_res/last_wind_padded_with_signal/austere_304_cow/cuts_intersec_with_old_det/'};
- data_dog = {'/Human_vs_non_human_training_new_detector/M_30_N_96_window_res/test/'};
- %data_dog = {'/Human_vs_non_human_training_new_detector/M_30_N_256_window_res/austere_282_cow/'};
+ %data_dog = {'/Human_vs_bike_training_new_detector/M_30_N_128_window_res/last_wind_padded_with_signal/Bike/'};
+ %data_dog = {'/Bike/'};
+ %data_dog = {'/Humanvsbike_new_detector/M_30_N_96_window_res/test/'};
+ data_dog = {'/Human_vs_non_human_training_new_detector/M_30_N_128_window_res/last_wind_padded_with_signal/final_304_cow/'};
  %data_dog = {'/IPSNdata/5-15-2011/Human'};
  %data_human = {'NIL'};
  %data_human = {'/Bike data/Oct 21 2017/humans_no_0.5/'};
  %data_dog = {'/Bike data/all_bikes/test/'};
  %data_dog = {'NIL'}
  %data_dog = {'/IPSNdata/5-15-2011/Human'};
- %data_human = {'NIL'}
- %data_human = {'/Human_845/'};
+ %data_human = {'/Human/'}
+ %data_human = {'/final_both/test/'};
+ data_human = {'/Human_vs_non_human_training_new_detector/M_30_N_128_window_res/last_wind_padded_with_signal/67_perc_synthetic_33_perc_real/'};
  %data_human = {'/Synthetic/20180505/walking_250hz/rank5/cut/'};
  %data_human = {'/Human_vs_non_human_training_new_detector/M_30_N_256_window_res/austere_364_human/'};
- data_human = {'/Human_vs_non_human_training_new_detector/M_30_N_96_window_res/test/'};
- %data_human = {'/Human_vs_non_human_training_new_detector/M_30_N_128_window_res/last_wind_padded_with_signal/austere_384_human/cuts_intersec_with_old_det/'};
+ %data_human = {'/Human_vs_non_human_training_new_detector/M_30_N_96_window_res/test/'};
+ %data_human = {'/Human_vs_non_human_training_new_detector/M_30_N_128_window_res/last_wind_padded_with_signal/final_390_human/'};
  %data_human = {'/Bike data/Oct 21 2017/cut_manual/all_humans/test2/'};
  %data_dog = {'/Bike data/Aug 9 2017/Detect_begs_and_ends/param0.9/cut/humans only radar y'};
  %data_dog = {'/Bike data/Oct 21 2017/bikes_no_0.5/'};
@@ -106,8 +108,8 @@ SetPath
 
 %% Any test data, such as a single walk cut
 %Index = [12345];
-data_dog = {'/Test/cow'};
-data_human = {'/Test/human'};
+%data_dog = {'/Test/cow'};
+%data_human = {'/Test/human'};
 %% Execute.m
 featureClass = 0 % use class 0 for classification features, also include
 
