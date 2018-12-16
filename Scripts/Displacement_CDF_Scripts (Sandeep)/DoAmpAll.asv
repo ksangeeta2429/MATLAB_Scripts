@@ -1,0 +1,41 @@
+function DoAmpAll(Path, Mask, MinDist)
+
+%% Assign constants
+N = 7;
+Mid = (N + 1)/2;
+M = 5;
+
+BumbleBee;
+
+%% Do Compuation
+FileList = dir(sprintf('%s/%s', Path,Mask));
+NumFile = length(FileList);
+
+NumRange = 100;
+InterpDist = 10*[0 : NumRange - 1]/(NumRange - 1);
+
+for i = 1 : NumFile
+  Name = FileList(i).name;
+  FullName = sprintf('%s/%s', Path,Name);
+
+  Comp = ReadComp(FullName);
+  NumSamp = length(Comp);
+
+  Rot = UnWrap(angle(Comp)/2/pi);
+  Index = [Mid : NumSamp - Mid + 1];
+  Dist{i} = (Rot(Index) - min(Rot))*lambda/2 + MinDist;
+
+  Feat{i} = MofN(abs(Comp), M,N);
+
+  for j = 1 : 100
+  InterpY{i} = AllCross(Dist,Feat, Interp
+%  InterpFeat(i,:) = interp1(Dist,Feat, InterpDist)
+end
+
+Range = 5;
+for i = 1 : NumFile
+  Cross = find(diff(Dist{i} < Range) ~= 0);
+  Temp(i) = interp1(Dist{i},Feat{i},Range);
+end
+
+plot(sort(Temp));
