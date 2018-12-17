@@ -18,12 +18,12 @@ clc;
 %added by neel
 SetEnvironment
 SetPath
-data_bike = '/Bike data/Oct 21 2017/bikes_first_window_start/';
-data_human = '/Bike data/Oct 21 2017/humans_first_window_start/';
+data_bike = '/Human_vs_bike_training_new_detector/M_30_N_128_window_res/last_wind_padded_with_signal/Bike_558/';
+data_human = '/Human_vs_non_human_training_new_detector/M_30_N_128_window_res/last_wind_padded_with_signal/austere_404_human/';
 
 ifTrain = 0;
-data_all = '/final_both/test/';
-%data_all = '/data_with_count/test/';
+data_all = '/final_both_radial/';
+%data_all = '/Human_vs_bike_training_new_detector/M_30_N_128_window_res/last_wind_padded_with_signal/Bike_558/';
 %data_all = '/Bike data/Oct 21 2017/all_first_window_start/';
 %data_all = '/home/neel/STC/STC/data files/new_radar_dataset/full';
 output_arff = strcat(g_str_pathbase_data,data_all,'counting');

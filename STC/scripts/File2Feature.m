@@ -8,7 +8,7 @@ function f_file=File2Feature(fileName, secondsPerFrame,ifScaled,fClass, feature_
 
 data = ReadBin(fileName);
 [I,Q,N]=Data2IQ(data);
-[I,Q,N] = dropLastWindow(I,Q,256);
+%[I,Q,N] = dropLastWindow(I,Q,256);
 length(I);
 %added by neel. Old human data is sampled at rate 256 and WLN data at 250
 %use secondsPerFrame same as length of the cuts since the cuts for new data are much smaller 
@@ -27,14 +27,17 @@ else
     sampRate = 256;
     pointsPerFrame = N;
 end
-sampRate;
-%sampRate=256;
+%sampRate;
+sampRate=256;
+fprintf('File : %s\n',fileName);
+fprintf('length : %d Rate : %d\n',length(I),sampRate);
 WINDOW = 2^nextpow2(sampRate);
 NFFT = 2^nextpow2(sampRate);
 %NFFT = sampRate;
-disp(fileName);
+
 %roomInFilename=ExtractRoomFromFileName(fileName);
 nPeople=ExtractNumFromFileName(fileName);
+%fprintf('Target Count : %d\n',nPeople);
 if ifReg==0
     classIndex=num2str(classMapping(nPeople,ClassDef));
 else
@@ -45,11 +48,11 @@ end
 target_label = ExtractClassLabelFromFileName(fileName);
 
 if(strcmp(target_label,'Bike'))
-    class_label = 0;
+    class_label = 'Bike';
 else
-    class_label = 1;
+    class_label = 'Human';
 end
-fprintf('Target : %s, Class Label : %d\n\n',target_label,class_label)
+fprintf('Target : %s, Class Label : %s\n',target_label,class_label)
 fprintf('Target Count : %d\n',nPeople)
 
 %use this if folder has all humans and you do not want to extract from file name
@@ -93,10 +96,9 @@ if nFrames>0       % at least 1 frame, not too short
             f_frame = (f_frame-feature_min).*scalingFactors;
         end
         f_frame=num2cell(f_frame);
+        f_frame=[f_frame classIndex]; %  [f_frame indexFile classIndex];  add indexFile and classIndex at the last
         %%%%%%%%%%% include class label as a feature
-        f_frame = [f_frame class_label];
-
-        f_frame1=[f_frame classIndex]; %  [f_frame indexFile classIndex];  add indexFile and classIndex at the last
+        f_frame1 = [f_frame class_label];
         f_file=[f_file;f_frame1];
     end
 end

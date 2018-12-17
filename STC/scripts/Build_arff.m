@@ -20,7 +20,7 @@ root='C:/Documents and Settings/he/My Documents/Dropbox/MyMatlabWork/';
 %path_data=[root,'radar/STC/data files/new_radar_dataset/clean/train'];
 cd(path_data);
 fileFullNames=dir(path_data);
-
+file_order = {};
 Files={};  % first 2 file is '.' and '..'
 i=1;
 for j=1:length(fileFullNames)
@@ -47,6 +47,7 @@ for i=1:length(Files) % take every file from the set 'Files'
         sprintf('%dth file is processing\n',i) % the i-th file is processing
     %end
     fileName=Files{i}; 
+    file_order = [file_order string(fileName)];
     f_file=File2Feature(fileName, secondsPerFrame,ifScaled,fClass,feature_min,scalingFactors,ifReg,ifTrimsample,ClassDef,i);
     f_set=[f_set;f_file];     
 end
@@ -95,7 +96,18 @@ if(exist(path_arff,'dir') ~= 7)
     fprintf('INFO: created directory %s\n', path_arff);
 end
 cd(path_arff);
-ofile_ver = '_aus';
+ofile_ver = '';
+file_order_file = [num2str(size(f_set,2)-1) '_f' ofile_ver '.txt']
+fd = fopen(file_order_file,'w');
+fprintf(fd,'Metadata : %s\n',string(datetime));
+fprintf(fd,'Metadata : Data Folder - %s\n',string(path_data));
+fprintf(fd,'Metadata : Number of files - %d\n',length(file_order));
+for i=1:length(file_order)
+    fileName = file_order{i};
+    fprintf(fd,'%s\n',fileName);
+end
+fclose(fd);
+
 if ifScaled == 0
     temp = strcat(num2str(size(f_set,2)-1),'_f',ofile_ver,'.arff');
     saveARFF(temp,instances);

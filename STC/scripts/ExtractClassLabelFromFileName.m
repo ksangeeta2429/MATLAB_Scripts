@@ -1,6 +1,7 @@
 function classInFilename=ExtractClassLabelFromFileName(fileName)
 	tmp=find(fileName=='_');
 	tmp1=find(fileName=='p');
+    tmp1 = tmp1(numel(tmp1));
 	%tmp2=tmp(length(tmp))+1;
 	tmp2 = 0;
 	for i = tmp
