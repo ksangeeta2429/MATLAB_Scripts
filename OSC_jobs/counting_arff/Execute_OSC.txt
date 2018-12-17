@@ -1,0 +1,9 @@
+#PBS -l walltime=3:30:00
+#PBS -l nodes=1:ppn=12
+#PBS -l mem=2000MB
+#PBS -j oe
+
+cd "/users/PAS1090/osu10640/box.com/MATLAB_Scripts/OSC_jobs/counting_arff/"
+
+module load matlab
+matlab -nodisplay -nodesktop < "ExecuteOSC.m"
