@@ -12,9 +12,9 @@ SetPath;
 
 %austere FPGA datasets
 %dates = {'Aug 13 2018','20180815','20180814','Sept 26 2018','Aug 31 2018','Sept 4 2018','Sept 5 2018','Sept 12 2018','Aug 19 2018'};
-dates = {'Aug 13 2018'};
-c = {'c3'};
-radars = {'aus','aus2','a16','a15','a17'};
+dates = {'Dec 9 2018'};
+c = {'c1'};
+radars = {'aus','aus2','a16','a15','a17','a13'};
 CUT_USING_SAMPLE_INDEXES = 1;
 ifile_version = '_bora_det_win_N_128';
 indexFile_version = '_bora_det_win_N_128_index';

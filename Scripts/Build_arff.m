@@ -9,7 +9,6 @@ SetPath
 %path_data_human = strcat(g_str_pathbase_data,'\training\test_human_onedata'); %REPLACE: human - 406
 %path_data_dog   = strcat(g_str_pathbase_data,'\training\test_dog_onedata'); %REPLACE: ball - 408
 
-
 path_data_human = strcat(g_str_pathbase_data,data_human)
 path_data_dog = strcat(g_str_pathbase_data,data_dog)
 
@@ -38,8 +37,7 @@ f_set=[]; % f_set will eventually contain the complete list of feature vectors f
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% human
 cd(path_data_human);
 fileFullNames=dir;
-
-
+file_order = {};
 Files={};  % first 2 file is '.' and '..'
 i=1;
 for j=1:length(fileFullNames)
@@ -57,7 +55,8 @@ for i=1:length(Files) % take every file from the set 'Files'
     end
     %sprintf('Human - %dth file is processing\n',i)
     fileName=Files{i};
-    [f_file] = File2Feature(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,[]);
+    file_order = [file_order string(fileName)];
+    [f_file,str_featnames] = File2Feature(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,[]);
     %[f_file] = File2Feature_minimal(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,[]);
     %     if ifScaled==0
     %         [imghuman, f_file] = File2Feature(fileName, 'Human', ifScaled, featureClass, feature_min, scalingFactors,[]);
@@ -94,7 +93,8 @@ for i=1:length(Files) % take every file from the set 'Files'
     end
     %sprintf('Dog - %dth file is processing\n',i)
     fileName=Files{i};
-    [f_file] = File2Feature(fileName, 'Bike', ifScaled, featureClass, feature_min, scalingFactors,[]);
+    file_order = [file_order string(fileName)];
+    [f_file,str_featnames] = File2Feature(fileName, 'Bike', ifScaled, featureClass, feature_min, scalingFactors,[]);
     %[f_file] = File2Feature_minimal(fileName, 'Cow', ifScaled, featureClass, feature_min, scalingFactors,[]);
     %     if ifScaled==0
     %         [imgdog, f_file] = File2Feature(fileName, 'Dog', ifScaled, featureClass, feature_min, scalingFactors,[]);
@@ -134,7 +134,7 @@ end
 % sprintf('the total num of features is: %d',size(f_set,2)-1)
 
 %Compute feature scaling
-
+%{
 if (ifScaled==0)
     format shortg
     feature_max = max(cell2mat(f_set(:,1:size(f_set,2)-1)));
@@ -167,7 +167,7 @@ if (ifScaled==0)
     end
     %save('..\tmp');
 end
-
+%}
 %load('..\tmp');
 % Weka Related
 % featureNames is f1 f2 f3 ...., give these name to the n columns of f_set
@@ -178,7 +178,7 @@ for i=1:nColumn
 end
 
 ifReg=0;
-instances=matlab2weka(sprintf('radar%d',OutIndex),featureNames,f_set,nColumn,ifReg);
+instances=matlab2weka(sprintf('radar%d',OutIndex),str_featnames,f_set,nColumn,ifReg);
 
 %% Commented by Dhrubo - f_set_nr and f_set_r not needed
 % nColumn=size(f_set_nr,2);
@@ -199,6 +199,16 @@ instances=matlab2weka(sprintf('radar%d',OutIndex),featureNames,f_set,nColumn,ifR
 
 %% save the wekaOBJ to arff file
 cd(path_arff);
+file_order_file = [num2str(nColumn),'_f_' num_of_humans '_humans_' num_of_dogs '_bikes_file_order' '.txt']
+fd = fopen(file_order_file,'w');
+fprintf(fd,'Metadata : %s\n',string(datetime));
+fprintf(fd,'Metadata : Human Folder - %s\n',string(path_data_human));
+fprintf(fd,'Metadata : NonHuman Folder - %s\n',string(path_data_dog));
+for i=1:length(file_order)
+    fileName = file_order{i};
+    fprintf(fd,'%s\n',fileName);
+end
+fclose(fd);
 if ifScaled == 0
     %temp = strcat(num2str(nColumn),'_f_',num_of_humans,'_humans_',num_of_dogs,'_cows_syn_and_real_med_dc','.arff')
     temp = strcat(num2str(nColumn),'_f_',num_of_humans,'_humans_',num_of_dogs,'_bikes','.arff')

@@ -1,0 +1,6 @@
+function checkbbsFile(fileName)
+    [I,Q,N]=Data2IQ(ReadBin([fileName]));
+    for i = 1:length(I)
+        if(I(i) ==)
+    end
+end

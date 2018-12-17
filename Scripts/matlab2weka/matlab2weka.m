@@ -77,7 +77,7 @@ function wekaOBJ = matlab2weka(name, featureNames, data,targetIndex,ifReg)
             %inst = Instance(numel(featureNames));  % weka 3.6
             inst = DenseInstance(numel(featureNames));  % weka 3.7
             inst.setDataset(wekaOBJ);
-            for j=0:numel(featureNames)-2 % last column assign string if needed             
+            for j=0:numel(featureNames)-2 % last 2 columns assign string if needed             
                 inst.setValue(j,data{i,j+1});
             end
             % now at the last column

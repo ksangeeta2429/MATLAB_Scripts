@@ -2,7 +2,7 @@
 % output: feature matrix, each row is a frame
 
 
-function [f_file] = File2Feature(fileName, classLabel, ifScaled, featureClass, feature_min, scalingFactors, fftimage)
+function [f_file,str_featnames] = File2Feature(fileName, classLabel, ifScaled, featureClass, feature_min, scalingFactors, fftimage)
 
 SetEnvironment
 SetPath
@@ -103,27 +103,23 @@ thr_sqr_Csharp = thr_sqr_matlab/(256^2);
 
 dcI = 0;
 dcQ = 0;
-
 if(fileName(1) == 'a')
-    dcI = 2025;
-    dcQ = 2025;
+    dcI = 2025;%austere data
+    dcQ = 2025;%austere data
 else
-    dcI = median(I);
-    dcQ = median(Q);
+    dcI = 2048;%Michaels synthetic data
+    dcQ = 2048;
 end
-
-disp(fileName);
-
+fprintf('\nFile : %s\n',fileName);
 fprintf('dcI : %d dcQ : %d\n',dcI,dcQ);
-
-
 Data = (I-dcI) + 1i*(Q-dcQ);
 Data(1:50);
 
-%disp(fileName(1));
 %use background rejection for austere data.
 USEBGR = 1;
+USEDISTANDFFTONLY = 0;
 bgr = 19; numQuads = 4; short_term_buffer_length = 256;
+f_num = 0;
 %{
 if(fileName(1) == 'a')
     USEBGR = 1;
@@ -131,9 +127,9 @@ else
     USEBGR = 0;
 end
 %}
-USEBGR;
+%USEBGR
 length(Data);
-
+fprintf('USEBGR : %d\n',USEBGR);
 if(rem(length(Data),256) == 0 | rem(length(Data),128) == 0 | rem(length(Data),64) == 0 | rem(length(Data)-1,256) == 0 | rem(length(Data)-1,128) == 0 | rem(length(Data)-1,64) == 0)
 	%fprintf('Rate is 256 : %d\n',length(Data));
 	Rate = 256;
@@ -145,9 +141,10 @@ else
 	%fprintf('Rate is not 256 or 250: %d Terminating script\n',length(Data));
 	%return;
 end
+%Rate = 512;
 %disp(fileName);
-disp(Rate);
-%fprintf('Length : %d Rate : %d\n',length(Data),Rate);
+%disp(Rate);
+fprintf('Length : %d Rate : %d\n',length(Data),Rate);
 %Rate = 256; % for old data
 %Rate = 250;
 %FftWindow = Rate;
@@ -162,7 +159,7 @@ Freq = FftFreq(FftWindow, Rate);
 medianBack=[];
 stdBack=[];
 
-
+str_featnames = [];
 %     if length(strfind(fileName,'\'))==0
 %         BkFileName = ['..\bk\',fileName(1:strfind(fileName,'cut')-2),'_bk'];
 %     else BkFileName = ['..\bk\',fileName(strfind(fileName,'\')+1:strfind(fileName,'cut')-2),'_bk'];
@@ -266,8 +263,12 @@ if featureClass == 0
     
     
     %commented out to use only spectrogram based features
-    f=[f,timeDomainFeatures(Data)]; %8
-
+    if(USEDISTANDFFTONLY == 0)
+        [ f_tdf, str_feat_tdf ] = timeDomainFeatures(Data);
+        f=[f, f_tdf]; 
+        f_num = f_num + 8;
+        str_featnames = [ str_featnames str_feat_tdf ];
+    end
 
     %commenting out to use only fft based features
     
@@ -283,8 +284,11 @@ if featureClass == 0
          %f = [f,SlidingPercentileVelocity(Data,80,60,Rate,quantile)];
          
          %commenting out to use only fft based features
-         f = [f,SlidingPercentileVelocity(Data,125,90,Rate,quantile,USEBGR,bgr,numQuads,short_term_buffer_length)];
-         
+         if(USEDISTANDFFTONLY == 0)
+            f = [f,SlidingPercentileVelocity(Data,125,90,Rate,quantile,USEBGR,bgr,numQuads,short_term_buffer_length)];
+            f_num = f_num + 1;
+            str_featnames = [ str_featnames [ 'SlidingPercVelo(125,90,_quantile_' num2str(quantile) ')_' num2str(f_num)] ];
+         end
          %f = [f,SlidingPercentileVelocity(Data,250,190,Rate,quantile)];
         %f = [f,SlidingPercentileVelocity(Data,1,0.75,Rate,quantile)];
     end
@@ -301,8 +305,11 @@ if featureClass == 0
        % f = [f, ApproxMax(Data,0.5,0.5,Rate,quantile)];
        
        %commenting out to use only fft based features
-       f = [f, ApproxMax(Data,125,90,Rate,quantile,USEBGR,bgr,numQuads,short_term_buffer_length)];
-       
+       if(USEDISTANDFFTONLY == 0)
+        f = [f, ApproxMax(Data,125,90,Rate,quantile,USEBGR,bgr,numQuads,short_term_buffer_length)];
+        f_num = f_num + 1;
+        str_featnames = [ str_featnames [ 'ApproxMax(125,90,_quantile_' num2str(quantile) ')_' num2str(f_num)] ];
+       end
        %f = [f, ApproxMax(Data,50,40,Rate,quantile)];
        %f = [f, ApproxMax(Data,30,20,Rate,quantile)];
        %f = [f, ApproxMax(Data,80,60,Rate,quantile)];
@@ -312,7 +319,10 @@ if featureClass == 0
      
     %commented out to get only fft features
     f=[f,dist,time,distTimeProd,distTimeRatio];    % 4
-
+    f_num = f_num + 4;
+    str_featnames = [ str_featnames [ 'dist' ] [ 'time' ] [ 'distTimeProd' ] [ 'distTimeRatio' ] ];
+    
+    
     temp = [];%to print set of features testing against C# equivalent features
     %m_s_19 = 0; m_s_30 = 0;  m_s_38 = 0; m_s_99 = 0; fre_w_9 = 0;
     [TimeFreq,TimeFreq_shift] = spectrogram_nohamming(Data, FftWindow, FftWindow - FftStep, NFFT, Rate);
@@ -458,6 +468,19 @@ if featureClass == 0
         %temp = [temp getFeaturesInParticularOrder(thr_sqr_csharp,numHitBins_sum,numHitBins_max,numHitBins_median,numHitBins_var,moment_sum,maxFreq,freqWidth,widthLengthRatio1,widthLengthRatio2, totalPowerAboveThr)];
         f = [f,numHitBins_sum,numHitBins_max,numHitBins_median,numHitBins_var,moment_sum,maxFreq,freqWidth,widthLengthRatio1,widthLengthRatio2, totalPowerAboveThr]; % 10
         %f = [f,numHitBins_sum,numHitBins_max,numHitBins_median,numHitBins_var,moment_sum,maxFreq,freq_width_mean,freq_width_meadian,freq_width_var,freqWidth,widthLengthRatio1,widthLengthRatio2, totalPowerAboveThr,p1,p2,num_exc_bins_diff,num_exc_bins_ratio,num_exc_bins_ratio1]; % 18
+        f_num = f_num + 10;
+        str_featnames = [ str_featnames ...
+            [ 'th' '_' num2str(thr_sqr_csharp) '_' 'numHitBins_sum' ] ...
+            [ 'th' '_' num2str(thr_sqr_csharp) '_' 'numHitBins_max' ] ...
+            [ 'th' '_' num2str(thr_sqr_csharp) '_' 'numHitBins_median' ] ...
+            [ 'th' '_' num2str(thr_sqr_csharp) '_' 'numHitBins_var' ] ...
+            [ 'th' '_' num2str(thr_sqr_csharp) '_' 'moment_sum' ] ...
+            [ 'th' '_' num2str(thr_sqr_csharp) '_' 'maxFreq' ] ...
+            [ 'th' '_' num2str(thr_sqr_csharp) '_' 'freqWidth' ] ...
+            [ 'th' '_' num2str(thr_sqr_csharp) '_' 'widthLengthRatio1' ] ...
+            [ 'th' '_' num2str(thr_sqr_csharp) '_' 'widthLengthRatio2' ] ...
+            [ 'th' '_' num2str(thr_sqr_csharp) '_' 'totalPowerAboveThr' ] ];
+        
     end
     %{
         fprintf('\n');
@@ -505,9 +528,12 @@ if featureClass == 0
     %}
 
     %commenting out to use only fft based features
-    accRange = AccRange(Data,0.5,0.5,Rate,0.9,USEBGR,bgr,numQuads,short_term_buffer_length);  % 0.5,0.8
-    f=[f,accRange];
-    
+    if(USEDISTANDFFTONLY == 0)
+        accRange = AccRange(Data,0.5,0.5,Rate,0.9,USEBGR,bgr,numQuads,short_term_buffer_length);  % 0.5,0.8
+        f=[f,accRange];
+        f_num = f_num + 1;
+        str_featnames = [ str_featnames ['accRange_' num2str(f_num)] ];
+    end
     %veloVar = VeloVarMinMax(Data,1,0.75, Rate, 0.1,0.9);   %0.5, 0.8
     %figure(); hold on
     %[veloVar,veloVar2] = VeloVarMinMax(Data,10,7,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
@@ -520,9 +546,12 @@ if featureClass == 0
     %f = [f,veloVar];
     
     %commenting out to use only fft based features
-    [veloVar,veloVar2] = VeloVarMinMax(Data,125,90,Rate,0.1,0.9,USEBGR,bgr,numQuads,short_term_buffer_length);
-    f = [f,veloVar]; 
-    
+    if(USEDISTANDFFTONLY == 0)
+        [veloVar,veloVar2] = VeloVarMinMax(Data,125,90,Rate,0.1,0.9,USEBGR,bgr,numQuads,short_term_buffer_length);
+        f = [f,veloVar]; 
+        f_num = f_num + 1;
+        str_featnames = [str_featnames strcat('veloVarMinMax_',num2str(f_num))];
+    end
     %[veloVar,veloVar2] = VeloVarMinMax(Data,80,60,Rate,0.1,0.9); %Using # of samples as input, instead of # of windows
     %f = [f,veloVar];
     
@@ -538,18 +567,28 @@ if featureClass == 0
     %addpath('C:\Users\he\My Research\2014.10\Haar Features');
     
     %commenting out to use only fft based features
-    f = [f, haar_feature(Data,5)];
-    
+    if(USEDISTANDFFTONLY == 0)
+        f = [f, haar_feature(Data,5)];
+        for i = 1:6
+            %str_featnames = [ str_featnames 'haar_l1' 'haar_l2' 'haar_l3' 'haar_l4' 'haar_l5' 'haar_a' ];
+            f_num = f_num + 1;
+            str_featnames = [str_featnames strcat('haar_',num2str(f_num))];
+        end
+    end
     
     %         f = [f, haar_feature(Data,5)-haar_feature(BkData,levels)];
 
     %87 features - 86
 
 
-    %let last feature be count label
-	%count_label = ExtractNumFromFileName(fileName);
-	%f = [f,count_label];
-	%f = [f,1];
+    %add feature be count label
+	count_label = ExtractNumFromFileName(fileName);
+    fprintf('Target Count : %d\n',count_label);
+	f = [f,count_label];
+    f_num = f_num + 1;
+    str_featnames = [str_featnames ['Target Count_' num2str(f_num)]];
+    %add feature fileName
+	%f = [f, string([fileName '.data'])];
 end
 
 %fprintf('Size of feature vector : %d\n',length(f));
@@ -610,8 +649,11 @@ if ifScaled==1
     f = (f-feature_min).*scalingFactors;
 end
 
-f_file=[num2cell(f),classLabel]; %Return the list of features for that file and the classlabel (Human/Dog/Ball etc.) as the last feature.
-
+%f_file=[num2cell(f),fileName,classLabel]; %Return the list of features for that file and the classlabel (Human/Dog/Ball etc.) as the last feature.
+f_file=[num2cell(f),classLabel];
+f_num = f_num + 1;
+str_featnames = [ str_featnames ['classLabel_' num2str(f_num)] ];
+%f_file(end-10:end)
 %     nStep = N/64
 %
 %     f(11)

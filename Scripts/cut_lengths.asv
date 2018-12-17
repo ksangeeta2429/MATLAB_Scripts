@@ -23,9 +23,6 @@ for j=1:length(fileFullNames)
     end
 end
 p = 0;
-average = 0;
-s_average = 0;
-s_files = 0;
 for i=1:length(Files) % take every file from the set 'Files'
     if mod(i,10)==0
         %sprintf('Human - %dth file is processing\n',i) % Report every 10 files-the i-th file is processing
@@ -33,22 +30,19 @@ for i=1:length(Files) % take every file from the set 'Files'
     fileName=Files{i};
     [I,Q,N]=Data2IQ(ReadBin([fileName,'.data']));
 
-    
+ 
     
     
     Data = I + 1i * Q;
-    average = average + length(Data)/256;
-    if(length(Data) < 256*2)
+    if(length(Data) <= 256)
         move_to_f = strcat('less_than_',num2str(512/256));   
         if(exist(move_to_f,'dir') ~= 7)
             mkdir(move_to_f);
             fprintf('INFO: created directory %s\n', move_to_f);
         end
-        s_average = s_average + length(Data)/256;
-        s_files = s_files + 1;
         fprintf('%s length : %d\n',fileName,length(Data));  
-        %delete([fileName '.data']);
-        %fprintf('INFO: deleted file %s\n', fileName);
+        delete([fileName '.data']);
+        fprintf('INFO: deleted file %s\n', fileName);
     end
     if(length(Data) > 3840)
         p = p + 1;
@@ -101,7 +95,5 @@ for i=1:length(Files) % take every file from the set 'Files'
     end
     
 end
-average = average/length(Files)
-s_average = s_average/s_files
 cd(oldFolder);
 p

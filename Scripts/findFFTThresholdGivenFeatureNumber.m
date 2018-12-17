@@ -9,7 +9,7 @@ function [th] = findFFTThresholdGivenFeatureNumber(f_num)
 
 threshold = 2:2:200;
 
-fft_start = 5;
+fft_start = 19;
 fft_num_feat = 10;
 
 th = 0;
@@ -18,7 +18,7 @@ for i = t
     %fprintf('%d ',i);
     if(f_num >= i && f_num < i+fft_num_feat)
         disp(i);
-        th = (i/5)+1;
+        th = (i/19)+1;
     end
 end
  fprintf('\n');
