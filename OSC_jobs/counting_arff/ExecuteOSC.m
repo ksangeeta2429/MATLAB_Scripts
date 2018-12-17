@@ -12,7 +12,10 @@
 % Fig. 12: Mean Absolute Error vs Frame Length - plotFrameLengthInfluence.m
 % radar89.arff is the best, should not replace it!!!!!
 
-addpath('/users/PAS1090/osu10640/box.com/MATLAB_Scripts/STC/');
+addpath(genpath('/users/PAS1090/osu10640/box.com/MATLAB_Scripts/STC/'));
+dpath = {'/users/PAS1090/osu10640/box.com/MATLAB_Scripts/JAR_files/weka.jar'};
+javaclasspath('-v1');
+javaclasspath(dpath);
 
 g_str_pathbase_data = '/users/PAS1090/osu10640/box.com/Data_Repository/';
 
