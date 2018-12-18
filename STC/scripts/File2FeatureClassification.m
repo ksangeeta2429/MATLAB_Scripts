@@ -112,6 +112,8 @@ else
     dcQ = 2048;
 end
 
+dcI = median(I); dcQ = median(Q);
+
 fprintf('\nFile : %s\n',fileName);
 fprintf('dcI : %d dcQ : %d\n',dcI,dcQ);
 Data = (I-dcI) + 1i*(Q-dcQ);
@@ -569,6 +571,7 @@ if featureClass == 0
     %addpath('C:\Users\he\My Research\2014.10\Haar Features');
     
     %commenting out to use only fft based features
+    %{
     if(USEDISTANDFFTONLY == 0)
         f = [f, haar_feature(Data,5)];
         for i = 1:6
@@ -577,6 +580,7 @@ if featureClass == 0
             str_featnames = [str_featnames strcat('haar_',num2str(f_num))];
         end
     end
+    %}
     
     %         f = [f, haar_feature(Data,5)-haar_feature(BkData,levels)];
 
