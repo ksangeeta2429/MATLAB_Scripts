@@ -41,6 +41,8 @@ f_set=[];
 sprintf('the total num of files is: %d',length(Files))
     % display total num of files
     
+str_featNames_classification = [];
+n_count_feat = 0; n_class_feat = 0;
 for i=1:length(Files) % take every file from the set 'Files'
     %Files{i}
     %if mod(i,10)==0 
@@ -49,9 +51,21 @@ for i=1:length(Files) % take every file from the set 'Files'
     fileName=Files{i}; 
     file_order = [file_order string(fileName)];
     f_file=File2Feature(fileName, secondsPerFrame,ifScaled,fClass,feature_min,scalingFactors,ifReg,ifTrimsample,ClassDef,i);
+    target_count = f_file{length(f_file)-1};
+    target_label = f_file{length(f_file)};
+    f_file(length(f_file)-1) = [];  f_file(length(f_file)) = []; 
+    fprintf('Number of counting features : %d\n',length(f_file));
+    n_count_feat = length(f_file);
+    %now compute classification features and combine with counting features
+    [f_file_classification str_featNames_classification] = File2FeatureClassification(fileName,0);
+    f_file = [f_file f_file_classification];
+    f_file = [f_file target_count target_label];
+    fprintf('Number of classification features : %d\n',length(f_file_classification));
+    n_class_feat = length(f_file_classification);
     f_set=[f_set;f_file];     
 end
 
+%{
 if (ifScaled == 0)
     format shortg
     feature_max = max(cell2mat(f_set(:,1:size(f_set,2)-1)));
@@ -67,6 +81,7 @@ if (ifScaled == 0)
     end
     %save('..\tmp');
 end
+%}
 sprintf('the total num of features is: %d',size(f_set,2)-1)
 
 
@@ -83,11 +98,17 @@ save('tmp');
 %% Weka Related
 % featureNames is f1 f2 f3 ...., give these name to the n columns of f_set
 nColumn=size(f_set,2);  
-featureNames=cell(1,nColumn);
-for i=1:nColumn
+featureNames={};
+for i=1:n_count_feat
     featureNames{i}= sprintf('f%d',i);
 end
-
+str_featNames_classification;
+featureNames = [featureNames str_featNames_classification 'Target Count' 'Class Label'];
+%k = 1;
+%for i = n_count_feat+1:n_class_feat
+ %   featureNames{i}= sprintf('%s',str_featNames_classification(k));
+  %  k = k + 1;
+%end
 instances=matlab2weka(sprintf('radar%d',OutIndex),featureNames,f_set,nColumn,ifReg);
 %% save the wekaOBJ to arff file
 %path_arff=[root,'radar/STC/arff files'];

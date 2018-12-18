@@ -79,7 +79,7 @@ SetPath
  %data_dog = {'/IPSNdata/5-15-2011/Human'};
  %data_human = {'NIL'};
  %data_human = {'/Bike data/Oct 21 2017/humans_no_0.5/'};
- data_dog = {'/final_bike_radial_full_cuts/'};
+ data_dog = {'/final_bike_full_cuts/'};
  %data_dog = {'NIL'}
  %data_dog = {'/IPSNdata/5-15-2011/Human'};
  data_human = {'/empty/'};

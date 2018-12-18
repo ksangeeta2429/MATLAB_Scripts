@@ -13,6 +13,9 @@
 % radar89.arff is the best, should not replace it!!!!!
 
 addpath(genpath('/users/PAS1090/osu10640/box.com/MATLAB_Scripts/STC/'));
+addpath(genpath('/users/PAS1090/osu10640/box.com/MATLAB_Scripts/Features/'));
+addpath(genpath('/users/PAS1090/osu10640/box.com/MATLAB_Scripts/Haar Features/'));
+
 dpath = {'/users/PAS1090/osu10640/box.com/MATLAB_Scripts/JAR_files/weka.jar'};
 javaclasspath('-v1');
 javaclasspath(dpath);
