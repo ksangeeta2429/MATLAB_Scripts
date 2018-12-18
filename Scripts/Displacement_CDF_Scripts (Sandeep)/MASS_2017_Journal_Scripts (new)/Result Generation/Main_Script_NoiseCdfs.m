@@ -1,6 +1,6 @@
 close all
 
-IQRejectionParam = 0.9;
+IQRejectionParam = 0.0;
 N = 1;
 
 out_cornfield = ComputeNoiseCDFs_MASS('/mnt/6b93b438-a3d4-40d2-9f3d-d8cdbb850183/Research/Robust_Learning/Data_Repository/Parking garage radial ortho (Sandeep)/SenSys10_data_scripts/data/1-CornField-Snow/snow-no-targets.data', ...
@@ -52,7 +52,7 @@ h = gca;
 %legend(l,'interpreter','latex','Location','NorthEast');
 legend([h1 h2 h3 h4 h5],{'Empty Mowed Field','Parking Garage','Trees (High Wind)','Bushes (light Wind)', 'Grass'},'interpreter','latex');
 %legend([h1 h2 h3 h4],{'Empty Mowed Field','Parking Garage','Trees (High Wind)','Bushes (light Wind)'});
-xlim([0 1]);
+xlim([0 0.7]);
 
 h.TickLabelInterpreter='latex';
 h.FontWeight = 'bold';
