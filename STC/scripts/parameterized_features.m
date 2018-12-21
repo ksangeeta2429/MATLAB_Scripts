@@ -669,7 +669,7 @@ if fClass==5.23
         WINDOW =parameterSetting{1}(i1);
         for i2=1:nValue(2)
             NOVERLAP=WINDOW*(1-parameterSetting{2}(i2));
-            [S,F,T,P_dbm]=IQ2P_dbm(I,Q,WINDOW,NOVERLAP,256,300);
+            [S,F,T,P_dbm]=IQ2P_dbm(I,Q,WINDOW,NOVERLAP,NFFT,sampRate);
             for i3=1:nValue(3)
                 thr=parameterSetting{3}(i3);     
                 f=[f,FeatureClass5_23(P_dbm,thr)];
