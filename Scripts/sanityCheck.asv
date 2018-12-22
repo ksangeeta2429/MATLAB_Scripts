@@ -80,8 +80,7 @@ stop_arr = [temp];
 for i = 2:length(start)
     t = start(i);
     if(start(i) >= stop(i))
-        %Not possible, wrong start and stop times
-        fprintf('ERROR : Start time cannot be less than or equal to stop time\n');
+        %
         return;
     end
     if(i > length(stop))
