@@ -22,8 +22,14 @@ str_pathbase_radar_dhrubo = '/media/Roy.174/6b93b438-a3d4-40d2-9f3d-d8cdbb850183
 str_pathbase_radar_Roy = 'C:/Users/Roy/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
 str_pathbase_radar_Balderdash = '/Users/Balderdash/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
 str_pathbase_radar_OSC = '/users/PAS1090/osu8577/RobustEnv';
-str_pathbase_radar_Neel = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
+
+if(ispc == 1)
+    str_pathbase_radar_Neel = 'C:/Users/neel/Downloads/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
+else
+    str_pathbase_radar_Neel = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael';
+end
 str_pathbase_radar_dhrubo_Ubuntu = '/home/roy174/Robust_Learning';
+str_pathbase_radar_Jihoon_PC = 'C:/Users/yun.131/Desktop/Radar';
 
 str_pathbase_data_jin = 'C:/Users/he/My Research/2015.1/test';
 str_pathbase_data_mike = 'C:/Users/researcher/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/data';
@@ -32,17 +38,25 @@ str_pathbase_data_dhrubo = '/media/Roy.174/6b93b438-a3d4-40d2-9f3d-d8cdbb850183/
 str_pathbase_data_Roy = 'C:/Users/Roy/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/data';
 str_pathbase_data_Balderdash = '/Users/Balderdash/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/data';
 str_pathbase_data_OSC = '';
-str_pathbase_data_Neel = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository';
+if(ispc == 1)
+    str_pathbase_data_Neel = 'C:/Users/neel/Downloads/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository';
+else
+    str_pathbase_data_Neel = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/Data_Repository';
+end
 str_pathbase_data_dhrubo_Ubuntu = '/home/roy174/Robust_Learning/Data';
+str_pathbase_data_Jihoon_PC = 'C:/Users/yun.131/Desktop/Radar/data';
 
 str_pathbase_model_mike = 'C:/Users/researcher/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/researcher';
 str_pathbase_model_dhrubo = '/media/Roy.174/6b93b438-a3d4-40d2-9f3d-d8cdbb850183/Research/Robust_Learning/Models';
 str_pathbase_model_Roy = 'C:/Users/Roy/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Roy';
 str_pathbase_model_Balderdash = '/Users/Balderdash/Box Sync/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Balderdash';
 str_pathbase_model_OSC = '/users/PAS1090/osu8577/RobustEnv/Models/osu8577';
-str_pathbase_model_Neel = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Neel';
+if(ispc == 1)
+    str_pathbase_model_Neel = 'C:/Users/neel/Downloads/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Neel';
+else
+    str_pathbase_model_Neel = '/home/neel/box.com/All_programs_data_IPSN_2016/Simulation/toDhruboMichael/IIITDemo/Models/Neel';
+end
 str_pathbase_model_dhrubo_Ubuntu = '/home/roy174/Robust_Learning/Models';
-
 %% assign path roots to global variables.
 
 if strcmp(getenv('USERNAME'),'he')==1 
@@ -73,10 +87,13 @@ elseif strcmp(getenv('PBS_O_LOGNAME'),'osu8577')==1 % Alternatively: elseif strc
     g_str_pathbase_radar = str_pathbase_radar_OSC;
     g_str_pathbase_data  = str_pathbase_data_OSC;
     g_str_pathbase_model = str_pathbase_model_OSC;
-elseif strcmp(getenv('USER'),'neel')==1
+elseif strcmp(getenv('USERNAME'),'neel')==1
     g_str_pathbase_radar = str_pathbase_radar_Neel;
     g_str_pathbase_data  = str_pathbase_data_Neel;
     g_str_pathbase_model = str_pathbase_model_Neel;
+elseif strcmpi(getenv('USERNAME'),'yun.131')==1
+    g_str_pathbase_radar = str_pathbase_radar_Jihoon_PC;
+    g_str_pathbase_data  = str_pathbase_data_Jihoon_PC;
 else
     fprintf('ERROR! no environment defined for user %s\n',getenv('USER'));
 end
@@ -86,6 +103,6 @@ end
 g_env_is_set = true;
 
 % cleanup
-clear str_pathbase_radar_jin str_pathbase_radar_mike str_pathbase_radar_dhrubo str_pathbase_radar_Roy str_pathbase_radar_Balderdash str_pathbase_radar_OSC str_pathbase_radar_Neel str_pathbase_radar_dhrubo_Ubuntu
-clear str_pathbase_data_jin str_pathbase_data_mike str_pathbase_data_dhrubo str_pathbase_data_Roy str_pathbase_data_Balderdash str_pathbase_data_OSC str_pathbase_data_Neel str_pathbase_data_dhrubo_Ubuntu
+clear str_pathbase_radar_jin str_pathbase_radar_mike str_pathbase_radar_dhrubo str_pathbase_radar_Roy str_pathbase_radar_Balderdash str_pathbase_radar_OSC str_pathbase_radar_Neel str_pathbase_radar_dhrubo_Ubuntu str_pathbase_radar_Jihoon_PC
+clear str_pathbase_data_jin str_pathbase_data_mike str_pathbase_data_dhrubo str_pathbase_data_Roy str_pathbase_data_Balderdash str_pathbase_data_OSC str_pathbase_data_Neel str_pathbase_data_dhrubo_Ubuntu str_pathbase_data_Jihoon_PC
 clear str_pathbase_model_mike str_pathbase_model_dhrubo str_pathbase_model_Roy str_pathbase_model_Balderdash str_pathbase_model_OSC str_pathbase_model_Neel str_pathbase_model_dhrubo_Ubuntu
