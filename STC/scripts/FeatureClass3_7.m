@@ -8,7 +8,7 @@ P_dbm_gray=mat2gray(P_dbm,[-60 60]);
 
 [imx,imy]=gaussgradient(P_dbm_gray,sigma);
 mat=(imx.^2+imy.^2).^0.5;     % change to mean square root
-
+temp = max(max(mat));
 bw=mat>thr;
 CC=bwconncomp(bw);
 num=CC.NumObjects;

@@ -448,14 +448,17 @@ end
 
 
 if fClass==3.7
-    parameterSetting={[32 64 128 256],[1/16 1/8 1/4],[0.1 0.2 0.5 1 2 5 10],[0.1 0.3 0.5 0.7 0.9]};
+    %parameterSetting={[32 64 128 256],[1/16 1/8 1/4],[0.1 0.2 0.5 1 2 5 10],[0.1 0.3 0.5 0.7 0.9]};
     %parameterSetting={[256],[1/4],[1],[0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95]};
-    
+
+    %thresholds are not restricted to 0.9, mat value can be > 0.9 also > 1 -> neel
+    %for austere I see values upto 3.6, also increase sigma parameter space
+    parameterSetting={[32 64 128 256],[1/16 1/8 1/4],[0.1:0.1:1 2:1:10],[0.05:0.05:2.5]};
     nParam=length(parameterSetting);
     for i0=1:nParam
         nValue(i0)=length(parameterSetting{i0}); 
     end
-    
+    max_t = 0;
     for i1=1:nValue(1)
         WINDOW = parameterSetting{1}(i1);
         for i2=1:nValue(2)
@@ -466,10 +469,15 @@ if fClass==3.7
                 for i4=1:nValue(4)
                     thr=parameterSetting{4}(i4);
                     f=[f,FeatureClass3_7(P_dbm,sigma,thr)];
+
+                    %[t,temp] = FeatureClass3_7(P_dbm,sigma,thr);
+                    %f = [f,t];
+                    %if(temp > max_t) max_t = temp; end
                 end
             end
         end
     end
+    max_t;
 end
 
 if fClass==3.3
@@ -1422,7 +1430,10 @@ if fClass==8.1
 end
 
 if fClass==8.2
-    parameterSetting={[50 100 200 400 600 800 1000]};  
+    %parameterSetting={[50 100 200 400 600 800 1000]};
+    
+    %austere radial common case is < 500, orthogonal > 500 sometimes reaches 1000.
+    parameterSetting={[50:10:700]}; %for radial, may be go higher for orthogonal/tangential. What is dataset has both?
     nParam=length(parameterSetting);
     for i0=1:nParam
         nValue(i0)=length(parameterSetting{i0}); 
