@@ -4,7 +4,7 @@
 % then there are errors happening at the validation stage, but the arff file is still successfully built, that is enough)
 
 
-function [feature_min scalingFactors]=Build_arff(root, OutIndex, ifScaled, fClass, feature_min, scalingFactors, ClassDef, ifReg, path_data,secondsPerFrame,ifTrimsample,path_arff,ifTrain)
+function [feature_min scalingFactors]=Build_arff(root, OutIndex, ifScaled, fClass, feature_min, scalingFactors, ClassDef, ifReg, path_data,secondsPerFrame,ifTrimsample,path_arff,ifTrain,USE_CLASSIFICATION_FEAT)
 root='C:/Documents and Settings/he/My Documents/Dropbox/MyMatlabWork/';
 %addpath([root,'radar/STC/scripts/matlab2weka']);
 %addpath([root,'radar/STC/scripts']);
@@ -51,17 +51,21 @@ for i=1:length(Files) % take every file from the set 'Files'
     fileName=Files{i}; 
     file_order = [file_order string(fileName)];
     f_file=File2Feature(fileName, secondsPerFrame,ifScaled,fClass,feature_min,scalingFactors,ifReg,ifTrimsample,ClassDef,i);
-    target_count = f_file{length(f_file)-1};
-    target_label = f_file{length(f_file)};
-    f_file(length(f_file)-1) = [];  f_file(length(f_file)) = []; 
+    if(USE_CLASSIFICATION_FEAT)
+        target_count = f_file{length(f_file)-1};
+        target_label = f_file{length(f_file)};
+        %remove target count and class label features if also using classification features as they will be added after classification feat.
+        f_file(length(f_file)-1) = [];  f_file(length(f_file)) = []; 
+        %now compute classification features and combine with counting features
+        [f_file_classification str_featNames_classification] = File2FeatureClassification(fileName,0);
+        f_file = [f_file f_file_classification];
+        f_file = [f_file target_count target_label];
+        fprintf('Number of classification features : %d\n',length(f_file_classification));
+        n_class_feat = length(f_file_classification);
+    end
     fprintf('Number of counting features : %d\n',length(f_file));
     n_count_feat = length(f_file);
-    %now compute classification features and combine with counting features
-    [f_file_classification str_featNames_classification] = File2FeatureClassification(fileName,0);
-    f_file = [f_file f_file_classification];
-    f_file = [f_file target_count target_label];
-    fprintf('Number of classification features : %d\n',length(f_file_classification));
-    n_class_feat = length(f_file_classification);
+    
     f_set=[f_set;f_file];     
 end
 
@@ -102,13 +106,15 @@ featureNames={};
 for i=1:n_count_feat
     featureNames{i}= sprintf('f%d',i);
 end
-str_featNames_classification;
-featureNames = [featureNames str_featNames_classification 'Target Count' 'Class Label'];
-%k = 1;
-%for i = n_count_feat+1:n_class_feat
- %   featureNames{i}= sprintf('%s',str_featNames_classification(k));
-  %  k = k + 1;
-%end
+
+if(USE_CLASSIFICATION_FEAT)
+    featureNames = [featureNames str_featNames_classification 'Target Count' 'Class Label'];
+    %k = 1;
+    %for i = n_count_feat+1:n_class_feat
+    %   featureNames{i}= sprintf('%s',str_featNames_classification(k));
+    %  k = k + 1;
+    %end
+end
 instances=matlab2weka(sprintf('radar%d',OutIndex),featureNames,f_set,nColumn,ifReg);
 %% save the wekaOBJ to arff file
 %path_arff=[root,'radar/STC/arff files'];

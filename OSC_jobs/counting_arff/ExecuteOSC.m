@@ -25,7 +25,7 @@ g_str_pathbase_data = '/users/PAS1090/osu10640/box.com/Data_Repository/';
 data_bike = '/Human_vs_bike_training_new_detector/M_30_N_128_window_res/last_wind_padded_with_signal/Bike_558/';
 data_human = '/Human_vs_non_human_training_new_detector/M_30_N_128_window_res/last_wind_padded_with_signal/austere_404_human/';
 
-ifTrain = 0;
+ifTrain = 0; USE_CLASSIFICATION_FEAT = 0;
 data_all = '/final_both_radial_full_cuts/';
 %data_all = '/final_both_full_cuts/';
 %data_all = '/final_bike_full_cuts/';
@@ -57,8 +57,8 @@ OutIndex=501;
 %secondsPerFrame=80;  % 160
 secondsPerFrame=1;
 fClass=[3.7 5.23 8.2 9.1];  % 
-[feature_min scalingFactors]=Build_arff(root,OutIndex,0,fClass,0,0,ClassDef,ifReg,path_data,secondsPerFrame,ifTrimsample, output_arff,ifTrain);
-%Build_arff(root, OutIndex,1, fClass, feature_min, scalingFactors,ClassDef, ifReg, path_data,secondsPerFrame,ifTrimsample, output_arff,ifTrain);
+[feature_min scalingFactors]=Build_arff(root,OutIndex,0,fClass,0,0,ClassDef,ifReg,path_data,secondsPerFrame,ifTrimsample, output_arff,ifTrain,USE_CLASSIFICATION_FEAT);
+%Build_arff(root, OutIndex,1, fClass, feature_min, scalingFactors,ClassDef, ifReg, path_data,secondsPerFrame,ifTrimsample, output_arff,ifTrain,USE_CLASSIFICATION_FEAT);
 
 % convertSVRModelToCSharp
 
