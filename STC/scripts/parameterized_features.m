@@ -453,7 +453,7 @@ if fClass==3.7
 
     %thresholds are not restricted to 0.9, mat value can be > 0.9 also > 1 -> neel
     %for austere I see values upto 3.6, also increase sigma parameter space
-    parameterSetting={[32 64 128 256],[1/16 1/8 1/4],[0.1:0.1:1 2:1:10],[0.05:0.05:2.5]};
+    parameterSetting={[32 64 128 256],[1/16 1/8 1/4],[0.1:0.1:1 2:1:10],[0.05:0.05:2.5]}; %4*3*19*50
     nParam=length(parameterSetting);
     for i0=1:nParam
         nValue(i0)=length(parameterSetting{i0}); 
@@ -666,8 +666,10 @@ if fClass==5.22
 end
     
 if fClass==5.23
-    parameterSetting={[32 64 128 256],[1/16 1/8 1/4],[5 10 15 20 25 30 35 40 45 50 55 60]};
+    %parameterSetting={[32 64 128 256],[1/16 1/8 1/4],[5 10 15 20 25 30 35 40 45 50 55 60]};
     %parameterSetting={[256],[1/4],[10 15 20 25 30 35 40 45]};
+
+    parameterSetting={[32 64 128 256],[1/16 1/8 1/4],[-80:5:45]}; % 4*3*26
     nParam=length(parameterSetting);
     for i0=1:nParam
         nValue(i0)=length(parameterSetting{i0}); 
@@ -1433,7 +1435,8 @@ if fClass==8.2
     %parameterSetting={[50 100 200 400 600 800 1000]};
     
     %austere radial common case is < 500, orthogonal > 500 sometimes reaches 1000.
-    parameterSetting={[50:10:700]}; %for radial, may be go higher for orthogonal/tangential. What is dataset has both?
+    %for radial, may be go higher for orthogonal/tangential. What if dataset has both?
+    parameterSetting={[50:10:700]}; %66
     nParam=length(parameterSetting);
     for i0=1:nParam
         nValue(i0)=length(parameterSetting{i0}); 
@@ -1441,14 +1444,14 @@ if fClass==8.2
     
     for i1=1:nValue(1)
         thr=parameterSetting{1}(i1);
-        f=[f,FeatureClass8_2(I,Q,thr)];
+        f=[f,FeatureClass8_2(I,Q,thr)]; %6 features
     end
 end
 
 if fClass==9.1
     parameterSetting={};
     nParam=length(parameterSetting);
-    f=FeatureClass9_1(I,Q);
+    f=FeatureClass9_1(I,Q); %25 features
 end
 
 if fClass==9.11

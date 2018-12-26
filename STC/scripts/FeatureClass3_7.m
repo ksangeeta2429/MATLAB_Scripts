@@ -4,8 +4,8 @@ root='C:/Documents and Settings/he/My Documents/Dropbox/MyMatlabWork/';
 
 f=zeros(1,1);
 
-P_dbm_gray=mat2gray(P_dbm,[-60 60]);
-
+%P_dbm_gray=mat2gray(P_dbm,[-60 60]);
+P_dbm_gray=mat2gray(P_dbm,[-80 45]); %for asutere data
 [imx,imy]=gaussgradient(P_dbm_gray,sigma);
 mat=(imx.^2+imy.^2).^0.5;     % change to mean square root
 temp = max(max(mat));
