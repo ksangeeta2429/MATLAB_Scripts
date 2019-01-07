@@ -117,7 +117,8 @@ Data(1:50);
 
 %use background rejection for austere data.
 USEBGR = 1;
-USEDISTANDFFTONLY = 0;
+USEDISTANDFFTONLY = 1;
+fprintf('USEDISTANDFFTONLY : %d\n',USEDISTANDFFTONLY);
 bgr = 19; numQuads = 4; short_term_buffer_length = 256;
 f_num = 0;
 %{
@@ -320,7 +321,7 @@ if featureClass == 0
     %commented out to get only fft features
     f=[f,dist,time,distTimeProd,distTimeRatio];    % 4
     f_num = f_num + 4;
-    str_featnames = [ str_featnames [ 'dist' ] [ 'time' ] [ 'distTimeProd' ] [ 'distTimeRatio' ] ];
+    str_featnames = [ str_featnames, {'dist','time','distTimeProd','distTimeRatio'} ];
     
     
     temp = [];%to print set of features testing against C# equivalent features
@@ -589,6 +590,7 @@ if featureClass == 0
     str_featnames = [str_featnames ['Target Count_' num2str(f_num)]];
     %add feature fileName
 	%f = [f, string([fileName '.data'])];
+	fprintf('# of features : %d\n',length(f));
 end
 
 %fprintf('Size of feature vector : %d\n',length(f));
@@ -653,6 +655,7 @@ end
 f_file=[num2cell(f),classLabel];
 f_num = f_num + 1;
 str_featnames = [ str_featnames ['classLabel_' num2str(f_num)] ];
+%disp(str_featnames);
 %f_file(end-10:end)
 %     nStep = N/64
 %
