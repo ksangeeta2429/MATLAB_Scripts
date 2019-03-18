@@ -112,6 +112,14 @@ Index = [112418];
 data_dog = {'/austere/final_304_cow'};
 data_human = {'/austere/final_384_human'};
 
+% Human-bike classification and counting datasets
+% 0317191 - Human vs bike Classification : All humans and radial bikes
+% 0317192 - Bike and Human cuts for counting (combined and individual) : radial only
+
+Index = [0317191, 0317192];
+data_human = {'/final_human_full_cuts', '/final_human_radial_full_cuts'};
+data_dog = {'/final_bike_radial_full_cuts', '/final_bike_radial_full_cuts'};
+
 %% Any test data, such as a single walk cut
 %Index = [12345];
 %data_dog = {'/Test/cow'};

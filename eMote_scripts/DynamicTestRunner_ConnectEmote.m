@@ -38,7 +38,7 @@ str_neel_dll = 'C:\Users\neel\Downloads\box.com\MATLAB_Scripts\eMote_scripts\Mic
 portNameMike = 'COM52';
 portNameDhrubo = 'COM32';
 portNameRoy = 'COM5';
-portNameJihoon = 'COM11';
+portNameJihoon = 'COM29';
 portNameNeel = 'COM8';
 
 str_dll = '';
