@@ -116,8 +116,8 @@ Data = (I-dcI) + 1i*(Q-dcQ);
 Data(1:50);
 
 %use background rejection for austere data.
-USEBGR = 1;
-USEDISTANDFFTONLY = 1;
+USEBGR = 1; %only for phase based features.
+USEDISTANDFFTONLY = 1; %if 1 use 10 fft, 4 DistTime and 8 timedomain features
 fprintf('USEDISTANDFFTONLY : %d\n',USEDISTANDFFTONLY);
 bgr = 19; numQuads = 4; short_term_buffer_length = 256;
 f_num = 0;
@@ -264,7 +264,7 @@ if featureClass == 0
     
     
     %commented out to use only spectrogram based features
-    if(USEDISTANDFFTONLY == 0)
+    if(USEDISTANDFFTONLY == 1)
         [ f_tdf, str_feat_tdf ] = timeDomainFeatures(Data);
         f=[f, f_tdf]; 
         f_num = f_num + 8;
