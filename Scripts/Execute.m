@@ -85,9 +85,42 @@ SetPath
 % data_human={'/Close zoom/Human'};
 
 %% Any test data, such as a single walk cut
-Index = [2468];
-data_dog = {'NIL'};
-data_human = {'/FeatureTest/Human'};
+%Index = [2468];
+%data_dog = {'NIL'};
+%data_human = {'/FeatureTest/Human'};
+
+%% MSRI: Windowed Bumblebee data: winlen=384, stride=128
+Index=[041019]
+data_dog={'/winlen_384_stride_384/Nonhuman'}
+data_human={'/winlen_384_stride_384/Human'}
+
+%% MSRI: Bumblebee cut arffs
+Index=[0411191, 0411192, 0411193, 0411194, 0411195, 0411196, 0411197, 0411198, 0411199]
+data_dog={'/msr_radar2/arc_1 (Humans_Gym balls)/Ball/',...
+'/msr_radar2/bv_4 (Humans_Cars)/Car/',...
+'/msr_radar2/ceiling_238_10 (Humans_Gym balls)/Ball/',...
+'/msr_radar2/combined_5 (Humans_Dogs)/Dog/',...
+'/msr_radar2/kh_3 (Humans_Gym balls)/Dog/',...
+'/msr_radar2/prb_2 (Humans_Gym balls)/Dog/',...
+'/msr_radar2/osu_farm_meadow_may24-28_2016 (Cattle)/',...
+'/msr_radar2/Radar_site1_hilltop (Cattle)/',...
+'/msr_radar2/Radar_site2_creamery (Cattle)/'}
+
+data_human={'/msr_radar2/arc_1 (Humans_Gym balls)/Human/',...
+'/msr_radar2/bv_4 (Humans_Cars)/Human/',...
+'/msr_radar2/ceiling_238_10 (Humans_Gym balls)/Human/',...
+'/msr_radar2/combined_5 (Humans_Dogs)/11-30-2011/Human',...
+'/msr_radar2/combined_5 (Humans_Dogs)/Human/',...
+'/msr_radar2/kh_3 (Humans_Gym balls)/Human/',...
+'/msr_radar2/prb_2 (Humans_Gym balls)/Human/',...
+'/msr_radar2/Parking garage orthogonal (Humans)/',...
+'/msr_radar2/Parking garage radial (Humans)/'}
+
+%% MSRI: 1st window only: Windowed Bumblebee data: winlen=384, stride=128
+Index=[041219]
+data_dog={'/winlen_384_stride_384_winindex_1/Nonhuman'}
+data_human={'/winlen_384_stride_384_winindex_1/Human'}
+
 %% Execute.m
 featureClass = 0;
 
@@ -108,13 +141,13 @@ for i=1:length(Index)
     fprintf('Processing OutIndex=%d...\n', OutIndex);
     if strcmp(data_human{i},'NIL')==1
         [feature_min, scalingFactors] = Build_arff_dog(OutIndex,0,featureClass, 0, 0, data_dog{i}); %Compute unscaled features
-        Build_arff_dog(OutIndex,1,featureClass, feature_min, scalingFactors, data_dog{i}); %Compute scaled features, cross-validate (suppressed, refer to RunResultScript_IoTDI.m)
+        %Build_arff_dog(OutIndex,1,featureClass, feature_min, scalingFactors, data_dog{i}); %Compute scaled features, cross-validate (suppressed, refer to RunResultScript_IoTDI.m)
     elseif strcmp(data_dog{i},'NIL')==1
         [feature_min, scalingFactors] = Build_arff_human(OutIndex,0,featureClass, 0, 0, data_human{i}); %Compute unscaled features (suppressed, refer to RunResultScript_IoTDI.m)
-        Build_arff_human(OutIndex,1,featureClass, feature_min, scalingFactors, data_human{i}); %Compute scaled features, cross-validate (suppressed, refer to RunResultScript_IoTDI.m)
+        %Build_arff_human(OutIndex,1,featureClass, feature_min, scalingFactors, data_human{i}); %Compute scaled features, cross-validate (suppressed, refer to RunResultScript_IoTDI.m)
     else
         [feature_min, scalingFactors] = Build_arff(OutIndex,0,featureClass, 0, 0, data_human{i}, data_dog{i}); %Compute unscaled features (suppressed, refer to RunResultScript_IoTDI.m)
-        Build_arff(OutIndex,1,featureClass, feature_min, scalingFactors, data_human{i}, data_dog{i}); %Compute scaled features, cross-validate (suppressed, refer to RunResultScript_IoTDI.m)
+        %Build_arff(OutIndex,1,featureClass, feature_min, scalingFactors, data_human{i}, data_dog{i}); %Compute scaled features, cross-validate (suppressed, refer to RunResultScript_IoTDI.m)
     end
     
     %% Uncomment this block to train a model
