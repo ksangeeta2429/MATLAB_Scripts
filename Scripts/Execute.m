@@ -89,10 +89,10 @@ SetPath
 %data_dog = {'NIL'};
 %data_human = {'/FeatureTest/Human'};
 
-%% MSRI: Windowed Bumblebee data: winlen=384, stride=128
+%% MSRI: Windowed Bumblebee data: winlen=384, stride=128    [UNBALANCED]
 Index=[041019]
-data_dog={'/winlen_384_stride_384/Nonhuman'}
-data_human={'/winlen_384_stride_384/Human'}
+data_dog={'/Targets_full_windowed_bkp/winlen_384_stride_384/Nonhuman'}
+data_human={'/Targets_full_windowed_bkp/winlen_384_stride_384/Human'}
 
 %% MSRI: Bumblebee cut arffs
 Index=[0411191, 0411192, 0411193, 0411194, 0411195, 0411196, 0411197, 0411198, 0411199]
@@ -116,10 +116,15 @@ data_human={'/msr_radar2/arc_1 (Humans_Gym balls)/Human/',...
 '/msr_radar2/Parking garage orthogonal (Humans)/',...
 '/msr_radar2/Parking garage radial (Humans)/'}
 
-%% MSRI: 1st window only: Windowed Bumblebee data: winlen=384, stride=128
+%% MSRI: 1st window only: Windowed Bumblebee data: winlen=384, stride=128    [UNBALANCED]
 Index=[041219]
-data_dog={'/winlen_384_stride_384_winindex_1/Nonhuman'}
-data_human={'/winlen_384_stride_384_winindex_1/Human'}
+data_dog={'/Targets_full_windowed_bkp/winlen_384_stride_384_winindex_1/Nonhuman'}
+data_human={'/Targets_full_windowed_bkp/winlen_384_stride_384_winindex_1/Human'}
+
+%% MSRI: 1st window only: Windowed Bumblebee data: winlen=384, stride=128    [BALANCED]
+Index=[051019]
+data_dog={'/Targets_balanced/winlen_384_stride_384_winindex_1/Nonhuman'}
+data_human={'/Targets_balanced/winlen_384_stride_384_winindex_1/Human'}
 
 %% Execute.m
 featureClass = 0;
