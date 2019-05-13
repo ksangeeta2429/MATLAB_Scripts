@@ -85,9 +85,9 @@ DO NOT edit classpath.txt directly, as I encountered an issue with finding the a
 
 1. Exfiltration from SD card (88X LCD reading) 
  
-	sudo su 
-	diskutil list       (fdisk -l on Ubuntu, cat /proc/partitions on Cygwin) 
-	dd if=/dev/disk1 of=./Desktop/Great_Fish_Data_Collect/Nov_26_Lodge/March_4_noise.bbs bs=512 skip=1 count=1188
+		sudo su 
+		diskutil list       (fdisk -l on Ubuntu, cat /proc/partitions on Cygwin) 
+		dd if=/dev/disk1 of=./Desktop/Great_Fish_Data_Collect/Nov_26_Lodge/March_4_noise.bbs bs=512 skip=1 count=1188
 
 2. Visualization on MATLAB
 
@@ -111,4 +111,10 @@ DO NOT edit classpath.txt directly, as I encountered an issue with finding the a
 
 3. Zero-out SD card. CAREFUL!!! Writing zeros
 
-	dd if=/dev/zero of=/dev/disk1 bs=1M count=20
+		dd if=/dev/zero of=/dev/disk1 bs=1M count=20
+		
+# Data extraction for Austere boards
+
+1. Exfiltration from SD card (use LCD reading)
+
+		sudo dd if=/dev/sdb of=radar_out.det bs=32256 count=lcd_num
