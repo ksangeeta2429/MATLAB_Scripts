@@ -121,10 +121,15 @@ Index=[041219]
 data_dog={'/Targets_full_windowed_bkp/winlen_384_stride_384_winindex_1/Nonhuman'}
 data_human={'/Targets_full_windowed_bkp/winlen_384_stride_384_winindex_1/Human'}
 
-%% MSRI: 1st window only, last window only, all windows: Windowed Bumblebee data: winlen=384, stride=128    [BALANCED]
+%% MSRI: 1st window only, last window only, all windows: Windowed Bumblebee data: winlen=384, stride=384    [BALANCED]
 Index=[051019, 051319, 051419]
 data_dog={'/Targets_balanced/winlen_384_winindex_0/Nonhuman', '/Targets_balanced/winlen_384_winindex_-1/Nonhuman', '/Targets_balanced/winlen_384_winindex_all/Nonhuman'}
 data_human={'/Targets_balanced/winlen_384_winindex_0/Human', '/Targets_balanced/winlen_384_winindex_-1/Human', '/Targets_balanced/winlen_384_winindex_all/Human'}
+
+%% MSRI: all windows: Windowed Bumblebee data: winlen=[256, 512, 640, 768, 896, 1024, 1152]    [BALANCED]
+Index=[256, 512, 640, 768, 896, 1024, 1152]
+data_dog={'/Targets_balanced/winlen_256_winindex_all/Nonhuman', '/Targets_balanced/winlen_512_winindex_all/Nonhuman', '/Targets_balanced/winlen_640_winindex_all/Nonhuman', '/Targets_balanced/winlen_768_winindex_all/Nonhuman', '/Targets_balanced/winlen_896_winindex_all/Nonhuman', '/Targets_balanced/winlen_1024_winindex_all/Nonhuman', '/Targets_balanced/winlen_1152_winindex_all/Nonhuman'}
+data_human={'/Targets_balanced/winlen_256_winindex_all/Human', '/Targets_balanced/winlen_512_winindex_all/Human', '/Targets_balanced/winlen_640_winindex_all/Human', '/Targets_balanced/winlen_768_winindex_all/Human', '/Targets_balanced/winlen_896_winindex_all/Human', '/Targets_balanced/winlen_1024_winindex_all/Human', '/Targets_balanced/winlen_1152_winindex_all/Human'}
 
 %% Execute.m
 featureClass = 0;
