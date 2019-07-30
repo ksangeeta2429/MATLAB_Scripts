@@ -1,4 +1,4 @@
-function train_row = getdata(fileName, path_dir)
+function train_row = getdata(fileName, path_dir, window)
 
 addpath('/scratch/sk7898/MATLAB_Scripts/Scripts')
 cd(path_dir);
@@ -10,7 +10,7 @@ dcI = median(I); %median or mean
 dcQ = median(Q);
 Data = (I-dcI) + 1i*(Q-dcQ);
 
-Rate=512;
+Rate=window;
 FftWindow = Rate;
 Nfft = Rate;
 FftStep = round(1/4*FftWindow);

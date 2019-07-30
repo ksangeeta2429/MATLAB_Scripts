@@ -1,11 +1,11 @@
 #!/bin/bash
-#SBATCH --nodes=4
+#SBATCH --nodes=1
 #SBATCH --cpus-per-task=4
-#SBATCH --time=2-0
+#SBATCH --time=1-0
 #SBATCH --mem=16GB
-#SBATCH --job-name=genFreqPhaseCNN_test_512
+#SBATCH --job-name=genFreqPhaseCNN_test_pedbike
 #SBATCH --mail-type=ALL
-#SBATCH --output=genFreqPhaseCNN_test_512_%j.out
+#SBATCH --output=genFreqPhaseCNN_test_pedbike_%j.out
   
 module purge
 module load matlab/2017b

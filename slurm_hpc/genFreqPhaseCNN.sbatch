@@ -3,9 +3,9 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --time=2-0
 #SBATCH --mem=16GB
-#SBATCH --job-name=genFreqPhaseCNN_512
+#SBATCH --job-name=genFreqPhaseCNN_pedbike
 #SBATCH --mail-type=ALL
-#SBATCH --output=genFreqPhaseCNN_512_%j.out
+#SBATCH --output=genFreqPhaseCNN_pedbike_%j.out
   
 module purge
 module load matlab/2017b
